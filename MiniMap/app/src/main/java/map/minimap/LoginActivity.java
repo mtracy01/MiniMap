@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.facebook.Session;
 
 /**
  * A login screen that offers login via email/password.
