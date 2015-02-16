@@ -21,6 +21,10 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        <activity
+            android:name=".FriendFinder"
+            android:label="@string/title_activity_friend_finder" >
+        </activity>
     </application>
 
 </manifest>
