@@ -63,29 +63,6 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-        /* DEPRECATED BELOW: WILL REMOVE SOON!!! */
-        /*
-        // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
-
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-        super.onCreate(savedInstanceState);
-        */
-
-
         if (savedInstanceState == null) {
             // Add the fragment on initial activity setup
             loginFragment = new LoginFragment();
