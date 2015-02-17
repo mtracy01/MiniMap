@@ -114,7 +114,7 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
     }
 
 
-    //Facebook login lhandler
+    //Facebook login handler
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
             Log.i(TAG, "Logged in...");
@@ -152,6 +152,11 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data);
+        Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+        if (Session.getActiveSession() != null || Session.getActiveSession().isOpened()){
+            Intent i = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override
