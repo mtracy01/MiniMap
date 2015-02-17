@@ -9,6 +9,8 @@ import android.content.ContentResolver;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -18,6 +20,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -29,6 +32,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.Signature;
 import java.util.ArrayList;
 import java.util.List;
 import com.facebook.Session;
@@ -68,6 +74,30 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        /* Debug Info  into LogCat*/
+        /*
+        PackageInfo info;
+        try {
+            info = getPackageManager().getPackageInfo("com.you.name", PackageManager.GET_SIGNATURES);
+            for (android.content.pm.Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                //String something = new String(Base64.encodeBytes(md.digest()));
+                Log.e("hash key", something);
+            }
+        } catch (PackageManager.NameNotFoundException e1) {
+            Log.e("name not found", e1.toString());
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("no such an algorithm", e.toString());
+        } catch (Exception e) {
+            Log.e("exception", e.toString());
+        }
+        */
+        /* End Debug Info code */
+
         uiHelper = new UiLifecycleHelper(this,callback);
         if (savedInstanceState == null) {
             // Add the fragment on initial activity setup
@@ -106,6 +136,15 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
     @Override
     public void onResume() {
         super.onResume();
+        Session session = Session.getActiveSession();
+
+        // For scenarios where the main activity is launched and user
+        // session is not null, the session state change notification
+        // may not be triggered. Trigger it if it's open/closed.
+        if (session != null &&
+                (session.isOpened() || session.isClosed()) ) {
+            onSessionStateChange(session, session.getState(), null);
+        }
         uiHelper.onResume();
     }
 
