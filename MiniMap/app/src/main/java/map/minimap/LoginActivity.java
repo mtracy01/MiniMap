@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -30,10 +31,12 @@ import java.util.ArrayList;
 import java.util.List;
 import com.facebook.Session;
 
+import map.minimap.frameworks.LoginFragment;
+
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends FragmentActivity implements LoaderCallbacks<Cursor> {
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -53,11 +56,17 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mProgressView;
     private View mLoginFormView;
 
+    //Fragment Reference
+    private LoginFragment loginFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+        /* DEPRECATED BELOW: WILL REMOVE SOON!!! */
+        /*
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -73,6 +82,22 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 return false;
             }
         });
+        super.onCreate(savedInstanceState);
+        */
+
+
+        if (savedInstanceState == null) {
+            // Add the fragment on initial activity setup
+            loginFragment = new LoginFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(android.R.id.content, loginFragment)
+                    .commit();
+        } else {
+            // Or set the fragment from restored state info
+            loginFragment = (LoginFragment) getSupportFragmentManager()
+                    .findFragmentById(android.R.id.content);
+        }
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
