@@ -1,12 +1,19 @@
 package map.minimap;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,6 +34,10 @@ public class GamesFragment extends android.support.v4.app.Fragment{
     private String mParam1;
     private String mParam2;
 
+
+    private ArrayList<String> GamesList;                //The list of games we have available for users
+    private static ListView GamesListView;    //The Actual UI element id for our games list
+    private Context context=getActivity();
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -37,6 +48,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
      * @param param2 Parameter 2.
      * @return A new instance of fragment GamesFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static GamesFragment newInstance(String param1, String param2) {
         GamesFragment fragment = new GamesFragment();
@@ -58,13 +70,29 @@ public class GamesFragment extends android.support.v4.app.Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        /* Add Application Names here as they are ready for testing to create their button in the UI */
+        GamesList = new ArrayList<String>();
+        GamesList.add("Friend Finder");
+        //GamesList.add("Capture the Flag");
+        //GamesList.add("Marco Polo");
+        //GamesList.add("Sardines");
+        //GamesList.add("Slender");
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_games, container, false);
+        View view = inflater.inflate(R.layout.fragment_games, container, false);
+        context = getActivity();
+        /* Create reaction interfaces for the game buttons in our list */
+        GamesListView = (ListView)view.findViewById(R.id.listView);
+        String[] GamesArray = GamesList.toArray(new String[1]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,GamesArray);
+        GamesListView.setAdapter(adapter);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
