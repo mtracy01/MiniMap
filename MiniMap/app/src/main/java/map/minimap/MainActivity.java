@@ -67,6 +67,9 @@ public class MainActivity extends ActionBarActivity
             case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
+            case 4:
+                mTitle = "Settings";
+                break;
         }
     }
 
