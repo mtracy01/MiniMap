@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        mTitle = getString(R.string.title_section1);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -57,27 +57,33 @@ public class MainActivity extends ActionBarActivity
         /*FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit(); */
-
+                .commit();
+            */
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (position == 0) {
-            fragmentManager.beginTransaction()
+        switch(position) {
+            case 0:
+                fragmentManager.beginTransaction()
                     .replace(R.id.container, GamesFragment.newInstance("a","b"))
                     .commit();
-        } else if (position == 1) {
-            fragmentManager.beginTransaction()
+                    break;
+            case 1:
+                fragmentManager.beginTransaction()
                     .replace(R.id.container, GroupsFragment.newInstance("a","b"))
                     .commit();
-        } else if (position == 2) {
-            fragmentManager.beginTransaction()
+                    break;
+            case 2:
+                fragmentManager.beginTransaction()
                     .replace(R.id.container, InvitationsFragment.newInstance("a", "b"))
                     .commit();
-        } else if (position == 3) {
-            fragmentManager.beginTransaction()
+                    break;
+            case 3:
+                fragmentManager.beginTransaction()
                     .replace(R.id.container, SettingsFragment.newInstance("a", "b"))
                     .commit();
+                    break;
         }
+        onSectionAttached(position+1);
     }
 
     public void onSectionAttached(int number) {
