@@ -1,2 +1,8 @@
 .DS_Store
 .metadata
+
+Server/.project
+Server/.classpath
+Server/.settings/*
+
+.recommenders/*
