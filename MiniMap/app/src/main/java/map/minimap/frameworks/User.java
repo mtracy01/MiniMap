@@ -10,8 +10,7 @@ public class User {
      *
      * A User has exactly one server
      * A User has 0 to many teams (?)
-     *
-     * A User has friends[], a Session, a name, an ID, Xcoord, and Ycoord
+     * A User has friends[], a name, an ID, Xcoord, and Ycoord
      */
     private double Xcoord, Ycoord;
 
