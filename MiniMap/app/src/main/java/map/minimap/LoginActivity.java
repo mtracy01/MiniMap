@@ -154,6 +154,8 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
         uiHelper.onActivityResult(requestCode, resultCode, data);
         Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
         if (Session.getActiveSession() != null || Session.getActiveSession().isOpened()){
+            /* TODO: Create User */
+           
             Intent i = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(i);
         }

@@ -1,4 +1,4 @@
-package map.minimap;
+package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -8,16 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import map.minimap.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GroupsFragment.OnFragmentInteractionListener} interface
+ * {@link InvitationsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GroupsFragment#newInstance} factory method to
+ * Use the {@link InvitationsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GroupsFragment extends android.support.v4.app.Fragment {
+public class InvitationsFragment extends android.support.v4.app.Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,11 +37,11 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GroupsFragment.
+     * @return A new instance of fragment InvitationsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GroupsFragment newInstance(String param1, String param2) {
-        GroupsFragment fragment = new GroupsFragment();
+    public static InvitationsFragment newInstance(String param1, String param2) {
+        InvitationsFragment fragment = new InvitationsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,7 +49,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         return fragment;
     }
 
-    public GroupsFragment() {
+    public InvitationsFragment() {
         // Required empty public constructor
     }
 
@@ -64,7 +66,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_groups, container, false);
+        return inflater.inflate(R.layout.fragment_invitations, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -1,23 +1,30 @@
-package map.minimap;
+package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import map.minimap.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SettingsFragment.OnFragmentInteractionListener} interface
+ * {@link GamesFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SettingsFragment#newInstance} factory method to
+ * Use the {@link GamesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SettingsFragment extends android.support.v4.app.Fragment{
+public class GamesFragment extends android.support.v4.app.Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,6 +34,10 @@ public class SettingsFragment extends android.support.v4.app.Fragment{
     private String mParam1;
     private String mParam2;
 
+
+    private ArrayList<String> GamesList;                //The list of games we have available for users
+    private static ListView GamesListView;    //The Actual UI element id for our games list
+    private Context context=getActivity();
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -35,11 +46,12 @@ public class SettingsFragment extends android.support.v4.app.Fragment{
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingsFragment.
+     * @return A new instance of fragment GamesFragment.
      */
+
     // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
+    public static GamesFragment newInstance(String param1, String param2) {
+        GamesFragment fragment = new GamesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -47,7 +59,7 @@ public class SettingsFragment extends android.support.v4.app.Fragment{
         return fragment;
     }
 
-    public SettingsFragment() {
+    public GamesFragment() {
         // Required empty public constructor
     }
 
@@ -58,13 +70,29 @@ public class SettingsFragment extends android.support.v4.app.Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        /* Add Application Names here as they are ready for testing to create their button in the UI */
+        GamesList = new ArrayList<String>();
+        GamesList.add("Friend Finder");
+        //GamesList.add("Capture the Flag");
+        //GamesList.add("Marco Polo");
+        //GamesList.add("Sardines");
+        //GamesList.add("Slender");
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_games, container, false);
+        context = getActivity();
+        /* Create reaction interfaces for the game buttons in our list */
+        GamesListView = (ListView)view.findViewById(R.id.listView);
+        String[] GamesArray = GamesList.toArray(new String[1]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,GamesArray);
+        GamesListView.setAdapter(adapter);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -103,7 +131,11 @@ public class SettingsFragment extends android.support.v4.app.Fragment{
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
+
         public void onFragmentInteraction(Uri uri);
+    }
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
     }
 
 }
