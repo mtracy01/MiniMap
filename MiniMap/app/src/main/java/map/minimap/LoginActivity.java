@@ -37,10 +37,16 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Signature;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
+
 import map.minimap.frameworks.LoginFragment;
+import map.minimap.frameworks.User;
 
 /**
  * A login screen that offers login via email/password.
@@ -57,7 +63,10 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    //private UserLoginTask mAuthTask = null;
+
+    //Debug variables
+    private static final String LOG_TAG = "LoginActivity";
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -118,6 +127,27 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
             Log.i(TAG, "Logged in...");
+            Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
+
+                @Override
+                public void onCompleted(GraphUser user, Response response) {
+                    if (user != null) {
+                        /* Add user info to a User class that can be stored elsewhere here*/
+                        /* For debug purposes, try to print out the desired user info in logCat)*/
+                        try{
+                            /* Create new user class here */
+                            Log.e(LOG_TAG,user.getId());
+                            Log.e(LOG_TAG,user.getName());
+                            User ourUser = new User(user.getId());
+                            //TODO: Put user in a permanent location within client and send info to server
+                        }
+                        catch(Exception e){
+                            Log.e(LOG_TAG,"Problem fetching Facebook data!");
+                        }
+
+                    }
+                }
+            });
         } else if (state.isClosed()) {
             Log.i(TAG, "Logged out...");
         }
@@ -153,9 +183,9 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data);
         Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+
+        /* If we are successful, go to our MainActivity */
         if (Session.getActiveSession() != null || Session.getActiveSession().isOpened()){
-            /* TODO: Create User */
-           
             Intent i = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(i);
         }
@@ -310,25 +340,6 @@ public class LoginActivity extends FragmentActivity implements LoaderCallbacks<C
 
             // TODO: register the new account here.
             return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
         }
     }
 }
