@@ -1,7 +1,6 @@
 package map.minimap;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,20 +8,32 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+
+import map.minimap.frameworks.Maps;
 
 
-public class FriendFinder extends ActionBarActivity {
+public class FriendFinder extends Activity implements OnMapReadyCallback {
+
+    private MapFragment map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_finder);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
+            /*getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
-                    .commit();
+                    .commit();*/
+
+            map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
+            map.getMapAsync(this);
+
         }
+        //map = this.findFragmentById(R.id.map);
     }
 
 
@@ -46,6 +57,11 @@ public class FriendFinder extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        Maps.readyMap(map);
     }
 
     /**
