@@ -1,5 +1,7 @@
 package map.minimap.frameworks;
 
+import com.google.android.gms.maps.model.Marker;
+
 /**
  * Created by Joe Coy on 2/20/2015.
  */
@@ -16,8 +18,13 @@ public class User {
 
     private String name;
 
+
     private String ID;
 
+    //The affiliated team of the player.  0 by default.
+    private int team;
+
+    private Marker marker;  //Location object for GoogleMap
     private User friends[];
 
     public User(String id) {
@@ -25,6 +32,7 @@ public class User {
         Ycoord = 0;
         name = ""; //Needs to be specified later
         ID = id;
+        team=0;
         friends = null; //Needs to be specified later
 
     }
@@ -69,4 +77,10 @@ public class User {
     public void setFriends(User[] friends) {
         this.friends = friends;
     }
+
+    public void setMarker(Marker m){ marker = m; }
+    public Marker getMarker(){ return marker;}
+
+    public void setTeam(int t){ team = t; }
+    public int getTeam(){ return team; }
 }
