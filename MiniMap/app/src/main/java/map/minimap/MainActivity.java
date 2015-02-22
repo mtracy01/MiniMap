@@ -18,6 +18,7 @@ import android.support.v4.widget.DrawerLayout;
 import com.facebook.Session;
 
 import map.minimap.frameworks.ServerConnection;
+import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
@@ -35,7 +36,7 @@ public class MainActivity extends ActionBarActivity
 
     //Debug tag for log console
     private String LOG_TAG="MainActivity";
-
+    private ServerConnection client;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -51,10 +52,13 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //set default userID in case something goes wrong
 
+        //Get our variables from LoginActivity
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             Session.setActiveSession((Session) extras.getSerializable("fb_session"));
+
             Log.e(LOG_TAG,"SUCCESS");
         }
         else{
@@ -69,9 +73,12 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        final Data data = (Data)getApplicationContext();
-        ServerConnection client = new ServerConnection(this,data.getUser().getID());
-        data.setClient(client);
+
+        ServerConnection client = new ServerConnection(this,Data.user.getID());
+        //Data.setClient(client);
+        Data.client=client;
+
+
     }
 
     @Override

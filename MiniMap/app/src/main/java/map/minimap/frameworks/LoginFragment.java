@@ -32,6 +32,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
 
     private UiLifecycleHelper uiHelper;
 
+    private User ourUser;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -67,12 +69,11 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                             /* Create new user class here */
                             Log.e(LOG_TAG, user.getId());
                             Log.e(LOG_TAG, user.getName());
-                            User ourUser = new User(user.getId());
+                            ourUser = new User(user.getId());
                             ourUser.setName(user.getName());
 
                             /* Put user in our Data class */
-                            final Data data = (Data) getActivity().getApplicationContext();
-                            data.setUser(ourUser);
+                            Data.user=ourUser;
                             //data.setSession(session2);
 
                         } catch (Exception e) {

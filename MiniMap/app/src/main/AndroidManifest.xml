@@ -22,7 +22,7 @@
         android:icon="@mipmap/minimaplogo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        android:name="map.minimap.helperClasses.Data">
+        >
 
         <!-- Meta-data and API keys go here -->
         <meta-data
