@@ -67,15 +67,20 @@ end
 hostname = 'localhost'
 port = 2048
 
+errors = 0
 
 if (!testConnection(hostname, port))
-	puts "Test connection failed"
+	puts "Test: connection failed"
+	errors = errors + 1
 	exit
 end
-
 if (!testGetAllUsers(hostname, port))
-	puts "Test get all users failed"
+	puts "Test: get all users failed"
+	errors = errors + 1
 end
 if (!testCreateFFGame(hostname, port))
-	puts "Test friend finder create failed"
+	puts "Test: friend finder create failed"
+	errors = errors + 1
 end
+
+puts "#{errors} test(s) failed."
