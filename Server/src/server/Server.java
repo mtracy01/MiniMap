@@ -4,11 +4,16 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import sessions.GameSession;
 
 
 public class Server extends Thread {
+	
+	private static final Logger log = Logger.getLogger( Server.class.getName() );
 	
 	/**
 	 * The port the server runs on
@@ -41,6 +46,13 @@ public class Server extends Thread {
 	public Server() {
 		connectedUsers = new ArrayList<User>();
 		gameSessions = new ArrayList<GameSession>();
+		
+		// Set up logging
+		Logger l = Logger.getLogger("");
+		ConsoleHandler handler = new ConsoleHandler();
+		handler.setLevel(Level.ALL);
+		l.addHandler(handler);
+		l.setLevel(Level.ALL);
 	}
 	
 	@Override
@@ -52,7 +64,7 @@ public class Server extends Thread {
 	 * Start accepting incoming connections
 	 */
 	public void startServer() {
-		System.out.println("Server starting...");
+		log.info("Server starting...");
 		
 		// Open the server socket
 		try {
@@ -62,7 +74,7 @@ public class Server extends Thread {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		System.out.println("Server running...");
+		log.info("Server running...");
 		
 		listening = true;
 		while (listening) {
@@ -83,7 +95,7 @@ public class Server extends Thread {
 	 * Stop the server and disconnect any connected users
 	 */
 	public void stopServer() {
-		System.out.println("Server stopping...");
+		log.info("Server stopping...");
 		listening = false;
 		try {
 			serverSocket.close();
@@ -100,7 +112,7 @@ public class Server extends Thread {
 	public void addUser(User u) {
 		synchronized (connectedUsers) {
 			connectedUsers.add(u);
-			System.out.println(connectedUsers.size() + " connected clients.");
+			log.fine(connectedUsers.size() + " connected clients.");
 		}
 	}
 	
@@ -111,7 +123,7 @@ public class Server extends Thread {
 	public void removeUser(User u) {
 		synchronized (connectedUsers) {
 			connectedUsers.remove(u);
-			System.out.println(connectedUsers.size() + " connected clients.");
+			log.fine(connectedUsers.size() + " connected clients.");
 		}
 	}
 	
@@ -122,7 +134,7 @@ public class Server extends Thread {
 	public void addSession(GameSession session) {
 		synchronized (gameSessions) {
 			gameSessions.add(session);
-			System.out.println(gameSessions.size() + " running sessions.");
+			log.finer(gameSessions.size() + " running sessions.");
 		}
 	}
 	
@@ -134,7 +146,7 @@ public class Server extends Thread {
 		session.endSession();
 		synchronized (gameSessions) {
 			gameSessions.remove(session);
-			System.out.println(gameSessions.size() + " running sessions.");
+			log.finer(gameSessions.size() + " running sessions.");
 		}
 	}
 	
@@ -169,5 +181,15 @@ public class Server extends Thread {
 				server.printStatus();
 			}
 		}
+	}
+
+	public void sendAllUsers(User user) {
+		StringBuilder usersMessage = new StringBuilder();
+		usersMessage.append("users");
+		for (User u : connectedUsers) {
+			usersMessage.append(' ');
+			usersMessage.append(u.getUserID());
+		}
+		user.sendMessage(usersMessage.toString());
 	}
 }

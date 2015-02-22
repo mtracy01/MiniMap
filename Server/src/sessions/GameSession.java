@@ -1,11 +1,15 @@
 package sessions;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
+import server.Server;
 import server.Team;
 import server.User;
 
 public abstract class GameSession {
+	
+	private static final Logger log = Logger.getLogger( Server.class.getName() );
 	
 	private static Integer baseId = 0;
 	
