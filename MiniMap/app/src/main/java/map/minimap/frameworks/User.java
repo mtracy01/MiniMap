@@ -1,6 +1,15 @@
 package map.minimap.frameworks;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
+
+import java.net.URL;
+
+import map.minimap.R;
 
 /**
  * Created by Joe Coy on 2/20/2015.
@@ -16,9 +25,10 @@ public class User {
      */
     private double Xcoord, Ycoord;
 
+    //Debug tag for logging errors in LogCat
+    private String LOG_TAG="User";
+
     private String name;
-
-
     private String ID;
 
     //The affiliated team of the player.  0 by default.
@@ -83,4 +93,20 @@ public class User {
 
     public void setTeam(int t){ team = t; }
     public int getTeam(){ return team; }
+
+
+    //Return the user image
+    public Bitmap getUserImage(){
+        Bitmap userIcon = Bitmap.createBitmap(50,50,Bitmap.Config.ARGB_4444);
+        try{
+            URL img_value = null;
+            img_value = new URL("http://graph.facebook.com/"+getID()+"/picture?type=small");
+            userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
+        }
+        catch(Exception e){
+            Log.e(LOG_TAG, "Failed to get User image" + e.getMessage());
+
+        }
+        return userIcon;
+    }
 }

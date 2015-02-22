@@ -102,7 +102,7 @@ public class Maps {
         System.arraycopy(playerList,0,users,0,length);
 
         /* Get metadata so we can use Facebook API key */
-        String apiKey="";
+        /*String apiKey="";
         try{
             ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo("map.minimap",PackageManager.GET_META_DATA);
             Bundle bunderu = applicationInfo.metaData;
@@ -113,7 +113,7 @@ public class Maps {
         }
         catch(NullPointerException e){
             Log.e(LOG_TAG,"Failed to load meta-data, NullPointer" + e.getMessage());
-        }
+        }*/
 
 
         /* Create markers and put them in respective locatons */
@@ -128,21 +128,10 @@ public class Maps {
             switch (users[i].getTeam()){
                 case 0:
                     /* Decode profile picture by calling Facebook Graph API */
-                    Bitmap userIcon;
-                    try{
-                        URL img_value = null;
-                        img_value = new URL("http://graph.facebook.com/"+apiKey+"/picture?type=small");
-                        userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
-
-                    }
-                    catch(Exception e){
-                        Log.e(LOG_TAG,"Failed to get User image" + e.getMessage());
-                        return;
-                    }
                     users[i].setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .fromBitmap(userIcon))));
+                                    .fromBitmap(users[i].getUserImage()))));
                 case 1:
                     users[i].setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)

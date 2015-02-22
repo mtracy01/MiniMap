@@ -42,7 +42,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
 
     private ArrayList<String> GamesList;                //The list of games we have available for users
     private static ListView GamesListView;    //The Actual UI element id for our games list
-    private Context context=getActivity();
+    private Context context;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -94,8 +94,8 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_games, container, false);
-        context = getActivity();
         /* Create reaction interfaces for the game buttons in our list */
+        context =getActivity();
         GamesListView = (ListView)view.findViewById(R.id.listView);
         GamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -105,7 +105,6 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                 Intent intent = new Intent(context, FriendFinder.class);
 
                 startActivity(intent);
-                int x=5;
             }
         });
         String[] GamesArray = GamesList.toArray(new String[1]);

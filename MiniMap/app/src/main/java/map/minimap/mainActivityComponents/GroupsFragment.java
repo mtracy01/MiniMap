@@ -1,14 +1,33 @@
 package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.facebook.FacebookException;
+import com.facebook.FacebookOperationCanceledException;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.widget.WebDialog;
+
+import java.util.ArrayList;
+
+import map.minimap.FriendFinder;
 import map.minimap.R;
+import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.facebookHelper;
 
 
 /**
@@ -25,9 +44,19 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private String LOG_TAG="GroupsFragment";
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private ArrayList<String> OptionsList;                //The list of games we have available for users
+    private static ListView OptionsListView;    //The Actual UI element id for our games list
+    private Context context;
+
+    //Facebook communication protocols
+    private facebookHelper facebook;
+    private UiLifecycleHelper uiHelper;
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,13 +89,51 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        //UI helper for facebook interactions
+        uiHelper = new UiLifecycleHelper(getActivity(), callback);
+        uiHelper.onCreate(savedInstanceState);
+
+        //List of options for this fragment
+        OptionsList = new ArrayList<String>();
+        OptionsList.add("Friends who use the app");
+        OptionsList.add("Find friends who use the app");
+        OptionsList.add("My Groups");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        context = getActivity();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_groups, container, false);
+        View view = inflater.inflate(R.layout.fragment_groups, container, false);
+        /* Create reaction interfaces for the game buttons in our list */
+        OptionsListView = (ListView)view.findViewById(R.id.listView);
+        OptionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView <?> a, View v, int position,
+                                    long id) {
+                if(position==0){
+                    //List friends who use the app
+                    //facebookHelper.listFriends(context);
+                    sendRequestDialog();
+
+                }
+                if(position==1){
+                    //Find friends who use the app
+                }
+                if(position==2){
+                    //facebookHelper.listFriends(context);
+                    //List user created groups and give them the option to create a new group.
+                    //Probably should be implemented in a new activity or heavily embedded into
+                    //this one.
+                }
+            }
+        });
+        String[] GamesArray = OptionsList.toArray(new String[3]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,GamesArray);
+        OptionsListView.setAdapter(adapter);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -104,8 +171,101 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * Facebook Interaction Methods go here
+     */
+
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        if (state.isOpened()) {
+            Log.i(LOG_TAG, "Logged in...");
+        } else if (state.isClosed()) {
+            Log.i(LOG_TAG, "Logged out...");
+        }
+    }
+
+    private Session.StatusCallback callback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state, Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        uiHelper.onResume();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        uiHelper.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        uiHelper.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        uiHelper.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
+    }
+
+    /*
+     * Facebook API integration
+     */
+    private void sendRequestDialog() throws ClassCastException {
+        Bundle params = new Bundle();
+        params.putString("message", "Learn how to make your Android apps social");
+        final Data data = (Data)getActivity().getApplicationContext();
+        Session session= data.getSession();
+        WebDialog requestsDialog = (
+                new WebDialog.RequestsDialogBuilder(getActivity(),
+                        session,
+                        params))
+                .setOnCompleteListener(new WebDialog.OnCompleteListener() {
+
+                    @Override
+                    public void onComplete(Bundle values,
+                                           FacebookException error) {
+                        if (error != null) {
+                            if (error instanceof FacebookOperationCanceledException) {
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "Request cancelled",
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "Network Error",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            final String requestId = values.getString("request");
+                            if (requestId != null) {
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "Request sent",
+                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "Request cancelled",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                })
+                .build();
+        requestsDialog.show();
+    }
 }
