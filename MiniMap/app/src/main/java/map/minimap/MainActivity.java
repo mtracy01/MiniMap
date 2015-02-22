@@ -17,6 +17,8 @@ import android.support.v4.widget.DrawerLayout;
 
 import com.facebook.Session;
 
+import map.minimap.frameworks.ServerConnection;
+import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
 import map.minimap.mainActivityComponents.InvitationsFragment;
@@ -67,6 +69,9 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        final Data data = (Data)getApplicationContext();
+        ServerConnection client = new ServerConnection(this,data.getUser().getID());
+        data.setClient(client);
     }
 
     @Override
