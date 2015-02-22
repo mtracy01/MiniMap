@@ -122,26 +122,23 @@ public class Maps {
             /* Convert coordinates to latitude and longitude tuple */
             LatLng latLng = new LatLng(users[i].getXcoord(),users[i].getYcoord());
 
-            /* Decode profile picture by calling Facebook Graph API */
-            Bitmap userIcon;
-            try{
-                URL img_value = null;
-                img_value = new URL("http://graph.facebook.com/"+apiKey+"/picture?type=small");
-                userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
 
-            }
-            catch(Exception e){
-                Log.e(LOG_TAG,"Failed to get User image" + e.getMessage());
-                return;
-            }
 
 
             switch (users[i].getTeam()){
                 case 0:
-                    /*users[i].setMarker(map.addMarker(new MarkerOptions()
-                        .position(latLng)
-                        .icon(BitmapDescriptorFactory
-                                .defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))));*/
+                    /* Decode profile picture by calling Facebook Graph API */
+                    Bitmap userIcon;
+                    try{
+                        URL img_value = null;
+                        img_value = new URL("http://graph.facebook.com/"+apiKey+"/picture?type=small");
+                        userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
+
+                    }
+                    catch(Exception e){
+                        Log.e(LOG_TAG,"Failed to get User image" + e.getMessage());
+                        return;
+                    }
                     users[i].setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
