@@ -122,13 +122,10 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView <?> a, View v, int position,
                                     long id) {
+                facebookHelper helper = new facebookHelper();
                 if(position==0){
                     //List friends who use the app
-                    //facebookHelper.listFriends(context);
-                    facebookHelper helper = new facebookHelper();
                     helper.listFriends(context);
-                    //sendRequestDialog();
-
                 }
                 if(position==1){
                     //Find friends who use the app
