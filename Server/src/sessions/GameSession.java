@@ -29,6 +29,11 @@ public abstract class GameSession {
 	protected ArrayList<User> users;
 	
 	/**
+	 * The number of accepted users
+	 */
+	private int acceptedUsers;
+	
+	/**
 	 * The teams in the game session
 	 */
 	protected ArrayList<Team> teams;
@@ -42,14 +47,17 @@ public abstract class GameSession {
 		}
 		this.users = users;
 		this.gameType = gameType;
+		this.acceptedUsers = 0;
 	}
 	
 	/**
 	 * Send all the users invitations to the current game.
 	 */
 	public void sendInvites() {
-		for (User u : users) {
-			u.sendMessage("invite " + gameType + " " + id);
+		synchronized (users) {
+			for (User u : users) {
+				u.sendMessage("invite " + gameType + " " + id);
+			}
 		}
 	}
 	
@@ -59,6 +67,11 @@ public abstract class GameSession {
 	 * @param user The user who sent the message.
 	 */
 	public abstract void handleMessage(String message, User user);
+	
+	/**
+	 * Start the session
+	 */
+	public abstract void startSession();
 	
 	/**
 	 * End the current session.
@@ -78,7 +91,28 @@ public abstract class GameSession {
 	 */
 	public abstract void addUser(User user);
 
+	public void accept(User user) {
+		synchronized (users) {
+			acceptedUsers++;
+			if (acceptedUsers == users.size()) {
+				this.startSession();
+			}
+		}
+	}
 	
+	public void reject(User user) {
+		synchronized (users) {
+			users.remove(user);
+		}
+	}
+	
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

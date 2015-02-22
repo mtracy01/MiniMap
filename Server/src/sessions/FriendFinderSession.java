@@ -15,6 +15,12 @@ public class FriendFinderSession extends GameSession {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+	public void startSession() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void endSession() {

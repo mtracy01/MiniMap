@@ -29,7 +29,7 @@ public class MessageHandler {
 		if (messageParts.length == 0) {
 			return;
 		}
-		log.log(Level.FINE, "message \"{0}\" received", message);
+		log.log(Level.FINE, "message \"{0}\" received from user {1}", new Object[]{message, user.getId()});
 		switch(messageParts[0]) {
 			case "createGame":
 				ArrayList<User> users = new ArrayList<User>();
@@ -44,8 +44,12 @@ public class MessageHandler {
 				createGame(messageParts[1], users);
 				break;
 			case "accept":
+				GameSession sessionAccept = server.getSessionByID(Integer.parseInt(messageParts[1]));
+				sessionAccept.accept(user);
 				break;
 			case "reject":
+				GameSession sessionReject = server.getSessionByID(Integer.parseInt(messageParts[1]));
+				sessionReject.reject(user);
 				break;
 			case "location":
 				break;

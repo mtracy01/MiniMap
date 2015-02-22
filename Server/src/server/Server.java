@@ -112,8 +112,8 @@ public class Server extends Thread {
 					return u;
 				}
 			}
-			return null;
 		}
+		return null;
 	}
 	
 	/**
@@ -140,6 +140,16 @@ public class Server extends Thread {
 		}
 	}
 
+	public GameSession getSessionByID(int id) {
+		synchronized (gameSessions) {
+			for (GameSession session : gameSessions) {
+				if (session.getId() == id) {
+					return session;
+				}
+			}
+		}
+		return null;
+	}
 	
 	
 	/*
