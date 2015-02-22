@@ -14,6 +14,11 @@ public abstract class GameSession {
 	private static Integer baseId = 0;
 	
 	/**
+	 * The game type
+	 */
+	private String gameType;
+	
+	/**
 	 * The game session id
 	 */
 	private int id;
@@ -29,15 +34,24 @@ public abstract class GameSession {
 	protected ArrayList<Team> teams;
 	
 	
-	public GameSession(ArrayList<User> users) {
+	public GameSession(ArrayList<User> users, String gameType) {
 		// set the id of the game session
 		synchronized (baseId) {
 			id = baseId;
 			baseId++;
 		}
-		users = users;
+		this.users = users;
+		this.gameType = gameType;
 	}
 	
+	/**
+	 * Send all the users invitations to the current game.
+	 */
+	public void sendInvites() {
+		for (User u : users) {
+			u.sendMessage("invite " + gameType + " " + id);
+		}
+	}
 	
 	/**
 	 * Handle an incoming message.  This is handled on a per game basis.

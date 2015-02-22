@@ -7,7 +7,7 @@ import server.User;
 public class FriendFinderSession extends GameSession {
 
 	public FriendFinderSession(ArrayList<User> users) {
-		super(users);
+		super(users, "friendFinder");
 	}
 
 	@Override

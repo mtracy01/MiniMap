@@ -52,6 +52,12 @@ public class MessageHandler {
 			case "getAllUsers":
 				server.sendAllUsers(user);
 				break;
+			default:
+				// Bounce the message to the game session
+				if (user.isInGame()) {
+					user.getGameSession().handleMessage(message, user);
+				}
+				break;
 		}
 	}
 
@@ -60,6 +66,7 @@ public class MessageHandler {
 		switch (gameType) {
 			case "friendFinder":
 				gameSession = new FriendFinderSession(users);
+				gameSession.sendInvites();
 				break;
 			case "ctf":
 				break;

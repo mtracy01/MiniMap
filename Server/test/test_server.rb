@@ -53,7 +53,7 @@ def testCreateFFGame(hostname, port)
 			user1.close
 			user2.close
 	
-			if (invite.start_with? "invite")
+			if (invite.start_with? "invite friendFinder")
 				return true
 			else
 				return false
@@ -74,10 +74,12 @@ if (!testConnection(hostname, port))
 	errors = errors + 1
 	exit
 end
+sleep 1
 if (!testGetAllUsers(hostname, port))
 	puts "Test: get all users failed"
 	errors = errors + 1
 end
+sleep 1
 if (!testCreateFFGame(hostname, port))
 	puts "Test: friend finder create failed"
 	errors = errors + 1
