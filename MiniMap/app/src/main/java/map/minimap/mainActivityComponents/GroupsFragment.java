@@ -106,7 +106,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         //List of options for this fragment
         OptionsList = new ArrayList<String>();
         OptionsList.add("Friends who use the app");
-        OptionsList.add("Find friends who use the app");
+        OptionsList.add("Invite friends to the app");
         OptionsList.add("My Groups");
     }
 
@@ -125,10 +125,11 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                 facebookHelper helper = new facebookHelper();
                 if(position==0){
                     //List friends who use the app
-                    helper.listFriends(context);
+                    //helper.listFriends(context);
                 }
                 if(position==1){
-                    //Find friends who use the app
+                    //Invite friends to use the app
+                    helper.inviteFriends(context);
                 }
                 if(position==2){
                     //facebookHelper.listFriends(context);
