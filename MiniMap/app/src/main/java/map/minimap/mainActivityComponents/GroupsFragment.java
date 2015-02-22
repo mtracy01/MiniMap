@@ -55,7 +55,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
     private Context context;
 
     //Facebook communication protocols
-    private facebookHelper facebook;
+    //private facebookHelper facebook;
     private UiLifecycleHelper uiHelper;
 
     private OnFragmentInteractionListener mListener;
@@ -68,7 +68,6 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment GroupsFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static GroupsFragment newInstance(String param1, String param2) {
         GroupsFragment fragment = new GroupsFragment();
         Bundle args = new Bundle();
@@ -88,6 +87,16 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+
+        //Attempt to get our active session
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras != null) {
+            Session.setActiveSession((Session) extras.getSerializable("fb_session"));
+            Log.e(LOG_TAG,"SUCCESS");
+        }
+        else{
+            Log.e(LOG_TAG,"FAILURE");
         }
 
         //UI helper for facebook interactions
@@ -229,11 +238,10 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
     private void sendRequestDialog() throws ClassCastException {
         Bundle params = new Bundle();
         params.putString("message", "Learn how to make your Android apps social");
-        final Data data = (Data)getActivity().getApplicationContext();
-        Session session= data.getSession();
+
         WebDialog requestsDialog = (
                 new WebDialog.RequestsDialogBuilder(getActivity(),
-                        session,
+                        Session.getActiveSession(),
                         params))
                 .setOnCompleteListener(new WebDialog.OnCompleteListener() {
 

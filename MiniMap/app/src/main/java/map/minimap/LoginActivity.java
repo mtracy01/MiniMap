@@ -54,18 +54,6 @@ import map.minimap.helperClasses.Data;
  */
 public class LoginActivity extends FragmentActivity {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove afters connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    //private UserLoginTask mAuthTask = null;
-
     //Debug variables
     private static final String LOG_TAG = "LoginActivity";
 
@@ -122,7 +110,8 @@ public class LoginActivity extends FragmentActivity {
                             /* Put user in our Data class */
                             final Data data = (Data)getApplicationContext();
                             data.setUser(ourUser);
-                            data.setSession(session2);
+                            //data.setSession(session2);
+
                         }
                         catch(Exception e){
                             Log.e(LOG_TAG,"Problem fetching Facebook data!");
@@ -170,6 +159,12 @@ public class LoginActivity extends FragmentActivity {
         /* If we are successful, go to our MainActivity */
         if (Session.getActiveSession() != null || Session.getActiveSession().isOpened()){
             Intent i = new Intent(LoginActivity.this,MainActivity.class);
+            Session session = Session.getActiveSession();
+            if(session.isOpened())
+                Log.e(LOG_TAG,"TRUE");
+            else
+                Log.e(LOG_TAG,"False");
+            i.putExtra("facebook_session",session);
             startActivity(i);
         }
     }
