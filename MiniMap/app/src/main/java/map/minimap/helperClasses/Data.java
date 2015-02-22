@@ -1,5 +1,8 @@
-package map.minimap.frameworks;
+package map.minimap.helperClasses;
 import android.app.Application;
+
+import map.minimap.frameworks.User;
+
 /**
  * Created by Matthew on 2/21/2015.
  * Purpose: Store global data that is used throughout the application
