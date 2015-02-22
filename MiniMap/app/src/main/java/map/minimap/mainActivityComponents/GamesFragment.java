@@ -2,17 +2,22 @@ package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import map.minimap.FriendFinder;
+import map.minimap.MainActivity;
 import map.minimap.R;
 
 
@@ -79,6 +84,9 @@ public class GamesFragment extends android.support.v4.app.Fragment{
         //GamesList.add("Sardines");
         //GamesList.add("Slender");
 
+
+
+
     }
 
     @Override
@@ -89,6 +97,17 @@ public class GamesFragment extends android.support.v4.app.Fragment{
         context = getActivity();
         /* Create reaction interfaces for the game buttons in our list */
         GamesListView = (ListView)view.findViewById(R.id.listView);
+        GamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView <?> a, View v, int position,
+                                    long id) {
+
+                Intent intent = new Intent(context, FriendFinder.class);
+
+                startActivity(intent);
+                int x=5;
+            }
+        });
         String[] GamesArray = GamesList.toArray(new String[1]);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,GamesArray);
         GamesListView.setAdapter(adapter);
