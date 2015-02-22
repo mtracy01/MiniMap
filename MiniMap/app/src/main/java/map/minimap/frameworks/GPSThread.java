@@ -16,15 +16,16 @@ public class GPSThread {
     private LocationListener locationListener;
     private static LocationManager locationManager;
 
-    public GPSThread(map.minimap.MainActivity activity) {
+    public GPSThread(map.minimap.MainActivity activity,final ServerConnection client) {
         this.activity =  activity;
-        final ServerConnection client = new ServerConnection(activity);
+        final int MINTIME = 1000;
+        final int MINDIST = 1;
 
         locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location
                 // provider.
-                client.sendMessage(location.getLatitude() + "," + location.getLongitude());
+                client.sendMessage("location" +location.getLatitude() + " " + location.getLongitude());
             }
             @Override
             public void onProviderDisabled(String provider) {
@@ -38,8 +39,8 @@ public class GPSThread {
 
             }
         };
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MINTIME, MINDIST, locationListener);
     }
-
+    public void destroyListener(){locationManager.removeUpdates(locationListener);}
 
 }

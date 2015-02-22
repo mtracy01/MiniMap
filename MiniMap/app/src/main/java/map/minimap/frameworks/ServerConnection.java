@@ -14,12 +14,12 @@ import android.util.Log;
 
 public class ServerConnection extends Thread {
 
-    public static final int SERVER_PORT = 3205;
-    public static final String SERVER_IP = "54.173.247.15";
+    public static final int SERVER_PORT = 2048;
+    public static final String SERVER_IP = "tracy94.com";
 
     private map.minimap.MainActivity activity;
     private Socket socket;
-
+    private String user_ID;
     // Input/output
     private PrintWriter out;
     private Scanner in;
@@ -27,9 +27,10 @@ public class ServerConnection extends Thread {
     // Are we connected to the client?
     private boolean connected;
 
-    public ServerConnection(map.minimap.MainActivity activity) {
+    public ServerConnection(map.minimap.MainActivity activity, String ID) {
         this.activity =  activity;
         connected = false;
+        user_ID = ID;
     }
 
     @Override
@@ -39,6 +40,7 @@ public class ServerConnection extends Thread {
             // Create a new PrintWriter with auto flush on
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new Scanner(socket.getInputStream());
+            out.println("id "+ user_ID);
         } catch (IOException e) {
             // Something went wrong
             System.out.println(e);
@@ -55,7 +57,6 @@ public class ServerConnection extends Thread {
 
         // We are connected
         connected = true;
-        sendMessage("request times");
         try {
             String line = null;
             while(in.hasNextLine()) {
@@ -96,6 +97,22 @@ public class ServerConnection extends Thread {
      */
     public void sendMessage(String message) {
         out.println(message);
+    }
+    public void createGameMessage(String gameType, User[] players){
+        out.print("create Game");
+        for(User u: players){
+            out.print(" " +u.getID());
+        }
+        out.println();
+    }
+    public void acceptGameMessage(String gameID){
+        out.println("accept "+ gameID);
+    }
+    public void rejectGameMessage(String gameID){
+        out.println("reject "+ gameID);
+    }
+    public void getAllUsers(){
+        out.println("request users");
     }
 
     /**

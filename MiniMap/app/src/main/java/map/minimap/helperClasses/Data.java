@@ -3,6 +3,7 @@ import android.app.Application;
 
 import com.facebook.Session;
 
+import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 
 /**
@@ -10,8 +11,9 @@ import map.minimap.frameworks.User;
  * Purpose: Store global data that is used throughout the application
  */
 public class Data extends Application {
-
+    // this will be our controller
     //Things for the application to store
+    private ServerConnection client;
     private User user;
     private User[] users;
 
@@ -24,6 +26,11 @@ public class Data extends Application {
     public User getUser(){
         return user;
     }
+
+    public void setClient(ServerConnection c){
+        this.client = c;
+    }
+    public ServerConnection getClient(){return client;}
 
     public void setUserList(User[] userList){
         int length = userList.length;
