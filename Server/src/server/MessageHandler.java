@@ -66,7 +66,6 @@ public class MessageHandler {
 		switch (gameType) {
 			case "friendFinder":
 				gameSession = new FriendFinderSession(users);
-				gameSession.sendInvites();
 				break;
 			case "ctf":
 				break;
@@ -79,6 +78,7 @@ public class MessageHandler {
 		}
 		if (gameSession != null) {
 			server.addSession(gameSession);
+			gameSession.sendInvites();
 		}
 	}
 }
