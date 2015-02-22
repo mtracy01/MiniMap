@@ -3,7 +3,9 @@ package server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +25,7 @@ public class Server extends Thread {
 	/**
 	 * A list of connected clients
 	 */
-	private ArrayList<User> connectedUsers;
+	private Set<User> connectedUsers;
 	
 	/**
 	 * The ServerSocket
@@ -38,14 +40,14 @@ public class Server extends Thread {
 	/**
 	 * A list of currently running game sessions.
 	 */
-	private ArrayList<GameSession> gameSessions;
+	private Set<GameSession> gameSessions;
 	
 	/**
 	 * Create the list of connected users
 	 */
 	public Server() {
-		connectedUsers = new ArrayList<User>();
-		gameSessions = new ArrayList<GameSession>();
+		connectedUsers = new HashSet<User>();
+		gameSessions = new HashSet<GameSession>();
 		
 		// Set up logging
 		Logger l = Logger.getLogger("");
@@ -54,7 +56,96 @@ public class Server extends Thread {
 		l.addHandler(handler);
 		l.setLevel(Level.ALL);
 	}
+
 	
+	/**
+	 * Send a list of all currently connected users to user
+	 * @param user
+	 */
+	public void sendAllUsers(User user) {
+		StringBuilder usersMessage = new StringBuilder();
+		usersMessage.append("users");
+		for (User u : connectedUsers) {
+			usersMessage.append(' ');
+			usersMessage.append(u.getUserID());
+		}
+		user.sendMessage(usersMessage.toString());
+	}
+	
+	
+	/*
+	 * --------------------- Add/Remove Users and Sessions ---------------------
+	 */
+	
+	/**
+	 * Add a user
+	 * @param u
+	 */
+	public boolean addUser(User u) {
+		synchronized (connectedUsers) {
+			boolean success = connectedUsers.add(u);
+			log.fine(connectedUsers.size() + " connected clients.");
+			return success;
+		}
+	}
+	
+	/**
+	 * Remove a user
+	 * @param c
+	 */
+	public void removeUser(User u) {
+		synchronized (connectedUsers) {
+			connectedUsers.remove(u);
+			log.fine(connectedUsers.size() + " connected clients.");
+		}
+	}
+	
+	/**
+	 * Get the user by their id.  If the specified user does not exist, return null.
+	 * @param id
+	 * @return
+	 */
+	public User getUserByID(String id) {
+		synchronized (connectedUsers) {
+			for (User u : connectedUsers) {
+				if (u.getUserID().equals(id)) {
+					return u;
+				}
+			}
+			return null;
+		}
+	}
+	
+	/**
+	 * Add a game session
+	 * @param session
+	 */
+	public void addSession(GameSession session) {
+		synchronized (gameSessions) {
+			gameSessions.add(session);
+			log.log(Level.FINER, "Adding game session of type {0}", session.getClass().getName());
+			log.finer(gameSessions.size() + " running sessions.");
+		}
+	}
+	
+	/**
+	 * Remove a game session
+	 * @param session
+	 */
+	public void removeSession(GameSession session) {
+		session.endSession();
+		synchronized (gameSessions) {
+			gameSessions.remove(session);
+			log.finer(gameSessions.size() + " running sessions.");
+		}
+	}
+
+	
+	
+	/*
+	 * ---------------------------- Server Operation ----------------------------
+	 */
+
 	@Override
 	public void run() {
 		startServer();
@@ -106,51 +197,6 @@ public class Server extends Thread {
 	}
 	
 	/**
-	 * Add a user
-	 * @param u
-	 */
-	public void addUser(User u) {
-		synchronized (connectedUsers) {
-			connectedUsers.add(u);
-			log.fine(connectedUsers.size() + " connected clients.");
-		}
-	}
-	
-	/**
-	 * Remove a user
-	 * @param c
-	 */
-	public void removeUser(User u) {
-		synchronized (connectedUsers) {
-			connectedUsers.remove(u);
-			log.fine(connectedUsers.size() + " connected clients.");
-		}
-	}
-	
-	/**
-	 * Add a game session
-	 * @param session
-	 */
-	public void addSession(GameSession session) {
-		synchronized (gameSessions) {
-			gameSessions.add(session);
-			log.finer(gameSessions.size() + " running sessions.");
-		}
-	}
-	
-	/**
-	 * Remove a game session
-	 * @param session
-	 */
-	public void removeSession(GameSession session) {
-		session.endSession();
-		synchronized (gameSessions) {
-			gameSessions.remove(session);
-			log.finer(gameSessions.size() + " running sessions.");
-		}
-	}
-	
-	/**
 	 * Print the status of the server
 	 */
 	public void printStatus() {
@@ -159,6 +205,12 @@ public class Server extends Thread {
 				System.out.println(u);
 			}
 			System.out.println(connectedUsers.size() + " connected users.");
+		}
+		synchronized (gameSessions) {
+			for (GameSession session : gameSessions) {
+				System.out.println(session);
+			}
+			System.out.println(gameSessions.size() + " running game sessions");
 		}
 	}
 	
@@ -181,15 +233,5 @@ public class Server extends Thread {
 				server.printStatus();
 			}
 		}
-	}
-
-	public void sendAllUsers(User user) {
-		StringBuilder usersMessage = new StringBuilder();
-		usersMessage.append("users");
-		for (User u : connectedUsers) {
-			usersMessage.append(' ');
-			usersMessage.append(u.getUserID());
-		}
-		user.sendMessage(usersMessage.toString());
 	}
 }

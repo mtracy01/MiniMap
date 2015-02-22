@@ -1,7 +1,11 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import sessions.FriendFinderSession;
+import sessions.GameSession;
 
 /**
  * MessageHandler
@@ -28,6 +32,16 @@ public class MessageHandler {
 		log.log(Level.FINE, "message \"{0}\" received", message);
 		switch(messageParts[0]) {
 			case "createGame":
+				ArrayList<User> users = new ArrayList<User>();
+				users.add(user);
+				for (int i = 2; i < messageParts.length; i++) {
+					User u = server.getUserByID(messageParts[i]);
+					// The user could be null if they disconnected when we received the message
+					if (u != null) {
+						users.add(u);
+					}
+				}
+				createGame(messageParts[1], users);
 				break;
 			case "accept":
 				break;
@@ -38,6 +52,26 @@ public class MessageHandler {
 			case "getAllUsers":
 				server.sendAllUsers(user);
 				break;
+		}
+	}
+
+	private void createGame(String gameType, ArrayList<User> users) {
+		GameSession gameSession = null;
+		switch (gameType) {
+			case "friendFinder":
+				gameSession = new FriendFinderSession(users);
+				break;
+			case "ctf":
+				break;
+			case "marcoPolo":
+				break;
+			case "sardines":
+				break;
+			case "slender":
+				break;
+		}
+		if (gameSession != null) {
+			server.addSession(gameSession);
 		}
 	}
 }

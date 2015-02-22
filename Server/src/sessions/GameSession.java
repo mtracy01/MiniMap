@@ -29,12 +29,13 @@ public abstract class GameSession {
 	protected ArrayList<Team> teams;
 	
 	
-	public GameSession() {
+	public GameSession(ArrayList<User> users) {
 		// set the id of the game session
 		synchronized (baseId) {
 			id = baseId;
 			baseId++;
 		}
+		users = users;
 	}
 	
 	
@@ -57,8 +58,23 @@ public abstract class GameSession {
 	 */
 	public abstract void removeUser(User user);
 
+	/**
+	 * Add a user to the game session
+	 * @param user
+	 */
+	public abstract void addUser(User user);
 
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.getClass().getName() + " [id=" + id + ", users=" + users + ", teams="
+				+ teams + "]";
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

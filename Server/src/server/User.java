@@ -96,7 +96,12 @@ public class User extends Thread {
 		// We are connected
 		connected = true;
 		// We add the client to the server here because we know we can read/write from it
-		server.addUser(this);
+		boolean added = server.addUser(this);
+		if (!added) {
+			log.log(Level.WARNING, "User not added, id already exists");
+			connected = false;
+			return;
+		}
 		// Create the message handler
 		messageHandler = new MessageHandler(server, this);
 		
@@ -141,7 +146,11 @@ public class User extends Thread {
 	 * @param message
 	 */
 	public void sendMessage(String message) {
-		out.println(message);
+		if (connected) {
+			out.println(message);
+		} else {
+			log.log(Level.WARNING, "Attempting to send message \"{0}\" to disconnected user", message);
+		}
 	}
 	
 	/**
@@ -214,6 +223,13 @@ public class User extends Thread {
 	 */
 	public GameSession getGameSession() {
 		return gameSession;
+	}
+
+	/**
+	 * @return the connected
+	 */
+	public boolean isConnected() {
+		return connected;
 	}
 
 	/* (non-Javadoc)
