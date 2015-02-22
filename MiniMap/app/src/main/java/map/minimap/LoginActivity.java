@@ -57,12 +57,6 @@ public class LoginActivity extends FragmentActivity {
     //Debug variables
     private static final String LOG_TAG = "LoginActivity";
 
-    // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
-
     //Fragment Reference
     private LoginFragment loginFragment;
     private static final String TAG = "LoginActivity";
@@ -86,14 +80,6 @@ public class LoginActivity extends FragmentActivity {
                     .findFragmentById(android.R.id.content);
         }
     }
-
-
-
-
-
-
-
-
 }
 
 

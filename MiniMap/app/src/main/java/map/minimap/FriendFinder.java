@@ -33,7 +33,6 @@ public class FriendFinder extends Activity implements OnMapReadyCallback {
             map.getMapAsync(this);
 
         }
-        //map = this.findFragmentById(R.id.map);
     }
 
 

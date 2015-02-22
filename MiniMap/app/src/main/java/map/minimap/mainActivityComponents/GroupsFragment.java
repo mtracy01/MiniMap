@@ -125,7 +125,9 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                 if(position==0){
                     //List friends who use the app
                     //facebookHelper.listFriends(context);
-                    sendRequestDialog();
+                    facebookHelper helper = new facebookHelper();
+                    helper.listFriends(context);
+                    //sendRequestDialog();
 
                 }
                 if(position==1){
@@ -230,50 +232,5 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         uiHelper.onSaveInstanceState(outState);
-    }
-
-    /*
-     * Facebook API integration
-     */
-    private void sendRequestDialog() throws ClassCastException {
-        Bundle params = new Bundle();
-        params.putString("message", "Learn how to make your Android apps social");
-
-        WebDialog requestsDialog = (
-                new WebDialog.RequestsDialogBuilder(getActivity(),
-                        Session.getActiveSession(),
-                        params))
-                .setOnCompleteListener(new WebDialog.OnCompleteListener() {
-
-                    @Override
-                    public void onComplete(Bundle values,
-                                           FacebookException error) {
-                        if (error != null) {
-                            if (error instanceof FacebookOperationCanceledException) {
-                                Toast.makeText(getActivity().getApplicationContext(),
-                                        "Request cancelled",
-                                        Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getActivity().getApplicationContext(),
-                                        "Network Error",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            final String requestId = values.getString("request");
-                            if (requestId != null) {
-                                Toast.makeText(getActivity().getApplicationContext(),
-                                        "Request sent",
-                                        Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getActivity().getApplicationContext(),
-                                        "Request cancelled",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-
-                })
-                .build();
-        requestsDialog.show();
     }
 }

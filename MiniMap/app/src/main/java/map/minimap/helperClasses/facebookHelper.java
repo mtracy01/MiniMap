@@ -57,10 +57,4 @@ public class facebookHelper {
         requestsDialog.show();
     }
 
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Session.getActiveSession().onActivityResult(context2, requestCode,
-                resultCode, data);
-    }*/
 }
