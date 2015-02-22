@@ -71,8 +71,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                             ourUser.setName(user.getName());
 
                             /* Put user in our Data class */
-                            /*final Data data = (Data) getApplicationContext();
-                            data.setUser(ourUser);*/
+                            final Data data = (Data) getActivity().getApplicationContext();
+                            data.setUser(ourUser);
                             //data.setSession(session2);
 
                         } catch (Exception e) {
