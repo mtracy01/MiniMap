@@ -63,6 +63,16 @@ public class Maps {
     }
 
     /**
+     * Purpose: Specify borders for map
+     * @param h
+     * @param w
+     */
+    public static void setBorders(int h, int w){
+        height=h;
+        width=w;
+    }
+
+    /**
      * Purpose: Prepare map with specified parameters
      * @param map
      */
@@ -116,21 +126,26 @@ public class Maps {
             Bitmap userIcon;
             try{
                 URL img_value = null;
-                img_value = new URL("http://graph.facebook.com/"+apiKey+"/picture?type=large");
+                img_value = new URL("http://graph.facebook.com/"+apiKey+"/picture?type=small");
                 userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
 
             }
             catch(Exception e){
                 Log.e(LOG_TAG,"Failed to get User image" + e.getMessage());
+                return;
             }
 
 
             switch (users[i].getTeam()){
                 case 0:
+                    /*users[i].setMarker(map.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .icon(BitmapDescriptorFactory
+                                .defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))));*/
                     users[i].setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))));
+                                    .fromBitmap(userIcon))));
                 case 1:
                     users[i].setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
