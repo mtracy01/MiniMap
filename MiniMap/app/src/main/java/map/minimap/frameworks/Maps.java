@@ -1,25 +1,13 @@
 package map.minimap.frameworks;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
+
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.lang.reflect.Array;
-import java.net.URL;
-
-import map.minimap.R;
 
 /**
  * Created by Matthew on 2/21/2015.
@@ -29,7 +17,7 @@ import map.minimap.R;
 public class Maps {
 
     //Debug variables
-    private static String LOG_TAG= "Maps Helper";
+    //private static String LOG_TAG= "Maps Helper";
 
     //Elements of player fields
     private static int height;
@@ -39,6 +27,7 @@ public class Maps {
 
     //List of users in the game
     private static User[] users;
+    private static LatLng center;
 
     /**
      * Purpose: Select the type of overlay to use for game map
@@ -64,8 +53,8 @@ public class Maps {
 
     /**
      * Purpose: Specify borders for map
-     * @param h
-     * @param w
+     * @param h Diameter of the north-south dimension of the map
+     * @param w Diameter of the east-west dimension of the map
      */
     public static void setBorders(int h, int w){
         height=h;
@@ -73,8 +62,16 @@ public class Maps {
     }
 
     /**
+     * Purpose: Get the x and y coordinates of our user and set his coordinates to be the center of the map.
+     * @param user host user
+     */
+    public static void setCenterPosition(User user){
+        center=user.getCoordinates();
+    }
+
+    /**
      * Purpose: Prepare map with specified parameters
-     * @param map
+     * @param map the map that is being modified by this framework
      */
     public static void readyMap(GoogleMap map){
         LatLng sydney = new LatLng(-33.867, 151.206);
@@ -91,36 +88,22 @@ public class Maps {
     /**
      * Purpose: Initialize markers for players and gather list
      *          of players
-     * @param map
-     * @param playerList
+     * @param map the map that is being modified by this framework
+     * @param playerList the list of players in the game
      */
-    public static void initializePlayers(GoogleMap map, User[] playerList, Context context){
+    public static void initializePlayers(GoogleMap map, User[] playerList){
         int length = playerList.length;
 
         /* create copy of users to store in class */
         users= new User[length];
         System.arraycopy(playerList,0,users,0,length);
 
-        /* Get metadata so we can use Facebook API key */
-        /*String apiKey="";
-        try{
-            ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo("map.minimap",PackageManager.GET_META_DATA);
-            Bundle bunderu = applicationInfo.metaData;
-            apiKey= bunderu.getString("com.facebook.sdk.ApplicationId");
-        }
-        catch(PackageManager.NameNotFoundException e){
-            Log.e(LOG_TAG,"Failed to load meta-data, NameNotFound" + e.getMessage());
-        }
-        catch(NullPointerException e){
-            Log.e(LOG_TAG,"Failed to load meta-data, NullPointer" + e.getMessage());
-        }*/
-
 
         /* Create markers and put them in respective locatons */
         for(int i=0;i<length;i++){
 
             /* Convert coordinates to latitude and longitude tuple */
-            LatLng latLng = new LatLng(users[i].getXcoord(),users[i].getYcoord());
+            LatLng latLng = users[i].getCoordinates();
 
 
 
@@ -156,4 +139,5 @@ public class Maps {
         }
 
     }
+
 }
