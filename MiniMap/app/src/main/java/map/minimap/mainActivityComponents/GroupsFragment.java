@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import com.facebook.FacebookException;
 import com.facebook.FacebookOperationCanceledException;
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
@@ -126,6 +129,25 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                 if(position==0){
                     //List friends who use the app
                     //helper.listFriends(context);
+                    new Request(
+                            Session.getActiveSession(),
+                            "/me/apprequests",
+                            null,
+                            HttpMethod.GET,
+                            new Request.Callback() {
+                                public void onCompleted(Response response) {
+                                    if (response.getRawResponse().contains("Nicki")) {
+
+
+                                        Toast.makeText(context.getApplicationContext(),
+                                                "Requests are there",
+                                                Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            }
+                    ).executeAsync();
+
                 }
                 if(position==1){
                     //Invite friends to use the app
