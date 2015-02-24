@@ -4,12 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import java.net.URL;
-
-import map.minimap.R;
 
 /**
  * Created by Joe Coy on 2/20/2015.
@@ -21,9 +19,10 @@ public class User {
      *
      * A User has exactly one server
      * A User has 0 to many teams (?)
-     * A User has friends[], a name, an ID, Xcoord, and Ycoord
+     * A User has friends[], a name, an ID, and coordinates
      */
-    private double Xcoord, Ycoord;
+
+    private LatLng coordinates;
 
     //Debug tag for logging errors in LogCat
     private String LOG_TAG="User";
@@ -38,8 +37,8 @@ public class User {
     private User friends[];
 
     public User(String id) {
-        Xcoord = 0;
-        Ycoord = 0;
+
+        coordinates = new LatLng(0,0);
         name = ""; //Needs to be specified later
         ID = id;
         team=0;
@@ -49,21 +48,9 @@ public class User {
 
     /* Getters and Setters */
 
-    public double getXcoord() {
-        return Xcoord;
-    }
+    public LatLng getCoordinates(){return coordinates;}
+    public void setCoordinates(LatLng newCoordinates){coordinates=newCoordinates;}
 
-    public double getYcoord() {
-        return Ycoord;
-    }
-
-    public void setXcoord(double xcoord) {
-        Xcoord = xcoord;
-    }
-
-    public void setYcoord(double ycoord) {
-        Ycoord = ycoord;
-    }
     public String getName() {
         return name;
     }
@@ -99,7 +86,7 @@ public class User {
     public Bitmap getUserImage(){
         Bitmap userIcon = Bitmap.createBitmap(50,50,Bitmap.Config.ARGB_4444);
         try{
-            URL img_value = null;
+            URL img_value;
             img_value = new URL("http://graph.facebook.com/"+getID()+"/picture?type=small");
             userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
         }

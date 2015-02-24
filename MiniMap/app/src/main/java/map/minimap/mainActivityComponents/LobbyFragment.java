@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -20,17 +21,12 @@ import java.util.ArrayList;
 import map.minimap.FriendFinder;
 import map.minimap.MainActivity;
 import map.minimap.R;
-
+import map.minimap.helperClasses.Data;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GamesFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GamesFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by Corey on 2/22/2015.
  */
-public class GamesFragment extends android.support.v4.app.Fragment{
+public class LobbyFragment extends android.support.v4.app.Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,11 +35,10 @@ public class GamesFragment extends android.support.v4.app.Fragment{
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-
-    private ArrayList<String> GamesList;                //The list of games we have available for users
-    private static ListView GamesListView;    //The Actual UI element id for our games list
+    private ArrayList<String> playersList;                //The list of players
+    private static ListView playerListView;
     private Context context;
+
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -52,12 +47,11 @@ public class GamesFragment extends android.support.v4.app.Fragment{
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GamesFragment.
+     * @return A new instance of fragment InvitationsFragment.
      */
-
     // TODO: Rename and change types and number of parameters
-    public static GamesFragment newInstance(String param1, String param2) {
-        GamesFragment fragment = new GamesFragment();
+    public static LobbyFragment newInstance(String param1, String param2) {
+        LobbyFragment fragment = new LobbyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +59,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
         return fragment;
     }
 
-    public GamesFragment() {
+    public LobbyFragment() {
         // Required empty public constructor
     }
 
@@ -76,17 +70,9 @@ public class GamesFragment extends android.support.v4.app.Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        /* Add Application Names here as they are ready for testing to create their button in the UI */
-        GamesList = new ArrayList<String>();
-        GamesList.add("Friend Finder");
-        //GamesList.add("Capture the Flag");
-        //GamesList.add("Marco Polo");
-        //GamesList.add("Sardines");
-        //GamesList.add("Slender");
-
-
-
+        playersList = new ArrayList<String>();
+        playersList.add(Data.user.getName());
+        //check server for other players
 
     }
 
@@ -94,23 +80,19 @@ public class GamesFragment extends android.support.v4.app.Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_games, container, false);
-        /* Create reaction interfaces for the game buttons in our list */
+        View view =  inflater.inflate(R.layout.fragment_grouplobby, container, false);
         context =getActivity();
-        GamesListView = (ListView)view.findViewById(R.id.listView);
-        GamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView <?> a, View v, int position,
-                                    long id) {
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
-                ft.addToBackStack(null);
-                ft.commit();
+        playerListView = (ListView)view.findViewById(R.id.listView);
+        final Button button = (Button) view.findViewById(R.id.startButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FriendFinder.class);
+                startActivity(intent);
             }
         });
-        String[] GamesArray = GamesList.toArray(new String[1]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,GamesArray);
-        GamesListView.setAdapter(adapter);
+        String[] playersArray = playersList.toArray(new String[1]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,playersArray);
+        playerListView.setAdapter(adapter);
         return view;
     }
 
@@ -124,12 +106,12 @@ public class GamesFragment extends android.support.v4.app.Fragment{
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
+      /*  try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
-        }
+        }*/
     }
 
     @Override
@@ -150,11 +132,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-
         public void onFragmentInteraction(Uri uri);
-    }
-    public void onFragmentInteraction(Uri uri){
-        //you can leave it empty
     }
 
 }

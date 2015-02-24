@@ -14,6 +14,11 @@ public abstract class GameSession {
 	private static Integer baseId = 0;
 	
 	/**
+	 * The game type
+	 */
+	private String gameType;
+	
+	/**
 	 * The game session id
 	 */
 	private int id;
@@ -24,19 +29,37 @@ public abstract class GameSession {
 	protected ArrayList<User> users;
 	
 	/**
+	 * The number of accepted users
+	 */
+	private int acceptedUsers;
+	
+	/**
 	 * The teams in the game session
 	 */
 	protected ArrayList<Team> teams;
 	
 	
-	public GameSession() {
+	public GameSession(ArrayList<User> users, String gameType) {
 		// set the id of the game session
 		synchronized (baseId) {
 			id = baseId;
 			baseId++;
 		}
+		this.users = users;
+		this.gameType = gameType;
+		this.acceptedUsers = 0;
 	}
 	
+	/**
+	 * Send all the users invitations to the current game.
+	 */
+	public void sendInvites() {
+		synchronized (users) {
+			for (User u : users) {
+				u.sendMessage("invite " + gameType + " " + id);
+			}
+		}
+	}
 	
 	/**
 	 * Handle an incoming message.  This is handled on a per game basis.
@@ -44,6 +67,11 @@ public abstract class GameSession {
 	 * @param user The user who sent the message.
 	 */
 	public abstract void handleMessage(String message, User user);
+	
+	/**
+	 * Start the session
+	 */
+	public abstract void startSession();
 	
 	/**
 	 * End the current session.
@@ -57,8 +85,44 @@ public abstract class GameSession {
 	 */
 	public abstract void removeUser(User user);
 
+	/**
+	 * Add a user to the game session
+	 * @param user
+	 */
+	public abstract void addUser(User user);
 
+	public void accept(User user) {
+		synchronized (users) {
+			acceptedUsers++;
+			if (acceptedUsers == users.size()) {
+				this.startSession();
+			}
+		}
+	}
 	
+	public void reject(User user) {
+		synchronized (users) {
+			users.remove(user);
+		}
+	}
+	
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.getClass().getName() + " [id=" + id + ", users=" + users + ", teams="
+				+ teams + "]";
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
