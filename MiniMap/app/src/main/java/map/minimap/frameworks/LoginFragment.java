@@ -2,19 +2,26 @@ package map.minimap.frameworks;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.facebook.FacebookRequestError;
+import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphObject;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
+
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -33,6 +40,10 @@ public class LoginFragment extends android.support.v4.app.Fragment {
     private UiLifecycleHelper uiHelper;
 
     private User ourUser;
+
+    //Invitations handling
+    private String requestId;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -67,8 +78,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                         /* For debug purposes, try to print out the desired user info in LogCat)*/
                         try {
                             /* Create new user class here */
-                            Log.e(LOG_TAG, user.getId());
-                            Log.e(LOG_TAG, user.getName());
+                            Log.i(LOG_TAG, user.getId());
+                            Log.i(LOG_TAG, user.getName());
                             ourUser = new User(user.getId());
                             ourUser.setName(user.getName());
 
@@ -83,6 +94,9 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                     }
                 }
             });
+            if(requestId!=null){
+                getRequestData(requestId);
+            }
         } else if (state.isClosed()) {
             Log.i(LOG_TAG, "Logged out...");
         }
@@ -130,6 +144,21 @@ public class LoginFragment extends android.support.v4.app.Fragment {
         }
     }
 
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // Check for an incoming notification. Save the info
+        Uri intentUri = getActivity().getIntent().getData();
+        if (intentUri != null) {
+            String requestIdParam = intentUri.getQueryParameter("request_ids");
+            if (requestIdParam != null) {
+                String array[] = requestIdParam.split(",");
+                requestId = array[0];
+                Log.i(LOG_TAG, "Request id: "+requestId);
+            }
+        }
+    }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -148,4 +177,56 @@ public class LoginFragment extends android.support.v4.app.Fragment {
         uiHelper.onSaveInstanceState(outState);
     }
 
+    //Get Request information
+    private void getRequestData(final String inRequestId) {
+        // Create a new request for an HTTP GET with the
+        // request ID as the Graph path.
+        Request request = new Request(Session.getActiveSession(),
+                inRequestId, null, HttpMethod.GET, new Request.Callback() {
+
+            @Override
+            public void onCompleted(Response response) {
+                // Process the returned response
+                GraphObject graphObject = response.getGraphObject();
+                FacebookRequestError error = response.getError();
+                // Default message
+                String message = "Incoming request";
+                if (graphObject != null) {
+                    // Check if there is extra data
+                    if (graphObject.getProperty("data") != null) {
+                        try {
+                            // Get the data, parse info to get the key/value info
+                            JSONObject dataObject =
+                                    new JSONObject((String)graphObject.getProperty("data"));
+                            // Get the value for the key - badge_of_awesomeness
+                            String badge =
+                                    dataObject.getString("badge_of_awesomeness");
+                            // Get the value for the key - social_karma
+                            String karma =
+                                    dataObject.getString("social_karma");
+                            // Get the sender's name
+                            JSONObject fromObject =
+                                    (JSONObject) graphObject.getProperty("from");
+                            String sender = fromObject.getString("name");
+                            String title = sender+" sent you a gift";
+                            // Create the text for the alert based on the sender
+                            // and the data
+                            message = title + "\n\n" +
+                                    "Badge: " + badge +
+                                    " Karma: " + karma;
+                        } catch (org.json.JSONException e) {
+                            message = "Error getting request info";
+                        }
+                    } else if (error != null) {
+                        message = "Error getting request info";
+                    }
+                }
+                Toast.makeText(getActivity().getApplicationContext(),
+                        message,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+        // Execute the request asynchronously.
+        Request.executeBatchAsync(request);
+    }
 }

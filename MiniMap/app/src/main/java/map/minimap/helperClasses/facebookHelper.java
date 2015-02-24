@@ -16,6 +16,7 @@ import com.facebook.widget.WebDialog;
  */
 public class facebookHelper {
     private  Context context2;
+
     public  void inviteFriends(Context context){
         Bundle params = new Bundle();
         params.putString("message", "YOUR_MESSAGE_HERE");

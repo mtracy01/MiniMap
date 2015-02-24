@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import map.minimap.R;
 
@@ -39,6 +41,12 @@ public class InvitationsFragment extends android.support.v4.app.Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment InvitationsFragment.
      */
+
+
+
+    //Debug tag
+    private String LOG_TAG="Invitations Fragment";
+
     // TODO: Rename and change types and number of parameters
     public static InvitationsFragment newInstance(String param1, String param2) {
         InvitationsFragment fragment = new InvitationsFragment();
@@ -107,5 +115,4 @@ public class InvitationsFragment extends android.support.v4.app.Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
-
 }
