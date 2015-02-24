@@ -144,6 +144,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
             else
                 Log.e(LOG_TAG,"FALSE");
             i.putExtra("facebook_session",session);
+            Data.session=session;
             startActivity(i);
         }
     }
@@ -158,6 +159,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
             if (requestIdParam != null) {
                 String array[] = requestIdParam.split(",");
                 requestId = array[0];
+                getRequestData(requestId);
                 Log.i(LOG_TAG, "Request id: "+requestId);
             }
         }

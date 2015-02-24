@@ -16,8 +16,6 @@ public class LoginActivity extends FragmentActivity {
 
     //Fragment Reference
     private LoginFragment loginFragment;
-    private static final String TAG = "LoginActivity";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

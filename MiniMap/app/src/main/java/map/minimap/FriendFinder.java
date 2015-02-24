@@ -25,10 +25,6 @@ public class FriendFinder extends Activity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_finder);
         if (savedInstanceState == null) {
-            /*getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();*/
-
             map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
             map.getMapAsync(this);
 

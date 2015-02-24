@@ -1,4 +1,6 @@
 package map.minimap.helperClasses;
+import com.facebook.Session;
+
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 
@@ -16,5 +18,6 @@ public class Data {
     //Facebook session info
     //static Session session;
     public static ServerConnection client;
+    public static Session session;
 
 }
