@@ -1,6 +1,5 @@
 package map.minimap.frameworks;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -122,6 +121,11 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                 (session.isOpened() || session.isClosed()) ) {
             onSessionStateChange(session, session.getState(), null);
         }
+        if(session !=null && Session.getActiveSession().isOpened()){
+            Intent i = new Intent(getActivity(),MainActivity.class);
+            i.putExtra("facebook_session",session);
+            startActivity(i);
+        }
         uiHelper.onResume();
     }
 
@@ -136,9 +140,9 @@ public class LoginFragment extends android.support.v4.app.Fragment {
             Intent i = new Intent(getActivity(),MainActivity.class);
             Session session = Session.getActiveSession();
             if(session.isOpened())
-                Log.e(LOG_TAG,"TRUE");
+                Log.i(LOG_TAG,"TRUE");
             else
-                Log.e(LOG_TAG,"False");
+                Log.e(LOG_TAG,"FALSE");
             i.putExtra("facebook_session",session);
             startActivity(i);
         }

@@ -1,24 +1,16 @@
 package map.minimap;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-
 import com.facebook.Session;
-
 import map.minimap.frameworks.ServerConnection;
-import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
@@ -36,7 +28,7 @@ public class MainActivity extends ActionBarActivity
 
     //Debug tag for log console
     private String LOG_TAG="MainActivity";
-    private ServerConnection client;
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */

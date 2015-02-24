@@ -1,6 +1,5 @@
 package map.minimap.frameworks;
 
-import android.content.Context;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;
