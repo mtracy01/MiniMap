@@ -2,6 +2,7 @@ package sessions;
 
 import java.util.ArrayList;
 
+import server.Location;
 import server.User;
 
 public class FriendFinderSession extends GameSession {
@@ -46,6 +47,18 @@ public class FriendFinderSession extends GameSession {
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void addBeacon(Location loc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeBeacon(Integer id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

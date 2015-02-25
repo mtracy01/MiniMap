@@ -1,8 +1,11 @@
 package sessions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
+import server.Beacon;
+import server.Location;
 import server.Server;
 import server.Team;
 import server.User;
@@ -38,6 +41,11 @@ public abstract class GameSession {
 	 */
 	protected ArrayList<Team> teams;
 	
+	/**
+	 * Any beacons in the game.
+	 */
+	protected HashMap<Integer, Beacon> beacons;
+	
 	
 	public GameSession(ArrayList<User> users, String gameType) {
 		// set the id of the game session
@@ -48,6 +56,8 @@ public abstract class GameSession {
 		this.users = users;
 		this.gameType = gameType;
 		this.acceptedUsers = 0;
+		this.teams = new ArrayList<Team>();
+		this.beacons = new HashMap<Integer, Beacon>();
 	}
 	
 	/**
@@ -90,6 +100,18 @@ public abstract class GameSession {
 	 * @param user
 	 */
 	public abstract void addUser(User user);
+	
+	/**
+	 * Add a beacon at the specified location
+	 * @param loc
+	 */
+	public abstract void addBeacon(Location loc);
+	
+	/**
+	 * Remove the specified beacon
+	 * @param id
+	 */
+	public abstract void removeBeacon(Integer id);
 
 	public void accept(User user) {
 		synchronized (users) {
