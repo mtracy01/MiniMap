@@ -1,7 +1,9 @@
 .DS_Store
 .metadata
+*~
 
 Server/.project
+Server/bin
 Server/.classpath
 Server/.settings/*
 
