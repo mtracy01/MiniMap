@@ -1,4 +1,4 @@
-package map.minimap.helperClasses;
+package map.minimap.mainActivityComponents;
 
 import android.os.AsyncTask;
 

@@ -17,12 +17,19 @@ public class FriendFinderSession extends GameSession {
 	}
 	
 	@Override
+	/* called when user presses start button
+	 * assign teams, etc...
+	 *  */
 	public void startSession() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	/*
+	 * everyone is gone? 
+	 * @see sessions.GameSession#endSession()
+	 */
 	public void endSession() {
 		// TODO Auto-generated method stub
 
@@ -35,6 +42,7 @@ public class FriendFinderSession extends GameSession {
 	}
 
 	@Override
+	/* mid-game */
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
 
