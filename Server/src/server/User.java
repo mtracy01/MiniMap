@@ -278,5 +278,9 @@ public class User extends Thread {
 	public void setTeamID(int id) {
 		teamID = id;
 	}
+	
+	public int getTeamID() {
+		return teamID;
+	}
 
 }

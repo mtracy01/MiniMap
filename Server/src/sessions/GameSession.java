@@ -99,13 +99,13 @@ public abstract class GameSession {
 	 * Add a user to the game session
 	 * @param user
 	 */
-	public abstract void addUser(User user);
+	public abstract void addUser(User user, int teamid);
 	
 	/**
 	 * Add a beacon at the specified location
 	 * @param loc
 	 */
-	public abstract void addBeacon(Location loc);
+	public abstract void addBeacon(int teamid, Location loc);
 	
 	/**
 	 * Remove the specified beacon

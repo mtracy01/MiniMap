@@ -10,12 +10,14 @@ public class FriendFinderSession extends GameSession {
 
 	public FriendFinderSession(ArrayList<User> users) {
 		super(users, "friendFinder");
-		teams.add(new Team(0)); //There is only one team in a friend finder session
+		teams.add(new Team()); //There is only one team in a friend finder session
 	}
 
 	@Override
 	public void handleMessage(String message, User user) {
 		// TODO Auto-generated method stub
+		
+		
 
 	}
 	
@@ -41,27 +43,35 @@ public class FriendFinderSession extends GameSession {
 	@Override
 	public void removeUser(User user) {
 		// TODO Auto-generated method stub
+		getTeambyID(teams, user.getTeamID()).removeUser(user);
 
 	}
 
 	@Override
 	/* mid-game */
-	public void addUser(User user) {
+	public void addUser(User user, int teamid) {
 		// TODO Auto-generated method stub
-		user.setTeamID(0);
-		getTeambyID(teams, 0).addUser(user);
+		user.setTeamID(teamid);
+		getTeambyID(teams, teamid).addUser(user);
 
 	}
 
+	/**
+	 * teamID should always be 0 in FriendFinder
+	 */
+	
 	@Override
-	public void addBeacon(Location loc) {
+	public void addBeacon(int teamid, Location loc) { 
 		// TODO Auto-generated method stub
 		Beacon beacon = new Beacon(loc);
-		beacon.setTeamId(0);
-		getTeambyID(teams, 0).addBeacon(beacon);
+		beacon.setTeamId(teamid);
+		getTeambyID(teams, teamid).addBeacon(beacon);
 
 	}
 
+	/**
+	 * teamID should always be 0
+	 */
 	@Override
 	public void removeBeacon(int teamid, Integer id) {
 		// TODO Auto-generated method stub
