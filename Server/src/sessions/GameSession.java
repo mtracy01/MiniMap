@@ -111,7 +111,7 @@ public abstract class GameSession {
 	 * Remove the specified beacon
 	 * @param id
 	 */
-	public abstract void removeBeacon(Integer id);
+	public abstract void removeBeacon(int teamid, Integer id);
 
 	public void accept(User user) {
 		synchronized (users) {
@@ -167,4 +167,15 @@ public abstract class GameSession {
 			return false;
 		return true;
 	}	
+	
+	public Team getTeambyID(ArrayList<Team> teamlist, int id) {
+		for (Team t: teamlist) {
+			if (t.getTeamID() == id) {
+				return t;
+			}
+		}
+		return null;
+	}
+	
+	
 }

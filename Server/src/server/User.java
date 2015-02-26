@@ -35,6 +35,7 @@ public class User extends Thread {
 	 * The userID
 	 */
 	private String userID;
+	private int teamID;
 	
 	/**
 	 * The current game session
@@ -272,6 +273,10 @@ public class User extends Thread {
 			return "Client: null";
 		}
 		return "Client: " + socket.getRemoteSocketAddress() + "\n\tid: " + userID;
+	}
+	
+	public void setTeamID(int id) {
+		teamID = id;
 	}
 
 }
