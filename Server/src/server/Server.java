@@ -135,9 +135,12 @@ public class Server extends Thread {
 	 * @param session
 	 */
 	public void removeSession(GameSession session) {
-		session.endSession();
+		if (session.isRunning()) {
+			session.endSession();
+		}
 		synchronized (gameSessions) {
 			gameSessions.remove(session);
+			log.finer("Removing session");
 			log.finer(gameSessions.size() + " running sessions.");
 		}
 	}

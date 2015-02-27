@@ -1,15 +1,19 @@
 package sessions;
 
-import java.util.ArrayList;
-import server.Team;
-import server.Location;
-import server.User;
+import java.util.logging.Logger;
+
 import server.Beacon;
+import server.Location;
+import server.Server;
+import server.Team;
+import server.User;
 
 public class FriendFinderSession extends GameSession {
+	
+	private static final Logger log = Logger.getLogger( Server.class.getName() );
 
-	public FriendFinderSession(User owner) {
-		super("friendFinder", owner);
+	public FriendFinderSession(User owner, Server server) {
+		super("friendFinder", owner, server);
 		teams.add(new Team()); //There is only one team in a friend finder session
 		// TODO: Add the owner to a team
 	}
@@ -27,8 +31,7 @@ public class FriendFinderSession extends GameSession {
 	 * assign teams, etc...
 	 *  */
 	public void startSession() {
-		// TODO Auto-generated method stub
-		
+		isRunning = true;
 	}
 
 	@Override
@@ -37,16 +40,26 @@ public class FriendFinderSession extends GameSession {
 	 * @see sessions.GameSession#endSession()
 	 */
 	public void endSession() {
-		// TODO Auto-generated method stub
-
+		isRunning = false;
+		// Remove ourselves
+		server.removeSession(this);
 	}
 
 	@Override
 	public void removeUser(User user) {
-		// TODO Auto-generated method stub
-		getTeambyID(teams, user.getTeamID()).removeUser(user);
+		log.finer("Removing user from friendfinder session");
+		if (getTeambyID(teams, user.getTeamID()) != null) {
+			getTeambyID(teams, user.getTeamID()).removeUser(user);
+		}
 		synchronized (users) {
 			users.remove(user);
+			
+			if (users.isEmpty()) {
+				endSession();
+			}
+			if (owner.equals(user) && !users.isEmpty()) {
+				owner = users.get(0);
+			}
 		}
 	}
 

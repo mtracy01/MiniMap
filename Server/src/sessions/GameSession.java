@@ -27,9 +27,19 @@ public abstract class GameSession {
 	private int id;
 	
 	/**
+	 * The server
+	 */
+	protected Server server;
+	
+	/**
 	 * The owner of the game session (the person who started it)
 	 */
 	protected User owner;
+	
+	/**
+	 * Is the session running?
+	 */
+	protected boolean isRunning;
 
 	/**
 	 * The users in the game session
@@ -42,7 +52,8 @@ public abstract class GameSession {
 	protected ArrayList<Team> teams;
 	
 	
-	public GameSession(String gameType, User owner) {
+	
+	public GameSession(String gameType, User owner, Server server) {
 		// set the id of the game session
 		synchronized (baseId) {
 			id = baseId;
@@ -50,9 +61,11 @@ public abstract class GameSession {
 		}
 		this.users = new ArrayList<User>();
 		this.owner = owner;
-		users.add(owner);
 		this.gameType = gameType;
 		this.teams = new ArrayList<Team>();
+		this.server = server;
+		users.add(owner);
+		isRunning = false;
 	}
 	
 	/**
@@ -133,6 +146,20 @@ public abstract class GameSession {
 	 */
 	public int getId() {
 		return id;
+	}
+
+	/**
+	 * @return the isRunning
+	 */
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	/**
+	 * @param isRunning the isRunning to set
+	 */
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
 	}
 
 	/**

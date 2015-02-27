@@ -230,6 +230,13 @@ public class User extends Thread {
 	}
 
 	/**
+	 * @param gameSession the gameSession to set
+	 */
+	public void setGameSession(GameSession gameSession) {
+		this.gameSession = gameSession;
+	}
+
+	/**
 	 * @return the connected
 	 */
 	public boolean isConnected() {
@@ -273,7 +280,7 @@ public class User extends Thread {
 	@Override
 	public String toString() {
 		if (socket == null) {
-			return "Client: null";
+			return "Client: no socket connection";
 		}
 		return "Client: " + socket.getRemoteSocketAddress() + "\n\tid: " + userID;
 	}

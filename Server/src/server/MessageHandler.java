@@ -68,7 +68,7 @@ public class MessageHandler {
 		GameSession gameSession = null;
 		switch (gameType) {
 			case "friendFinder":
-				gameSession = new FriendFinderSession(user);
+				gameSession = new FriendFinderSession(user, server);
 				break;
 			case "ctf":
 				break;
@@ -83,6 +83,8 @@ public class MessageHandler {
 			server.addSession(gameSession);
 		}
 		// Send the id back to the client
+		user.setGameSession(gameSession);
+		user.setInGame(true);
 		user.sendMessage("game " + gameSession.getId());
 	}
 }
