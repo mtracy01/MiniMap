@@ -57,14 +57,15 @@ def testCreateFFGameAccept(hostname, port)
 			
 			user2.puts "accept #{gameID.split(' ')[1]}"
 
-			user1.puts "getAllUsers"
 			users = user1.gets.chomp!
-	
+			
+			userParts = users.split(' ')
+
 			user1.close
 			user2.close
 			
 			# Test if all users are in the session
-			if ((response.eql? "users 1 2") || (response.eql? "users 2 1"))
+			if ((userParts[0].eql? "gameUsers") && (userParts.length == 4))
 				return true
 			end
 		end
@@ -91,14 +92,14 @@ def testCreateFFGameReject(hostname, port)
 			
 			user2.puts "reject #{gameID.split(' ')[1]}"
 
-			user1.puts "getAllUsers"
 			users = user1.gets.chomp!
+			userParts = users.split(' ')
 	
 			user1.close
 			user2.close
 			
 			# Test if all users are in the session
-			if (response.eql? "users 1")
+			if ((userParts[0].eql? "gameUsers") && (userParts.length == 3) && (userParts[2] == "1"))
 				return true
 			end
 		end
