@@ -25,7 +25,7 @@ public class GPSThread {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location
                 // provider.
-                client.sendMessage("location" +location.getLatitude() + " " + location.getLongitude());
+                client.sendMessage("location " +location.getLatitude() + " " + location.getLongitude());
             }
             @Override
             public void onProviderDisabled(String provider) {
