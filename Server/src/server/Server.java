@@ -65,9 +65,11 @@ public class Server extends Thread {
 	public void sendAllUsers(User user) {
 		StringBuilder usersMessage = new StringBuilder();
 		usersMessage.append("users");
-		for (User u : connectedUsers) {
-			usersMessage.append(' ');
-			usersMessage.append(u.getUserID());
+		synchronized (connectedUsers) {
+			for (User u : connectedUsers) {
+				usersMessage.append(' ');
+				usersMessage.append(u.getUserID());
+			}
 		}
 		user.sendMessage(usersMessage.toString());
 	}

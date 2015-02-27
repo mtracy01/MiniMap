@@ -35,6 +35,9 @@ public class User extends Thread {
 	 * The userID
 	 */
 	private String userID;
+	/**
+	 * The teamID
+	 */
 	private int teamID;
 	
 	/**

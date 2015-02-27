@@ -21,7 +21,7 @@ public class Team {
 			this.teamID = id;
 			teamID++;
 		}
-		
+		beacons = new ArrayList<Beacon>();
 	}
 	
 	/**

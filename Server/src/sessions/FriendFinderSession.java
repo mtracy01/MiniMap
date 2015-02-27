@@ -8,9 +8,10 @@ import server.Beacon;
 
 public class FriendFinderSession extends GameSession {
 
-	public FriendFinderSession(ArrayList<User> users) {
-		super(users, "friendFinder");
+	public FriendFinderSession(User owner) {
+		super("friendFinder", owner);
 		teams.add(new Team()); //There is only one team in a friend finder session
+		// TODO: Add the owner to a team
 	}
 
 	@Override
@@ -44,7 +45,9 @@ public class FriendFinderSession extends GameSession {
 	public void removeUser(User user) {
 		// TODO Auto-generated method stub
 		getTeambyID(teams, user.getTeamID()).removeUser(user);
-
+		synchronized (users) {
+			users.remove(user);
+		}
 	}
 
 	@Override
@@ -53,7 +56,9 @@ public class FriendFinderSession extends GameSession {
 		// TODO Auto-generated method stub
 		user.setTeamID(teamid);
 		getTeambyID(teams, teamid).addUser(user);
-
+		synchronized (users) {
+			users.add(user);
+		}
 	}
 
 	/**

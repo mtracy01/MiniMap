@@ -5,6 +5,7 @@ require 'timeout'
 
 def testConnection(hostname, port)
 	begin
+		user1 = nil
 		Timeout::timeout(5) do
 			begin
 				user1 = TCPSocket.open(hostname, port)
@@ -15,13 +16,17 @@ def testConnection(hostname, port)
 				false
 			end
 		end
-	rescue
+	rescue Timeout::Error
+		if (!user1.nil?)
+			user1.close
+		end
 		false
 	end
 end
 
 def testGetAllUsers(hostname, port)
 	begin
+		user1 = nil
 		Timeout::timeout(5) do
 			user1 = TCPSocket.open(hostname, port)
 			user1.puts "id 1"
@@ -34,13 +39,18 @@ def testGetAllUsers(hostname, port)
 				return false
 			end
 		end
-	rescue
+	rescue Timeout::Error
+		if (!user1.nil?)
+			user1.close
+		end
 		return false
 	end
 end
 
 def testCreateFFGameAccept(hostname, port)
 	begin
+		user1 = nil
+		user2 = nil
 		Timeout::timeout(5) do
 			user1 = TCPSocket.open(hostname, port)
 			user1.puts "id 1"
@@ -52,11 +62,12 @@ def testCreateFFGameAccept(hostname, port)
 
 			# Check to see if the game info is correct
 			if (!gameInfo.start_with? "game ")
+				user1.close
+				user2.close
 				return false
 			end
 			
-			user2.puts "accept #{gameID.split(' ')[1]}"
-
+			user2.puts "accept #{gameInfo.split(' ')[1]}"
 			users = user1.gets.chomp!
 			
 			userParts = users.split(' ')
@@ -69,13 +80,23 @@ def testCreateFFGameAccept(hostname, port)
 				return true
 			end
 		end
-	rescue
+	rescue Timeout::Error
+		puts "timeout"
+		if (!user1.nil?)
+			user1.close
+		end
+		if (!user2.nil?)
+			user2.close
+		end
+
 		return false
 	end
 end
 
 def testCreateFFGameReject(hostname, port)
 	begin
+		user1 = nil
+		user2 = nil
 		Timeout::timeout(5) do
 			user1 = TCPSocket.open(hostname, port)
 			user1.puts "id 1"
@@ -84,13 +105,15 @@ def testCreateFFGameReject(hostname, port)
 	
 			user1.puts "createGame friendFinder"
 			gameInfo = user1.gets.chomp!
-
+			
 			# Check to see if the game info is correct
 			if (!gameInfo.start_with? "game ")
+				user1.close
+				user2.close
 				return false
 			end
 			
-			user2.puts "reject #{gameID.split(' ')[1]}"
+			user2.puts "reject #{gameInfo.split(' ')[1]}"
 
 			users = user1.gets.chomp!
 			userParts = users.split(' ')
@@ -103,7 +126,13 @@ def testCreateFFGameReject(hostname, port)
 				return true
 			end
 		end
-	rescue
+	rescue Timeout::Error
+		if (!user1.nil?)
+			user1.close
+		end
+		if (!user2.nil?)
+			user2.close
+		end
 		return false
 	end
 end
@@ -131,7 +160,7 @@ if (!testCreateFFGameAccept(hostname, port))
 	errors = errors + 1
 end
 sleep 1
-if (!testCreateFFGameAccept(hostname, port))
+if (!testCreateFFGameReject(hostname, port))
 	puts "\e[31mTest: friend finder create with reject failed\e[0m"
 	errors = errors + 1
 end

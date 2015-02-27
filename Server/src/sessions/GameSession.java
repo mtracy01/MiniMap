@@ -25,6 +25,11 @@ public abstract class GameSession {
 	 * The game session id
 	 */
 	private int id;
+	
+	/**
+	 * The owner of the game session (the person who started it)
+	 */
+	protected User owner;
 
 	/**
 	 * The users in the game session
@@ -32,32 +37,22 @@ public abstract class GameSession {
 	protected ArrayList<User> users;
 	
 	/**
-	 * The number of accepted users
-	 */
-	private int acceptedUsers;
-	
-	/**
 	 * The teams in the game session
 	 */
 	protected ArrayList<Team> teams;
 	
-	/**
-	 * Any beacons in the game.
-	 */
-	protected HashMap<Integer, Beacon> beacons;
 	
-	
-	public GameSession(ArrayList<User> users, String gameType) {
+	public GameSession(String gameType, User owner) {
 		// set the id of the game session
 		synchronized (baseId) {
 			id = baseId;
 			baseId++;
 		}
-		this.users = users;
+		this.users = new ArrayList<User>();
+		this.owner = owner;
+		users.add(owner);
 		this.gameType = gameType;
-		this.acceptedUsers = 0;
 		this.teams = new ArrayList<Team>();
-		this.beacons = new HashMap<Integer, Beacon>();
 	}
 	
 	/**
@@ -113,19 +108,24 @@ public abstract class GameSession {
 	 */
 	public abstract void removeBeacon(int teamid, Integer id);
 
+	/**
+	 * Called when user accepts the invitation
+	 * This also sends out an updated list of all users to every client
+	 * @param user
+	 */
 	public void accept(User user) {
 		synchronized (users) {
-			acceptedUsers++;
-			if (acceptedUsers == users.size()) {
-				this.startSession();
-			}
+			users.add(user);
 		}
+		sendSessionUsers();
 	}
 	
+	/**
+	 * Called when user rejects the invitation
+	 * @param user
+	 */
 	public void reject(User user) {
-		synchronized (users) {
-			users.remove(user);
-		}
+		sendSessionUsers();
 	}
 	
 	/**
@@ -135,6 +135,27 @@ public abstract class GameSession {
 		return id;
 	}
 
+	/**
+	 * Send a list of all users in the session to every user
+	 */
+	protected void sendSessionUsers() {
+		synchronized (users) {
+			StringBuilder usersMessage = new StringBuilder();
+			usersMessage.append("gameUsers ");
+			usersMessage.append(id);
+			for (User u : users) {
+				usersMessage.append(' ');
+				usersMessage.append(u.getUserID());
+			}
+			
+			String message = usersMessage.toString();
+			
+			for (User u : users) {
+				u.sendMessage(message);
+			}
+		}
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -168,6 +189,12 @@ public abstract class GameSession {
 		return true;
 	}	
 	
+	/**
+	 * Get a team by its id
+	 * @param teamlist
+	 * @param id
+	 * @return
+	 */
 	public Team getTeambyID(ArrayList<Team> teamlist, int id) {
 		for (Team t: teamlist) {
 			if (t.getTeamID() == id) {
