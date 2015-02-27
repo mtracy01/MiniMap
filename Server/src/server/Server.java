@@ -97,6 +97,7 @@ public class Server extends Thread {
 	 */
 	public void removeUser(User u) {
 		synchronized (connectedUsers) {
+			log.fine("Removing user: " + u);
 			connectedUsers.remove(u);
 			log.fine(connectedUsers.size() + " connected clients.");
 		}

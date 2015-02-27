@@ -130,6 +130,8 @@ public abstract class GameSession {
 		synchronized (users) {
 			users.add(user);
 		}
+		user.setGameSession(this);
+		user.setInGame(true);
 		sendSessionUsers();
 	}
 	

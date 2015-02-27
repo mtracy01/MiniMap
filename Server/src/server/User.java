@@ -282,7 +282,7 @@ public class User extends Thread {
 		if (socket == null) {
 			return "Client: no socket connection";
 		}
-		return "Client: " + socket.getRemoteSocketAddress() + "\n\tid: " + userID;
+		return "Client: " + socket.getRemoteSocketAddress() + "\tid: " + userID;
 	}
 	
 	public void setTeamID(int id) {

@@ -33,7 +33,7 @@ public class MessageHandler {
 		if (messageParts.length == 0) {
 			return;
 		}
-		log.log(Level.FINE, "message \"{0}\" received from user {1}", new Object[]{message, user.getId()});
+		log.fine("message \"" + message + "\" received from user " + user);
 		switch(messageParts[0]) {
 			case "createGame":
 				createGame(messageParts[1]);

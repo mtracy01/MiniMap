@@ -52,8 +52,10 @@ public class FriendFinderSession extends GameSession {
 			getTeambyID(teams, user.getTeamID()).removeUser(user);
 		}
 		synchronized (users) {
+			log.finer(users.toString());
 			users.remove(user);
-			
+			log.finer(users.toString());
+			log.finer(users.size() + " users in session");
 			if (users.isEmpty()) {
 				endSession();
 			}
