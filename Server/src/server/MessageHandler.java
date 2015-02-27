@@ -46,10 +46,22 @@ public class MessageHandler {
 				GameSession sessionReject = server.getSessionByID(Integer.parseInt(messageParts[1]));
 				sessionReject.reject(user);
 				break;
-			case "location":
-				break;
 			case "getAllUsers":
 				server.sendAllUsers(user);
+				break;
+			case "start":
+				GameSession sessionStart = server.getSessionByID(Integer.parseInt(messageParts[1]));
+				// If the current user is the owner, start the session
+				if (sessionStart.getOwner().equals(user)) {
+					sessionStart.startSession();
+				}
+				break;
+			case "addbeacon":
+				Location locAdd = new Location(Double.parseDouble(messageParts[1]), Double.parseDouble(messageParts[2]));
+				user.getGameSession().addBeacon(user.getTeamID(), locAdd);
+				break;
+			case "removebeacon":
+				user.getGameSession().removeBeacon(user.getTeamID(), Integer.parseInt(messageParts[1]));
 				break;
 			default:
 				// Bounce the message to the game session

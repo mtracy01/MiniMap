@@ -31,7 +31,11 @@ public class FriendFinderSession extends GameSession {
 	 * assign teams, etc...
 	 *  */
 	public void startSession() {
+		log.fine("Starting game session " + this.getId());
 		isRunning = true;
+		
+		// Last thing after setting up the game, send the start message
+		sendStartMessage();
 	}
 
 	@Override

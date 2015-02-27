@@ -68,17 +68,26 @@ def testCreateFFGameAccept(hostname, port)
 			end
 			
 			user2.puts "accept #{gameInfo.split(' ')[1]}"
-			users = user1.gets.chomp!
+			users1 = user1.gets.chomp!
+			users2 = user2.gets.chomp!
 			
-			userParts = users.split(' ')
+			userParts = users1.split(' ')
+
+			user1.puts "start #{gameInfo.split(' ')[1]}"
+			startMessage1 = user1.gets.chomp!
+			startMessage2 = user2.gets.chomp!
 
 			user1.close
 			user2.close
 			
 			# Test if all users are in the session
-			if ((userParts[0].eql? "gameUsers") && (userParts.length == 4))
-				return true
+			if (!(userParts[0].eql? "gameUsers") || !(userParts.length == 4))
+				return false
 			end
+			if (!(startMessage1.eql? "gameStart #{gameInfo.split(' ')[1]}") || !(startMessage2.eql? "gameStart #{gameInfo.split(' ')[1]}"))
+				return false
+			end
+			return true
 		end
 	rescue Timeout::Error
 		puts "timeout"

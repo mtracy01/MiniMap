@@ -69,17 +69,6 @@ public abstract class GameSession {
 	}
 	
 	/**
-	 * Send all the users invitations to the current game.
-	 */
-	public void sendInvites() {
-		synchronized (users) {
-			for (User u : users) {
-				u.sendMessage("invite " + gameType + " " + id);
-			}
-		}
-	}
-	
-	/**
 	 * Handle an incoming message.  This is handled on a per game basis.
 	 * @param message The incoming message.
 	 * @param user The user who sent the message.
@@ -151,6 +140,13 @@ public abstract class GameSession {
 	}
 
 	/**
+	 * @return the owner
+	 */
+	public User getOwner() {
+		return owner;
+	}
+
+	/**
 	 * @return the isRunning
 	 */
 	public boolean isRunning() {
@@ -179,6 +175,18 @@ public abstract class GameSession {
 			
 			String message = usersMessage.toString();
 			
+			for (User u : users) {
+				u.sendMessage(message);
+			}
+		}
+	}
+	
+	/**
+	 * Send the game start message to all users
+	 */
+	protected void sendStartMessage() {
+		String message = "gameStart " + id;
+		synchronized (users) {
 			for (User u : users) {
 				u.sendMessage(message);
 			}
