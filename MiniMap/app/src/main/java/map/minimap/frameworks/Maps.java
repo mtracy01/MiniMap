@@ -107,7 +107,7 @@ public class Maps {
 
 
 
-            switch (users[i].getTeam()){
+            switch (users[i].getTeam()-1){
                 case 0:
                     /* Decode profile picture by calling Facebook Graph API */
                     users[i].setMarker(map.addMarker(new MarkerOptions()
