@@ -88,6 +88,8 @@ public class FriendFinderSession extends GameSession {
 	@Override
 	public void removeUser(User user) {
 		log.finer("Removing user from friendfinder session");
+		user.setInGame(false);
+		user.setGameSession(null);
 		if (getTeambyID(teams, user.getTeamID()) != null) {
 			getTeambyID(teams, user.getTeamID()).removeUser(user);
 		}
