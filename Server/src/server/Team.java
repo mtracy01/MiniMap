@@ -11,16 +11,13 @@ public class Team {
 	 * Store the users in the team
 	 */
 	private ArrayList<User> users;
-	private static Integer teamID = 0;
+	private int teamID;
 	private int id;
 	private ArrayList<Beacon> beacons;
 	
-	public Team() {
+	public Team(int tid) {
 		users = new ArrayList<User>();
-		synchronized (teamID) {
-			this.teamID = id;
-			teamID++;
-		}
+		this.teamID = tid;
 		beacons = new ArrayList<Beacon>();
 	}
 	

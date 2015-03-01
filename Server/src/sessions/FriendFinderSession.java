@@ -14,7 +14,7 @@ public class FriendFinderSession extends GameSession {
 
 	public FriendFinderSession(User owner, Server server) {
 		super("friendFinder", owner, server);
-		teams.add(new Team()); //There is only one team in a friend finder session
+		teams.add(new Team(-1)); //There is only one team in a friend finder session
 		// TODO: Add the owner to a team
 	}
 
@@ -51,12 +51,10 @@ public class FriendFinderSession extends GameSession {
 		isRunning = true;
 		
 		//Put all users on the same team for friendfinder
-		Team team = new Team();
 		for (User user: this.users)
 		{
-			team.addUser(user);
+			teams.get(0).addUser(user);
 		}
-		this.teams.add(team);
 		
 		
 		// Last thing after setting up the game, send the start message
