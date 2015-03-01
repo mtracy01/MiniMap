@@ -21,7 +21,7 @@ public class Maps {
     //Elements of player fields
     private static int height;
     private static int width;
-
+    private static boolean hasBorders;
 
 
     //List of users in the game
@@ -58,6 +58,7 @@ public class Maps {
     public static void setBorders(int h, int w){
         height=h;
         width=w;
+        hasBorders=true;
     }
 
     /**
@@ -92,7 +93,7 @@ public class Maps {
      */
     public static void initializePlayers(GoogleMap map, User[] playerList){
         int length = playerList.length;
-
+        hasBorders=false;
         /* create copy of users to store in class */
         users= new User[length];
         System.arraycopy(playerList,0,users,0,length);
