@@ -28,12 +28,13 @@ public class FriendFinderSession extends GameSession {
 		//User reporting location
 		case "location":
 			//send location to all users for them to handle
+			m.append("location");
+			m.append(" " + user.getId());
+			m.append(" " + messageParts[1]);
+			m.append(" " + messageParts[2]);
+			
 			for (User u: this.users)
 			{
-				m.append("location");
-				m.append(" " + user.getId());
-				m.append(" " + messageParts[1]);
-				m.append(" " + messageParts[2]);
 				u.sendMessage(m.toString());
 			}
 			break;
