@@ -22,7 +22,22 @@ public class FriendFinderSession extends GameSession {
 	public void handleMessage(String message, User user) {
 		// TODO Auto-generated method stub
 		
-		
+		String[] messageParts = message.split(" ");
+		StringBuilder m = new StringBuilder();
+		switch(messageParts[0]) {
+		//User reporting location
+		case "location":
+			//send location to all users for them to handle
+			for (User u: this.users)
+			{
+				m.append("location");
+				m.append(" " + user.getId());
+				m.append(" " + messageParts[1]);
+				m.append(" " + messageParts[2]);
+				u.sendMessage(m.toString());
+			}
+			break;
+		}
 
 	}
 	
@@ -33,6 +48,15 @@ public class FriendFinderSession extends GameSession {
 	public void startSession() {
 		log.fine("Starting game session " + this.getId());
 		isRunning = true;
+		
+		//Put all users on the same team for friendfinder
+		Team team = new Team();
+		for (User user: this.users)
+		{
+			team.addUser(user);
+		}
+		this.teams.add(team);
+		
 		
 		// Last thing after setting up the game, send the start message
 		sendStartMessage();
@@ -45,6 +69,17 @@ public class FriendFinderSession extends GameSession {
 	 */
 	public void endSession() {
 		isRunning = false;
+		
+		for (User user: this.users)
+		{
+			removeUser(user);
+		}
+		for (Team team: this.teams)
+		{
+			//might be a temporary solution
+			team.removeAllBeacons();
+		}
+		
 		// Remove ourselves
 		server.removeSession(this);
 	}

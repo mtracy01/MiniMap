@@ -76,4 +76,13 @@ public class Team {
 		return teamID;
 	}
 	
+	//Added for endSession: Can't access list of beacons otherwise to delete them all
+	public void removeAllBeacons()
+	{
+		for (Beacon beacon: this.beacons)
+		{
+			removeBeacon(beacon);
+		}
+	}
+	
 }
