@@ -5,6 +5,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/* IMPORTANT USAGE DETAILS:
+* To interact with the database, instantiate a new DbInteract object. When you are done
+* using the database, please close the connection using the closeConnection() method.
+* 
+* Users should be added upon account creation or initial login or whatever we call it.
+* Groups are represented by String arrays where the first element is the name of the group.
+* Please adhere to above convention so I don't have to spend 5 minutes making a proper class.
+*/
 
 public class DbInteract {
 	private Connection conn = null;
@@ -24,6 +32,22 @@ public class DbInteract {
 		} catch (SQLException ex) {
 			System.out.printf(ex.getMessage());
 		}
+	}
+	
+	/** addUser
+	* Adds a user to the database. This should be done upon registration/activation of account
+	* @param userID		The unique identifier associated with a given user
+	*/
+	public void addUser(String userID) {
+		String query = String.format("INSERT INTO usergroups (user, groups) VALUES ('" + userID +"', '')");
+		Statement stmt = null;
+		
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	/** getGroupsByID
