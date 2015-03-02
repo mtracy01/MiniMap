@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class DbInteract {
 	private Connection conn = null;
 	
-	
 	public DbInteract() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
