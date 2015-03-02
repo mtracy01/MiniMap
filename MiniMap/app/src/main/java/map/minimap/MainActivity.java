@@ -69,6 +69,7 @@ public class MainActivity extends ActionBarActivity
         ServerConnection client = new ServerConnection(this,Data.user.getID());
         //Data.setClient(client);
         Data.client=client;
+        client.start();
 
 
     }

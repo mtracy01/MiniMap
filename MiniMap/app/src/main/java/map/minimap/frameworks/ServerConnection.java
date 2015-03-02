@@ -6,10 +6,14 @@ package map.minimap.frameworks;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import android.app.Activity;
 import android.util.Log;
+
+import map.minimap.helperClasses.Data;
+import map.minimap.mainActivityComponents.LobbyFragment;
 
 
 public class ServerConnection extends Thread {
@@ -83,6 +87,14 @@ public class ServerConnection extends Thread {
 
         try {
             String[] parts = message.split(" ");
+            LobbyFragment.playersList = new ArrayList<String>();
+            LobbyFragment.playersList.add(Data.user.getName());
+            if(parts[1].equals("gameUsers")){
+                for(int i =2; i < parts.length; i++){
+                    LobbyFragment.playersList.add(parts[i]);
+                }
+                LobbyFragment.changeGrid();
+            }
 
         } catch (Exception e) {
             // Something went wrong, don't crash
