@@ -12,6 +12,13 @@
         android:text="Start Game"
         android:id="@+id/startButton"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invite"
+        android:id="@+id/inviteButton"
+        android:layout_alignTop="@+id/startButton"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
