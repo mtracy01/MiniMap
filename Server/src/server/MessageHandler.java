@@ -24,24 +24,19 @@ public class MessageHandler {
 		this.user = user;
 	}
 	
+	/**
+	 * Handle an incoming message
+	 * @param message
+	 */
 	public void handleMessage(String message) {
 		String[] messageParts = message.split(" ");
 		if (messageParts.length == 0) {
 			return;
 		}
-		log.log(Level.FINE, "message \"{0}\" received from user {1}", new Object[]{message, user.getId()});
+		log.fine("message \"" + message + "\" received from user " + user);
 		switch(messageParts[0]) {
 			case "createGame":
-				ArrayList<User> users = new ArrayList<User>();
-				users.add(user);
-				for (int i = 2; i < messageParts.length; i++) {
-					User u = server.getUserByID(messageParts[i]);
-					// The user could be null if they disconnected when we received the message
-					if (u != null) {
-						users.add(u);
-					}
-				}
-				createGame(messageParts[1], users);
+				createGame(messageParts[1]);
 				break;
 			case "accept":
 				GameSession sessionAccept = server.getSessionByID(Integer.parseInt(messageParts[1]));
@@ -51,10 +46,22 @@ public class MessageHandler {
 				GameSession sessionReject = server.getSessionByID(Integer.parseInt(messageParts[1]));
 				sessionReject.reject(user);
 				break;
-			case "location":
-				break;
 			case "getAllUsers":
 				server.sendAllUsers(user);
+				break;
+			case "start":
+				GameSession sessionStart = server.getSessionByID(Integer.parseInt(messageParts[1]));
+				// If the current user is the owner, start the session
+				if (sessionStart.getOwner().equals(user)) {
+					sessionStart.startSession();
+				}
+				break;
+			case "addbeacon":
+				Location locAdd = new Location(Double.parseDouble(messageParts[1]), Double.parseDouble(messageParts[2]));
+				user.getGameSession().addBeacon(user.getTeamID(), locAdd);
+				break;
+			case "removebeacon":
+				user.getGameSession().removeBeacon(user.getTeamID(), Integer.parseInt(messageParts[1]));
 				break;
 			default:
 				// Bounce the message to the game session
@@ -65,11 +72,15 @@ public class MessageHandler {
 		}
 	}
 
-	private void createGame(String gameType, ArrayList<User> users) {
+	/**
+	 * Create a game of the specified type
+	 * @param gameType
+	 */
+	private void createGame(String gameType) {
 		GameSession gameSession = null;
 		switch (gameType) {
 			case "friendFinder":
-				gameSession = new FriendFinderSession(users);
+				gameSession = new FriendFinderSession(user, server);
 				break;
 			case "ctf":
 				break;
@@ -82,7 +93,10 @@ public class MessageHandler {
 		}
 		if (gameSession != null) {
 			server.addSession(gameSession);
-			gameSession.sendInvites();
 		}
+		// Send the id back to the client
+		user.setGameSession(gameSession);
+		user.setInGame(true);
+		user.sendMessage("game " + gameSession.getId());
 	}
 }

@@ -35,6 +35,10 @@ public class User extends Thread {
 	 * The userID
 	 */
 	private String userID;
+	/**
+	 * The teamID
+	 */
+	private int teamID;
 	
 	/**
 	 * The current game session
@@ -226,6 +230,13 @@ public class User extends Thread {
 	}
 
 	/**
+	 * @param gameSession the gameSession to set
+	 */
+	public void setGameSession(GameSession gameSession) {
+		this.gameSession = gameSession;
+	}
+
+	/**
 	 * @return the connected
 	 */
 	public boolean isConnected() {
@@ -269,9 +280,17 @@ public class User extends Thread {
 	@Override
 	public String toString() {
 		if (socket == null) {
-			return "Client: null";
+			return "Client: no socket connection";
 		}
-		return "Client: " + socket.getRemoteSocketAddress() + "\n\tid: " + userID;
+		return "Client: " + socket.getRemoteSocketAddress() + "\tid: " + userID;
+	}
+	
+	public void setTeamID(int id) {
+		teamID = id;
+	}
+	
+	public int getTeamID() {
+		return teamID;
 	}
 
 }

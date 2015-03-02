@@ -65,9 +65,11 @@ public class Server extends Thread {
 	public void sendAllUsers(User user) {
 		StringBuilder usersMessage = new StringBuilder();
 		usersMessage.append("users");
-		for (User u : connectedUsers) {
-			usersMessage.append(' ');
-			usersMessage.append(u.getUserID());
+		synchronized (connectedUsers) {
+			for (User u : connectedUsers) {
+				usersMessage.append(' ');
+				usersMessage.append(u.getUserID());
+			}
 		}
 		user.sendMessage(usersMessage.toString());
 	}
@@ -95,6 +97,7 @@ public class Server extends Thread {
 	 */
 	public void removeUser(User u) {
 		synchronized (connectedUsers) {
+			log.fine("Removing user: " + u);
 			connectedUsers.remove(u);
 			log.fine(connectedUsers.size() + " connected clients.");
 		}
@@ -133,9 +136,12 @@ public class Server extends Thread {
 	 * @param session
 	 */
 	public void removeSession(GameSession session) {
-		session.endSession();
+		if (session.isRunning()) {
+			session.endSession();
+		}
 		synchronized (gameSessions) {
 			gameSessions.remove(session);
+			log.finer("Removing session");
 			log.finer(gameSessions.size() + " running sessions.");
 		}
 	}

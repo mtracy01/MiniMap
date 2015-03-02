@@ -8,3 +8,4 @@ Server/.classpath
 Server/.settings/*
 
 .recommenders/*
+/bin

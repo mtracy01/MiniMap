@@ -25,6 +25,21 @@ public abstract class GameSession {
 	 * The game session id
 	 */
 	private int id;
+	
+	/**
+	 * The server
+	 */
+	protected Server server;
+	
+	/**
+	 * The owner of the game session (the person who started it)
+	 */
+	protected User owner;
+	
+	/**
+	 * Is the session running?
+	 */
+	protected boolean isRunning;
 
 	/**
 	 * The users in the game session
@@ -32,43 +47,25 @@ public abstract class GameSession {
 	protected ArrayList<User> users;
 	
 	/**
-	 * The number of accepted users
-	 */
-	private int acceptedUsers;
-	
-	/**
 	 * The teams in the game session
 	 */
 	protected ArrayList<Team> teams;
 	
-	/**
-	 * Any beacons in the game.
-	 */
-	protected HashMap<Integer, Beacon> beacons;
 	
 	
-	public GameSession(ArrayList<User> users, String gameType) {
+	public GameSession(String gameType, User owner, Server server) {
 		// set the id of the game session
 		synchronized (baseId) {
 			id = baseId;
 			baseId++;
 		}
-		this.users = users;
+		this.users = new ArrayList<User>();
+		this.owner = owner;
 		this.gameType = gameType;
-		this.acceptedUsers = 0;
 		this.teams = new ArrayList<Team>();
-		this.beacons = new HashMap<Integer, Beacon>();
-	}
-	
-	/**
-	 * Send all the users invitations to the current game.
-	 */
-	public void sendInvites() {
-		synchronized (users) {
-			for (User u : users) {
-				u.sendMessage("invite " + gameType + " " + id);
-			}
-		}
+		this.server = server;
+		users.add(owner);
+		isRunning = false;
 	}
 	
 	/**
@@ -99,33 +96,40 @@ public abstract class GameSession {
 	 * Add a user to the game session
 	 * @param user
 	 */
-	public abstract void addUser(User user);
+	public abstract void addUser(User user, int teamid);
 	
 	/**
 	 * Add a beacon at the specified location
 	 * @param loc
 	 */
-	public abstract void addBeacon(Location loc);
+	public abstract void addBeacon(int teamid, Location loc);
 	
 	/**
 	 * Remove the specified beacon
 	 * @param id
 	 */
-	public abstract void removeBeacon(Integer id);
+	public abstract void removeBeacon(int teamid, Integer id);
 
+	/**
+	 * Called when user accepts the invitation
+	 * This also sends out an updated list of all users to every client
+	 * @param user
+	 */
 	public void accept(User user) {
 		synchronized (users) {
-			acceptedUsers++;
-			if (acceptedUsers == users.size()) {
-				this.startSession();
-			}
+			users.add(user);
 		}
+		user.setGameSession(this);
+		user.setInGame(true);
+		sendSessionUsers();
 	}
 	
+	/**
+	 * Called when user rejects the invitation
+	 * @param user
+	 */
 	public void reject(User user) {
-		synchronized (users) {
-			users.remove(user);
-		}
+		sendSessionUsers();
 	}
 	
 	/**
@@ -135,6 +139,60 @@ public abstract class GameSession {
 		return id;
 	}
 
+	/**
+	 * @return the owner
+	 */
+	public User getOwner() {
+		return owner;
+	}
+
+	/**
+	 * @return the isRunning
+	 */
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	/**
+	 * @param isRunning the isRunning to set
+	 */
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+
+	/**
+	 * Send a list of all users in the session to every user
+	 */
+	protected void sendSessionUsers() {
+		synchronized (users) {
+			StringBuilder usersMessage = new StringBuilder();
+			usersMessage.append("gameUsers ");
+			usersMessage.append(id);
+			for (User u : users) {
+				usersMessage.append(' ');
+				usersMessage.append(u.getUserID());
+			}
+			
+			String message = usersMessage.toString();
+			
+			for (User u : users) {
+				u.sendMessage(message);
+			}
+		}
+	}
+	
+	/**
+	 * Send the game start message to all users
+	 */
+	protected void sendStartMessage() {
+		String message = "gameStart " + id;
+		synchronized (users) {
+			for (User u : users) {
+				u.sendMessage(message);
+			}
+		}
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -167,4 +225,21 @@ public abstract class GameSession {
 			return false;
 		return true;
 	}	
+	
+	/**
+	 * Get a team by its id
+	 * @param teamlist
+	 * @param id
+	 * @return
+	 */
+	public Team getTeambyID(ArrayList<Team> teamlist, int id) {
+		for (Team t: teamlist) {
+			if (t.getTeamID() == id) {
+				return t;
+			}
+		}
+		return null;
+	}
+	
+	
 }
