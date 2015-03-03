@@ -125,7 +125,7 @@ public class ServerConnection extends Thread {
     public void getAllUsers(){
         out.println("request users");
     }
-    public void startGame() {out.println("start" + Data.gameId);}
+    public void startGame() {out.println("start " + Data.gameId);}
 
     /**
      * Close the socket and any input/output streams
