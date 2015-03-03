@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.facebook.FacebookException;
 import com.facebook.FacebookOperationCanceledException;
@@ -19,7 +20,9 @@ public class facebookHelper {
 
     public  void inviteFriends(Context context){
         Bundle params = new Bundle();
-        params.putString("message", Data.gameId);
+        Log.v("gameID", Data.gameId);
+        params.putString("message", "YOUR_MESSAGE_HERE");
+        //params.putString("message", Data.gameId);
         final Context context1=context;
         context2 = context;
         WebDialog requestsDialog = (

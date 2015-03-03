@@ -86,6 +86,7 @@ public class ServerConnection extends Thread {
     private void handleMessage(String message) {
 
         try {
+            Log.v("Message", message);
             String[] parts = message.split(" ");
             LobbyFragment.playersList = new ArrayList<String>();
             LobbyFragment.playersList.add(Data.user.getName());
@@ -169,7 +170,7 @@ public class ServerConnection extends Thread {
         if (socket == null) {
             return "Client: null";
         }
-        return "Client: " + socket.getRemoteSocketAddress();
+        return "Client: " + user_ID + " "+ socket.getRemoteSocketAddress();
     }
 
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.internal.widget.AdapterViewCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +104,8 @@ public class GamesFragment extends android.support.v4.app.Fragment{
             @Override
             public void onItemClick(AdapterView <?> a, View v, int position,
                                     long id) {
-                Data.client.createGameMessage("friendfinder");
+                Log.v("id", Data.client.toString());
+                Data.client.createGameMessage("friendFinder");
 
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
