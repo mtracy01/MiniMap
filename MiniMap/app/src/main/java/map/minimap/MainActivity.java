@@ -66,6 +66,7 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        Log.v("userid", Data.user.getID());
         ServerConnection client = new ServerConnection(this,Data.user.getID());
         //Data.setClient(client);
         Data.client=client;

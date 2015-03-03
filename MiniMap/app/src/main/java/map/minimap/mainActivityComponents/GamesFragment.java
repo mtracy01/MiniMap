@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import map.minimap.FriendFinder;
 import map.minimap.MainActivity;
 import map.minimap.R;
+import map.minimap.helperClasses.Data;
 
 
 /**
@@ -102,6 +103,8 @@ public class GamesFragment extends android.support.v4.app.Fragment{
             @Override
             public void onItemClick(AdapterView <?> a, View v, int position,
                                     long id) {
+                Data.client.createGameMessage("friendfinder");
+
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
                 ft.addToBackStack(null);

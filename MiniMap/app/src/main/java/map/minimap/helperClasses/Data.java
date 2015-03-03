@@ -14,7 +14,7 @@ public class Data {
 
     public static User user = new User("abc123");
     public static User[] users;
-
+    public static String gameId;
     //Facebook session info
     //static Session session;
     public static ServerConnection client;

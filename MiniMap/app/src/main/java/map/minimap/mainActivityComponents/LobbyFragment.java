@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.internal.widget.AdapterViewCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import map.minimap.FriendFinder;
 import map.minimap.MainActivity;
 import map.minimap.R;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.facebookHelper;
 
 /**
  * Created by Corey on 2/22/2015.
@@ -31,11 +34,11 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private static ArrayAdapter<String> adapter = null;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ArrayList<String> playersList;                //The list of players
+    public static ArrayList<String> playersList;           //The list of players shared with client
     private static ListView playerListView;
     private Context context;
 
@@ -72,30 +75,50 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
         }
         playersList = new ArrayList<String>();
         playersList.add(Data.user.getName());
+        Log.v("name",Data.user.getName());
         //check server for other players
+        final Handler handler = new Handler();
+        handler.postDelayed( new Runnable() {
+        @Override
+        public void run() {
 
+            handler.postDelayed( this, 60 * 1000 );
+        }
+        }, 15 * 1000 );
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_grouplobby, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_grouplobby, container, false);
         context =getActivity();
         playerListView = (ListView)view.findViewById(R.id.listView);
-        final Button button = (Button) view.findViewById(R.id.startButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button startButton = (Button) view.findViewById(R.id.startButton);
+        startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Data.client.startGame();
                 Intent intent = new Intent(context, FriendFinder.class);
                 startActivity(intent);
             }
         });
+        final Button inviteButton = (Button) view.findViewById(R.id.inviteButton);
+        inviteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                facebookHelper helper = new facebookHelper();
+                helper.inviteFriends(view.getContext());
+
+            }
+        });
         String[] playersArray = playersList.toArray(new String[1]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,playersArray);
+        adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,playersArray);
         playerListView.setAdapter(adapter);
         return view;
     }
-
+    public static void changeGrid(){
+        adapter.notifyDataSetChanged();
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

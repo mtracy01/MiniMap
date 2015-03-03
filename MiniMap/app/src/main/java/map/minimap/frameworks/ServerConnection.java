@@ -95,6 +95,9 @@ public class ServerConnection extends Thread {
                 }
                 LobbyFragment.changeGrid();
             }
+            else if(parts[1].equals("game")){
+                Data.gameId = parts[2];
+            }
 
         } catch (Exception e) {
             // Something went wrong, don't crash
@@ -110,12 +113,8 @@ public class ServerConnection extends Thread {
     public void sendMessage(String message) {
         out.println(message);
     }
-    public void createGameMessage(String gameType, User[] players){
-        out.print("create Game");
-        for(User u: players){
-            out.print(" " +u.getID());
-        }
-        out.println();
+    public void createGameMessage(String gameType){
+        out.println("createGame " + gameType);
     }
     public void acceptGameMessage(String gameID){
         out.println("accept "+ gameID);
@@ -126,6 +125,7 @@ public class ServerConnection extends Thread {
     public void getAllUsers(){
         out.println("request users");
     }
+    public void startGame() {out.println("start" + Data.gameId);}
 
     /**
      * Close the socket and any input/output streams
