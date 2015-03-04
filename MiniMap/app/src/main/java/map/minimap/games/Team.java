@@ -1,11 +1,12 @@
-package games;
+package map.minimap.games;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import map.minimap.frameworks.*;
+import android.util.log;
 
 public class Team {
 	
-	private static final Logger log = Logger.getLogger( Server.class.getName() );
 	
 	/**
 	 * Store the users in the team

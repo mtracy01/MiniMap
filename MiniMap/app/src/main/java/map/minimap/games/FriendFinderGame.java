@@ -1,4 +1,4 @@
-package games;
+package map.minimap.games;
 
 import java.util.logging.Logger;
 
@@ -8,6 +8,7 @@ import server.Location;
 import server.Server;
 import server.Team;
 import server.User;
+import com.google.android.gms.maps.model.LatLng;
 
 public class FriendFinderGame extends Game {
 
@@ -48,7 +49,7 @@ public class FriendFinderGame extends Game {
 	 * assign teams, etc...
 	 *  */
 	public void startSession() {
-		log.v("Starting game session " + this.getId());
+		Log.v("Friend Finder Game", "Starting game session " + this.getId());
 		isRunning = true;
 		
 		//Put all users on the same team for friendfinder
@@ -84,17 +85,17 @@ public class FriendFinderGame extends Game {
 
 	@Override
 	public void removeUser(User user) {
-		Log.v("Removing user from friendfinder session");
+		Log.v("Friend Finder Game", "Removing user from friendfinder session");
 		user.setInGame(false);
 		user.setGameSession(null);
 		if (getTeambyID(teams, user.getTeamID()) != null) {
 			getTeambyID(teams, user.getTeamID()).removeUser(user);
 		}
 		synchronized (users) {
-			Log.v(users.toString());
+			Log.v("Friend Finder Game", users.toString());
 			users.remove(user);
-			Log.v(users.toString());
-			Log.v(users.size() + " users in session");
+			Log.v("Friend Finder Game", users.toString());
+			Log.v("Friend Finder Game", users.size() + " users in session");
 			if (users.isEmpty()) {
 				endSession();
 			}
@@ -120,7 +121,7 @@ public class FriendFinderGame extends Game {
 	 */
 	
 	@Override
-	public void addBeacon(int teamid, Location loc) { 
+	public void addBeacon(int teamid, LatLng loc) { 
 		// TODO Auto-generated method stub
 		Beacon beacon = new Beacon(loc);
 		beacon.setTeamId(teamid);
