@@ -66,7 +66,6 @@ def testCreateFFGameAcceptWithInvites(hostname, port)
 				user2.close
 				return false
 			end
-			
 			invite = user2.gets.chomp!
 			if (!invite.start_with? "invite ")
 				user1.close

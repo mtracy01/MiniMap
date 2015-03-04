@@ -120,6 +120,7 @@ public class MessageHandler {
 	private void createGame(String gameType, ArrayList<User> users) {
 		createGame(gameType);
 		for (User u : users) {
+			log.finer("Sending invite to: " + u.getUserID());
 			u.sendMessage("invite " + user.getGameSession().getId());
 		}
 	}
