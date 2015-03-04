@@ -1,6 +1,7 @@
-package map.minimap.frameworks;
+package games;
 
 import java.util.logging.Logger;
+
 import android.util.log;
 import server.Beacon;
 import server.Location;
