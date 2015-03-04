@@ -3,7 +3,7 @@ package map.minimap.games;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import map.minimap.frameworks.*;
-import android.util.log;
+import android.util.Log;
 
 public class Team {
 	
@@ -66,7 +66,7 @@ public class Team {
 	
 	public void sendMessage(String message) {
 		for (User u : users) {
-			u.sendMessage(message);
+			//u.sendMessage(message);
 		}
 	}
 	

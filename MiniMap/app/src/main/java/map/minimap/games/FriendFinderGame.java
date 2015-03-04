@@ -1,13 +1,8 @@
 package map.minimap.games;
 
-import java.util.logging.Logger;
 
-import android.util.log;
-import server.Beacon;
-import server.Location;
-import server.Server;
-import server.Team;
-import server.User;
+import android.util.Log;
+import map.minimap.frameworks.*;
 import com.google.android.gms.maps.model.LatLng;
 
 public class FriendFinderGame extends Game {
@@ -29,21 +24,6 @@ public class FriendFinderGame extends Game {
 		
 	}
 	
-	/**
-	 * Send the game start message to all users
-	 */
-	protected void sendStartMessage() {
-		String message = "gameStart " + id;
-		synchronized (users) {
-			for (User u : users) {
-				u.sendMessage(message);
-			}
-		}
-	}
-	
-	
-
-	
 	@Override
 	/* called when user presses start button
 	 * assign teams, etc...
@@ -57,10 +37,6 @@ public class FriendFinderGame extends Game {
 		{
 			teams.get(0).addUser(user);
 		}
-		
-		
-		// Last thing after setting up the game, send the start message
-		sendStartMessage();
 	}
 
 	@Override
@@ -87,7 +63,6 @@ public class FriendFinderGame extends Game {
 	public void removeUser(User user) {
 		Log.v("Friend Finder Game", "Removing user from friendfinder session");
 		user.setInGame(false);
-		user.setGameSession(null);
 		if (getTeambyID(teams, user.getTeamID()) != null) {
 			getTeambyID(teams, user.getTeamID()).removeUser(user);
 		}

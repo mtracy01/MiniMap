@@ -1,12 +1,10 @@
 package map.minimap.games;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
+import android.util.Log;
 
-import server.Location;
-import server.Server;
-import server.Team;
-import server.User;
+import map.minimap.frameworks.*;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by joe on 2/21/2015.
@@ -93,7 +91,7 @@ public abstract class Game {
 	 * Add a beacon at the specified location
 	 * @param loc
 	 */
-	public abstract void addBeacon(int teamid, Location loc);
+	public abstract void addBeacon(int teamid, LatLng loc);
 	
 	/**
 	 * Remove the specified beacon
