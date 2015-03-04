@@ -91,14 +91,14 @@ public class ServerConnection extends Thread {
             LobbyFragment.playersList = new ArrayList<String>();
             LobbyFragment.playersList.add(Data.user.getName());
             if(parts[0].equals("gameUsers")){
-                for(int i =2; i < parts.length; i++){
+                for(int i =1; i < parts.length; i++){
                     LobbyFragment.playersList.add(parts[i]);
                 }
                 LobbyFragment.changeGrid();
             }
             else if(parts[0].equals("game")){
-                Log.v("gameId", parts[2]);
-                Data.gameId = parts[2];
+                Log.v("gameId", parts[1]);
+                Data.gameId = parts[1];
             }
 
         } catch (Exception e) {
