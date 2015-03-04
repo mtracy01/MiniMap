@@ -20,7 +20,7 @@ public class facebookHelper {
 
     public  void inviteFriends(Context context){
         Bundle params = new Bundle();
-        Log.v("gameID", Data.gameId);
+        //Log.v("gameID", Data.gameId);
         params.putString("message", "YOUR_MESSAGE_HERE");
         //params.putString("message", Data.gameId);
         final Context context1=context;
