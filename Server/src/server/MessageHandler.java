@@ -36,7 +36,19 @@ public class MessageHandler {
 		log.fine("message \"" + message + "\" received from user " + user);
 		switch(messageParts[0]) {
 			case "createGame":
-				createGame(messageParts[1]);
+				//createGame(messageParts[1]);
+				
+				/*
+				 * Temporary (I hope) until invites work through facebook
+				 */
+				ArrayList<User> users = new ArrayList<User>();
+				for (int i = 2; i < messageParts.length; i++) {
+					User u = server.getUserByID(messageParts[i]);
+					if (u != null) {
+						users.add(u);
+					}
+				}
+				createGame(messageParts[1], users);
 				break;
 			case "accept":
 				GameSession sessionAccept = server.getSessionByID(Integer.parseInt(messageParts[1]));
@@ -98,5 +110,17 @@ public class MessageHandler {
 		user.setGameSession(gameSession);
 		user.setInGame(true);
 		user.sendMessage("game " + gameSession.getId());
+	}
+	
+	/**
+	 * Create a game session and send invites to people
+	 * @param gameType
+	 * @param users
+	 */
+	private void createGame(String gameType, ArrayList<User> users) {
+		createGame(gameType);
+		for (User u : users) {
+			u.sendMessage("invite " + user.getGameSession().getId());
+		}
 	}
 }

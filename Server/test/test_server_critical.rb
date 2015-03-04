@@ -47,6 +47,68 @@ def testGetAllUsers(hostname, port)
 	end
 end
 
+def testCreateFFGameAcceptWithInvites(hostname, port)
+	begin
+		user1 = nil
+		user2 = nil
+		Timeout::timeout(5) do
+			user1 = TCPSocket.open(hostname, port)
+			user1.puts "id 1"
+			user2 = TCPSocket.open(hostname, port)
+			user2.puts "id 2"
+	
+			user1.puts "createGame friendFinder 2"
+			gameInfo = user1.gets.chomp!
+
+			# Check to see if the game info is correct
+			if (!gameInfo.start_with? "game ")
+				user1.close
+				user2.close
+				return false
+			end
+			
+			invite = user2.gets.chomp!
+			if (!invite.start_with? "invite ")
+				user1.close
+				user2.close
+				return false
+			end
+			
+			user2.puts "accept #{invite.split(' ')[1]}"
+			users1 = user1.gets.chomp!
+			users2 = user2.gets.chomp!
+			
+			userParts = users1.split(' ')
+
+			user1.puts "start #{gameInfo.split(' ')[1]}"
+			startMessage1 = user1.gets.chomp!
+			startMessage2 = user2.gets.chomp!
+
+			user1.close
+			user2.close
+			
+			# Test if all users are in the session
+			if (!(userParts[0].eql? "gameUsers") || !(userParts.length == 4))
+				return false
+			end
+			if (!(startMessage1.eql? "gameStart #{gameInfo.split(' ')[1]}") || !(startMessage2.eql? "gameStart #{gameInfo.split(' ')[1]}"))
+				return false
+			end
+			return true
+		end
+	rescue Timeout::Error
+		puts "timeout"
+		if (!user1.nil?)
+			user1.close
+		end
+		if (!user2.nil?)
+			user2.close
+		end
+
+		return false
+	end
+end
+
 def testCreateFFGameAccept(hostname, port)
 	begin
 		user1 = nil
@@ -150,7 +212,7 @@ hostname = 'localhost'
 port = 2048
 
 errors = 0
-tests = 4
+tests = 3
 
 puts "These are critical server tests.  All of these must pass."
 
@@ -163,14 +225,19 @@ if (!testGetAllUsers(hostname, port))
 	puts "\e[31mTest: get all users failed\e[0m"
 	errors = errors + 1
 end
+#sleep 1
+#if (!testCreateFFGameAccept(hostname, port))
+#	puts "\e[31mTest: friend finder create with accept failed\e[0m"
+#	errors = errors + 1
+#end
+#sleep 1
+#if (!testCreateFFGameReject(hostname, port))
+#	puts "\e[31mTest: friend finder create with reject failed\e[0m"
+#	errors = errors + 1
+#end
 sleep 1
-if (!testCreateFFGameAccept(hostname, port))
-	puts "\e[31mTest: friend finder create with accept failed\e[0m"
-	errors = errors + 1
-end
-sleep 1
-if (!testCreateFFGameReject(hostname, port))
-	puts "\e[31mTest: friend finder create with reject failed\e[0m"
+if (!testCreateFFGameAcceptWithInvites(hostname, port))
+	puts "\e[31mTest: friend finder create with accept (with invites) failed\e[0m"
 	errors = errors + 1
 end
 
