@@ -3,7 +3,7 @@ package map.minimap.helperClasses;
 /**
  * Created by Matthew on 2/16/2015.
  */
-public class character {
+public class Character {
     /**
      * Check if a character is alphaNumeric
      */

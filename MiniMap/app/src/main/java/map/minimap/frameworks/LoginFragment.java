@@ -72,7 +72,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
             Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
                 @Override
                 public void onCompleted(GraphUser user, Response response) {
-                    if (user != null) {
+                    if (user !=null) {
                         /* Add user info to a User class that can be stored elsewhere here*/
                         /* For debug purposes, try to print out the desired user info in LogCat)*/
                         try {
@@ -84,6 +84,10 @@ public class LoginFragment extends android.support.v4.app.Fragment {
 
                             /* Put user in our Data class */
                             Data.user=ourUser;
+                            Log.v("loginsetname", Data.user.getName());
+                            ServerConnection client = new ServerConnection( Data.user.getID());
+                            client.start();
+                            Data.client = client;
                             //data.setSession(session2);
 
                         } catch (Exception e) {

@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity
             Log.e(LOG_TAG,"SUCCESS");
         }
         else{
-            Log.e(LOG_TAG,"FAILURE");
+            Log.e(LOG_TAG, "FAILURE");
         }
         //Link to XML fragments
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -66,11 +66,8 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        Log.v("userid", Data.user.getID());
-        ServerConnection client = new ServerConnection(this,Data.user.getID());
-        //Data.setClient(client);
-        Data.client=client;
-        client.start();
+
+
 
 
     }

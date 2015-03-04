@@ -7,7 +7,7 @@ import android.os.AsyncTask;
  * Purpose: Run ****SMALL**** Background tasks at specified intervals for the system to request information.
  * Use primarily for notification services
  */
-public class syncService extends AsyncTask{
+public class SyncService extends AsyncTask{
     @Override
     protected Object doInBackground(Object[] params) {
 

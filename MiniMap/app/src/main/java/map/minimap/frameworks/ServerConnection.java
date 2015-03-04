@@ -21,7 +21,7 @@ public class ServerConnection extends Thread {
     public static final int SERVER_PORT = 2048;
     public static final String SERVER_IP = "tracy94.com";
 
-    private map.minimap.MainActivity activity;
+    //private map.minimap.MainActivity activity;
     private Socket socket;
     private String user_ID;
     // Input/output
@@ -31,8 +31,8 @@ public class ServerConnection extends Thread {
     // Are we connected to the client?
     private boolean connected;
 
-    public ServerConnection(map.minimap.MainActivity activity, String ID) {
-        this.activity =  activity;
+    public ServerConnection( String ID) {
+      //  this.activity =  activity;
         connected = false;
         user_ID = ID;
     }

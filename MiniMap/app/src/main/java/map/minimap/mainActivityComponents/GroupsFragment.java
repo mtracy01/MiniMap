@@ -15,22 +15,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.facebook.FacebookException;
-import com.facebook.FacebookOperationCanceledException;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.WebDialog;
 
 import java.util.ArrayList;
 
-import map.minimap.FriendFinder;
 import map.minimap.R;
-import map.minimap.helperClasses.Data;
-import map.minimap.helperClasses.facebookHelper;
+import map.minimap.helperClasses.FacebookHelper;
 
 
 /**
@@ -125,7 +120,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView <?> a, View v, int position,
                                     long id) {
-                facebookHelper helper = new facebookHelper();
+                FacebookHelper helper = new FacebookHelper();
                 if(position==0){
                     //List friends who use the app
                     //helper.listFriends(context);

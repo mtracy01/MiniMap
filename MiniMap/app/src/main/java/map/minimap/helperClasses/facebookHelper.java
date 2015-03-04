@@ -15,7 +15,7 @@ import com.facebook.widget.WebDialog;
  * Purpose: Interact with facebook API to easily request information
  * Created by Matthew on 2/22/2015.
  */
-public class facebookHelper {
+public class FacebookHelper {
     private  Context context2;
 
     public  void inviteFriends(Context context){
