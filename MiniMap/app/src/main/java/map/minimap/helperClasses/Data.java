@@ -20,6 +20,7 @@ public class Data {
     //Facebook session info
     //static Session session;
     public static ServerConnection client;
+    public final static Object LOGIN_LOCK = new Object();
     public static Session session;
 
 }
