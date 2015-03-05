@@ -12,12 +12,11 @@ import java.io.IOException;
  */
 public class GPSThread {
 
-    private map.minimap.MainActivity activity;
+
     private LocationListener locationListener;
     private static LocationManager locationManager;
 
-    public GPSThread(map.minimap.MainActivity activity,final ServerConnection client) {
-        this.activity =  activity;
+    public GPSThread(final ServerConnection client) {
         final int MINTIME = 1000;
         final int MINDIST = 1;
 

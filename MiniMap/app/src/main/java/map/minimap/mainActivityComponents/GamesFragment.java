@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import map.minimap.FriendFinder;
 import map.minimap.MainActivity;
 import map.minimap.R;
+import map.minimap.frameworks.GPSThread;
 import map.minimap.helperClasses.Data;
 
 
@@ -106,7 +107,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                                     long id) {
                 Log.v("id", Data.client.toString());
                 Data.client.createGameMessage("friendFinder");
-
+                GPSThread gpsThread = new GPSThread(Data.client);
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
                 ft.addToBackStack(null);

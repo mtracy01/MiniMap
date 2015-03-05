@@ -14,6 +14,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import map.minimap.FriendFinder;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.LobbyFragment;
@@ -93,9 +97,10 @@ public class ServerConnection extends Thread {
         try {
             Log.v("Message", message);
             String[] parts = message.split(" ");
-            LobbyFragment.playersList = new ArrayList<String>();
-            LobbyFragment.playersList.add(Data.user.getName());
+
             if(parts[0].equals("gameUsers")){
+                LobbyFragment.playersList = new ArrayList<String>();
+                LobbyFragment.playersList.add(Data.user.getName());
                 for(int i =1; i < parts.length; i++){
                     LobbyFragment.playersList.add(parts[i]);
                 }
@@ -118,12 +123,18 @@ public class ServerConnection extends Thread {
                     Data.users.add(new User(parts[i]));
                 }
                 LobbyFragment.playersList = new ArrayList<String>();
-                LobbyFragment.playersList.add(Data.user.getName());
                 for(User u : Data.users){
                     LobbyFragment.playersList.add(u.getName());
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
                 }
                 LobbyFragment.changeGrid();
+            }else if(parts[0].equals("location")) {
+                    for(int i =0; i< Data.users.size();i++){
+                        if(Data.users.get(i).getID().equals(parts[1])){
+                            Data.users.get(i).getMarker().setPosition(new LatLng(Double.parseDouble(parts[2]),Double.parseDouble(parts[3])));
+                        }
+                    }
+
             }
             else if(parts[0].equals("gameStart")) {
                 Intent intent = new Intent(Data.mainAct.getApplicationContext(), FriendFinder.class);
