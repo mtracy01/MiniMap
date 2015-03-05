@@ -100,7 +100,7 @@ public class FriendFinderSession extends GameSession {
 				endSession();
 			}
 			if (owner.equals(user) && !users.isEmpty()) {
-				owner = users.get(0);
+				owner = users.iterator().next();
 			}
 		}
 	}

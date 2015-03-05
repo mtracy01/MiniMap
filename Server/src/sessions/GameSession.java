@@ -1,10 +1,10 @@
 package sessions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
-import server.Beacon;
 import server.Location;
 import server.Server;
 import server.Team;
@@ -44,7 +44,7 @@ public abstract class GameSession {
 	/**
 	 * The users in the game session
 	 */
-	protected ArrayList<User> users;
+	protected Set<User> users;
 	
 	/**
 	 * The teams in the game session
@@ -59,7 +59,7 @@ public abstract class GameSession {
 			id = baseId;
 			baseId++;
 		}
-		this.users = new ArrayList<User>();
+		this.users = new HashSet<User>();
 		this.owner = owner;
 		this.gameType = gameType;
 		this.teams = new ArrayList<Team>();
@@ -119,6 +119,7 @@ public abstract class GameSession {
 		synchronized (users) {
 			users.add(user);
 		}
+		log.fine("users: " + users);
 		user.setGameSession(this);
 		user.setInGame(true);
 		sendSessionUsers();
@@ -174,6 +175,7 @@ public abstract class GameSession {
 			}
 			
 			String message = usersMessage.toString();
+			log.fine("All users message: " + message);
 			
 			for (User u : users) {
 				u.sendMessage(message);

@@ -41,14 +41,20 @@ public class MessageHandler {
 				/*
 				 * Temporary (I hope) until invites work through facebook
 				 */
-				ArrayList<User> users = new ArrayList<User>();
+				createGame(messageParts[1]);
+				break;
+			case "invite":
+				// Make sure we are in a game and are not inviting to other games.
+				if (!user.isInGame() || Integer.parseInt(messageParts[1]) != user.getGameSession().getId()) {
+					break;
+				}
 				for (int i = 2; i < messageParts.length; i++) {
 					User u = server.getUserByID(messageParts[i]);
 					if (u != null) {
-						users.add(u);
+						log.finer("Inviting " + u.getUserID() + " to " + user.getGameSession().getId());
+						u.sendMessage("invite " + user.getGameSession().getId());
 					}
 				}
-				createGame(messageParts[1], users);
 				break;
 			case "accept":
 				GameSession sessionAccept = server.getSessionByID(Integer.parseInt(messageParts[1]));
@@ -110,18 +116,5 @@ public class MessageHandler {
 		user.setGameSession(gameSession);
 		user.setInGame(true);
 		user.sendMessage("game " + gameSession.getId());
-	}
-	
-	/**
-	 * Create a game session and send invites to people
-	 * @param gameType
-	 * @param users
-	 */
-	private void createGame(String gameType, ArrayList<User> users) {
-		createGame(gameType);
-		for (User u : users) {
-			log.finer("Sending invite to: " + u.getUserID());
-			u.sendMessage("invite " + user.getGameSession().getId());
-		}
 	}
 }

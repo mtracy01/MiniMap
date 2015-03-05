@@ -57,32 +57,29 @@ def testCreateFFGameAcceptWithInvites(hostname, port)
 			user2 = TCPSocket.open(hostname, port)
 			user2.puts "id 2"
 	
-			user1.puts "createGame friendFinder 2"
+			user1.puts "createGame friendFinder"
 			gameInfo = user1.gets.chomp!
-
 			# Check to see if the game info is correct
 			if (!gameInfo.start_with? "game ")
 				user1.close
 				user2.close
 				return false
 			end
+			user1.puts "invite #{gameInfo.split(' ')[1]} 2"
 			invite = user2.gets.chomp!
 			if (!invite.start_with? "invite ")
 				user1.close
 				user2.close
 				return false
 			end
-			
 			user2.puts "accept #{invite.split(' ')[1]}"
 			users1 = user1.gets.chomp!
 			users2 = user2.gets.chomp!
 			
 			userParts = users1.split(' ')
-
 			user1.puts "start #{gameInfo.split(' ')[1]}"
 			startMessage1 = user1.gets.chomp!
 			startMessage2 = user2.gets.chomp!
-
 			user1.close
 			user2.close
 			

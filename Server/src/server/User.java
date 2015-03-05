@@ -150,6 +150,7 @@ public class User extends Thread {
 	 * @param message
 	 */
 	public void sendMessage(String message) {
+		log.fine("Sending message \"" + message + "\" to " + userID);
 		if (connected) {
 			out.println(message);
 		} else {
