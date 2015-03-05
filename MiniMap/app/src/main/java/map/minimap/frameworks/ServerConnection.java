@@ -110,7 +110,20 @@ public class ServerConnection extends Thread {
                 Data.user.setInGame(true);
             } else if (parts[0].equals("users")) {
                 // We have a list of all users
-            } else if (Data.user.getInGame()) {
+            } else if (parts[0].equals("users")) {
+                Data.users = new ArrayList<User>();
+                for(int i =1; i < parts.length;i++){
+                    Data.users.add(new User(parts[i]));
+                }
+                LobbyFragment.playersList = new ArrayList<String>();
+                LobbyFragment.playersList.add(Data.user.getName());
+                for(User u : Data.users){
+                    LobbyFragment.playersList.add(u.getName());
+                    Data.client.sendMessage("invite " + Data.gameId +" " +u.getID());
+                }
+
+            }
+                else if (Data.user.getInGame()) {
                 Data.user.getGame().handleMessage(message);
             }
 
@@ -137,6 +150,7 @@ public class ServerConnection extends Thread {
     public void rejectGameMessage(String gameID){
         out.println("reject "+ gameID);
     }
+    //public void inviteUsers() {out.println("invite" + Data.gameId + Data.users);}
     public void getAllUsers(){
         out.println("request users");
     }

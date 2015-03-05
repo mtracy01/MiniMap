@@ -101,8 +101,9 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
         final Button inviteButton = (Button) view.findViewById(R.id.inviteButton);
         inviteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                FacebookHelper helper = new FacebookHelper();
-                helper.inviteFriends(view.getContext());
+                Data.client.getAllUsers();
+            //    FacebookHelper helper = new FacebookHelper();
+             //   helper.inviteFriends(view.getContext());
 
             }
         });
