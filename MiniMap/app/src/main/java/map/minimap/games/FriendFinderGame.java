@@ -17,7 +17,7 @@ public class FriendFinderGame extends Game {
 	}
 
 	@Override
-	public void handleMessage() {
+	public void handleMessage(String message) {
 		// TODO Auto-generated method stub
 		
 		
@@ -98,9 +98,9 @@ public class FriendFinderGame extends Game {
 	@Override
 	public void addBeacon(int teamid, LatLng loc) { 
 		// TODO Auto-generated method stub
-		Beacon beacon = new Beacon(loc);
-		beacon.setTeamId(teamid);
-		getTeambyID(teams, teamid).addBeacon(beacon);
+		// Beacon beacon = new Beacon(loc);
+		// beacon.setTeamId(teamid);
+		// getTeambyID(teams, teamid).addBeacon(beacon);
 
 	}
 

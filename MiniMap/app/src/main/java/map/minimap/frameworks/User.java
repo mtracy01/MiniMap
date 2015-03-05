@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.Marker;
 import java.net.URL;
 
 import map.minimap.helperClasses.Data;
+import map.minimap.games.*;
 
 /**
  * Created by Joe Coy on 2/20/2015.
@@ -40,6 +41,7 @@ public class User {
     private int team;
 
     private boolean inGame;
+    private Game currentGame;
 
     private Marker marker;  //Location object for GoogleMap
     private User friends[];
@@ -52,6 +54,7 @@ public class User {
         team=0;
         friends = null; //Needs to be specified later
         inGame = false;
+        currentGame = null;
 
     }
 
@@ -109,6 +112,13 @@ public class User {
     }
     public void setInGame(boolean g) {
         inGame = g;
+    }
+
+    public Game getGame() {
+        return currentGame;
+    }
+    public void setGame(Game g) {
+        currentGame = g;
     }
 
 

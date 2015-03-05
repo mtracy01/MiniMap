@@ -15,7 +15,7 @@ public class SyncService extends AsyncTask{
     }
 
     /**
-     * Purpose: Check if we have new invites every few seconds 
+     * Purpose: Check if we have new invites every few seconds
      */
     {
 

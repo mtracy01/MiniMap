@@ -95,14 +95,17 @@ public class ServerConnection extends Thread {
                     LobbyFragment.playersList.add(parts[i]);
                 }
                 LobbyFragment.changeGrid();
-            }
-            else if(parts[0].equals("game")){
+            } else if(parts[0].equals("game")){
                 Log.v("gameId", parts[1]);
                 Data.gameId = parts[1];
             } else if (parts[0].equals("invite")) {
                 Log.v("invite", parts[1]);
                 // We got an invite, lets join (temporary, normally should ask)
                 acceptGameMessage(parts[1]);
+            } else if (parts[0].equals("users")) {
+                // We have a list of all users
+            } else if (Data.user.getInGame()) {
+                Data.user.getGame().handleMessage(message);
             }
 
         } catch (Exception e) {

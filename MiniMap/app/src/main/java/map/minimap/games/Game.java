@@ -63,7 +63,7 @@ public abstract class Game {
 	
     public Game() {}
     public abstract void processLogic ();
-    public abstract void handleMessage();
+    public abstract void handleMessage(String message);
 	/**
 	 * Start the session
 	 */
