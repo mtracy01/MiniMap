@@ -8,6 +8,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
+import map.minimap.helperClasses.Data;
+
 /**
  * Created by Matthew on 2/21/2015.
  * Purpose: Helper class for implementation of the MapFragment
@@ -22,7 +26,7 @@ public class Maps {
     private static int height;
     private static int width;
     private static boolean hasBorders;
-
+    private static boolean calledInitialize=false;
 
     //List of users in the game
     private static User[] users;
@@ -65,7 +69,9 @@ public class Maps {
      * Purpose: Get the x and y coordinates of our user and set his coordinates to be the center of the map.
      * @param user host user
      */
-    public static void setCenterPosition(User user){
+    public static void setCenterPosition(User user)
+    {
+        calledInitialize=true;
         center=user.getCoordinates();
     }
 
@@ -74,15 +80,28 @@ public class Maps {
      * @param map the map that is being modified by this framework
      */
     public static void readyMap(GoogleMap map){
-        LatLng sydney = new LatLng(-33.867, 151.206);
 
-        map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+        if(calledInitialize){
+            //enable my current location
+            map.setMyLocationEnabled(true);
+            //initialize players, setting their markers
+            initializePlayers(map, Data.users);
+            //Move map's camera and set zoom level.  I will make the zoom a variable later
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(center,13));
+            //addPlayersToField(map);
+        }
+        //if we don't initialize, call Sydney
+        else {
+            LatLng sydney = new LatLng(-33.867, 151.206);
 
-        map.addMarker(new MarkerOptions()
-                .title("Sydney")
-                .snippet("The most populous city in Australia.")
-                .position(sydney));
+            map.setMyLocationEnabled(true);
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+
+            map.addMarker(new MarkerOptions()
+                    .title("Sydney")
+                    .snippet("The most populous city in Australia.")
+                    .position(sydney));
+        }
     }
 
     /**
@@ -91,8 +110,8 @@ public class Maps {
      * @param map the map that is being modified by this framework
      * @param playerList the list of players in the game
      */
-    public static void initializePlayers(GoogleMap map, User[] playerList){
-        int length = playerList.length;
+    public static void initializePlayers(GoogleMap map, ArrayList<User> playerList){
+        int length = playerList.size();
         hasBorders=false;
         /* create copy of users to store in class */
         users= new User[length];
@@ -112,7 +131,7 @@ public class Maps {
                 case 0:
                     /* Decode profile picture by calling Facebook Graph API */
                     users[i].setMarker(map.addMarker(new MarkerOptions()
-                            .position(latLng)
+                            .title(users[i].getName()).position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .fromBitmap(users[i].getUserImage()))));
                 case 1:
@@ -139,5 +158,14 @@ public class Maps {
         }
 
     }
+    /*private static void addPlayersToField(GoogleMap map){
+
+        //User[] users = new User[Data.users.size()];
+        //System.arraycopy(Data.users.size,0,users,0,length);
+        //Data.users;
+        for(int i=0;i<users.length;i++){
+            map.addMarker(users[i].getMarker());
+        }
+    }*/
 
 }
