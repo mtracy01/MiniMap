@@ -9,7 +9,7 @@ public class FriendFinderGame extends Game {
 
 	//private static final Logger log = Logger.getLogger( Server.class.getName() );
 	
-	
+
 	public FriendFinderGame() {
 
 	}
@@ -25,8 +25,18 @@ public class FriendFinderGame extends Game {
 	@Override
 	public void handleMessage(String message) {
 		// TODO Auto-generated method stub
-		
-		
+		Log.v("Friend Finder Game", message);
+		String[] parts = message.split(" ");
+		if (parts[0].equals("gameStart")) {
+			// We have started the game
+			startSession();
+		} else if (parts[0].equals("location")) {
+
+		} else if (parts[0].equals("addbeacon")) {
+
+		} else if (parts[0].equals("removebeacon")) {
+
+		}
 		
 	}
 	
