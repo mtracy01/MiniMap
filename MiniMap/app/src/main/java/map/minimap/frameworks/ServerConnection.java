@@ -119,7 +119,7 @@ public class ServerConnection extends Thread {
                     LobbyFragment.playersList.add(u.getName());
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
                 }
-
+                LobbyFragment.changeGrid();
             }
             else if (Data.user.getInGame()) {
                 Data.user.getGame().handleMessage(message);

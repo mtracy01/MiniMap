@@ -42,7 +42,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
 
     //Invitations handling
     private String requestId;
-
+    private int startCount =0;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -66,6 +66,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
 
     //Facebook login handler
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+
         if (state.isOpened()) {
             Log.i(LOG_TAG, "Logged in...");
             final Session session2=session;
@@ -85,14 +86,14 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                             /* Put user in our Data class */
                             Data.user=ourUser;
                             Log.v("loginsetname", Data.user.getName());
-                            synchronized (Data.LOGIN_LOCK) {
-                                if (Data.client == null || !Data.client.isConnected()) {
+
+                                if (startCount ==0) {
                                     Log.v("client", "Starting Client");
                                     ServerConnection client = new ServerConnection( Data.user.getID());
                                     Data.client = client;
                                     client.start();
                                 }
-                            }
+                                startCount++;
                             //data.setSession(session2);
 
                         } catch (Exception e) {
