@@ -63,8 +63,8 @@ public class FriendFinderGame extends Game {
 	public void removeUser(User user) {
 		Log.v("Friend Finder Game", "Removing user from friendfinder session");
 		user.setInGame(false);
-		if (getTeambyID(teams, user.getTeamID()) != null) {
-			getTeambyID(teams, user.getTeamID()).removeUser(user);
+		if (getTeambyID(teams, user.getTeam()) != null) {
+			getTeambyID(teams, user.getTeam()).removeUser(user);
 		}
 		synchronized (users) {
 			Log.v("Friend Finder Game", users.toString());
@@ -84,7 +84,7 @@ public class FriendFinderGame extends Game {
 	/* mid-game */
 	public void addUser(User user, int teamid) {
 		// TODO Auto-generated method stub
-		user.setTeamID(teamid);
+		user.setTeam(teamid);
 		getTeambyID(teams, teamid).addUser(user);
 		synchronized (users) {
 			users.add(user);

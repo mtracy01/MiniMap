@@ -39,6 +39,8 @@ public class User {
     //The affiliated team of the player.  0 by default.
     private int team;
 
+    private boolean inGame;
+
     private Marker marker;  //Location object for GoogleMap
     private User friends[];
 
@@ -49,6 +51,7 @@ public class User {
         ID = id;
         team=0;
         friends = null; //Needs to be specified later
+        inGame = false;
 
     }
 
@@ -100,6 +103,13 @@ public class User {
 
     public void setTeam(int t){ team = t; }
     public int getTeam(){ return team; }
+
+    public boolean getInGame() {
+        return inGame;
+    }
+    public void setInGame(boolean g) {
+        inGame = g;
+    }
 
 
     //Return the user image
