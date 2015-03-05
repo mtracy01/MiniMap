@@ -9,6 +9,12 @@ public class FriendFinderGame extends Game {
 
 	//private static final Logger log = Logger.getLogger( Server.class.getName() );
 	
+	
+	public FriendFinderGame() {
+
+	}
+
+
 	@Override
 	public void processLogic() {
 		// TODO Auto-generated method stub
