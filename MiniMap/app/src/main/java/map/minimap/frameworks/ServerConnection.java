@@ -149,9 +149,14 @@ public class ServerConnection extends Thread {
         out.println("reject "+ gameID);
     }
     public void getAllUsers(){
-        out.println("request users");
+        out.println("getAllUsers");
     }
     public void startGame() {out.println("start " + Data.gameId);}
+
+
+    public boolean isConnected() {
+        return connected;
+    }
 
     /**
      * Close the socket and any input/output streams

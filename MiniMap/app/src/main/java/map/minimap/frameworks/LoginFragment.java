@@ -85,9 +85,12 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                             /* Put user in our Data class */
                             Data.user=ourUser;
                             Log.v("loginsetname", Data.user.getName());
-                            ServerConnection client = new ServerConnection( Data.user.getID());
-                            client.start();
-                            Data.client = client;
+                            if (Data.client == null || !Data.client.isConnected()) {
+                                Log.v("client", "Starting Client");
+                                ServerConnection client = new ServerConnection( Data.user.getID());
+                                client.start();
+                                Data.client = client;
+                            }
                             //data.setSession(session2);
 
                         } catch (Exception e) {
