@@ -5,19 +5,15 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Beacon {
 
-	private static Integer baseId = 0;
 	private int teamid;
 	private LatLng location;
 	private int id;
 	
-	public Beacon (LatLng loc)
+	public Beacon (LatLng loc, int id)
 	{
 		setLocation(loc);
+		this.id = id;
 		
-		synchronized (baseId) {
-			id = baseId;
-			baseId++;
-		}
 	}
 
 	public LatLng getLocation() {
