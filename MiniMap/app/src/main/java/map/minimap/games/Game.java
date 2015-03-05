@@ -60,8 +60,6 @@ public abstract class Game {
 	 */
 	protected ArrayList<Team> teams;
 	
-	
-    public Game() {}
     public abstract void processLogic ();
     public abstract void handleMessage(String message);
 	/**
