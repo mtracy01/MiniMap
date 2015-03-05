@@ -1,7 +1,10 @@
 package map.minimap.games;
 
 
+import android.content.Intent;
 import android.util.Log;
+
+import map.minimap.FriendFinder;
 import map.minimap.frameworks.*;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -47,7 +50,7 @@ public class FriendFinderGame extends Game {
 	public void startSession() {
 		Log.v("Friend Finder Game", "Starting game session " + this.getId());
 		isRunning = true;
-		
+
 		//Put all users on the same team for friendfinder
 		for (User user: this.users)
 		{

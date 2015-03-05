@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
+import map.minimap.FriendFinder;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.LobbyFragment;
 import map.minimap.games.*;
@@ -34,6 +37,7 @@ public class ServerConnection extends Thread {
 
     public ServerConnection( String ID) {
       //  this.activity =  activity;
+
         connected = false;
         user_ID = ID;
     }
@@ -120,6 +124,10 @@ public class ServerConnection extends Thread {
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
                 }
                 LobbyFragment.changeGrid();
+            }
+            else if(parts[0].equals("gameStart")) {
+                Intent intent = new Intent(Data.mainAct.getApplicationContext(), FriendFinder.class);
+                Data.mainAct.startActivity(intent);
             }
             else if (Data.user.getInGame()) {
                 Data.user.getGame().handleMessage(message);

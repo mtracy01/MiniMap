@@ -89,7 +89,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
 
                                 if (startCount ==0) {
                                     Log.v("client", "Starting Client");
-                                    ServerConnection client = new ServerConnection( Data.user.getID());
+                                    ServerConnection client = new ServerConnection(Data.user.getID());
                                     Data.client = client;
                                     client.start();
                                 }

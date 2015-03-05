@@ -1,4 +1,6 @@
 package map.minimap.helperClasses;
+import android.app.Activity;
+
 import com.facebook.Session;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import map.minimap.frameworks.User;
 public class Data {
     // this will be our controller
     //Things for the application to store
-
+    public static Activity mainAct;
     public static User user = new User("abc123");
     public static ArrayList<User> users;
     public static String gameId;

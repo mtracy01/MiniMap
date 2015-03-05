@@ -94,8 +94,6 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Data.client.startGame();
-                Intent intent = new Intent(context, FriendFinder.class);
-                startActivity(intent);
             }
         });
         final Button inviteButton = (Button) view.findViewById(R.id.inviteButton);

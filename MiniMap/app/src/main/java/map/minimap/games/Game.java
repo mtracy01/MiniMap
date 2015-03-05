@@ -1,15 +1,21 @@
 package map.minimap.games;
 
 import java.util.ArrayList;
+
+import android.app.Activity;
 import android.util.Log;
 
 import map.minimap.frameworks.*;
+
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
  * Created by joe on 2/21/2015.
  */
-public abstract class Game {
+public abstract class Game{
+
+
 
     /*
      *   Each specific game type will be a subclass of Game
@@ -17,19 +23,19 @@ public abstract class Game {
      *      refering to any game type as a Game
      */
 
-	
+
 	private static Integer baseId = 0;
-	
+
 	/**
 	 * The game type
 	 */
 	private String gameType;
-	
+
 	/**
 	 * The game session id
 	 */
 	protected int id;
-	
+
 	public int getId() {
 		return id;
 	}
