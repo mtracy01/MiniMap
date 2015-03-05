@@ -109,8 +109,19 @@ public class ServerConnection extends Thread {
                 Data.user.setGame(new FriendFinderGame());
                 Data.user.setInGame(true);
             } else if (parts[0].equals("users")) {
-                // We have a list of all users
-            } else if (Data.user.getInGame()) {
+                Data.users = new ArrayList<User>();
+                for(int i =1; i < parts.length;i++){
+                    Data.users.add(new User(parts[i]));
+                }
+                LobbyFragment.playersList = new ArrayList<String>();
+                LobbyFragment.playersList.add(Data.user.getName());
+                for(User u : Data.users){
+                    LobbyFragment.playersList.add(u.getName());
+                    Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
+                }
+
+            }
+            else if (Data.user.getInGame()) {
                 Data.user.getGame().handleMessage(message);
             }
 

@@ -1,6 +1,8 @@
 package map.minimap.helperClasses;
 import com.facebook.Session;
 
+import java.util.ArrayList;
+
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 
@@ -13,7 +15,7 @@ public class Data {
     //Things for the application to store
 
     public static User user = new User("abc123");
-    public static User[] users;
+    public static ArrayList<User> users;
     public static String gameId;
     //Facebook session info
     //static Session session;
