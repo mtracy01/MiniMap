@@ -14,6 +14,7 @@ import android.util.Log;
 
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.LobbyFragment;
+import map.minimap.games.*;
 
 
 public class ServerConnection extends Thread {
@@ -102,6 +103,8 @@ public class ServerConnection extends Thread {
                 Log.v("invite", parts[1]);
                 // We got an invite, lets join (temporary, normally should ask)
                 acceptGameMessage(parts[1]);
+                Data.user.setGame(new FriendFinderGame());
+                Data.user.setInGame(true);
             } else if (parts[0].equals("users")) {
                 // We have a list of all users
             } else if (Data.user.getInGame()) {
