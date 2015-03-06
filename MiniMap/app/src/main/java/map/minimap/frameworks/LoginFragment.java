@@ -97,6 +97,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                                     client.start();
                                 }
                                 startCount++;
+
+                            GPSThread gpsThread = new GPSThread(Data.client);
                             //data.setSession(session2);
 
                         } catch (Exception e) {
