@@ -133,17 +133,8 @@ public class ServerConnection extends Thread {
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
                 }
                 LobbyFragment.changeGrid();
-            }else if(parts[0].equals("location")) {
-                if(Data.users !=null) {
-                    for (int i = 0; i < Data.users.size(); i++) {
-                        if (Data.users.get(i).getID().equals(parts[1])) {
-                            Data.users.get(i).getMarker().setPosition(new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3])));
-                        }
-                    }
-                }
-
-            }
-            else if(parts[0].equals("gameStart")) {
+            } else if(parts[0].equals("gameStart")) {
+                Maps.setCenterPosition(Data.user);
                 Intent intent = new Intent(Data.mainAct.getApplicationContext(), FriendFinder.class);
                 Data.mainAct.startActivity(intent);
                 Data.user.getGame().startSession();
