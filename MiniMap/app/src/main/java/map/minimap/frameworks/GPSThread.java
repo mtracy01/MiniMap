@@ -4,8 +4,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.io.IOException;
+
+import map.minimap.helperClasses.Data;
 
 /**
  * Created by Corey on 2/17/2015.
@@ -19,11 +22,12 @@ public class GPSThread {
     public GPSThread(final ServerConnection client) {
         final int MINTIME = 1000;
         final int MINDIST = 1;
-
+         locationManager =(LocationManager) Data.mainAct.getSystemService(Data.mainAct.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location
                 // provider.
+                Log.v("locs", Double.toString(location.getLatitude()));
                 client.sendMessage("location " +location.getLatitude() + " " + location.getLongitude());
             }
             @Override
