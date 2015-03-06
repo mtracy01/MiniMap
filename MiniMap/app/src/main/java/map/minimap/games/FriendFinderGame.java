@@ -3,6 +3,8 @@ package map.minimap.games;
 
 import android.content.Intent;
 import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 
 import map.minimap.FriendFinder;
 import map.minimap.frameworks.*;
@@ -37,13 +39,25 @@ public class FriendFinderGame extends Game {
 		String[] parts = message.split(" ");
 		if (parts[0].equals("location")) {
             User u = findUserbyId(parts[1], Data.users);
+            if (u == null) {
+            	return;
+            }
             LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
             Log.v("userid", parts[1]);
             if (u == null) {
             	Log.v("userid", "is null");
             }
             u.setCoordinates(ll);
-            u.getMarker().setPosition(ll);
+
+            // We can only update locations from the main thread
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
+            	public void run() {
+            		for (User u : Data.users) {
+	            		u.getMarker().setPosition(u.getCoordinates());
+	            	}
+            	}
+            });
 
 		} else if (parts[0].equals("addbeacon")) {
 
