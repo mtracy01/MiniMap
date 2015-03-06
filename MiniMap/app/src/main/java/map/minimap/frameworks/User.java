@@ -51,7 +51,7 @@ public class User {
         coordinates = new LatLng(0,0);
         name = ""; //Needs to be specified later
         ID = id;
-        team=0;
+        team=1;
         friends = null; //Needs to be specified later
         inGame = false;
         currentGame = null;
