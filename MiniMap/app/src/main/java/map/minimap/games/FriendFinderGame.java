@@ -12,6 +12,7 @@ import map.minimap.helperClasses.Data;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 
@@ -54,7 +55,10 @@ public class FriendFinderGame extends Game {
             mainHandler.post(new Runnable() {
             	public void run() {
             		for (User u : Data.users) {
-	            		u.getMarker().setPosition(u.getCoordinates());
+	            		Marker mark = u.getMarker();
+	            		if (mark != null) {
+	            			mark.setPosition(u.getCoordinates());
+	            		}
 	            	}
             	}
             });
