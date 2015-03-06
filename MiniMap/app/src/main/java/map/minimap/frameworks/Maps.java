@@ -132,26 +132,31 @@ public class Maps {
                             .title(user.getName()).position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .fromBitmap(user.getUserImage()))));
+                    break;
                 case 1:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
+                    break;
                 case 2:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_RED))));
+                    break;
                 case 3:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))));
-                case 4:
+                    break;
+                default:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+                    break;
             }
         }
 
