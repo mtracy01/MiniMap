@@ -102,7 +102,11 @@ public class ServerConnection extends Thread {
                 LobbyFragment.playersList = new ArrayList<String>();
                 LobbyFragment.playersList.add(Data.user.getName());
                 // Remove all current users
-                Data.users.clear();
+                if (Data.users == null) {
+                    Data.users = new ArrayList<User>();
+                } else {
+                    Data.users.clear();
+                }
                 for(int i =1; i < parts.length; i++){
                     LobbyFragment.playersList.add(parts[i]);
 
