@@ -30,10 +30,7 @@ public class FriendFinderGame extends Game {
 		// TODO Auto-generated method stub
 		Log.v("Friend Finder Game", message);
 		String[] parts = message.split(" ");
-		if (parts[0].equals("gameStart")) {
-			// We have started the game
-			startSession();
-		} else if (parts[0].equals("location")) {
+		if (parts[0].equals("location")) {
 
 		} else if (parts[0].equals("addbeacon")) {
 
@@ -50,12 +47,6 @@ public class FriendFinderGame extends Game {
 	public void startSession() {
 		Log.v("Friend Finder Game", "Starting game session " + this.getId());
 		isRunning = true;
-
-		//Put all users on the same team for friendfinder
-		for (User user: this.users)
-		{
-			teams.get(0).addUser(user);
-		}
 	}
 
 	@Override
@@ -66,48 +57,17 @@ public class FriendFinderGame extends Game {
 	public void endSession() {
 		isRunning = false;
 		
-		for (User user: this.users)
-		{
-			removeUser(user);
-		}
-		for (Team team: this.teams)
-		{
-			//might be a temporary solution
-			team.removeAllBeacons();
-		}
-		
 	}
 
 	@Override
 	public void removeUser(User user) {
 		Log.v("Friend Finder Game", "Removing user from friendfinder session");
-		user.setInGame(false);
-		if (getTeambyID(teams, user.getTeam()) != null) {
-			getTeambyID(teams, user.getTeam()).removeUser(user);
-		}
-		synchronized (users) {
-			Log.v("Friend Finder Game", users.toString());
-			users.remove(user);
-			Log.v("Friend Finder Game", users.toString());
-			Log.v("Friend Finder Game", users.size() + " users in session");
-			if (users.isEmpty()) {
-				endSession();
-			}
-			if (owner.equals(user) && !users.isEmpty()) {
-				owner = users.get(0);
-			}
-		}
 	}
 
 	@Override
 	/* mid-game */
 	public void addUser(User user, int teamid) {
 		// TODO Auto-generated method stub
-		user.setTeam(teamid);
-		getTeambyID(teams, teamid).addUser(user);
-		synchronized (users) {
-			users.add(user);
-		}
 	}
 
 	/**

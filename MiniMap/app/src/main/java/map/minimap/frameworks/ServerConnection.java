@@ -140,6 +140,7 @@ public class ServerConnection extends Thread {
             else if(parts[0].equals("gameStart")) {
                 Intent intent = new Intent(Data.mainAct.getApplicationContext(), FriendFinder.class);
                 Data.mainAct.startActivity(intent);
+                Data.user.getGame().startSession();
             }
             else if (Data.user.getInGame()) {
                 Data.user.getGame().handleMessage(message);
