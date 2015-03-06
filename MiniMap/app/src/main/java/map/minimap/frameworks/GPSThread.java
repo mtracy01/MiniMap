@@ -3,6 +3,7 @@ package map.minimap.frameworks;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import com.google.android.gms.maps.model.LatLng;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -55,6 +56,7 @@ public class GPSThread {
                 if (location != null) {
                     Log.v("locsG", location.toString());
                     client.sendMessage("location " + location.getLatitude() + " " + location.getLongitude());
+                    Data.user.setCoordinates(new LatLng(location.getLongitude(), location.getLongitude()));
                 }
             }
         }
@@ -66,6 +68,7 @@ public class GPSThread {
                 if (location != null) {
                     Log.v("locsN", location.toString());
                     client.sendMessage("location " + location.getLatitude() + " " + location.getLongitude());
+                    Data.user.setCoordinates(new LatLng(location.getLongitude(), location.getLongitude()));
                 }
             }
         }

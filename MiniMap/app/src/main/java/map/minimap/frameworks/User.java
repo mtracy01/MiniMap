@@ -127,7 +127,7 @@ public class User {
         Bitmap userIcon = Bitmap.createBitmap(50,50,Bitmap.Config.ARGB_4444);
         try{
             URL img_value;
-            img_value = new URL("https://graph.facebook.com/"+getID()+"/picture?type=small");
+            img_value = new URL("https://graph.facebook.com/"+getID()+"/picture");
             userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
         }
         catch(Exception e){
