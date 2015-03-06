@@ -57,6 +57,11 @@ public class FriendFinderGame extends Game {
             		if (Data.map == null) {
             			return;
             		}
+            		for (User u : Data.users) {
+            			if (u.getMarker() != null) {
+            				u.getMarker().remove();
+            			}
+            		}
             		Data.map.clear();
             		Maps.initializePlayers(Data.map, Data.users);
             	}

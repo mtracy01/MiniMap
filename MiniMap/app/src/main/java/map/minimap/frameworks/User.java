@@ -127,11 +127,11 @@ public class User {
         Bitmap userIcon = Bitmap.createBitmap(50,50,Bitmap.Config.ARGB_4444);
         try{
             URL img_value;
-            img_value = new URL("http://graph.facebook.com/"+getID()+"/picture?type=small");
+            img_value = new URL("https://graph.facebook.com/"+getID()+"/picture?type=small");
             userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
         }
         catch(Exception e){
-            Log.e(LOG_TAG, "Failed to get User image" + e.getMessage());
+            Log.e(LOG_TAG, "Failed to get User image " + e.getMessage());
 
         }
         return userIcon;
