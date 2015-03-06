@@ -87,7 +87,7 @@ public class Maps {
             //initialize players, setting their markers
             initializePlayers(map, Data.users);
             //Move map's camera and set zoom level.  I will make the zoom a variable later
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(center,13));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(),13));
             //addPlayersToField(map);
         }
         //if we don't initialize, call Sydney
