@@ -127,7 +127,7 @@ public class Maps {
             switch (user.getTeam()-1){
                 case 0:
                     /* Decode profile picture by calling Facebook Graph API */
-                    users.setMarker(map.addMarker(new MarkerOptions()
+                    user.setMarker(map.addMarker(new MarkerOptions()
                             .title(user.getName()).position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .fromBitmap(user.getUserImage()))));
