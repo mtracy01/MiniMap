@@ -3,17 +3,9 @@ package map.minimap.frameworks;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-
-import com.facebook.HttpMethod;
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.model.GraphObject;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-
 import java.net.URL;
-
-import map.minimap.helperClasses.Data;
 import map.minimap.games.*;
 
 /**

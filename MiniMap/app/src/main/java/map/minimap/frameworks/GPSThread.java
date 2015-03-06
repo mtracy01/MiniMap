@@ -7,8 +7,6 @@ import com.google.android.gms.maps.model.LatLng;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.io.IOException;
-
 import map.minimap.helperClasses.Data;
 
 /**
