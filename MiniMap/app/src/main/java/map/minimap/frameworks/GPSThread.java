@@ -18,11 +18,16 @@ public class GPSThread {
 
     private LocationListener locationListener;
     private static LocationManager locationManager;
+    private Location location;
 
     public GPSThread(final ServerConnection client) {
         final int MINTIME = 1000;
-        final int MINDIST = 1;
+        final int MINDIST = 0;
          locationManager =(LocationManager) Data.mainAct.getSystemService(Data.mainAct.LOCATION_SERVICE);
+        boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        // getting network status
+        boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location
@@ -42,7 +47,32 @@ public class GPSThread {
 
             }
         };
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MINTIME, MINDIST, locationListener);
+        if (isGPSEnabled) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MINTIME,
+                    MINDIST, locationListener);
+            if (locationManager != null) {
+                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (location != null) {
+                    Log.v("locsG", location.toString());
+                    client.sendMessage("location " + location.getLatitude() + " " + location.getLongitude());
+                }
+            }
+        }
+        if (isNetworkEnabled) {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MINTIME,
+                    MINDIST, locationListener);
+            if (locationManager != null) {
+                location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                if (location != null) {
+                    Log.v("locsN", location.toString());
+                    client.sendMessage("location " + location.getLatitude() + " " + location.getLongitude());
+                }
+            }
+        }
+        else
+            Log.v("gpsbroke", "network/gps providers both out");
+
+
     }
     public void destroyListener(){locationManager.removeUpdates(locationListener);}
 
