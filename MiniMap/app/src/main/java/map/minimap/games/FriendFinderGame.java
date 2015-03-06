@@ -58,7 +58,7 @@ public class FriendFinderGame extends Game {
             			return;
             		}
             		Data.map.clear();
-            		Maps.readyMap(Data.map);
+            		Maps.initializePlayers(Data.map, Data.users);
             	}
             });
 
