@@ -129,12 +129,13 @@ public class ServerConnection extends Thread {
                 }
                 LobbyFragment.changeGrid();
             }else if(parts[0].equals("location")) {
-                
-                    for(int i =0; i< Data.users.size();i++){
-                        if(Data.users.get(i).getID().equals(parts[1])){
-                            Data.users.get(i).getMarker().setPosition(new LatLng(Double.parseDouble(parts[2]),Double.parseDouble(parts[3])));
+                if(Data.users !=null) {
+                    for (int i = 0; i < Data.users.size(); i++) {
+                        if (Data.users.get(i).getID().equals(parts[1])) {
+                            Data.users.get(i).getMarker().setPosition(new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3])));
                         }
                     }
+                }
 
             }
             else if(parts[0].equals("gameStart")) {
