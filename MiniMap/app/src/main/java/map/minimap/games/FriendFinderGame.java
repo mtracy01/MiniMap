@@ -6,7 +6,12 @@ import android.util.Log;
 
 import map.minimap.FriendFinder;
 import map.minimap.frameworks.*;
+import map.minimap.helperClasses.Data;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 public class FriendFinderGame extends Game {
 
@@ -31,6 +36,10 @@ public class FriendFinderGame extends Game {
 		Log.v("Friend Finder Game", message);
 		String[] parts = message.split(" ");
 		if (parts[0].equals("location")) {
+            User u = findUserbyId(parts[1], Data.users);
+            LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
+            u.setCoordinates(ll);
+            u.getMarker().setPosition(ll);
 
 		} else if (parts[0].equals("addbeacon")) {
 
@@ -39,6 +48,20 @@ public class FriendFinderGame extends Game {
 		}
 		
 	}
+
+    public User findUserbyId(String theid, ArrayList<User> users) {
+        for (User u: users) {
+            if (u.getID().equals(theid)) {
+                return u;
+            }
+        }
+        return null;
+
+    }
+
+
+
+
 	
 	@Override
 	/* called when user presses start button
