@@ -70,6 +70,8 @@ public class ServerConnection extends Thread {
 
         // We are connected
         connected = true;
+        // Start the gps thread
+        GPSThread gpsThread = new GPSThread(Data.client);
         try {
             String line = null;
             while(in.hasNextLine()) {
