@@ -124,13 +124,13 @@ public class Maps {
 
 
 
-            switch (users[i].getTeam()-1){
+            switch (user.getTeam()-1){
                 case 0:
                     /* Decode profile picture by calling Facebook Graph API */
                     users.setMarker(map.addMarker(new MarkerOptions()
-                            .title(users[i].getName()).position(latLng)
+                            .title(user.getName()).position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .fromBitmap(users[i].getUserImage()))));
+                                    .fromBitmap(user.getUserImage()))));
                 case 1:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
