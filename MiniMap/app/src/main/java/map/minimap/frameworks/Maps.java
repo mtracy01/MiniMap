@@ -114,15 +114,12 @@ public class Maps {
         int length = playerList.size();
         hasBorders=false;
         /* create copy of users to store in class */
-        users= new User[length];
-        System.arraycopy(playerList,0,users,0,length);
-
 
         /* Create markers and put them in respective locatons */
-        for(int i=0;i<length;i++){
+        for(User user : Data.users){
 
             /* Convert coordinates to latitude and longitude tuple */
-            LatLng latLng = users[i].getCoordinates();
+            LatLng latLng = user.getCoordinates();
 
 
 
@@ -130,27 +127,27 @@ public class Maps {
             switch (users[i].getTeam()-1){
                 case 0:
                     /* Decode profile picture by calling Facebook Graph API */
-                    users[i].setMarker(map.addMarker(new MarkerOptions()
+                    users.setMarker(map.addMarker(new MarkerOptions()
                             .title(users[i].getName()).position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .fromBitmap(users[i].getUserImage()))));
                 case 1:
-                    users[i].setMarker(map.addMarker(new MarkerOptions()
+                    user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
                 case 2:
-                    users[i].setMarker(map.addMarker(new MarkerOptions()
+                    user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_RED))));
                 case 3:
-                    users[i].setMarker(map.addMarker(new MarkerOptions()
+                    user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))));
                 case 4:
-                    users[i].setMarker(map.addMarker(new MarkerOptions()
+                    user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
