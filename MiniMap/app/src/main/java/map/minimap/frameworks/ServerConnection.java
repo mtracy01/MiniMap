@@ -99,8 +99,7 @@ public class ServerConnection extends Thread {
             String[] parts = message.split(" ");
 
             if(parts[0].equals("gameUsers")){
-                LobbyFragment.playersList = new ArrayList<String>();
-                LobbyFragment.playersList.add(Data.user.getName());
+
                 // Remove all current users
                 if (Data.users == null) {
                     Data.users = new ArrayList<User>();
@@ -108,9 +107,6 @@ public class ServerConnection extends Thread {
                     Data.users.clear();
                 }
                 for(int i =1; i < parts.length; i++){
-                    LobbyFragment.playersList.add(parts[i]);
-
-                    // Maintain an up to date list of users
                     Data.users.add(new User(parts[i]));
                 }
                 LobbyFragment.changeGrid();
@@ -131,9 +127,7 @@ public class ServerConnection extends Thread {
                 for(int i =1; i < parts.length;i++){
                     Data.users.add(new User(parts[i]));
                 }
-                LobbyFragment.playersList = new ArrayList<String>();
                 for(User u : Data.users){
-                    LobbyFragment.playersList.add(u.getName());
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
                 }
                 LobbyFragment.changeGrid();

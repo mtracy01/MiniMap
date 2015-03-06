@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import map.minimap.FriendFinder;
 import map.minimap.R;
+import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 
@@ -68,8 +69,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        playersList = new ArrayList<String>();
-        playersList.add(Data.user.getName());
+
         Log.v("name",Data.user.getName());
         //check server for other players
         final Handler handler = new Handler();
@@ -105,7 +105,9 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
 
             }
         });
-        String[] playersArray = playersList.toArray(new String[1]);
+        String[] playersArray = new String[Data.users.size()];
+        for(int i =0; i < Data.users.size();i++)
+            playersArray[i] = Data.users.get(i).getName();
         adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,playersArray);
         playerListView.setAdapter(adapter);
         return view;

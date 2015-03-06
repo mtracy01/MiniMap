@@ -38,6 +38,7 @@ public class FriendFinderGame extends Game {
 		if (parts[0].equals("location")) {
             User u = findUserbyId(parts[1], Data.users);
             LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
+            Log.v("userid", parts[1]);
             u.setCoordinates(ll);
             u.getMarker().setPosition(ll);
 
