@@ -107,7 +107,12 @@ public class ServerConnection extends Thread {
                     Data.users.clear();
                 }
                 for(int i =1; i < parts.length; i++){
-                    Data.users.add(new User(parts[i]));
+                    // Add the existing user if it is us, otherwise create a new one
+                    if (Data.user.getID().equals(parts[i])) {
+                        Data.users.add(Data.user);
+                    } else {
+                        Data.users.add(new User(parts[i]));
+                   }
                 }
                 LobbyFragment.changeGrid();
             } else if(parts[0].equals("game")){
