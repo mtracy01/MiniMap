@@ -96,7 +96,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                                     Data.client = client;
                                     client.start();
                                     try {
-                                        Thread.sleep(100);
+                                        Thread.sleep(200);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
