@@ -3,17 +3,9 @@ package map.minimap.frameworks;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-
-import com.facebook.HttpMethod;
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.model.GraphObject;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-
 import java.net.URL;
-
-import map.minimap.helperClasses.Data;
 import map.minimap.games.*;
 
 /**
@@ -51,7 +43,7 @@ public class User {
         coordinates = new LatLng(0,0);
         name = ""; //Needs to be specified later
         ID = id;
-        team=0;
+        team=1;
         friends = null; //Needs to be specified later
         inGame = false;
         currentGame = null;
@@ -127,11 +119,11 @@ public class User {
         Bitmap userIcon = Bitmap.createBitmap(50,50,Bitmap.Config.ARGB_4444);
         try{
             URL img_value;
-            img_value = new URL("http://graph.facebook.com/"+getID()+"/picture?type=small");
+            img_value = new URL("https://graph.facebook.com/"+getID()+"/picture");
             userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
         }
         catch(Exception e){
-            Log.e(LOG_TAG, "Failed to get User image" + e.getMessage());
+            Log.e(LOG_TAG, "Failed to get User image " + e.getMessage());
 
         }
         return userIcon;

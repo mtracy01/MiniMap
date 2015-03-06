@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
+import com.google.android.gms.maps.GoogleMap;
 
 /**
  * Created by Matthew on 2/21/2015.
@@ -24,5 +25,7 @@ public class Data {
     public static ServerConnection client;
     public final static Object LOGIN_LOCK = new Object();
     public static Session session;
+
+    public static GoogleMap map;
 
 }

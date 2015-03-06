@@ -22,6 +22,7 @@ import com.facebook.widget.LoginButton;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import map.minimap.MainActivity;
@@ -85,6 +86,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
 
                             /* Put user in our Data class */
                             Data.user=ourUser;
+                            Data.users = new ArrayList<User>();
+                            Data.users.add(ourUser);
                             Log.v("loginsetname", Data.user.getName());
 
                                 if (startCount ==0) {
@@ -92,8 +95,16 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                                     ServerConnection client = new ServerConnection(Data.user.getID());
                                     Data.client = client;
                                     client.start();
+                                    try {
+                                        Thread.sleep(200);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    GPSThread gpsThread = new GPSThread(Data.client);
                                 }
                                 startCount++;
+
+
                             //data.setSession(session2);
 
                         } catch (Exception e) {

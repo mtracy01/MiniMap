@@ -3,10 +3,18 @@ package map.minimap.games;
 
 import android.content.Intent;
 import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 
 import map.minimap.FriendFinder;
 import map.minimap.frameworks.*;
+import map.minimap.helperClasses.Data;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Marker;
+
+import java.util.ArrayList;
 
 public class FriendFinderGame extends Game {
 
@@ -30,10 +38,34 @@ public class FriendFinderGame extends Game {
 		// TODO Auto-generated method stub
 		Log.v("Friend Finder Game", message);
 		String[] parts = message.split(" ");
-		if (parts[0].equals("gameStart")) {
-			// We have started the game
-			startSession();
-		} else if (parts[0].equals("location")) {
+		if (parts[0].equals("location")) {
+            User u = findUserbyId(parts[1], Data.users);
+            if (u == null) {
+            	return;
+            }
+            LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
+            Log.v("userid", parts[1]);
+            if (u == null) {
+            	Log.v("userid", "is null");
+            }
+            u.setCoordinates(ll);
+
+            // We can only update locations from the main thread
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
+            	public void run() {
+            		if (Data.map == null) {
+            			return;
+            		}
+            		for (User u : Data.users) {
+            			if (u.getMarker() != null) {
+            				u.getMarker().remove();
+            			}
+            		}
+            		Data.map.clear();
+            		Maps.initializePlayers(Data.map, Data.users);
+            	}
+            });
 
 		} else if (parts[0].equals("addbeacon")) {
 
@@ -42,6 +74,20 @@ public class FriendFinderGame extends Game {
 		}
 		
 	}
+
+    public User findUserbyId(String theid, ArrayList<User> users) {
+        for (User u: users) {
+            if (u.getID().equals(theid)) {
+                return u;
+            }
+        }
+        return null;
+
+    }
+
+
+
+
 	
 	@Override
 	/* called when user presses start button
@@ -50,12 +96,6 @@ public class FriendFinderGame extends Game {
 	public void startSession() {
 		Log.v("Friend Finder Game", "Starting game session " + this.getId());
 		isRunning = true;
-
-		//Put all users on the same team for friendfinder
-		for (User user: this.users)
-		{
-			teams.get(0).addUser(user);
-		}
 	}
 
 	@Override
@@ -66,48 +106,17 @@ public class FriendFinderGame extends Game {
 	public void endSession() {
 		isRunning = false;
 		
-		for (User user: this.users)
-		{
-			removeUser(user);
-		}
-		for (Team team: this.teams)
-		{
-			//might be a temporary solution
-			team.removeAllBeacons();
-		}
-		
 	}
 
 	@Override
 	public void removeUser(User user) {
 		Log.v("Friend Finder Game", "Removing user from friendfinder session");
-		user.setInGame(false);
-		if (getTeambyID(teams, user.getTeam()) != null) {
-			getTeambyID(teams, user.getTeam()).removeUser(user);
-		}
-		synchronized (users) {
-			Log.v("Friend Finder Game", users.toString());
-			users.remove(user);
-			Log.v("Friend Finder Game", users.toString());
-			Log.v("Friend Finder Game", users.size() + " users in session");
-			if (users.isEmpty()) {
-				endSession();
-			}
-			if (owner.equals(user) && !users.isEmpty()) {
-				owner = users.get(0);
-			}
-		}
 	}
 
 	@Override
 	/* mid-game */
 	public void addUser(User user, int teamid) {
 		// TODO Auto-generated method stub
-		user.setTeam(teamid);
-		getTeambyID(teams, teamid).addUser(user);
-		synchronized (users) {
-			users.add(user);
-		}
 	}
 
 	/**

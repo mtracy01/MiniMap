@@ -55,11 +55,6 @@ public abstract class Game{
 	 * Is the session running?
 	 */
 	protected boolean isRunning;
-
-	/**
-	 * The users in the game session
-	 */
-	protected ArrayList<User> users;
 	
 	/**
 	 * The teams in the game session

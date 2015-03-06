@@ -1,11 +1,8 @@
 package map.minimap.helperClasses;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-import android.util.Log;
-
 import com.facebook.FacebookException;
 import com.facebook.FacebookOperationCanceledException;
 import com.facebook.Session;

@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import com.facebook.Session;
+
+import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.GamesFragment;
@@ -43,7 +45,7 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.v("startMiniMap", "startMiniMap");
         //set default userID in case something goes wrong
 
         //Get our variables from LoginActivity

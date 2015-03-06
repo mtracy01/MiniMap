@@ -14,6 +14,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import map.minimap.FriendFinder;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.LobbyFragment;
@@ -93,11 +97,22 @@ public class ServerConnection extends Thread {
         try {
             Log.v("Message", message);
             String[] parts = message.split(" ");
-            LobbyFragment.playersList = new ArrayList<String>();
-            LobbyFragment.playersList.add(Data.user.getName());
+
             if(parts[0].equals("gameUsers")){
+
+                // Remove all current users
+                if (Data.users == null) {
+                    Data.users = new ArrayList<User>();
+                } else {
+                    Data.users.clear();
+                }
                 for(int i =1; i < parts.length; i++){
-                    LobbyFragment.playersList.add(parts[i]);
+                    // Add the existing user if it is us, otherwise create a new one
+                    if (Data.user.getID().equals(parts[i])) {
+                        Data.users.add(Data.user);
+                    } else {
+                        Data.users.add(new User(parts[i]));
+                   }
                 }
                 LobbyFragment.changeGrid();
             } else if(parts[0].equals("game")){
@@ -117,17 +132,15 @@ public class ServerConnection extends Thread {
                 for(int i =1; i < parts.length;i++){
                     Data.users.add(new User(parts[i]));
                 }
-                LobbyFragment.playersList = new ArrayList<String>();
-                LobbyFragment.playersList.add(Data.user.getName());
                 for(User u : Data.users){
-                    LobbyFragment.playersList.add(u.getName());
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
                 }
                 LobbyFragment.changeGrid();
-            }
-            else if(parts[0].equals("gameStart")) {
+            } else if(parts[0].equals("gameStart")) {
+                Maps.setCenterPosition(Data.user);
                 Intent intent = new Intent(Data.mainAct.getApplicationContext(), FriendFinder.class);
                 Data.mainAct.startActivity(intent);
+                Data.user.getGame().startSession();
             }
             else if (Data.user.getInGame()) {
                 Data.user.getGame().handleMessage(message);
