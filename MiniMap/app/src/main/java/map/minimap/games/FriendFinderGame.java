@@ -54,12 +54,11 @@ public class FriendFinderGame extends Game {
             Handler mainHandler = new Handler(Looper.getMainLooper());
             mainHandler.post(new Runnable() {
             	public void run() {
-            		for (User u : Data.users) {
-	            		Marker mark = u.getMarker();
-	            		if (mark != null) {
-	            			mark.setPosition(u.getCoordinates());
-	            		}
-	            	}
+            		if (Data.map == null) {
+            			return;
+            		}
+            		Data.map.clear();
+            		Maps.readyMap(Data.map);
             	}
             });
 

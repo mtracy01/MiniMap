@@ -102,6 +102,7 @@ public class Maps {
                     .snippet("The most populous city in Australia.")
                     .position(sydney));
         }
+        Data.map = map;
     }
 
     /**
