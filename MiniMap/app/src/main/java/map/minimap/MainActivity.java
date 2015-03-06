@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import com.facebook.Session;
+
+import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.GamesFragment;
@@ -66,7 +68,7 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         Data.mainAct = this;
-
+        GPSThread gpsThread = new GPSThread(Data.client);
 
 
 
