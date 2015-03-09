@@ -128,10 +128,14 @@ public class Maps {
             switch (user.getTeam()-1){
                 case 0:
                     /* Decode profile picture by calling Facebook Graph API */
+                    // user.setMarker(map.addMarker(new MarkerOptions()
+                    //         .title(user.getName()).position(latLng)
+                    //         .icon(BitmapDescriptorFactory
+                    //                 .fromBitmap(user.getUserImage()))));
                     user.setMarker(map.addMarker(new MarkerOptions()
-                            .title(user.getName()).position(latLng)
+                            .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .fromBitmap(user.getUserImage()))));
+                                    .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
                     break;
                 case 1:
                     user.setMarker(map.addMarker(new MarkerOptions()
