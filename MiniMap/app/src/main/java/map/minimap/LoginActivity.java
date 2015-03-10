@@ -11,9 +11,6 @@ import map.minimap.frameworks.LoginFragment;
  */
 public class LoginActivity extends FragmentActivity {
 
-    //Debug variables
-    private static final String LOG_TAG = "LoginActivity";
-
     //Fragment Reference
     private LoginFragment loginFragment;
 

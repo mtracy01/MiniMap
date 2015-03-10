@@ -13,7 +13,6 @@ import com.facebook.widget.WebDialog;
  * Created by Matthew on 2/22/2015.
  */
 public class FacebookHelper {
-    private  Context context2;
 
     public  void inviteFriends(Context context){
         Bundle params = new Bundle();
@@ -21,7 +20,6 @@ public class FacebookHelper {
         params.putString("message", "YOUR_MESSAGE_HERE");
         //params.putString("message", Data.gameId);
         final Context context1=context;
-        context2 = context;
         WebDialog requestsDialog = (
                 new WebDialog.RequestsDialogBuilder(context,
                         Session.getActiveSession(),

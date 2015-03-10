@@ -122,9 +122,6 @@ public class Maps {
             /* Convert coordinates to latitude and longitude tuple */
             LatLng latLng = user.getCoordinates();
 
-
-
-
             switch (user.getTeam()-1){
                 case 0:
                     /* Decode profile picture by calling Facebook Graph API */
