@@ -122,36 +122,42 @@ public class Maps {
             /* Convert coordinates to latitude and longitude tuple */
             LatLng latLng = user.getCoordinates();
 
-
-
-
             switch (user.getTeam()-1){
                 case 0:
                     /* Decode profile picture by calling Facebook Graph API */
+                    // user.setMarker(map.addMarker(new MarkerOptions()
+                    //         .title(user.getName()).position(latLng)
+                    //         .icon(BitmapDescriptorFactory
+                    //                 .fromBitmap(user.getUserImage()))));
                     user.setMarker(map.addMarker(new MarkerOptions()
-                            .title(user.getName()).position(latLng)
+                            .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .fromBitmap(user.getUserImage()))));
+                                    .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+                    break;
                 case 1:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
+                    break;
                 case 2:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_RED))));
+                    break;
                 case 3:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))));
-                case 4:
+                    break;
+                default:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
                                     .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+                    break;
             }
         }
 
