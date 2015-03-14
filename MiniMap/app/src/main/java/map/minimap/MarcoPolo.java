@@ -5,13 +5,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
-public class MarcoPolo extends ActionBarActivity {
+import map.minimap.frameworks.Maps;
+
+
+public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
+
+    private MapFragment map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marco_polo);
+        if (savedInstanceState == null) {
+            map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
+            map.getMapAsync(this);
+
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        Maps.readyMap(map);
     }
 
 
