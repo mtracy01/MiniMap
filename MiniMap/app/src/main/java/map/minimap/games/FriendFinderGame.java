@@ -1,18 +1,13 @@
 package map.minimap.games;
 
-
-import android.content.Intent;
 import android.util.Log;
 import android.os.Handler;
 import android.os.Looper;
 
-import map.minimap.FriendFinder;
 import map.minimap.frameworks.*;
 import map.minimap.helperClasses.Data;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 

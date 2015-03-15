@@ -1,6 +1,5 @@
 package map.minimap.games;
 
-import java.util.ArrayList;
 import com.google.android.gms.maps.model.LatLng;
 
 public class Beacon {
