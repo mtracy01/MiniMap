@@ -1,0 +1,2 @@
+TEST_HOSTNAME = 'localhost'
+TEST_PORT = 2048
