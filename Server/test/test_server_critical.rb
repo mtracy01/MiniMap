@@ -72,7 +72,7 @@ def testCreateFFGameAcceptWithInvites(hostname, port)
 				user2.close
 				return false
 			end
-			user2.puts "accept #{invite.split(' ')[1]}"
+			user2.puts "accept #{invite.split(' ')[2]}"
 			users1 = user1.gets.chomp!
 			users2 = user2.gets.chomp!
 			

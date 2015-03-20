@@ -121,10 +121,11 @@ public class ServerConnection extends Thread {
                 Data.user.setGame(new FriendFinderGame());
                 Data.user.setInGame(true);
             } else if (parts[0].equals("invite")) {
-                Log.v("invite", parts[1]);
+                Log.v("invite", parts[2]);
                 // We got an invite, lets join (temporary, normally should ask)
-                acceptGameMessage(parts[1]);
-                Data.gameId = parts[1];
+                // TODO handle the invite correctly, parts[1] contains the type, parts[2] contains the id
+                acceptGameMessage(parts[2]);
+                Data.gameId = parts[2];
                 Data.user.setGame(new FriendFinderGame());
                 Data.user.setInGame(true);
             } else if (parts[0].equals("users")) {
