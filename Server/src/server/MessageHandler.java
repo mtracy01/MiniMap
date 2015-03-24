@@ -81,6 +81,21 @@ public class MessageHandler {
 			case "removebeacon":
 				user.getGameSession().removeBeacon(user.getTeamID(), Integer.parseInt(messageParts[1]));
 				break;
+			case "remove":
+				if (user.isInGame()) {
+					// Check if we are the owner
+					GameSession session = server.getSessionByID(Integer.parseInt(messageParts[1]));
+					
+					// If the current user is the owner, remove the user
+					if (session.getOwner().equals(user)) {
+						User toRemove = server.getUserByID(messageParts[2]);
+						session.removeUser(toRemove);
+					} else if (user.getUserID().equals(messageParts[2])) {
+						// If the user wants to remove themselves, remove the user
+						user.getGameSession().removeUser(user);
+					}
+				}
+				break;
 			default:
 				// Bounce the message to the game session
 				if (user.isInGame()) {

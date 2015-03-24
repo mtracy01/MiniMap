@@ -51,7 +51,9 @@ def testCreateFFGameAcceptWithInvites(hostname, port)
 			return true
 		end
 	rescue Timeout::Error
-		puts "timeout"
+		if __FILE__ == $PROGRAM_NAME
+			puts "timeout"
+		end
 		if (!user1.nil?)
 			user1.close
 		end

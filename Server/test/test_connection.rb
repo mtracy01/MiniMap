@@ -19,6 +19,9 @@ def testConnection(hostname, port)
 			end
 		end
 	rescue Timeout::Error
+		if __FILE__ == $PROGRAM_NAME
+			puts "timeout"
+		end
 		if (!user1.nil?)
 			user1.close
 		end
