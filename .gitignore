@@ -1,6 +1,8 @@
 .DS_Store
 .metadata
 *~
+*.class
+*.swp
 
 Server/.project
 Server/bin
