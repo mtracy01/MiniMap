@@ -5,7 +5,7 @@ require 'timeout'
 
 require './connection_info.rb'
 
-def testCreateFFGameAcceptWithInvites(hostname, port)
+def testRemoveUserFF(hostname, port)
 	begin
 		user1 = nil
 		user2 = nil
@@ -38,16 +38,56 @@ def testCreateFFGameAcceptWithInvites(hostname, port)
 			user1.puts "start #{gameInfo.split(' ')[1]}"
 			startMessage1 = user1.gets.chomp!
 			startMessage2 = user2.gets.chomp!
-			user1.close
-			user2.close
 			
 			# Test if all users are in the session
 			if (!(userParts[0].eql? "gameUsers") || !(userParts.length == 4))
+				user1.close
+				user2.close
 				return false
 			end
 			if (!(startMessage1.eql? "gameStart #{gameInfo.split(' ')[1]}") || !(startMessage2.eql? "gameStart #{gameInfo.split(' ')[1]}"))
+				user1.close
+				user2.close
 				return false
 			end
+
+			if __FILE__ == $PROGRAM_NAME
+				puts "Game started correctly, removing user 2"
+			end
+
+			# Now that everyone is in the game, let us remove user 2
+			user1.puts "remove #{gameInfo.split(' ')[1]} 2"
+			if __FILE__ == $PROGRAM_NAME
+				puts "remove message sent"
+			end
+			removeUser1 = user1.gets.chomp!
+			if __FILE__ == $PROGRAM_NAME
+				puts "final users 1 received: #{removeUser1}"
+			end
+			removeUser2 = user2.gets.chomp!
+			if __FILE__ == $PROGRAM_NAME
+				puts "final users 2 received: #{removeUser2}"
+			end
+
+			if (!(removeUser1.eql? "userRemoved 2"))
+				if __FILE__ == $PROGRAM_NAME
+					puts "remove message 1 incorrect"
+				end
+				user1.close
+				user2.close
+				return false
+			end
+			if (!(removeUser2.eql? "userRemoved 2"))
+				if __FILE__ == $PROGRAM_NAME
+					puts "remove message 2 incorrect"
+				end
+				user1.close
+				user2.close
+				return false
+			end
+
+			user1.close
+			user2.close
 			return true
 		end
 	rescue Timeout::Error
@@ -68,7 +108,7 @@ end
 
 
 if __FILE__ == $PROGRAM_NAME
-	if (!testCreateFFGameAcceptWithInvites(TEST_HOSTNAME, TEST_PORT))
+	if (!testRemoveUserFF(TEST_HOSTNAME, TEST_PORT))
 		puts "\e[31mTest: failed\e[0m"
 	end
 end

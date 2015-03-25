@@ -7,10 +7,11 @@ require './connection_info.rb'
 require './test_connection.rb'
 require './test_get_all_users.rb'
 require './test_create_ff_game_accept_with_invites.rb'
+require './test_remove_user_ff.rb'
 
 
 errors = 0
-tests = 3
+tests = 4
 
 puts "These are critical server tests.  All of these must pass."
 
@@ -28,8 +29,11 @@ if (!testCreateFFGameAcceptWithInvites(TEST_HOSTNAME, TEST_PORT))
 	puts "\e[31mTest: friend finder create with accept (with invites) failed\e[0m"
 	errors = errors + 1
 end
-
-
+sleep 1
+if (!testRemoveUserFF(TEST_HOSTNAME, TEST_PORT))
+	puts "\e[31mTest: remove user friend finder failed\e[0m"
+	errors = errors + 1
+end
 
 
 puts "\e[#{(errors == 0) ? 32 : 31}m#{errors}\e[0m test(s) failed."

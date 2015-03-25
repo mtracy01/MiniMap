@@ -2,6 +2,7 @@ package map.minimap.frameworks;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import map.minimap.MainActivity;
 import map.minimap.R;
@@ -81,9 +83,56 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                             /* Create new user class here */
                             Log.i(LOG_TAG, user.getId());
                             Log.i(LOG_TAG, user.getName());
+                            //make graph request and print results to logcat
                             ourUser = new User(user.getId());
                             ourUser.setName(user.getName());
+                            final String friendRequest="/"+ user.getId()+ "/invitable_friends";
+                            AsyncTask<Void, Void, Integer> friendsListLog = new AsyncTask<Void, Void, Integer>() {
+                                @Override
+                                protected Integer doInBackground(Void... params) {
+                                    new Request(
+                                        session2,
+                                        friendRequest,
+                                        null,
+                                        HttpMethod.GET,
+                                        new Request.Callback() {
+                                            public void onCompleted(Response response) {
+                                                /* handle the result */
 
+                                                List users = response.getGraphObjectList();
+                                                if(users==null)
+                                                     Log.i(LOG_TAG,"True");
+                                                Log.i(LOG_TAG,"False");
+                                                GraphUser test = (GraphUser) users.get(0);
+                                                Log.i(LOG_TAG,"Name of a friend= " + test.getName());
+                                            }
+                                        }
+                                    ).executeAsync();
+                                    return 1;
+                                }
+                                @Override
+                                protected void onPostExecute(Integer integer){
+                                    Log.i(LOG_TAG,"Done with request");
+                                }
+                            };
+                            friendsListLog.execute();
+                            /*new Request(
+                                    session2,
+                                    friendRequest,
+                                    null,
+                                    HttpMethod.GET,
+                                    new Request.Callback() {
+                                        public void onCompleted(Response response) {
+                                            /* handle the result */
+
+                                            /*List users = response.getGraphObjectList();
+                                            if(users==null)
+                                                 Log.i(LOG_TAG,"True");
+                                            GraphUser test = (GraphUser) users.get(0);
+                                            Log.i(LOG_TAG,test.getName());
+                                        }
+                                    }
+                            ).executeAsync();*/
                             /* Put user in our Data class */
                             Data.user=ourUser;
                             Data.users = new ArrayList<User>();
