@@ -52,7 +52,7 @@ public class MessageHandler {
 					User u = server.getUserByID(messageParts[i]);
 					if (u != null) {
 						log.finer("Inviting " + u.getUserID() + " to " + user.getGameSession().getId());
-						u.sendMessage("invite " + user.getGameSession().getId());
+						u.sendMessage("invite " + getGameType(user.getGameSession()) + " " + user.getGameSession().getId());
 					}
 				}
 				break;
@@ -80,6 +80,21 @@ public class MessageHandler {
 				break;
 			case "removebeacon":
 				user.getGameSession().removeBeacon(user.getTeamID(), Integer.parseInt(messageParts[1]));
+				break;
+			case "remove":
+				if (user.isInGame()) {
+					// Check if we are the owner
+					GameSession session = server.getSessionByID(Integer.parseInt(messageParts[1]));
+					
+					// If the current user is the owner, remove the user
+					if (session.getOwner().equals(user)) {
+						User toRemove = server.getUserByID(messageParts[2]);
+						session.removeUser(toRemove);
+					} else if (user.getUserID().equals(messageParts[2])) {
+						// If the user wants to remove themselves, remove the user
+						user.getGameSession().removeUser(user);
+					}
+				}
 				break;
 			default:
 				// Bounce the message to the game session
@@ -116,5 +131,31 @@ public class MessageHandler {
 		user.setGameSession(gameSession);
 		user.setInGame(true);
 		user.sendMessage("game " + gameSession.getId());
+	}
+	
+	/**
+	 * Get the type of a game.
+	 * Returns:
+	 * 	friendFinder
+	 * 	ctf
+	 * 	marcoPolo
+	 * 	sardines
+	 * 	slender
+	 * @param session
+	 * @return
+	 */
+	private String getGameType(GameSession session) {
+		if (session instanceof FriendFinderSession) {
+			return "friendFinder";
+		} else if (session instanceof FriendFinderSession) {
+			return "ctf";
+		} else if (session instanceof FriendFinderSession) {
+			return "marcoPolo";
+		} else if (session instanceof FriendFinderSession) {
+			return "sardines";
+		} else if (session instanceof FriendFinderSession) {
+			return "slender";
+		}
+		return null;
 	}
 }
