@@ -10,9 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 import com.facebook.Session;
-
-import map.minimap.frameworks.GPSThread;
-import map.minimap.frameworks.ServerConnection;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
