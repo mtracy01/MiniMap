@@ -77,8 +77,8 @@ public class GamesFragment extends android.support.v4.app.Fragment{
         GamesList = new ArrayList<String>();
         GamesList.add("Friend Finder");
         //GamesList.add("Capture the Flag");
-        //GamesList.add("Marco Polo");
-        //GamesList.add("Sardines");
+        GamesList.add("Marco Polo");
+        GamesList.add("Sardines");
         //GamesList.add("Slender");
 
 
@@ -99,7 +99,14 @@ public class GamesFragment extends android.support.v4.app.Fragment{
             public void onItemClick(AdapterView <?> a, View v, int position,
                                     long id) {
                 Log.v("id", Data.client.toString());
-                Data.client.createGameMessage("friendFinder");
+                switch(position){
+                    case 0:
+                        Data.client.createGameMessage("friendFinder");
+                    case 1:
+                        Data.client.createGameMessage("marcoPolo");
+                    case 2:
+                        Data.client.createGameMessage("sardines");
+                }
 
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
@@ -107,7 +114,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                 ft.commit();
             }
         });
-        String[] GamesArray = GamesList.toArray(new String[1]);
+        String[] GamesArray = GamesList.toArray(new String[3]);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,GamesArray);
         GamesListView.setAdapter(adapter);
         return view;
