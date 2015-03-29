@@ -108,6 +108,8 @@ public class DbInteract {
 	/** removeGroup
 	* @param userID		The unique identifier associated with a given user
 	* @param groupName	The name of the group(s) to remove, given by first entry of a group. * removes all groups
+	* 
+	*  //TODO: turns out only the "*" works at the moment, needs fixing
 	*/
 	public void removeGroup(String userID, String groupName) {
 		String[] groups = getGroupsByID(userID);
