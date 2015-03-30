@@ -62,7 +62,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Sardines"
+            android:name=".games.Sardines"
             android:label="@string/title_activity_sardines" >
         </activity>
         <activity
