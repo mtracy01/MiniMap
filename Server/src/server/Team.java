@@ -37,6 +37,29 @@ public class Team {
 		}
 	}
 	
+	/**
+	 * get list of users 
+	 */
+	public ArrayList<User> getUsers()
+	{
+		return users;
+	}
+	
+	/**
+	 * returns true if user is in the team 
+	 */
+	public boolean contains(User user)
+	{
+		for (User u: users)
+		{
+			if (u.equals(user))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public Beacon getBeaconbyID(int id) {
 		for (Beacon b: beacons) {
 			if (b.getId() == id) {
