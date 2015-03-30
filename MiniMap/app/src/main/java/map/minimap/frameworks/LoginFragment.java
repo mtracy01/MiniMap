@@ -30,6 +30,7 @@ import java.util.List;
 import map.minimap.MainActivity;
 import map.minimap.R;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.FacebookGraphRequestTester;
 
 /**
  * Created by Matthew on 2/17/2015.
@@ -73,6 +74,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
         if (state.isOpened()) {
             Log.i(LOG_TAG, "Logged in...");
             final Session session2=session;
+
             Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
                 @Override
                 public void onCompleted(GraphUser user, Response response) {
@@ -87,7 +89,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                             ourUser = new User(user.getId());
                             ourUser.setName(user.getName());
                             final String friendRequest="/"+ user.getId()+ "/invitable_friends";
-                            AsyncTask<Void, Void, Integer> friendsListLog = new AsyncTask<Void, Void, Integer>() {
+                            /*AsyncTask<Void, Void, Integer> friendsListLog = new AsyncTask<Void, Void, Integer>() {
                                 @Override
                                 protected Integer doInBackground(Void... params) {
                                     new Request(
@@ -97,7 +99,7 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                                         HttpMethod.GET,
                                         new Request.Callback() {
                                             public void onCompleted(Response response) {
-                                                /* handle the result */
+                                                //handle the result
 
                                                 List users = response.getGraphObjectList();
                                                 if(users==null)
@@ -115,7 +117,10 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                                     Log.i(LOG_TAG,"Done with request");
                                 }
                             };
-                            friendsListLog.execute();
+
+                            friendsListLog.execute();*/
+                            Data.user=ourUser;
+
                             /*new Request(
                                     session2,
                                     friendRequest,
@@ -134,8 +139,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                                     }
                             ).executeAsync();*/
                             /* Put user in our Data class */
-                            Data.user=ourUser;
-                            Data.users = new ArrayList<User>();
+                            //Data.user=ourUser;
+                            Data.users = new ArrayList<>();
                             Data.users.add(ourUser);
                             Log.v("loginsetname", Data.user.getName());
 
