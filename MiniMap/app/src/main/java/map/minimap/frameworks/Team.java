@@ -1,9 +1,6 @@
-package map.minimap.games;
+package map.minimap.frameworks;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
-import map.minimap.frameworks.*;
-import android.util.Log;
 
 public class Team {
 	

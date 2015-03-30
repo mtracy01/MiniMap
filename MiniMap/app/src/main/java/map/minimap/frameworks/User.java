@@ -6,7 +6,6 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import java.net.URL;
-import map.minimap.games.*;
 
 /**
  * Created by Joe Coy on 2/20/2015.

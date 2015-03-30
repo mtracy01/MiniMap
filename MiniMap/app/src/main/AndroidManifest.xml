@@ -66,7 +66,7 @@
             android:label="@string/title_activity_sardines" >
         </activity>
         <activity
-            android:name=".MarcoPolo"
+            android:name=".games.MarcoPolo"
             android:label="@string/title_activity_marco_polo" >
         </activity>
     </application>

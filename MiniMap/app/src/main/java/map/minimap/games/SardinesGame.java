@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
+import map.minimap.frameworks.Game;
 import map.minimap.frameworks.Maps;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;

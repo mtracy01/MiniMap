@@ -1,4 +1,4 @@
-package map.minimap.games;
+package map.minimap.frameworks;
 
 import com.google.android.gms.maps.model.LatLng;
 

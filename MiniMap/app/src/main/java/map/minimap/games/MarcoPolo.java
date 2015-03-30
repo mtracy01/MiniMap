@@ -1,4 +1,4 @@
-package map.minimap;
+package map.minimap.games;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
+import map.minimap.R;
 import map.minimap.frameworks.Maps;
 
 

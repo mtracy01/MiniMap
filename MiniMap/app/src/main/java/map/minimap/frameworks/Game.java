@@ -1,13 +1,9 @@
-package map.minimap.games;
+package map.minimap.frameworks;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.util.Log;
-
 import map.minimap.frameworks.*;
 
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
