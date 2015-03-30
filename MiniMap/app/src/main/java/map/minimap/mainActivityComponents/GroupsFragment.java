@@ -102,7 +102,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         uiHelper.onCreate(savedInstanceState);
 
         //List of options for this fragment
-        OptionsList = new ArrayList<String>();
+        OptionsList = new ArrayList<>();
         OptionsList.add("Friends who use the app");
         OptionsList.add("Invite friends to the app");
         OptionsList.add("My Groups");
@@ -157,7 +157,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
             }
         });
         String[] GamesArray = OptionsList.toArray(new String[3]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,GamesArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,GamesArray);
         OptionsListView.setAdapter(adapter);
         return view;
     }
