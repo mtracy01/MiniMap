@@ -23,6 +23,12 @@ public class FacebookGraphRequestTester extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... params) {
         //Log.v(LOG_TAG,"Params verification:" + params[0]);
+        try {
+            Thread.sleep(2000);
+        }
+        catch(InterruptedException e){
+            Log.e(LOG_TAG,"INTERRUPT EXCEPTION!!!");
+        }
         new Request(
                 Session.getActiveSession(),
                 "/" +  Data.user.getID()+ "/invitable_friends",
@@ -31,7 +37,7 @@ public class FacebookGraphRequestTester extends AsyncTask<Void, Void, Void> {
                 new Request.Callback() {
                     public void onCompleted(Response response) {
                         /* handle the result */
-
+                        Log.v(LOG_TAG,"Beginning OnCompleted");
                         if(response==null){
                             Log.e(LOG_TAG,"TRUE NULL RESPONSE");
                         }
