@@ -2,7 +2,7 @@ package map.minimap.helperClasses;
 import android.app.Activity;
 
 import com.facebook.AccessToken;
-import com.facebook.Session;
+
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class Data {
     //Facebook session info
     //static Session session;
     public static ServerConnection client;
-    public static Session session;
+
 
     public static GoogleMap map;
 

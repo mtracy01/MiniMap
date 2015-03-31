@@ -2,7 +2,7 @@ package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -13,19 +13,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.facebook.HttpMethod;
-import com.facebook.Request;
-import com.facebook.Response;
-import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
+
 
 import java.util.ArrayList;
 
 import map.minimap.R;
-import map.minimap.helperClasses.FacebookHelper;
 
 
 /**
@@ -54,7 +47,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
 
     //Facebook communication protocols
     //private facebookHelper facebook;
-    private UiLifecycleHelper uiHelper;
+    //private UiLifecycleHelper uiHelper;
 
     private OnFragmentInteractionListener mListener;
 
@@ -90,7 +83,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         //Attempt to get our active session
         Bundle extras = getActivity().getIntent().getExtras();
         if (extras != null) {
-            Session.setActiveSession((Session) extras.getSerializable("fb_session"));
+            //Session.setActiveSession((Session) extras.getSerializable("fb_session"));
             Log.e(LOG_TAG,"SUCCESS");
         }
         else{
@@ -98,8 +91,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         }
 
         //UI helper for facebook interactions
-        uiHelper = new UiLifecycleHelper(getActivity(), callback);
-        uiHelper.onCreate(savedInstanceState);
+
 
         //List of options for this fragment
         OptionsList = new ArrayList<>();
@@ -120,33 +112,16 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView <?> a, View v, int position,
                                     long id) {
-                FacebookHelper helper = new FacebookHelper();
+
                 if(position==0){
                     //List friends who use the app
                     //helper.listFriends(context);
-                    new Request(
-                            Session.getActiveSession(),
-                            "/me/apprequests",
-                            null,
-                            HttpMethod.GET,
-                            new Request.Callback() {
-                                public void onCompleted(Response response) {
-                                    if (response.getRawResponse().contains("Nicki")) {
 
-
-                                        Toast.makeText(context.getApplicationContext(),
-                                                "Requests are there",
-                                                Toast.LENGTH_SHORT).show();
-
-                                    }
-                                }
-                            }
-                    ).executeAsync();
 
                 }
                 if(position==1){
                     //Invite friends to use the app
-                    helper.inviteFriends(context);
+
                 }
                 if(position==2){
                     //facebookHelper.listFriends(context);
@@ -200,52 +175,4 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    /**
-     * Facebook Interaction Methods go here
-     */
-
-    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
-        if (state.isOpened()) {
-            Log.i(LOG_TAG, "Logged in...");
-        } else if (state.isClosed()) {
-            Log.i(LOG_TAG, "Logged out...");
-        }
-    }
-
-    private Session.StatusCallback callback = new Session.StatusCallback() {
-        @Override
-        public void call(Session session, SessionState state, Exception exception) {
-            onSessionStateChange(session, state, exception);
-        }
-    };
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        uiHelper.onResume();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        uiHelper.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        uiHelper.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        uiHelper.onDestroy();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        uiHelper.onSaveInstanceState(outState);
-    }
 }
