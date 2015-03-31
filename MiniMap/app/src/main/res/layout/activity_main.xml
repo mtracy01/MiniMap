@@ -21,12 +21,13 @@
         android:layout_gravity="start" android:name="map.minimap.mainActivityComponents.NavigationDrawerFragment"
         tools:layout="@layout/fragment_navigation_drawer" />
 
-    <com.facebook.widget.LoginButton
-        android:id="@+id/authButton"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        />
+        android:layout_marginBottom="30dp" />
+
 
 </android.support.v4.widget.DrawerLayout>

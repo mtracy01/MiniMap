@@ -51,8 +51,10 @@ public class LoginActivity extends FragmentActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.v(LOG_TAG,"SUCCESSful:D");
-                        handlePendingAction();
-                        updateUI();
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        //handlePendingAction();
+                        //updateUI();
                     }
 
                     @Override
