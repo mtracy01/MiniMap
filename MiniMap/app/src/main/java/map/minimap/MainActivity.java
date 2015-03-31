@@ -9,9 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
-import com.facebook.Session;
+
 import map.minimap.helperClasses.Data;
-import map.minimap.helperClasses.FacebookGraphRequestTester;
+
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
 import map.minimap.mainActivityComponents.InvitationsFragment;
@@ -45,12 +45,11 @@ public class MainActivity extends ActionBarActivity
         setContentView(R.layout.activity_main);
         Log.v("startMiniMap", "startMiniMap");
         //set default userID in case something goes wrong
-        FacebookGraphRequestTester tester = new FacebookGraphRequestTester();
-        tester.execute();
+
         //Get our variables from LoginActivity
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            Session.setActiveSession((Session) extras.getSerializable("fb_session"));
+            //Session.setActiveSession((Session) extras.getSerializable("fb_session"));
 
             Log.e(LOG_TAG,"SUCCESS");
         }

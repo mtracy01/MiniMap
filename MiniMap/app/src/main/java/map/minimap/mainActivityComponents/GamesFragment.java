@@ -74,7 +74,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
         }
 
         /* Add Application Names here as they are ready for testing to create their button in the UI */
-        GamesList = new ArrayList<String>();
+        GamesList = new ArrayList<>();
         GamesList.add("Friend Finder");
         //GamesList.add("Capture the Flag");
         GamesList.add("Marco Polo");
