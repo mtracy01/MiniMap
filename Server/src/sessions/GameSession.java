@@ -76,6 +76,13 @@ public abstract class GameSession {
 	public abstract void handleMessage(String message, User user);
 	
 	/**
+	 * Handle a location update from the given user
+	 * @param loc
+	 * @param user
+	 */
+	public abstract void handleLocation(Location loc, User user);
+	
+	/**
 	 * Start the session
 	 */
 	public abstract void startSession();

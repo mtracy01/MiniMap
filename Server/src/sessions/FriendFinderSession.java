@@ -22,23 +22,7 @@ public class FriendFinderSession extends GameSession {
 	public void handleMessage(String message, User user) {
 		// TODO Auto-generated method stub
 		
-		String[] messageParts = message.split(" ");
-		StringBuilder m = new StringBuilder();
-		switch(messageParts[0]) {
-		//User reporting location
-		case "location":
-			//send location to all users for them to handle
-			m.append("location");
-			m.append(" " + user.getUserID());
-			m.append(" " + messageParts[1]);
-			m.append(" " + messageParts[2]);
-			
-			for (User u: this.users)
-			{
-				u.sendMessage(m.toString());
-			}
-			break;
-		}
+		
 
 	}
 	
@@ -116,6 +100,7 @@ public class FriendFinderSession extends GameSession {
 				owner = users.iterator().next();
 			}
 		}
+		sendSessionUsers();
 	}
 
 	@Override
@@ -150,6 +135,19 @@ public class FriendFinderSession extends GameSession {
 	public void removeBeacon(int teamid, Integer id) {
 		// TODO Auto-generated method stub
 		getTeambyID(teams, teamid).removeBeacon((getTeambyID(teams, teamid).getBeaconbyID(id)));
+	}
+
+	@Override
+	public void handleLocation(Location loc, User user) {
+		StringBuilder m = new StringBuilder();
+		m.append("location");
+		m.append(" " + user.getUserID());
+		m.append(" " + loc.getLatitude());
+		m.append(" " + loc.getLongitude());
+		
+		for (User u: this.users) {
+			u.sendMessage(m.toString());
+		}
 	}
 
 }
