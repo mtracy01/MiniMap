@@ -1,36 +1,53 @@
 package map.minimap;
 
 
+
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import map.minimap.frameworks.LoginFragment;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+
+
 
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends FragmentActivity {
+public class LoginActivity extends Activity {
 
     //Fragment Reference
-    private LoginFragment loginFragment;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
 
-        if (savedInstanceState == null) {
-            // Add the fragment on initial activity setup
-            loginFragment = new LoginFragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(android.R.id.content, loginFragment)
-                    .commit();
-        } else {
-            // Or set the fragment from restored state info
-            loginFragment = (LoginFragment) getSupportFragmentManager()
-                    .findFragmentById(android.R.id.content);
-        }
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
+
     }
 }
 
