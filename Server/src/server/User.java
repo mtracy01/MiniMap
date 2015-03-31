@@ -48,11 +48,30 @@ public class User extends Thread {
 	 * Are we in a game?
 	 */
 	private boolean inGame;
+	/**
+	 * The users last seen location
+	 */
+	private Location location;
 	
+	/**
+	 * @return the location
+	 */
+	public Location getLocation() {
+		return location;
+	}
+
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	public User(Socket socket, Server server) {
 		this.socket = socket;
 		this.server = server;
 		connected = false;
+		location = null;
 	}
 	
 	/**

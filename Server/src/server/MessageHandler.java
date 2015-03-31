@@ -96,6 +96,12 @@ public class MessageHandler {
 					}
 				}
 				break;
+			case "location":
+				Location loc = new Location(Double.parseDouble(messageParts[1]), Double.parseDouble(messageParts[2]));
+				user.setLocation(loc);
+				if (user.isInGame()) {
+					user.getGameSession().handleLocation(loc, user);
+				}
 			default:
 				// Bounce the message to the game session
 				if (user.isInGame()) {
