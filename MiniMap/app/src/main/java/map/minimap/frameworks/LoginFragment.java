@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenSource;
 import com.facebook.FacebookRequestError;
 import com.facebook.HttpMethod;
 import com.facebook.Request;
@@ -73,8 +75,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
 
         if (state.isOpened()) {
             Log.i(LOG_TAG, "Logged in...");
-            final Session session2=session;
 
+            Data.session=session;
             Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
                 @Override
                 public void onCompleted(GraphUser user, Response response) {
@@ -88,58 +90,10 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                             //make graph request and print results to logcat
                             ourUser = new User(user.getId());
                             ourUser.setName(user.getName());
-                            final String friendRequest="/"+ user.getId()+ "/invitable_friends";
-                            /*AsyncTask<Void, Void, Integer> friendsListLog = new AsyncTask<Void, Void, Integer>() {
-                                @Override
-                                protected Integer doInBackground(Void... params) {
-                                    new Request(
-                                        session2,
-                                        friendRequest,
-                                        null,
-                                        HttpMethod.GET,
-                                        new Request.Callback() {
-                                            public void onCompleted(Response response) {
-                                                //handle the result
 
-                                                List users = response.getGraphObjectList();
-                                                if(users==null)
-                                                     Log.i(LOG_TAG,"True");
-                                                Log.i(LOG_TAG,"False");
-                                                GraphUser test = (GraphUser) users.get(0);
-                                                Log.i(LOG_TAG,"Name of a friend= " + test.getName());
-                                            }
-                                        }
-                                    ).executeAsync();
-                                    return 1;
-                                }
-                                @Override
-                                protected void onPostExecute(Integer integer){
-                                    Log.i(LOG_TAG,"Done with request");
-                                }
-                            };
 
-                            friendsListLog.execute();*/
-                            Data.user=ourUser;
-
-                            /*new Request(
-                                    session2,
-                                    friendRequest,
-                                    null,
-                                    HttpMethod.GET,
-                                    new Request.Callback() {
-                                        public void onCompleted(Response response) {
-                                            /* handle the result */
-
-                                            /*List users = response.getGraphObjectList();
-                                            if(users==null)
-                                                 Log.i(LOG_TAG,"True");
-                                            GraphUser test = (GraphUser) users.get(0);
-                                            Log.i(LOG_TAG,test.getName());
-                                        }
-                                    }
-                            ).executeAsync();*/
                             /* Put user in our Data class */
-                            //Data.user=ourUser;
+                            Data.user=ourUser;
                             Data.users = new ArrayList<>();
                             Data.users.add(ourUser);
                             Log.v("loginsetname", Data.user.getName());
@@ -220,7 +174,8 @@ public class LoginFragment extends android.support.v4.app.Fragment {
                 Log.e(LOG_TAG,"FALSE");
             i.putExtra("facebook_session",session);
             Data.session=session;
-            startActivity(i);
+            //Data.accessToken=
+            //Graph
         }
     }
 

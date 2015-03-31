@@ -1,6 +1,7 @@
 package map.minimap.helperClasses;
 import android.app.Activity;
 
+import com.facebook.AccessToken;
 import com.facebook.Session;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Data {
     public static User user;// = new User("a");
     public static ArrayList<User> users;
     public static String gameId;
+    public static AccessToken accessToken;
     //Facebook session info
     //static Session session;
     public static ServerConnection client;

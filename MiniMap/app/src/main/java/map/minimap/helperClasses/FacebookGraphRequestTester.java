@@ -7,9 +7,12 @@ import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
+import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
 import java.util.List;
+
+import map.minimap.frameworks.LoginFragment;
 
 
 /**
@@ -29,8 +32,16 @@ public class FacebookGraphRequestTester extends AsyncTask<Void, Void, Void> {
         catch(InterruptedException e){
             Log.e(LOG_TAG,"INTERRUPT EXCEPTION!!!");
         }
+        Session.StatusCallback callback = new Session.StatusCallback() {
+            @Override
+            public void call(Session session, SessionState state, Exception exception) {
+                //onSessionStateChange(session, state, exception);
+            }
+        };
+        Session session = Data.session;
+        session.open(Data.accessToken, callback);
         new Request(
-                Session.getActiveSession(),
+                session,
                 "/" +  Data.user.getID()+ "/invitable_friends",
                 null,
                 HttpMethod.GET,
@@ -56,4 +67,6 @@ public class FacebookGraphRequestTester extends AsyncTask<Void, Void, Void> {
         ).executeAndWait();
         return null;
     }
+
+
 }
