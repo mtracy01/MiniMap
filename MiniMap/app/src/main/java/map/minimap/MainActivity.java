@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
+import com.facebook.GraphRequest;
+
 import map.minimap.helperClasses.Data;
 
 import map.minimap.mainActivityComponents.GamesFragment;
@@ -44,7 +46,11 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.v("startMiniMap", "startMiniMap");
-        //set default userID in case something goes wrong
+
+
+        //Test Graph Requests
+      //  GraphRequest getUserInfo = new GraphRequest();
+      //  getUserInfo.
 
         //Get our variables from LoginActivity
         Bundle extras = getIntent().getExtras();

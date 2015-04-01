@@ -3,7 +3,6 @@ package map.minimap;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,7 +26,8 @@ public class LoginActivity extends FragmentActivity {
     //LoginTag
     private String LOG_TAG = "LoginActivity";
 
-    private static final String PERMISSION="invitable_friends";
+
+    private int loggedInFlag=0;
     private CallbackManager callbackManager;
     private PendingAction pendingAction = PendingAction.NONE;
     private final String PENDING_ACTION_BUNDLE_KEY =
@@ -38,7 +38,7 @@ public class LoginActivity extends FragmentActivity {
         POST_PHOTO,
         POST_STATUS_UPDATE
     }
-
+    private LoginResult result=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,9 @@ public class LoginActivity extends FragmentActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.v(LOG_TAG,"SUCCESSful:D");
+
+                        loggedInFlag=1;
+                        result=loginResult;
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
                         //handlePendingAction();
@@ -94,7 +97,10 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        if(AccessToken.getCurrentAccessToken()!=null){
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
         // Call the 'activateApp' method to log an app event for use in analytics and advertising
         // reporting.  Do so in the onResume methods of the primary Activities that an app may be
         // launched into.
@@ -130,10 +136,16 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        profileTracker.stopTracking();
+       // profileTracker.stopTracking();
     }
 
     private void updateUI() {
+
+        //If we are already logged in, go ahead to main activity.
+        if(result!=null){
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
         boolean enableButtons = AccessToken.getCurrentAccessToken() != null;
 
 
