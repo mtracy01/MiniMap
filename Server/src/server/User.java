@@ -241,13 +241,6 @@ public class User extends Thread {
 	public String getUserID() {
 		return userID;
 	}
-
-	/**
-	 * @return the userID
-	 */
-	public String getID() {
-		return userID;
-	}
 	
 	/**
 	 * @return the gameSession
