@@ -32,13 +32,16 @@ public class SardinesSession extends GameSession {
 		case "Found":
 			if (messageParts[2].equals("true"))
 			{
+				m.append("TeamChange");
+				m.append(" " + messageParts[1]);
+				teams.get(1).sendMessage(m.toString());
+				
 				User temp = server.getUserByID(messageParts[1]);
 				teams.get(1).removeUser(temp);
 				teams.get(0).addUser(temp);
 			}
 			break;
 		}
-
 	}
 	
 	@Override
