@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import server.Location;
 import server.Server;
+import server.Team;
 import server.User;
 import server.Utility;
 
@@ -163,31 +164,81 @@ public class AssassinsSession extends GameSession {
 
 	@Override
 	public void endSession() {
-		// TODO Auto-generated method stub
-
+		isRunning = false;
+		
+		for (User user: this.users)
+		{
+			removeUser(user);
+		}
+		
+		// Remove ourselves
+		server.removeSession(this);
 	}
 
 	@Override
 	public void removeUser(User user) {
-		// TODO Auto-generated method stub
-
+		log.finer("Removing user from friendfinder session");
+		
+		
+		user.setInGame(false);
+		user.setGameSession(null);
+		synchronized (users) {
+			log.finer(users.toString());
+			
+			// Process someone leaving as if they were killed
+			for (Entry<User, User> entry : targets.entrySet()) {
+				if (entry.getValue().equals(user)) {
+					PotentialFind find = new PotentialFind();
+					find.assassin = entry.getKey();
+					find.target = user;
+					processKill(find);
+				}
+			}
+			
+			
+			// Actually remove the user
+			users.remove(user);
+			
+			// Send the remove message to all users, including the one getting removed
+			String removeMessage = "userRemoved " + user.getUserID();
+			for (User u : users) {
+				u.sendMessage(removeMessage);
+			}
+			user.sendMessage(removeMessage);
+			
+			log.finer(users.toString());
+			log.finer(users.size() + " users in session");
+			
+			// Check for empty sessions
+			if (users.isEmpty()) {
+				endSession();
+			}
+			// Check for owner succession
+			if (owner.equals(user) && !users.isEmpty()) {
+				owner = users.iterator().next();
+			}
+		}
+		sendSessionUsers();
 	}
 
 	@Override
 	public void addUser(User user, int teamid) {
-		// TODO Auto-generated method stub
-
+		// Don't do anything when a user is added beyond adding them to the user list
+		synchronized (users) {
+			users.add(user);
+		}
+		sendSessionUsers();
 	}
 
 	@Override
 	public void addBeacon(int teamid, Location loc) {
-		// TODO Auto-generated method stub
+		// Beacons are not part of the game
 
 	}
 
 	@Override
 	public void removeBeacon(int teamid, Integer id) {
-		// TODO Auto-generated method stub
+		// Beacons are not part of the game
 
 	}
 
