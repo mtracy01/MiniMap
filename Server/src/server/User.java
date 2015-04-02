@@ -243,6 +243,13 @@ public class User extends Thread {
 	}
 
 	/**
+	 * @return the userID
+	 */
+	public String getID() {
+		return userID;
+	}
+	
+	/**
 	 * @return the gameSession
 	 */
 	public GameSession getGameSession() {
