@@ -1,11 +1,11 @@
 package server;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import sessions.AssassinsSession;
 import sessions.FriendFinderSession;
 import sessions.GameSession;
+import sessions.SardinesSession;
 
 /**
  * MessageHandler
@@ -126,8 +126,12 @@ public class MessageHandler {
 			case "marcoPolo":
 				break;
 			case "sardines":
+				gameSession = new SardinesSession(user, server);
 				break;
 			case "slender":
+				break;
+			case "assassins":
+				gameSession = new AssassinsSession(user, server);
 				break;
 		}
 		if (gameSession != null) {
@@ -147,6 +151,7 @@ public class MessageHandler {
 	 * 	marcoPolo
 	 * 	sardines
 	 * 	slender
+	 *  assassins
 	 * @param session
 	 * @return
 	 */
@@ -157,10 +162,12 @@ public class MessageHandler {
 			return "ctf";
 		} else if (session instanceof FriendFinderSession) {
 			return "marcoPolo";
-		} else if (session instanceof FriendFinderSession) {
+		} else if (session instanceof SardinesSession) {
 			return "sardines";
 		} else if (session instanceof FriendFinderSession) {
 			return "slender";
+		} else if (session instanceof AssassinsSession) {
+			return "assassins";
 		}
 		return null;
 	}

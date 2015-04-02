@@ -6,8 +6,8 @@ import server.User;
 
 public class AssassinsSession extends GameSession {
 
-	public AssassinsSession(String gameType, User owner, Server server) {
-		super(gameType, owner, server);
+	public AssassinsSession(User owner, Server server) {
+		super("assassins", owner, server);
 		// TODO Auto-generated constructor stub
 	}
 
