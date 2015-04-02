@@ -7,6 +7,7 @@ import server.Location;
 import server.Server;
 import server.Team;
 import server.User;
+import server.Utility;
 // TODO: make changes specific to Sardines
 public class SardinesSession extends GameSession {
 	
@@ -202,19 +203,10 @@ public class SardinesSession extends GameSession {
 		//send confirmation message to sardines that are close by
 		for (User u: this.teams.get(otid).getUsers())
 		{
-			Location loc1 = user.getLocation();
-			Location loc2 = u.getLocation();
-			Double lat1, lat2, lon1, lon2;
 			
-			lat1 = Math.toRadians(loc1.getLatitude());
-			lon1 = Math.toRadians(loc2.getLatitude());
-			lat2 = Math.toRadians(loc1.getLongitude());
-			lon2 = Math.toRadians(loc2.getLongitude());
-			double R = 20902231; //radius of earth in ft
-			double a = Math.pow(Math.sin((lat2-lat1)/2.0), 2.0)+Math.cos(lat1)*Math.cos(lat2)*Math.pow(Math.sin((lon2-lon1)/2.0),2.0);
-			double c = 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-			double d = R*c;
-			if( d < 25){
+			boolean close = Utility.areClose(user, u, Utility.PROXIMITY_DISTANCE);
+			
+			if(close){
 				StringBuilder n = new StringBuilder();
 				//send location to all users for them to handle
 				n.append("Found");
