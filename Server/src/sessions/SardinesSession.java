@@ -29,38 +29,13 @@ public class SardinesSession extends GameSession {
 		StringBuilder m = new StringBuilder();
 		switch(messageParts[0]) {
 		//User reporting location to teammates
-		case "location":
-			//send location to all users for them to handle
-			m.append("location");
-			m.append(" " + user.getUserID());
-			m.append(" " + messageParts[1]);
-			m.append(" " + messageParts[2]);
-			
-			int tid; //friendly team
-			int otid; //opposing team
-			
-			if (teams.get(0).contains(user))
+		case "Found":
+			if (messageParts[2].equals("true"))
 			{
-				tid = 0;
-				otid = 1;
+				User temp = server.getUserByID(messageParts[1]);
+				teams.get(1).removeUser(temp);
+				teams.get(0).addUser(temp);
 			}
-			else
-			{
-				tid = 1;
-				otid = 0;
-			}
-				
-			for (User u: this.teams.get(tid).getUsers())
-			{
-				u.sendMessage(m.toString());
-			}
-			
-			//send confirmation message to sardines that are close by
-			for (User u: this.teams.get(otid).getUsers())
-			{
-				
-			}
-			
 			break;
 		}
 
