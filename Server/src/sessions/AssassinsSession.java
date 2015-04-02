@@ -35,13 +35,89 @@ public class AssassinsSession extends GameSession {
 	@Override
 	public void handleMessage(String message, User user) {
 		// TODO Auto-generated method stub
-
+		String[] parts = message.split(" ");
+		if (parts[0].equals("confirmDeath")) {
+			synchronized (users) {
+				// Get the potentialFind for the user
+				PotentialFind find = null;
+				for (PotentialFind f : potentialFinds) {
+					if (f.target.equals(user)) {
+						find = f;
+						break;
+					}
+				}
+				if (find == null) {
+					return;
+				}
+				
+				if (parts[1].equals("true")) {
+					// The assassin confirmed
+					find.targetConfirm = true;
+					if (find.bothConfirmed()) {
+						processKill(find);
+					}
+				} else {
+					// Reject happened, remove any potential find
+					potentialFinds.remove(find);
+				}
+			}
+		} else if (parts.equals("confirmKill")) {
+			synchronized (users) {
+				// Get the potentialFind for the user
+				PotentialFind find = null;
+				for (PotentialFind f : potentialFinds) {
+					if (f.assassin.equals(user)) {
+						find = f;
+						break;
+					}
+				}
+				if (find == null) {
+					return;
+				}
+				
+				
+				if (parts[1].equals("true")) {
+					// The assassin confirmed
+					find.assassinConfirm = true;
+					if (find.bothConfirmed()) {
+						processKill(find);
+					}
+				} else {
+					// Reject happened, remove any potential find
+					potentialFinds.remove(find);
+				}
+			}
+		}
 	}
 
+	/**
+	 * Process a kill
+	 * @param find
+	 */
+	private void processKill(PotentialFind find) {
+		// Send out the global kill message
+		String killMessage = "kill " + find.assassin.getUserID() + " " + find.target.getUserID();
+		for (User u : users) {
+			u.sendMessage(killMessage);
+		}
+		
+		potentialFinds.remove(find);
+		
+		// Set the new target for the assassin
+		targets.put(find.assassin, targets.get(find.target));
+		targets.remove(find.target);
+		String targetMessage = "target " + targets.get(find.assassin).getUserID();
+		find.assassin.sendMessage(targetMessage);
+	}
+	
 	@Override
 	public void handleLocation(Location loc, User user) {
 		// Get the target of the user and see if their locations are close
 		User target = targets.get(user);
+		// If the user has no target, don't process it
+		if (target == null) {
+			return;
+		}
 		boolean close = Utility.areClose(user, target, Utility.PROXIMITY_DISTANCE);
 		
 		if (close) {
