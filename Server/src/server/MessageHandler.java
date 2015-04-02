@@ -102,6 +102,7 @@ public class MessageHandler {
 				if (user.isInGame()) {
 					user.getGameSession().handleLocation(loc, user);
 				}
+				break;
 			default:
 				// Bounce the message to the game session
 				if (user.isInGame()) {
