@@ -104,6 +104,19 @@ public class AssassinsSession extends GameSession {
 		
 		potentialFinds.remove(find);
 		
+		// Remove a potential find where the target is the assassin
+		PotentialFind toRemove = null;
+		for (PotentialFind f : potentialFinds) {
+			if (f.assassin.equals(find.target)) {
+				toRemove = f;
+				break;
+			}
+		}
+		if (toRemove != null) {
+			potentialFinds.remove(toRemove);
+		}
+		
+		
 		// Set the new target for the assassin
 		targets.put(find.assassin, targets.get(find.target));
 		targets.remove(find.target);
