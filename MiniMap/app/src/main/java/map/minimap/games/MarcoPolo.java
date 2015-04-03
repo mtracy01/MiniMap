@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.FacebookSdk;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,6 +21,7 @@ public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_marco_polo);
         if (savedInstanceState == null) {
             map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);

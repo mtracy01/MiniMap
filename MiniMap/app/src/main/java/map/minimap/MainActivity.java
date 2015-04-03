@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 
 import map.minimap.helperClasses.Data;
@@ -44,6 +45,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_main);
         Log.v("startMiniMap", "startMiniMap");
 

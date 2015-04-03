@@ -98,6 +98,7 @@ public class LoginActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         if(AccessToken.getCurrentAccessToken()!=null){
+            Data.
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }

@@ -102,7 +102,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
         String[] playersArray = new String[Data.users.size()];
         for(int i =0; i < Data.users.size();i++)
             playersArray[i] = Data.users.get(i).getName();
-        adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,playersArray);
+        adapter = new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,playersArray);
         playerListView.setAdapter(adapter);
         return view;
     }
