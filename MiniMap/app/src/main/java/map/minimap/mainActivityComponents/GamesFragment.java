@@ -102,10 +102,13 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                 switch(position){
                     case 0:
                         Data.client.createGameMessage("friendFinder");
+                        break;
                     case 1:
                         Data.client.createGameMessage("marcoPolo");
+                        break;
                     case 2:
                         Data.client.createGameMessage("sardines");
+                        break;
                 }
 
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
