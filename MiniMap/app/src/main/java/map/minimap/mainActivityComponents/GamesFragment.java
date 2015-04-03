@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
 import map.minimap.R;
+import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
 
@@ -77,7 +78,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
         GamesList = new ArrayList<>();
         GamesList.add("Friend Finder");
         //GamesList.add("Capture the Flag");
-        GamesList.add("Marco Polo");
+        GamesList.add("Assassins");
         GamesList.add("Sardines");
         //GamesList.add("Slender");
 
@@ -104,12 +105,20 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                         Data.client.createGameMessage("friendFinder");
                         break;
                     case 1:
-                        Data.client.createGameMessage("marcoPolo");
+                        Data.client.createGameMessage("assassins");
                         break;
                     case 2:
                         Data.client.createGameMessage("sardines");
                         break;
                 }
+
+                // Add ourselves to the list of users
+                if (Data.users == null) {
+                    Data.users = new ArrayList<User>();
+                } else {
+                    Data.users.clear();
+                }
+                Data.users.add(Data.user);
 
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
