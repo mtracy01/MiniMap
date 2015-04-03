@@ -6,7 +6,6 @@ import sessions.AssassinsSession;
 import sessions.FriendFinderSession;
 import sessions.GameSession;
 import sessions.SardinesSession;
-import database.DbInteract;
 
 /**
  * MessageHandler
@@ -106,7 +105,7 @@ public class MessageHandler {
 				break;
 
 			// Database messages begin here
-			case "addUserToDB":
+			/*case "addUserToDB":
 				DbInteract db = new DbInteract();
 				db.addUser(messageParts[1]);
 				db.closeConnection();
@@ -134,6 +133,7 @@ public class MessageHandler {
 				db.closeConnection();
 				break;
 			// Database messages end here
+			*/
 
 			default:
 				// Bounce the message to the game session
