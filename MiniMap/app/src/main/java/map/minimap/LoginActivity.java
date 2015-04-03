@@ -84,7 +84,7 @@ public class LoginActivity extends FragmentActivity {
                                     Log.e(LOG_TAG,"EXCEPTION ON SLEEP CALL");
                                 }*/
                                 //Starting client (We need to delay this action a little somehow)
-                                /*if (startCount ==0) {
+                                if (startCount ==0) {
                                    Log.v("client", "Starting Client");
                                    ServerConnection client = new ServerConnection(Data.user.getID());
                                    Data.client = client;
@@ -96,7 +96,7 @@ public class LoginActivity extends FragmentActivity {
                                    }
                                     GPSThread gpsThread = new GPSThread(Data.client);
                                 }
-                                startCount++;*/
+                                startCount++;
                             }
                         };
                         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
