@@ -1,3 +1,5 @@
+package database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -155,6 +157,26 @@ public class DbInteract {
 		}
 	}
 	
+	/** convertToGroupString
+	* This is for converting group arrays into string form for transmission
+	* between client and server.
+	*/
+	public static String convertToGroupString(String[] group) {
+		String str = "";
+		for(int i = 0; i < group.length-1; i++) {
+			str.concat(group[i]);
+			str.concat(":");
+		}
+		str.concat(group[i]);
+		return str;
+	}
+	
+	/** convertToGroupArray
+	* Splits a group string on colons for convenience
+	*/
+	public static String[] convertToGroupArray(String group) {
+		return group.split(":");
+	}
 	
 	/** closeStatementsAndResults
 	* To be called at the end of any function that uses a query
