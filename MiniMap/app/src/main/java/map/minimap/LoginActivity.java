@@ -77,30 +77,32 @@ public class LoginActivity extends FragmentActivity {
                                 } catch(JSONException e){
                                     Log.e(LOG_TAG, e.getMessage());
                                 }
+
+                                /*try {
+                                    Thread.sleep(00);
+                                } catch (Exception e){
+                                    Log.e(LOG_TAG,"EXCEPTION ON SLEEP CALL");
+                                }*/
+                                //Starting client (We need to delay this action a little somehow)
+                                /*if (startCount ==0) {
+                                   Log.v("client", "Starting Client");
+                                   ServerConnection client = new ServerConnection(Data.user.getID());
+                                   Data.client = client;
+                                   client.start();
+                                   try {
+                                       Thread.sleep(200);
+                                   }catch (Exception e) {
+                                       e.printStackTrace();
+                                   }
+                                    GPSThread gpsThread = new GPSThread(Data.client);
+                                }
+                                startCount++;*/
                             }
                         };
                         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
                         graphRequest.executeAsync();
 
-                        /*try {
-                            Thread.sleep(2500);
-                        } catch (Exception e){
-                            Log.e(LOG_TAG,"EXCEPTION ON SLEEP CALL");
-                        }
-                        //Starting client (We need to delay this action a little somehow)
-                        if (startCount ==0) {
-                           Log.v("client", "Starting Client");
-                           ServerConnection client = new ServerConnection(Data.user.getID());
-                           Data.client = client;
-                           client.start();
-                           try {
-                               Thread.sleep(200);
-                           }catch (Exception e) {
-                               e.printStackTrace();
-                           }
-                            GPSThread gpsThread = new GPSThread(Data.client);
-                        }
-                        startCount++;*/
+
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
                         //handlePendingAction();
