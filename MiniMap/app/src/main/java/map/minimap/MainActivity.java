@@ -10,9 +10,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v4.widget.DrawerLayout;
 
+import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import map.minimap.frameworks.GPSThread;
+import map.minimap.frameworks.ServerConnection;
+import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
 import map.minimap.mainActivityComponents.GamesFragment;
@@ -50,9 +58,38 @@ public class MainActivity extends ActionBarActivity
         Log.v("startMiniMap", "startMiniMap");
 
 
-        //Test Graph Requests
-      //  GraphRequest getUserInfo = new GraphRequest();
-      //  getUserInfo.
+        //Create client if one is not already created
+
+        GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                //Add user data into our user object here
+                String rawResponse = jsonObject.toString();
+                Log.v(LOG_TAG, "Raw Response from Request:" + rawResponse);
+                try {
+                    Data.user = new User(jsonObject.getString("id"));
+                    Data.user.setName(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
+                } catch(JSONException e){
+                    Log.e(LOG_TAG, e.getMessage());
+                }
+
+                //Starting client (We need to delay this action a little somehow)
+                if (Data.client==null) {
+                    Log.v("client", "Starting Client");
+                    ServerConnection client = new ServerConnection(Data.user.getID());
+                    Data.client = client;
+                    client.start();
+                    try {
+                        Thread.sleep(200);
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    GPSThread gpsThread = new GPSThread(Data.client);
+                }
+            }
+        };
+        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
+        graphRequest.executeAsync();
 
         //Get our variables from LoginActivity
         Bundle extras = getIntent().getExtras();
