@@ -156,11 +156,11 @@ public class AssassinsSession extends GameSession {
 		
 		synchronized (users) {
 			// Assign each user a target
-			User[] usersArray = (User[]) users.toArray();
+			Object[] usersArray = users.toArray();
 			for (int i = 0; i < usersArray.length - 1; i++) {
-				targets.put(usersArray[i], usersArray[i+1]);
+				targets.put((User) usersArray[i], (User) usersArray[i+1]);
 			}
-			targets.put(usersArray[usersArray.length - 1], usersArray[0]);
+			targets.put((User) usersArray[usersArray.length - 1], (User) usersArray[0]);
 		}
 		
 		// Send the start message
