@@ -61,6 +61,8 @@ public class LoginActivity extends FragmentActivity {
                         Log.v(LOG_TAG,"SUCCESSful:D");
 
                         result=loginResult;
+
+                        //Graph request to get our user's Facebook data
                         GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
@@ -71,6 +73,8 @@ public class LoginActivity extends FragmentActivity {
                         };
                         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),userData );
                         graphRequest.executeAsync();
+
+                        //Starting client (We need to delay this action a little somehow)
                         /*if (startCount ==0) {
                            Log.v("client", "Starting Client");
                            ServerConnection client = new ServerConnection(Data.user.getID());
