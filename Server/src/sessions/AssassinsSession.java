@@ -35,7 +35,6 @@ public class AssassinsSession extends GameSession {
 
 	@Override
 	public void handleMessage(String message, User user) {
-		// TODO Auto-generated method stub
 		String[] parts = message.split(" ");
 		if (parts[0].equals("confirmDeath")) {
 			synchronized (users) {
@@ -52,7 +51,7 @@ public class AssassinsSession extends GameSession {
 				}
 				
 				if (parts[1].equals("true")) {
-					// The assassin confirmed
+					// The target confirmed
 					find.targetConfirm = true;
 					if (find.bothConfirmed()) {
 						processKill(find);
@@ -126,6 +125,16 @@ public class AssassinsSession extends GameSession {
 	
 	@Override
 	public void handleLocation(Location loc, User user) {
+		
+		// Update the locations of the relevant clients
+		String locationMessage = "location " + user.getUserID() + " " + loc.getLatitude() + " " + loc.getLongitude();
+		for (Entry<User, User> entry : targets.entrySet()) {
+			if (entry.getValue().equals(user)) {
+				entry.getKey().sendMessage(locationMessage);
+			}
+		}
+		user.sendMessage(locationMessage);
+		
 		// Get the target of the user and see if their locations are close
 		User target = targets.get(user);
 		// If the user has no target, don't process it
@@ -161,13 +170,11 @@ public class AssassinsSession extends GameSession {
 				targets.put((User) usersArray[i], (User) usersArray[i+1]);
 			}
 			targets.put((User) usersArray[usersArray.length - 1], (User) usersArray[0]);
-		}
 		
-		// Send the start message
-		sendStartMessage();
+			// Send the start message
+			sendStartMessage();
 		
-		// Send target assignments
-		synchronized (users) {
+			// Send target assignments
 			for (Entry<User, User> entry : targets.entrySet()) {
 				String message = "target " + entry.getValue().getUserID();
 				entry.getKey().sendMessage(message);
