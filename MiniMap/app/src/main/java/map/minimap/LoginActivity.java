@@ -22,10 +22,12 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.ServerConnection;
+import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
 
@@ -58,9 +60,9 @@ public class LoginActivity extends FragmentActivity {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        Log.v(LOG_TAG,"SUCCESSful:D");
+                        Log.v(LOG_TAG, "SUCCESSful:D");
 
-                        result=loginResult;
+                        result = loginResult;
 
                         //Graph request to get our user's Facebook data
                         GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
@@ -68,14 +70,25 @@ public class LoginActivity extends FragmentActivity {
                             public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
                                 //Add user data into our user object here
                                 String rawResponse = jsonObject.toString();
-                                Log.v(LOG_TAG,"Raw Response from Request:" + rawResponse);
+                                Log.v(LOG_TAG, "Raw Response from Request:" + rawResponse);
+                                try {
+                                    Data.user = new User(jsonObject.getString("id"));
+                                    Data.user.setName(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
+                                } catch(JSONException e){
+                                    Log.e(LOG_TAG, e.getMessage());
+                                }
                             }
                         };
-                        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),userData );
+                        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
                         graphRequest.executeAsync();
 
+                        /*try {
+                            Thread.sleep(2500);
+                        } catch (Exception e){
+                            Log.e(LOG_TAG,"EXCEPTION ON SLEEP CALL");
+                        }
                         //Starting client (We need to delay this action a little somehow)
-                        /*if (startCount ==0) {
+                        if (startCount ==0) {
                            Log.v("client", "Starting Client");
                            ServerConnection client = new ServerConnection(Data.user.getID());
                            Data.client = client;
