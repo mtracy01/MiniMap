@@ -167,7 +167,7 @@ public class DbInteract {
 			str.concat(group[i]);
 			str.concat(":");
 		}
-		str.concat(group[i]);
+		str.concat(group[group.length - 1]);
 		return str;
 	}
 	

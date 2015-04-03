@@ -6,6 +6,7 @@ import sessions.AssassinsSession;
 import sessions.FriendFinderSession;
 import sessions.GameSession;
 import sessions.SardinesSession;
+import database.DbInteract;
 
 /**
  * MessageHandler
@@ -105,35 +106,34 @@ public class MessageHandler {
 				break;
 
 			// Database messages begin here
-			/*case "addUserToDB":
+			case "addUserToDB":
 				DbInteract db = new DbInteract();
 				db.addUser(messageParts[1]);
 				db.closeConnection();
 				break;
 			case "getGroupsByID":
-				DbInteract db = new DbInteract();
+				db = new DbInteract();
 				String[] groups = db.getGroupsByID(messageParts[1]);
 				String groupString = DbInteract.convertToGroupString(groups);
 				user.sendMessage(groupString);
 				db.closeConnection();
 				break;
 			case "addGroup":
-				DbInteract db = new DbInteract();
+				db = new DbInteract();
 				db.addGroup(messageParts[1], messageParts[2]);
 				db.closeConnection();
 				break;
 			case "removeAllUserGroups":
-				DbInteract db = new DbInteract();
+				db = new DbInteract();
 				db.removeGroup(messageParts[1], "*");
 				db.closeConnection();
 				break;
 			case "removeUserGroup":
-				DbInteract db = new DbInteract();
+				db = new DbInteract();
 				db.removeGroup(messageParts[1], messageParts[2]);
 				db.closeConnection();
 				break;
 			// Database messages end here
-			*/
 
 			default:
 				// Bounce the message to the game session
