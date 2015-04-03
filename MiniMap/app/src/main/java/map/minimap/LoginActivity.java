@@ -14,11 +14,19 @@ import com.facebook.FacebookAuthorizationException;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+
+import org.json.JSONObject;
+
+import map.minimap.frameworks.GPSThread;
+import map.minimap.frameworks.ServerConnection;
+import map.minimap.helperClasses.Data;
 
 
 public class LoginActivity extends FragmentActivity {
@@ -37,11 +45,13 @@ public class LoginActivity extends FragmentActivity {
         POST_STATUS_UPDATE
     }
     private LoginResult result=null;
+
+    private int startCount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-
+        startCount=0;
         callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(callbackManager,
@@ -51,6 +61,29 @@ public class LoginActivity extends FragmentActivity {
                         Log.v(LOG_TAG,"SUCCESSful:D");
 
                         result=loginResult;
+                        GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                                //Add user data into our user object here
+                                String rawResponse = jsonObject.toString();
+                                Log.v(LOG_TAG,"Raw Response from Request:" + rawResponse);
+                            }
+                        };
+                        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),userData );
+                        graphRequest.executeAsync();
+                        /*if (startCount ==0) {
+                           Log.v("client", "Starting Client");
+                           ServerConnection client = new ServerConnection(Data.user.getID());
+                           Data.client = client;
+                           client.start();
+                           try {
+                               Thread.sleep(200);
+                           }catch (Exception e) {
+                               e.printStackTrace();
+                           }
+                            GPSThread gpsThread = new GPSThread(Data.client);
+                        }
+                        startCount++;*/
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
                         //handlePendingAction();
