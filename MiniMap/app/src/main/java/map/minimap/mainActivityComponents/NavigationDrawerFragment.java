@@ -27,6 +27,7 @@ import com.facebook.login.LoginManager;
 
 import map.minimap.LoginActivity;
 import map.minimap.R;
+import map.minimap.helperClasses.Data;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -260,6 +261,8 @@ public class NavigationDrawerFragment extends Fragment {
             Intent returnToLoginPage = new Intent(getActivity(),LoginActivity.class);
             startActivity(returnToLoginPage);
             Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
+            Data.client.closeSocket();
+            Data.client = null;
             return true;
         }
 

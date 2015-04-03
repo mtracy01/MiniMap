@@ -172,7 +172,9 @@ public class ServerConnection extends Thread {
      * @param message
      */
     public void sendMessage(String message) {
-        out.println(message);
+        if (connected) {
+            out.println(message);
+        }
     }
     public void createGameMessage(String gameType){
         newGameType = gameType;
