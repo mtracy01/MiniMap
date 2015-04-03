@@ -104,6 +104,7 @@ public class MessageHandler {
 					user.getGameSession().handleLocation(loc, user);
 				}
 				break;
+
 			// Database messages begin here
 			case "addUserToDB":
 				DbInteract db = new DbInteract();
@@ -133,6 +134,7 @@ public class MessageHandler {
 				db.closeConnection();
 				break;
 			// Database messages end here
+
 			default:
 				// Bounce the message to the game session
 				if (user.isInGame()) {
