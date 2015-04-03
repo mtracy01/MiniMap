@@ -3,25 +3,27 @@ package map.minimap.frameworks;
 /**
  * Created by Corey on 2/17/2015.
  */
+
+import android.content.Intent;
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
 import map.minimap.FriendFinder;
+import map.minimap.LoginActivity;
+import map.minimap.games.AssassinsGame;
+import map.minimap.games.FriendFinderGame;
+import map.minimap.games.SardinesGame;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.LobbyFragment;
-import map.minimap.games.*;
+
+import android.widget.Toast;
+
+import com.facebook.login.LoginManager;
 
 
 public class ServerConnection extends Thread {
@@ -62,10 +64,15 @@ public class ServerConnection extends Thread {
             e.printStackTrace();
             // Cannot communicate, try closing socket
             try {
-                socket.close();
+                if (socket != null) {
+                    socket.close();
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+
+            Log.e("ServerConnection", "Could not connect to server");
+
             // Return
             return;
         }
@@ -152,6 +159,7 @@ public class ServerConnection extends Thread {
                 LobbyFragment.changeGrid();
             } else if(parts[0].equals("gameStart")) {
                 Maps.setCenterPosition(Data.user);
+                // TODO: Don't make this only start friend finder...
                 Intent intent = new Intent(Data.mainAct.getApplicationContext(), FriendFinder.class);
                 Data.mainAct.startActivity(intent);
                 Data.user.getGame().startSession();
@@ -178,18 +186,30 @@ public class ServerConnection extends Thread {
     }
     public void createGameMessage(String gameType){
         newGameType = gameType;
-        out.println("createGame " + gameType);
+        if (connected) {
+            out.println("createGame " + gameType);
+        }
     }
     public void acceptGameMessage(String gameID){
-        out.println("accept "+ gameID);
+        if (connected) {
+            out.println("accept " + gameID);
+        }
     }
     public void rejectGameMessage(String gameID){
-        out.println("reject "+ gameID);
+        if (connected) {
+            out.println("reject " + gameID);
+        }
     }
     public void getAllUsers(){
-        out.println("getAllUsers");
+        if (connected) {
+            out.println("getAllUsers");
+        }
     }
-    public void startGame() {out.println("start " + Data.gameId);}
+    public void startGame() {
+        if (connected) {
+            out.println("start " + Data.gameId);
+        }
+    }
 
 
     public boolean isConnected() {
@@ -227,6 +247,10 @@ public class ServerConnection extends Thread {
             System.out.println(e);
             e.printStackTrace();
         }
+
+        // Put any code we want to call if the connection fails here
+        Toast toast = Toast.makeText(Data.mainAct.getApplicationContext(), "Disconnected from server", Toast.LENGTH_SHORT);
+        toast.show();
 
     }
 
