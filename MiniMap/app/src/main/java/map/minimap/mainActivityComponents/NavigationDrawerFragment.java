@@ -1,5 +1,6 @@
 package map.minimap.mainActivityComponents;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -22,6 +23,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+
+import map.minimap.LoginActivity;
 import map.minimap.R;
 
 /**
@@ -251,7 +255,11 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.action_logout) {
-            Toast.makeText(getActivity(), "Logout :)", Toast.LENGTH_SHORT).show();
+            LoginManager manager = LoginManager.getInstance();
+            manager.logOut();
+            Intent returnToLoginPage = new Intent(getActivity(),LoginActivity.class);
+            startActivity(returnToLoginPage);
+            Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
             return true;
         }
 

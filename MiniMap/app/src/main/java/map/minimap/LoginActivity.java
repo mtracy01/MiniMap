@@ -26,8 +26,6 @@ public class LoginActivity extends FragmentActivity {
     //LoginTag
     private String LOG_TAG = "LoginActivity";
 
-
-    private int loggedInFlag=0;
     private CallbackManager callbackManager;
     private PendingAction pendingAction = PendingAction.NONE;
     private final String PENDING_ACTION_BUNDLE_KEY =
@@ -52,7 +50,6 @@ public class LoginActivity extends FragmentActivity {
                     public void onSuccess(LoginResult loginResult) {
                         Log.v(LOG_TAG,"SUCCESSful:D");
 
-                        loggedInFlag=1;
                         result=loginResult;
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
@@ -102,6 +99,7 @@ public class LoginActivity extends FragmentActivity {
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }
+
         // Call the 'activateApp' method to log an app event for use in analytics and advertising
         // reporting.  Do so in the onResume methods of the primary Activities that an app may be
         // launched into.
