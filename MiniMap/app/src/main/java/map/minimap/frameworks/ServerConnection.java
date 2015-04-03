@@ -39,6 +39,8 @@ public class ServerConnection extends Thread {
     // Are we connected to the client?
     private boolean connected;
 
+    private String newGameType;
+
     public ServerConnection( String ID) {
       //  this.activity =  activity;
 
@@ -118,7 +120,18 @@ public class ServerConnection extends Thread {
             } else if(parts[0].equals("game")){
                 Log.v("gameId", parts[1]);
                 Data.gameId = parts[1];
-                Data.user.setGame(new FriendFinderGame());
+                switch(newGameType) {
+                    case "friendFinder":
+                        Data.user.setGame(new FriendFinderGame());
+                        break;
+                    case "assassins":
+                        Data.user.setGame(new AssassinsGame());
+                        break;
+                    case "marcoPolo":
+                        Data.user.setGame(new SardinesGame());
+                        break;
+                }
+
                 Data.user.setInGame(true);
             } else if (parts[0].equals("invite")) {
                 Log.v("invite", parts[2]);
@@ -162,6 +175,7 @@ public class ServerConnection extends Thread {
         out.println(message);
     }
     public void createGameMessage(String gameType){
+        newGameType = gameType;
         out.println("createGame " + gameType);
     }
     public void acceptGameMessage(String gameID){
