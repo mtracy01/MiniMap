@@ -44,14 +44,19 @@ public class Maps {
         switch(mapType){
             case 0:
                 map.setMapType(GoogleMap.MAP_TYPE_NONE);
+                break;
             case 1:
                 map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                break;
             case 2:
                 map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                break;
             case 3:
                 map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                break;
             case 4:
                 map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                break;
         }
 
     }
