@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity
         graphRequest.executeAsync();
 
         //Get our variables from LoginActivity
-        Bundle extras = getIntent().getExtras();
+        /*Bundle extras = getIntent().getExtras();
         if (extras != null) {
             //Session.setActiveSession((Session) extras.getSerializable("fb_session"));
 
@@ -100,7 +100,7 @@ public class MainActivity extends ActionBarActivity
         }
         else{
             Log.e(LOG_TAG, "FAILURE");
-        }
+        }*/
         //Link to XML fragments
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);

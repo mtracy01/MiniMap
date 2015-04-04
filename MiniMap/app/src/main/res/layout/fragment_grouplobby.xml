@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Start Game"
         android:id="@+id/startButton"
+        android:background="@drawable/com_facebook_tooltip_blue_background"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true" />
 
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Invite"
         android:id="@+id/inviteButton"
+        android:background="@drawable/com_facebook_tooltip_blue_background"
         android:layout_alignTop="@+id/startButton"
         android:layout_alignParentStart="true" />
     <com.facebook.login.widget.LoginButton

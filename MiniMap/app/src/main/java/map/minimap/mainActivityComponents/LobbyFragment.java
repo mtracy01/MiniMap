@@ -2,6 +2,7 @@ package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -90,12 +91,16 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
                 Data.client.startGame();
             }
         });
+
         final Button inviteButton = (Button) view.findViewById(R.id.inviteButton);
+
+
+        //inviteButton.setBackground();
         inviteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Data.client.getAllUsers();
-              //  FacebookHelper helper = new FacebookHelper();
-             //  helper.inviteFriends(view.getContext());
+                //  FacebookHelper helper = new FacebookHelper();
+                //  helper.inviteFriends(view.getContext());
 
             }
         });
