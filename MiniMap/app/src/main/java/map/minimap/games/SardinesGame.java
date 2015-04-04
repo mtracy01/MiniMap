@@ -32,18 +32,18 @@ public class SardinesGame extends Game {
 
 	@Override
 	public void handleMessage(String message) {
-		// TODO Auto-generated method stub
-		Log.v("Sardines Game", message); //I just changed this to Sardines...
-		String[] parts = message.split(" ");
-		if (parts[0].equals("location")) {
+        // TODO Auto-generated method stub
+        Log.v("Sardines Game", message); //I just changed this to Sardines...
+        String[] parts = message.split(" ");
+        if (parts[0].equals("location")) {
             User u = findUserbyId(parts[1], Data.users);
             if (u == null) {
-            	return;
+                return;
             }
             LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
             Log.v("userid", parts[1]);
             if (u == null) {
-            	Log.v("userid", "is null");
+                Log.v("userid", "is null");
             }
             u.setCoordinates(ll);
 
@@ -64,11 +64,15 @@ public class SardinesGame extends Game {
                 }
             });
 
-		} else if (parts[0].equals("addbeacon")) {
+        } else if (parts[0].equals("addbeacon")) {
 
-		} else if (parts[0].equals("removebeacon")) {
+        } else if (parts[0].equals("removebeacon")) {
 
-		}
+        } else if (parts[0].equals("Found")) {
+            //make a dialogue to ask if ___ has found this user
+        } else if (parts[0].equals("TeamChange")) {
+            //erase everyone from the map.
+        }
 		
 	}
 
