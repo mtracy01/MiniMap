@@ -86,22 +86,39 @@ public class LoginActivity extends FragmentActivity {
                                    Data.client = client;
                                    client.start();
                                    try {
-                                       Thread.sleep(200);
+                                       Thread.sleep(400);
                                    }catch (Exception e) {
                                        e.printStackTrace();
                                    }
                                     if(Data.client !=null){
-                                       // Data.gps = new GPSThread(Data.client);
+                                        Data.gps = new GPSThread(Data.client);
                                     }
                                     //If client fails to be created, log out the user from facebook and do not advance intents to next activity
                                 }
                                 startCount++;
+
+                                if(Data.client!=null) {
+                                    Log.v(LOG_TAG,"Client is not NULL, proceeding to login");
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                                //We did not communicate successfully, log back out of facebook
+                                else{
+                                    //Display error
+                                    Log.e(LOG_TAG,"Unable to connect to our server, aborting login");
+                                    Toast toast = Toast.makeText(getApplicationContext(),"Unable to connect to Server",Toast.LENGTH_SHORT);
+                                    toast.show();
+
+                                    //Logout
+                                    //LoginManager lm = LoginManager.getInstance();
+                                    //lm.logOut();
+                                }
                             }
                         };
                         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
                         graphRequest.executeAsync();
 
-                        if(Data.client!=null) {
+                        /*if(Data.client!=null) {
                             Log.v(LOG_TAG,"Client is not NULL, proceeding to login");
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -116,7 +133,7 @@ public class LoginActivity extends FragmentActivity {
                             //Logout
                             //LoginManager lm = LoginManager.getInstance();
                             //lm.logOut();
-                        }
+                        }*/
                     }
 
                     @Override
