@@ -23,6 +23,7 @@ import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
+import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
 import map.minimap.mainActivityComponents.InvitationsFragment;
@@ -56,8 +57,9 @@ public class MainActivity extends ActionBarActivity
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_main);
         Log.v("startMiniMap", "startMiniMap");
-
-
+        Log.e(LOG_TAG,"Before");
+        FacebookHelper.getFriendsList();
+        Log.e(LOG_TAG,"After");
         //Create client if one is not already created
 
         GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
