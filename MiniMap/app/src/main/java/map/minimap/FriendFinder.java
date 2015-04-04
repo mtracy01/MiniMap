@@ -15,6 +15,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.frameworks.Maps;
+import map.minimap.helperClasses.Data;
 
 
 public class FriendFinder extends Activity implements OnMapReadyCallback {
@@ -31,6 +32,7 @@ public class FriendFinder extends Activity implements OnMapReadyCallback {
             map.getMapAsync(this);
 
         }
+
     }
 
 

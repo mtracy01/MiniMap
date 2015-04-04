@@ -84,7 +84,7 @@ public class MainActivity extends ActionBarActivity
                     }catch (Exception e) {
                         e.printStackTrace();
                     }
-                    GPSThread gpsThread = new GPSThread(Data.client);
+                    Data.gps = new GPSThread(Data.client);
                 }
             }
         };

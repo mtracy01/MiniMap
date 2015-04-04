@@ -149,7 +149,7 @@ public class ServerConnection extends Thread {
                 Data.user.setGame(new FriendFinderGame());
                 Data.user.setInGame(true);
             } else if (parts[0].equals("users")) {
-                Data.users = new ArrayList<User>();
+                Data.users = new ArrayList<>();
                 for(int i =1; i < parts.length;i++){
                     Data.users.add(new User(parts[i]));
                 }

@@ -2,6 +2,8 @@ package map.minimap.frameworks;
 
 
 
+import android.util.Log;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -88,6 +90,7 @@ public class Maps {
             initializePlayers(map, Data.users);
             //Move map's camera and set zoom level.  I will make the zoom a variable later
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(),13));
+            Log.v("Maps", "Set Center");
             //addPlayersToField(map);
         }
         //if we don't initialize, call Sydney

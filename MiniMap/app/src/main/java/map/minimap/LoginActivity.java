@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -55,7 +56,7 @@ public class LoginActivity extends FragmentActivity {
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
-
+        Data.mainAct=getParent();
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -78,12 +79,7 @@ public class LoginActivity extends FragmentActivity {
                                     Log.e(LOG_TAG, e.getMessage());
                                 }
 
-                                /*try {
-                                    Thread.sleep(00);
-                                } catch (Exception e){
-                                    Log.e(LOG_TAG,"EXCEPTION ON SLEEP CALL");
-                                }*/
-                                //Starting client (We need to delay this action a little somehow)
+                                //Starting client
                                 if (startCount ==0) {
                                    Log.v("client", "Starting Client");
                                    ServerConnection client = new ServerConnection(Data.user.getID());
@@ -94,7 +90,10 @@ public class LoginActivity extends FragmentActivity {
                                    }catch (Exception e) {
                                        e.printStackTrace();
                                    }
-                                    GPSThread gpsThread = new GPSThread(Data.client);
+                                    if(Data.client !=null){
+                                       // Data.gps = new GPSThread(Data.client);
+                                    }
+                                    //If client fails to be created, log out the user from facebook and do not advance intents to next activity
                                 }
                                 startCount++;
                             }
@@ -102,11 +101,22 @@ public class LoginActivity extends FragmentActivity {
                         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
                         graphRequest.executeAsync();
 
+                        if(Data.client!=null) {
+                            Log.v(LOG_TAG,"Client is not NULL, proceeding to login");
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                        //We did not communicate successfully, log back out of facebook
+                        else{
+                            //Display error
+                            Log.e(LOG_TAG,"Unable to connect to our server, aborting login");
+                            Toast toast = Toast.makeText(getApplicationContext(),"Unable to connect to Server",Toast.LENGTH_SHORT);
+                            toast.show();
 
-                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
-                        //handlePendingAction();
-                        //updateUI();
+                            //Logout
+                            //LoginManager lm = LoginManager.getInstance();
+                            //lm.logOut();
+                        }
                     }
 
                     @Override

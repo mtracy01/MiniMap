@@ -255,12 +255,19 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
+        //If logout button is selected
         if (item.getItemId() == R.id.action_logout) {
+            //logout of facebook
             LoginManager manager = LoginManager.getInstance();
             manager.logOut();
+
+            //return to loginActivity
             Intent returnToLoginPage = new Intent(getActivity(),LoginActivity.class);
             startActivity(returnToLoginPage);
             Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
+
+            //Destroy GPS thread and client
+            Data.gps.destroyListener();
             Data.client.closeSocket();
             Data.client = null;
             return true;
