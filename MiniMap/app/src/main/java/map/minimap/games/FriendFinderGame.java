@@ -36,6 +36,7 @@ public class FriendFinderGame extends Game {
 		if (parts[0].equals("location")) {
             User u = findUserbyId(parts[1], Data.users);
             if (u == null) {
+            	Log.v("Friend Finder Game", "user null");
             	return;
             }
             LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
@@ -43,6 +44,7 @@ public class FriendFinderGame extends Game {
             if (u == null) {
             	Log.v("userid", "is null");
             }
+            Log.v("Friend Finder Game", ll.toString());
             u.setCoordinates(ll);
 
             // We can only update locations from the main thread
@@ -58,6 +60,7 @@ public class FriendFinderGame extends Game {
             			}
             		}
             		Data.map.clear();
+            		Log.v("Friend Finder Game", "initializePlayers");
             		Maps.initializePlayers(Data.map, Data.users);
             	}
             });
