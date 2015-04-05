@@ -76,8 +76,9 @@ public class FacebookHelper {
                     protected Void doInBackground(Void... params) {
                         ArrayList<User> ourFriends = Data.user.getFriends();
                         for(int i=0;i<ourFriends.size();i++)
-                            getFacebookProfilePicture(ourFriends.get(i).getID());
+                            ourFriends.get(i).setProfilePhoto(getFacebookProfilePicture(ourFriends.get(i).getID()));
                         Data.user.setFriends(ourFriends);
+                        Data.user.setProfilePhoto(getFacebookProfilePicture(Data.user.getID()));
                         return null;
                     }
                 };
@@ -90,7 +91,7 @@ public class FacebookHelper {
     public static Bitmap getFacebookProfilePicture(String userID){
         Bitmap bitmap = null;
         try {
-            URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=large");
+            URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=small");
             bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
         } catch( IOException e){
             Log.e(LOG_TAG,"IOException when attempting to retrieve profile pictures!");

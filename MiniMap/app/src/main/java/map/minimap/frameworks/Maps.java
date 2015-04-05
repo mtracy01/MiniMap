@@ -89,8 +89,9 @@ public class Maps {
     public static void readyMap(GoogleMap map){
 
         if(calledInitialize){
+            map.setMyLocationEnabled(false);
             //enable my current location
-            map.setMyLocationEnabled(true);
+            //map.setMyLocationEnabled(true);
             //initialize players, setting their markers
             initializePlayers(map, Data.players);
             //Move map's camera and set zoom level.  I will make the zoom a variable later
@@ -140,7 +141,7 @@ public class Maps {
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+                                    .fromBitmap(user.getProfilePhoto()))));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
                     break;
                 case 1:
                     user.setMarker(map.addMarker(new MarkerOptions()

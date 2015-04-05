@@ -65,21 +65,13 @@ public class User {
         this.name = name;
     }
 
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
+    public String getID() { return ID; }
 
     public ArrayList<User> getFriends() {
         return friends;
     }
 
-    public void setFriends(ArrayList<User> friends) {
-        this.friends = friends;
-    }
+    public void setFriends(ArrayList<User> friends) { this.friends = friends; }
 
     public void setMarker(Marker m){ marker = m; }
     public Marker getMarker(){ return marker;}
@@ -87,9 +79,7 @@ public class User {
     public void setTeam(int t){ team = t; }
     public int getTeam(){ return team; }
 
-    public boolean getInGame() {
-        return inGame;
-    }
+    public boolean getInGame() { return inGame; }
     public void setInGame(boolean g) {
         inGame = g;
     }
@@ -97,25 +87,8 @@ public class User {
     public Game getGame() {
         return currentGame;
     }
-    public void setGame(Game g) {
-        currentGame = g;
-    }
+    public void setGame(Game g) { currentGame = g;}
 
     public Bitmap getProfilePhoto() {return profilePhoto;}
     public void setProfilePhoto(Bitmap profilePhoto){ this.profilePhoto = profilePhoto;}
-
-    //Return the user image
-    public Bitmap getUserImage(){
-        Bitmap userIcon = Bitmap.createBitmap(50,50,Bitmap.Config.ARGB_4444);
-        try{
-            URL img_value;
-            img_value = new URL("https://graph.facebook.com/"+getID()+"/picture");
-            userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
-        }
-        catch(Exception e){
-            Log.e(LOG_TAG, "Failed to get User image " + e.getMessage());
-
-        }
-        return userIcon;
-    }
 }
