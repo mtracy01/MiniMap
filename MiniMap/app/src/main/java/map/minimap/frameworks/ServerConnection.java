@@ -108,7 +108,7 @@ public class ServerConnection extends Thread {
 
                 // Remove all current players
                 if (Data.players == null) {
-                    Data.players = new ArrayList<User>();
+                    Data.players = new ArrayList<>();
                 } else {
                     Data.players.clear();
                 }

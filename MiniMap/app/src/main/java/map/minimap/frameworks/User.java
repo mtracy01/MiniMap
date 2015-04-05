@@ -23,8 +23,6 @@ public class User {
 
     private LatLng coordinates;
 
-    //Debug tag for logging errors in LogCat
-    private String LOG_TAG="User";
 
     private String name;
     private String ID;
