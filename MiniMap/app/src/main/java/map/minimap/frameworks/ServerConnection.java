@@ -19,6 +19,7 @@ import map.minimap.games.AssassinsGame;
 import map.minimap.games.FriendFinderGame;
 import map.minimap.games.SardinesGame;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.LobbyFragment;
 
 import android.widget.Toast;
@@ -147,6 +148,8 @@ public class ServerConnection extends Thread {
             } else if (parts[0].equals("users")) {
                 Data.players = new ArrayList<>();
                 for(int i =1; i < parts.length;i++){
+                    User user = new User(parts[i]);
+                    user.setProfilePhoto(FacebookHelper.getFacebookProfilePicture(user.getID()));
                     Data.players.add(new User(parts[i]));
                 }
                 for(User u : Data.players){
