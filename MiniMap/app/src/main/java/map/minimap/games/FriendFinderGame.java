@@ -5,16 +5,18 @@ import android.os.Handler;
 import android.os.Looper;
 
 import map.minimap.frameworks.*;
+import map.minimap.frameworks.MapResources.LatLngInterpolator;
 import map.minimap.helperClasses.Data;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
 public class FriendFinderGame extends Game {
 
 	//private static final Logger log = Logger.getLogger( Server.class.getName() );
-	
+	private String LOG_TAG = "FriendFinderGame";
 
 	public FriendFinderGame() {
 
@@ -52,13 +54,25 @@ public class FriendFinderGame extends Game {
             		if (Data.map == null) {
             			return;
             		}
-            		for (User u : Data.players) {
+            		/*for (User u : Data.players) {
             			if (u.getMarker() != null) {
             				u.getMarker().remove();
             			}
             		}
             		Data.map.clear();
-            		Maps.initializePlayers(Data.map, Data.players);
+            		Maps.initializePlayers(Data.map, Data.players);*/
+					LatLngInterpolator mLatLngInterpolator;
+					for(User u : Data.players) {
+						if(u.getMarker() != null){
+							mLatLngInterpolator = new LatLngInterpolator.Linear();
+							Data.mapFragment.animateMarkerToGB(u.getMarker(), u.getCoordinates(), mLatLngInterpolator, 1500);
+						}
+						else{
+							//Note: this is safety code in case a user marker does not exist. **This should never be run!!!**
+							Log.e(LOG_TAG,"User marker did not exist! Creating one in FriendFinderGame...");
+							u.setMarker(Data.map.addMarker(new MarkerOptions().position(u.getCoordinates())));
+						}
+					}
             	}
             });
 

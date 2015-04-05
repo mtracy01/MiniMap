@@ -1,4 +1,4 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.MapResources;
 
 
 
@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
 /**
@@ -90,8 +91,7 @@ public class Maps {
 
         if(calledInitialize){
             map.setMyLocationEnabled(false);
-            //enable my current location
-            //map.setMyLocationEnabled(true);
+
             //initialize players, setting their markers
             initializePlayers(map, Data.players);
             //Move map's camera and set zoom level.  I will make the zoom a variable later

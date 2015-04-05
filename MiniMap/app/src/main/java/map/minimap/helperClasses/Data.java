@@ -1,12 +1,13 @@
 package map.minimap.helperClasses;
 import android.app.Activity;
 
-import com.facebook.AccessToken;
+
 
 
 import java.util.ArrayList;
 
 import map.minimap.frameworks.GPSThread;
+import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,6 +25,7 @@ public class Data {
     public static String gameId;
     public static ServerConnection client;
     public static GoogleMap map;
+    public static SyncedMapFragment mapFragment;
     public static GPSThread gps;
 
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import map.minimap.FriendFinder;
+import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.games.AssassinsGame;
 import map.minimap.games.FriendFinderGame;
 import map.minimap.games.SardinesGame;

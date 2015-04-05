@@ -3,6 +3,7 @@ package map.minimap;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,13 +15,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-import map.minimap.frameworks.Maps;
+import map.minimap.frameworks.MapResources.Maps;
+import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 
 
-public class FriendFinder extends Activity implements OnMapReadyCallback {
+public class FriendFinder extends FragmentActivity implements OnMapReadyCallback {
 
-    private MapFragment map;
+    private SyncedMapFragment map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +30,20 @@ public class FriendFinder extends Activity implements OnMapReadyCallback {
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_friend_finder);
         if (savedInstanceState == null) {
-            map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
-            map.getMapAsync(this);
+            map = new SyncedMapFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(android.R.id.content,map).commit();
+            Data.mapFragment=map;
 
+            Data.mapFragment.getMapAsync(this);
+            Data.map=map.getMap();
+            //map = (SyncedMapFragment)getFragmentManager().findFragmentById(R.id.map);
+            //map.getMapAsync(this);
+            //Data.mapFragment = map;
         }
 
     }
+
 
 
     @Override
@@ -63,19 +73,6 @@ public class FriendFinder extends Activity implements OnMapReadyCallback {
         Maps.readyMap(map);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
 
-        public PlaceholderFragment() {
-        }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_friend_finder, container, false);
-            return rootView;
-        }
-    }
 }

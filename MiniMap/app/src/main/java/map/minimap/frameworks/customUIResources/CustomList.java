@@ -1,4 +1,4 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.customUIResources;
 
 import android.graphics.Bitmap;
 import android.widget.ArrayAdapter;

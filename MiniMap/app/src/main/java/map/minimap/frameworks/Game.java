@@ -1,5 +1,7 @@
 package map.minimap.frameworks;
 
+import android.app.Application;
+
 import java.util.ArrayList;
 
 import map.minimap.frameworks.*;
@@ -9,7 +11,7 @@ import com.google.android.gms.maps.model.LatLng;
 /**
  * Created by joe on 2/21/2015.
  */
-public abstract class Game{
+public abstract class Game extends Application{
 
 
 
