@@ -37,6 +37,7 @@ public class User {
 
     private Marker marker;  //Location object for GoogleMap
     private ArrayList<User> friends;
+    private Bitmap profilePhoto;
 
     public User(String id) {
 
@@ -47,6 +48,7 @@ public class User {
         friends = null; //Needs to be specified later
         inGame = false;
         currentGame = null;
+        profilePhoto = null;
 
     }
 
@@ -72,20 +74,6 @@ public class User {
     }
 
     public ArrayList<User> getFriends() {
-        /*return friends;*/
-        /* make the API call */
-        /*new Request(
-                Data.session,
-                "/{friendlist-id}",
-                null,
-                HttpMethod.GET,
-                new Request.Callback() {
-                    public void onCompleted(Response response) {
-                        GraphObject ourFriends=response.getGraphObject();
-                    }
-                }
-        ).executeAsync();
-        */
         return friends;
     }
 
@@ -113,6 +101,8 @@ public class User {
         currentGame = g;
     }
 
+    public Bitmap getProfilePhoto() {return profilePhoto;}
+    public void setProfilePhoto(Bitmap profilePhoto){ this.profilePhoto = profilePhoto;}
 
     //Return the user image
     public Bitmap getUserImage(){
