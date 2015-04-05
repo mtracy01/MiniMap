@@ -36,10 +36,7 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
             Data.mapFragment=map;
 
             Data.mapFragment.getMapAsync(this);
-            Data.map=map.getMap();
-            //map = (SyncedMapFragment)getFragmentManager().findFragmentById(R.id.map);
-            //map.getMapAsync(this);
-            //Data.mapFragment = map;
+
         }
 
     }
