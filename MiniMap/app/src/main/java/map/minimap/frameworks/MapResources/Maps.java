@@ -26,7 +26,7 @@ import map.minimap.helperClasses.Data;
 public class Maps {
 
     //Debug variables
-    //private static String LOG_TAG= "Maps Helper";
+    private static String LOG_TAG= "Maps";
 
     //Elements of player fields
     private static int height;
@@ -98,7 +98,7 @@ public class Maps {
             //initialize players, setting their markers
             initializePlayers(map, Data.players);
             //Move map's camera and set zoom level.  I will make the zoom a variable later
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(),13));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(),18));
             Log.v("Maps", "Set Center");
             //addPlayersToField(map);
         }
@@ -141,8 +141,12 @@ public class Maps {
                     //         .title(user.getName()).position(latLng)
                     //         .icon(BitmapDescriptorFactory
                     //                 .fromBitmap(user.getUserImage()))));
-                   if(user.getProfilePhoto()==null)
-                       user.setProfilePhoto( BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait));
+                   if(user.getProfilePhoto()==null) {
+                       Log.e(LOG_TAG,"User didn't have a profile photo! Giving them default profile picture...");
+                       Bitmap big = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait);
+                       big = Bitmap.createScaledBitmap(big,big.getWidth() / 5,big.getHeight() / 5, false);
+                       user.setProfilePhoto(big);
+                   }
                     Bitmap tmp = user.getProfilePhoto();
                     Bitmap doubleSized = Bitmap.createScaledBitmap(tmp,tmp.getWidth() * 2,tmp.getHeight() * 2, false);
                     user.setMarker(map.addMarker(new MarkerOptions()

@@ -27,6 +27,8 @@ import android.widget.Toast;
 
 public class ServerConnection extends Thread {
 
+    private String LOG_TAG = "ServerConnection";
+
     public static final int SERVER_PORT = 2048;
     public static final String SERVER_IP = "tracy94.com";
 
@@ -121,6 +123,11 @@ public class ServerConnection extends Thread {
                         if(user==null) {
                             user = new User(parts[i]);
                             //TODO: we need to add name here, but don't have the name from server yet***
+                            try{
+                                Thread.sleep(200);
+                            } catch(Exception e){
+                                Log.e(LOG_TAG,"Exception on sleep thread for null user handling!");
+                            }
                         }
                         Data.players.add(user);
                    }
@@ -153,9 +160,11 @@ public class ServerConnection extends Thread {
             } else if (parts[0].equals("users")) {
                 Data.players = new ArrayList<>();
                 for(int i =1; i < parts.length;i++){
-                    User user = new User(parts[i]);
-                    user.setProfilePhoto(FacebookHelper.getFacebookProfilePicture(user.getID()));
-                    Data.players.add(new User(parts[i]));
+                    User user = Data.user.findUserById(parts[i]);
+                    if(user!=null)
+                        Data.players.add(user);
+                    else
+                        Data.players.add(new User(parts[i]));
                 }
                 for(User u : Data.players){
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
