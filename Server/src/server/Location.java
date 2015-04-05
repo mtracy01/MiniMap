@@ -4,7 +4,7 @@ public class Location {
 	private double longitude;
 	private double latitude;
 	
-	public Location (double lon, double lat)
+	public Location (double lat, double lon)
 	{
 		setLongitude(lon);
 		setLatitude(lat);

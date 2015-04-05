@@ -30,7 +30,7 @@ public class Maps {
     private static boolean hasBorders;
     private static boolean calledInitialize=false;
 
-    //List of players in the game
+    //List of users in the game
     private static User[] users;
     private static LatLng center;
 
@@ -122,7 +122,7 @@ public class Maps {
     public static void initializePlayers(GoogleMap map, ArrayList<User> playerList){
         int length = playerList.size();
         hasBorders=false;
-        /* create copy of players to store in class */
+        /* create copy of users to store in class */
 
         /* Create markers and put them in respective locatons */
         for(User user : Data.players){
@@ -172,11 +172,11 @@ public class Maps {
     }
     /*private static void addPlayersToField(GoogleMap map){
 
-        //User[] players = new User[Data.players.size()];
-        //System.arraycopy(Data.players.size,0,players,0,length);
-        //Data.players;
-        for(int i=0;i<players.length;i++){
-            map.addMarker(players[i].getMarker());
+        //User[] users = new User[Data.users.size()];
+        //System.arraycopy(Data.users.size,0,users,0,length);
+        //Data.users;
+        for(int i=0;i<users.length;i++){
+            map.addMarker(users[i].getMarker());
         }
     }*/
 
