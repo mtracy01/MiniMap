@@ -92,7 +92,7 @@ public class MainActivity extends ActionBarActivity
             GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
             graphRequest.executeAsync();
         }
-        
+
         //Link to XML fragments
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
