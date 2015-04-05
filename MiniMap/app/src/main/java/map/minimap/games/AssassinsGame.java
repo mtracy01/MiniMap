@@ -5,21 +5,24 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
 import map.minimap.frameworks.Game;
+import map.minimap.frameworks.MapResources.LatLngInterpolator;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 //TODO: Specifics of Sardines
 public class AssassinsGame extends Game {
 
+    private String LOG_TAG = "AssasinsGame";
     //private static final Logger log = Logger.getLogger( Server.class.getName() );
-
+    private User target;
 
     public AssassinsGame() {
-        private User target = null;
+         target = null;
     }
 
 

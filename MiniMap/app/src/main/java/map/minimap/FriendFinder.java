@@ -1,18 +1,12 @@
 package map.minimap;
 
-import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.facebook.FacebookSdk;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.GoogleMap;;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.frameworks.MapResources.Maps;

@@ -124,7 +124,7 @@ public class Maps {
      * @param playerList the list of players in the game
      */
     public static void initializePlayers(GoogleMap map, ArrayList<User> playerList){
-        int length = playerList.size();
+
         hasBorders=false;
         /* create copy of users to store in class */
 
