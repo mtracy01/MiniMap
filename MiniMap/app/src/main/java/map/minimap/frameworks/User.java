@@ -1,9 +1,13 @@
 package map.minimap.frameworks;
 
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import java.util.ArrayList;
+
+import map.minimap.helperClasses.FacebookHelper;
 
 /**
  * Created by Joe Coy on 2/20/2015.
@@ -43,7 +47,16 @@ public class User {
         friends = null; //Needs to be specified later
         inGame = false;
         currentGame = null;
-        profilePhoto = null;
+
+        AsyncTask<Void,Void,Void> profileRetriever = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                profilePhoto = FacebookHelper.getFacebookProfilePicture(ID);
+                return null;
+            }
+        };
+        profileRetriever.execute();
+        //profilePhoto = null;//FacebookHelper.getFacebookProfilePicture(ID);
 
     }
 
@@ -86,4 +99,14 @@ public class User {
 
     public Bitmap getProfilePhoto() {return profilePhoto;}
     public void setProfilePhoto(Bitmap profilePhoto){ this.profilePhoto = profilePhoto;}
+
+    public User findUserById(String id) {
+        for (User u: friends) {
+            if (u.getID().equals(id)) {
+                return u;
+            }
+        }
+        return null;
+
+    }
 }

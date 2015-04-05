@@ -117,7 +117,12 @@ public class ServerConnection extends Thread {
                     if (Data.user.getID().equals(parts[i])) {
                         Data.players.add(Data.user);
                     } else {
-                        Data.players.add(new User(parts[i]));
+                        User user = Data.user.findUserById(parts[i]);
+                        if(user==null) {
+                            user = new User(parts[i]);
+                            //TODO: we need to add name here, but don't have the name from server yet***
+                        }
+                        Data.players.add(user);
                    }
                 }
                 LobbyFragment.changeGrid();
