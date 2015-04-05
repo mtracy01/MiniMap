@@ -58,9 +58,10 @@ public class LoginActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
+
         setContentView(R.layout.activity_login);
-        ImageView loginImage = (ImageView)findViewById(R.id.imageView);
-        loginImage.setImageDrawable(getResources().getDrawable(R.drawable.minimaplogo));
+        //ImageView loginImage = (ImageView)findViewById(R.id.imageView);
+        //loginImage.setImageDrawable(getResources().getDrawable(R.drawable.minimaplogo));
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
         Data.mainAct=getParent();
