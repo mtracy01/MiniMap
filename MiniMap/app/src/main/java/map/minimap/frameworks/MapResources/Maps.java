@@ -2,6 +2,7 @@ package map.minimap.frameworks.MapResources;
 
 
 
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,6 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import map.minimap.R;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
@@ -138,6 +140,8 @@ public class Maps {
                     //         .title(user.getName()).position(latLng)
                     //         .icon(BitmapDescriptorFactory
                     //                 .fromBitmap(user.getUserImage()))));
+                   if(user.getProfilePhoto()==null)
+                       user.setProfilePhoto( BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait));
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
