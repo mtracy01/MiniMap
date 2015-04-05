@@ -2,6 +2,7 @@ package map.minimap.frameworks.MapResources;
 
 
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
@@ -142,10 +143,12 @@ public class Maps {
                     //                 .fromBitmap(user.getUserImage()))));
                    if(user.getProfilePhoto()==null)
                        user.setProfilePhoto( BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait));
+                    Bitmap tmp = user.getProfilePhoto();
+                    Bitmap doubleSized = Bitmap.createScaledBitmap(tmp,tmp.getWidth() * 2,tmp.getHeight() * 2, false);
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .fromBitmap(user.getProfilePhoto()))));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+                                    .fromBitmap(doubleSized))));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
                     break;
                 case 1:
                     user.setMarker(map.addMarker(new MarkerOptions()
