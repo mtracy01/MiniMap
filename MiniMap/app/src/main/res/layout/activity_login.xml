@@ -7,33 +7,23 @@
     tools:context="map.minimap.LoginActivity"
     android:gravity="center_horizontal">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/minimaplogo"/>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_below="@id/imageView"
         android:layout_gravity="center_horizontal"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:visibility="visible"
-        android:id="@+id/imageView"
-        android:background="@drawable/minimaplogo"
-        android:layout_above="@+id/login_button"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/description"
-        android:clickable="false"
-        android:src="@drawable/minimaplogo"
-        android:adjustViewBounds="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentBottom="false" />
+
 
 
 </RelativeLayout>
