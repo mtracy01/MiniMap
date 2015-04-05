@@ -2,8 +2,6 @@ package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.hardware.camera2.params.Face;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +15,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import map.minimap.R;
 import map.minimap.helperClasses.Data;
-import map.minimap.helperClasses.FacebookHelper;
 
 /**
  * Created by Corey on 2/22/2015.
@@ -106,9 +103,9 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
 
             }
         });
-        String[] playersArray = new String[Data.users.size()];
-        for(int i =0; i < Data.users.size();i++)
-            playersArray[i] = Data.users.get(i).getName();
+        String[] playersArray = new String[Data.players.size()];
+        for(int i =0; i < Data.players.size();i++)
+            playersArray[i] = Data.players.get(i).getName();
         adapter = new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,playersArray);
         playerListView.setAdapter(adapter);
         return view;

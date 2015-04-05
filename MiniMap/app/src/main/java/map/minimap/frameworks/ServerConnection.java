@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import map.minimap.FriendFinder;
-import map.minimap.LoginActivity;
 import map.minimap.games.AssassinsGame;
 import map.minimap.games.FriendFinderGame;
 import map.minimap.games.SardinesGame;
@@ -22,8 +21,6 @@ import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.LobbyFragment;
 
 import android.widget.Toast;
-
-import com.facebook.login.LoginManager;
 
 
 public class ServerConnection extends Thread {
@@ -109,18 +106,18 @@ public class ServerConnection extends Thread {
 
             if(parts[0].equals("gameUsers")){
 
-                // Remove all current users
-                if (Data.users == null) {
-                    Data.users = new ArrayList<User>();
+                // Remove all current players
+                if (Data.players == null) {
+                    Data.players = new ArrayList<User>();
                 } else {
-                    Data.users.clear();
+                    Data.players.clear();
                 }
                 for(int i =1; i < parts.length; i++){
                     // Add the existing user if it is us, otherwise create a new one
                     if (Data.user.getID().equals(parts[i])) {
-                        Data.users.add(Data.user);
+                        Data.players.add(Data.user);
                     } else {
-                        Data.users.add(new User(parts[i]));
+                        Data.players.add(new User(parts[i]));
                    }
                 }
                 LobbyFragment.changeGrid();
@@ -149,11 +146,11 @@ public class ServerConnection extends Thread {
                 Data.user.setGame(new FriendFinderGame());
                 Data.user.setInGame(true);
             } else if (parts[0].equals("users")) {
-                Data.users = new ArrayList<>();
+                Data.players = new ArrayList<>();
                 for(int i =1; i < parts.length;i++){
-                    Data.users.add(new User(parts[i]));
+                    Data.players.add(new User(parts[i]));
                 }
-                for(User u : Data.users){
+                for(User u : Data.players){
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
                 }
                 LobbyFragment.changeGrid();

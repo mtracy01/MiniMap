@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -20,16 +21,22 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.FacebookHelper;
 
 
 public class LoginActivity extends FragmentActivity {
@@ -54,15 +61,28 @@ public class LoginActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
+        setContentView(R.layout.activity_login);
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
         Data.mainAct=getParent();
+        LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
+        if(loginButton!=null) {
+            ArrayList<String> permissions = new ArrayList<>(2);
+
+            permissions.add("public_profile");
+            permissions.add("user_friends");
+
+            loginButton.setReadPermissions(permissions);
+        }
+        else{
+            Log.e(LOG_TAG,"Null loginButton");
+        }
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.v(LOG_TAG, "SUCCESSful:D");
-
+                        Log.v(LOG_TAG, "Granted Permissions: " + loginResult.getRecentlyGrantedPermissions());
                         result = loginResult;
 
                         //Graph request to get our user's Facebook data
@@ -75,65 +95,50 @@ public class LoginActivity extends FragmentActivity {
                                 try {
                                     Data.user = new User(jsonObject.getString("id"));
                                     Data.user.setName(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
-                                } catch(JSONException e){
+                                } catch (JSONException e) {
                                     Log.e(LOG_TAG, e.getMessage());
                                 }
 
                                 //Starting client
-                                if (startCount ==0) {
-                                   Log.v("client", "Starting Client");
-                                   ServerConnection client = new ServerConnection(Data.user.getID());
-                                   Data.client = client;
-                                   client.start();
-                                   try {
-                                       Thread.sleep(400);
-                                   }catch (Exception e) {
-                                       e.printStackTrace();
-                                   }
-                                    if(Data.client !=null){
-                                        Data.gps = new GPSThread(Data.client);
+                                if (startCount == 0) {
+                                    Log.v("client", "Starting Client");
+                                    ServerConnection client = new ServerConnection(Data.user.getID());
+                                    Data.client = client;
+                                    client.start();
+                                    try {
+                                        Thread.sleep(400);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (Data.client != null) {
+                                      //  Data.gps = new GPSThread(Data.client);
                                     }
                                     //If client fails to be created, log out the user from facebook and do not advance intents to next activity
                                 }
                                 startCount++;
 
-                                if(Data.client!=null) {
-                                    Log.v(LOG_TAG,"Client is not NULL, proceeding to login");
+                                if (Data.client != null) {
+                                    Log.v(LOG_TAG, "Client is not NULL, proceeding to login");
+                                    FacebookHelper.getFriendsList();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                 }
                                 //We did not communicate successfully, log back out of facebook
-                                else{
+                                else {
                                     //Display error
-                                    Log.e(LOG_TAG,"Unable to connect to our server, aborting login");
-                                    Toast toast = Toast.makeText(getApplicationContext(),"Unable to connect to Server",Toast.LENGTH_SHORT);
+                                    Log.e(LOG_TAG, "Unable to connect to our server, aborting login");
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Unable to connect to Server", Toast.LENGTH_SHORT);
                                     toast.show();
 
                                     //Logout
-                                    //LoginManager lm = LoginManager.getInstance();
-                                    //lm.logOut();
+                                    FacebookHelper.logOut();
                                 }
                             }
                         };
                         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
                         graphRequest.executeAsync();
 
-                        /*if(Data.client!=null) {
-                            Log.v(LOG_TAG,"Client is not NULL, proceeding to login");
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                        //We did not communicate successfully, log back out of facebook
-                        else{
-                            //Display error
-                            Log.e(LOG_TAG,"Unable to connect to our server, aborting login");
-                            Toast toast = Toast.makeText(getApplicationContext(),"Unable to connect to Server",Toast.LENGTH_SHORT);
-                            toast.show();
 
-                            //Logout
-                            //LoginManager lm = LoginManager.getInstance();
-                            //lm.logOut();
-                        }*/
                     }
 
                     @Override
@@ -142,7 +147,7 @@ public class LoginActivity extends FragmentActivity {
                             showAlert();
                             pendingAction = PendingAction.NONE;
                         }
-                        Log.v(LOG_TAG,"Cancelled");
+                        Log.v(LOG_TAG, "Cancelled");
                         updateUI();
                     }
 
@@ -153,7 +158,7 @@ public class LoginActivity extends FragmentActivity {
                             showAlert();
                             pendingAction = PendingAction.NONE;
                         }
-                        Log.v(LOG_TAG,"Error!");
+                        Log.v(LOG_TAG, "Error!");
                         updateUI();
                     }
 
@@ -167,14 +172,13 @@ public class LoginActivity extends FragmentActivity {
                 });
 
 
-        setContentView(R.layout.activity_login);
+       // setContentView(R.layout.activity_login);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if(AccessToken.getCurrentAccessToken()!=null){
-            //Data.
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }
@@ -221,8 +225,8 @@ public class LoginActivity extends FragmentActivity {
 
         //If we are already logged in, go ahead to main activity.
         if(result!=null){
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
+           // Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+           // startActivity(intent);
         }
         boolean enableButtons = AccessToken.getCurrentAccessToken() != null;
 

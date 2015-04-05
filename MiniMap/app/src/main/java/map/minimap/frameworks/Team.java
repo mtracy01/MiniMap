@@ -6,7 +6,7 @@ public class Team {
 	
 	
 	/**
-	 * Store the users in the team
+	 * Store the players in the team
 	 */
 	private ArrayList<User> users;
 	private int teamID;

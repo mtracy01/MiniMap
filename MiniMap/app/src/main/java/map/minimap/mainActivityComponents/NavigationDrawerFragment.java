@@ -266,9 +266,9 @@ public class NavigationDrawerFragment extends Fragment {
             startActivity(returnToLoginPage);
             Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
 
-            //Destroy GPS thread and client
-            Data.gps.destroyListener();
-            Data.client.closeSocket();
+            //Destroy GPS thread and client (if they exist
+            if(Data.gps!=null)      Data.gps.destroyListener();
+            if(Data.client!=null)   Data.client.closeSocket();
             Data.client = null;
             return true;
         }

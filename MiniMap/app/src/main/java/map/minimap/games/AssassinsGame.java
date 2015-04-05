@@ -36,7 +36,7 @@ public class AssassinsGame extends Game {
         Log.v("Sardines Game", message); //I just changed this to Sardines...
         String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
-            User u = findUserbyId(parts[1], Data.users);
+            User u = findUserbyId(parts[1], Data.players);
             if (u == null) {
                 return;
             }
@@ -54,13 +54,13 @@ public class AssassinsGame extends Game {
                     if (Data.map == null) {
                         return;
                     }
-                    for (User u : Data.users) {
+                    for (User u : Data.players) {
                         if (u.getMarker() != null) {
                             u.getMarker().remove();
                         }
                     }
                     Data.map.clear();
-                    Maps.initializePlayers(Data.map, Data.users);
+                    Maps.initializePlayers(Data.map, Data.players);
                 }
             });
 

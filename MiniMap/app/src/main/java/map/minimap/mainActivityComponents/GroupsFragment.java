@@ -19,6 +19,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import map.minimap.R;
+import map.minimap.helperClasses.FacebookHelper;
 
 
 /**
@@ -41,7 +42,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ArrayList<String> OptionsList;                //The list of games we have available for users
+    private ArrayList<String> OptionsList;                //The list of games we have available for players
     private static ListView OptionsListView;    //The Actual UI element id for our games list
     private Context context;
 
@@ -116,6 +117,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                 if(position==0){
                     //List friends who use the app
                     //helper.listFriends(context);
+                    FacebookHelper.getFriendsList();
 
 
                 }

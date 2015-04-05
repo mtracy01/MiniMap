@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by Joe Coy on 2/20/2015.
@@ -35,7 +36,7 @@ public class User {
     private Game currentGame;
 
     private Marker marker;  //Location object for GoogleMap
-    private User friends[];
+    private ArrayList<User> friends;
 
     public User(String id) {
 
@@ -70,7 +71,7 @@ public class User {
         this.ID = ID;
     }
 
-    public User[] getFriends() {
+    public ArrayList<User> getFriends() {
         /*return friends;*/
         /* make the API call */
         /*new Request(
@@ -88,7 +89,7 @@ public class User {
         return friends;
     }
 
-    public void setFriends(User[] friends) {
+    public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
     }
 

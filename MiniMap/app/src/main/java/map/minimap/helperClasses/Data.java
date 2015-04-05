@@ -20,7 +20,7 @@ public class Data {
     //Things for the application to store
     public static Activity mainAct;
     public static User user;// = new User("a");
-    public static ArrayList<User> users;
+    public static ArrayList<User> players;
     public static String gameId;
     public static ServerConnection client;
     public static GoogleMap map;
