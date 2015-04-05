@@ -28,6 +28,7 @@ import com.facebook.login.LoginManager;
 import map.minimap.LoginActivity;
 import map.minimap.R;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.FacebookHelper;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -257,22 +258,15 @@ public class NavigationDrawerFragment extends Fragment {
 
         //If logout button is selected
         if (item.getItemId() == R.id.action_logout) {
-            //logout of facebook
-            LoginManager manager = LoginManager.getInstance();
-            manager.logOut();
+
+            //Run logout procedures
+            FacebookHelper.logout();
 
             //return to loginActivity
             Intent returnToLoginPage = new Intent(getActivity(),LoginActivity.class);
             startActivity(returnToLoginPage);
-            Toast.makeText(getActivity(), "Logout", Toast.LENGTH_SHORT).show();
-
-            //Destroy GPS thread and client (if they exist
-            if(Data.gps!=null)      Data.gps.destroyListener();
-            if(Data.client!=null)   Data.client.closeSocket();
-            Data.client = null;
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

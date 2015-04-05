@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -21,7 +20,6 @@ import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -30,7 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.ServerConnection;
@@ -48,13 +45,11 @@ public class LoginActivity extends FragmentActivity {
     private PendingAction pendingAction = PendingAction.NONE;
     private final String PENDING_ACTION_BUNDLE_KEY =
             "com.facebook.samples.hellofacebook:PendingAction";
-    private ProfileTracker profileTracker;
     private enum PendingAction {
         NONE,
         POST_PHOTO,
         POST_STATUS_UPDATE
     }
-    private LoginResult result=null;
 
     private int startCount=0;
     @Override
@@ -65,25 +60,24 @@ public class LoginActivity extends FragmentActivity {
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
         Data.mainAct=getParent();
+
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
         if(loginButton!=null) {
             ArrayList<String> permissions = new ArrayList<>(2);
-
             permissions.add("public_profile");
             permissions.add("user_friends");
-
             loginButton.setReadPermissions(permissions);
         }
         else{
             Log.e(LOG_TAG,"Null loginButton");
         }
+
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.v(LOG_TAG, "SUCCESSful:D");
                         Log.v(LOG_TAG, "Granted Permissions: " + loginResult.getRecentlyGrantedPermissions());
-                        result = loginResult;
 
                         //Graph request to get our user's Facebook data
                         GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
@@ -111,7 +105,7 @@ public class LoginActivity extends FragmentActivity {
                                         e.printStackTrace();
                                     }
                                     if (Data.client != null) {
-                                      //  Data.gps = new GPSThread(Data.client);
+                                        Data.gps = new GPSThread(Data.client);
                                     }
                                     //If client fails to be created, log out the user from facebook and do not advance intents to next activity
                                 }
@@ -131,7 +125,7 @@ public class LoginActivity extends FragmentActivity {
                                     toast.show();
 
                                     //Logout
-                                    FacebookHelper.logOut();
+                                    FacebookHelper.logout();
                                 }
                             }
                         };
@@ -148,7 +142,6 @@ public class LoginActivity extends FragmentActivity {
                             pendingAction = PendingAction.NONE;
                         }
                         Log.v(LOG_TAG, "Cancelled");
-                        updateUI();
                     }
 
                     @Override
@@ -159,7 +152,6 @@ public class LoginActivity extends FragmentActivity {
                             pendingAction = PendingAction.NONE;
                         }
                         Log.v(LOG_TAG, "Error!");
-                        updateUI();
                     }
 
                     private void showAlert() {
@@ -188,7 +180,6 @@ public class LoginActivity extends FragmentActivity {
         // launched into.
         AppEventsLogger.activateApp(this);
 
-        updateUI();
     }
 
     @Override
@@ -221,20 +212,6 @@ public class LoginActivity extends FragmentActivity {
        // profileTracker.stopTracking();
     }
 
-    private void updateUI() {
-
-        //If we are already logged in, go ahead to main activity.
-        if(result!=null){
-           // Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-           // startActivity(intent);
-        }
-        boolean enableButtons = AccessToken.getCurrentAccessToken() != null;
-
-
-
-        Profile profile = Profile.getCurrentProfile();
-
-    }
 
 
 
@@ -245,23 +222,7 @@ public class LoginActivity extends FragmentActivity {
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
-    private void handlePendingAction() {
-        PendingAction previouslyPendingAction = pendingAction;
-        // These actions may re-set pendingAction if they are still pending, but we assume they
-        // will succeed.
-        pendingAction = PendingAction.NONE;
 
-        switch (previouslyPendingAction) {
-            case NONE:
-                break;
-            case POST_PHOTO:
-               // postPhoto();
-                break;
-            case POST_STATUS_UPDATE:
-               // postStatusUpdate();
-                break;
-        }
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

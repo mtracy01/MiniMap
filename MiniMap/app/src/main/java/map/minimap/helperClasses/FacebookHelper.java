@@ -1,10 +1,10 @@
 package map.minimap.helperClasses;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
-import com.facebook.GraphRequestAsyncTask;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 
@@ -12,7 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import map.minimap.frameworks.User;
 
@@ -25,13 +24,22 @@ public class FacebookHelper {
 
 
     //Log out of facebook
-    public static void logOut(){
+    public static void logout(){
+
+        //Logout of Facebook
         LoginManager loginManager = LoginManager.getInstance();
         loginManager.logOut();
+
+        //Destroy GPS thread and client (if they exist)
+        if(Data.gps!=null)      Data.gps.destroyListener();
+        if(Data.client!=null)   Data.client.closeSocket();
+        Data.client = null;
+        Toast.makeText(Data.mainAct.getApplicationContext(), "Logout", Toast.LENGTH_SHORT).show();
     }
 
     //returns a list of JSON objects containing the friendsList of a user and relevant information
     public static void getFriendsList(){
+        //Run facebook graph request
         GraphRequest graphRequest = GraphRequest.newMyFriendsRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONArrayCallback() {
             @Override
             public void onCompleted(JSONArray jsonArray, GraphResponse graphResponse) {
@@ -58,6 +66,5 @@ public class FacebookHelper {
             }
         });
         graphRequest.executeAsync();
-        //return;
     }
 }
