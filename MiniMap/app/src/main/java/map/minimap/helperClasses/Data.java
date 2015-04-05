@@ -27,5 +27,6 @@ public class Data {
     public static GoogleMap map;
     public static SyncedMapFragment mapFragment;
     public static GPSThread gps;
+    public static int loggedInFlag=0;
 
 }

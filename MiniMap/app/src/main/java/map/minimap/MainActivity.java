@@ -59,11 +59,11 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_main);
-       /* MediaPlayer mMediaPlayer;
-        mMediaPlayer = MediaPlayer.create(this,);
+        MediaPlayer mMediaPlayer;
+        mMediaPlayer = MediaPlayer.create(this,R.raw.hojus);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setLooping(false);
-        mMediaPlayer.start();*/
+        mMediaPlayer.start();
         Log.v("startMiniMap", "Starting MainActivity");
 
         //Create client if one is not already created

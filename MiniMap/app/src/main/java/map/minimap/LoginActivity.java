@@ -119,8 +119,9 @@ public class LoginActivity extends FragmentActivity {
                                 if (Data.client != null) {
                                     Log.v(LOG_TAG, "Client is not NULL, proceeding to login");
                                     FacebookHelper.getFriendsList();
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
+                                    Data.loggedInFlag=1;
+                                   // Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                   // startActivity(intent);
                                 }
                                 //We did not communicate successfully, log back out of facebook
                                 else {
@@ -175,7 +176,7 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(AccessToken.getCurrentAccessToken()!=null){
+        if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==0){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }
