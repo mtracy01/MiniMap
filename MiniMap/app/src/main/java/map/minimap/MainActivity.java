@@ -1,6 +1,9 @@
 package map.minimap;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentManager;
@@ -56,6 +59,11 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_main);
+       /* MediaPlayer mMediaPlayer;
+        mMediaPlayer = MediaPlayer.create(this,);
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.setLooping(false);
+        mMediaPlayer.start();*/
         Log.v("startMiniMap", "Starting MainActivity");
 
         //Create client if one is not already created
