@@ -33,5 +33,6 @@
     <string name="cancelled">Login cancelled</string>
     <string name="permission_not_granted">Permission not granted</string>
     <string name="action_logout">Logout</string>
+    <string name="description">Image</string>
 
 </resources>

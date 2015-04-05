@@ -2,11 +2,13 @@ package map.minimap;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -57,6 +59,8 @@ public class LoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_login);
+        ImageView loginImage = (ImageView)findViewById(R.id.imageView);
+        loginImage.setImageDrawable(getResources().getDrawable(R.drawable.minimaplogo));
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
         Data.mainAct=getParent();

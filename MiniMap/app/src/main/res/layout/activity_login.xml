@@ -25,7 +25,15 @@
         android:id="@+id/imageView"
         android:background="@drawable/minimaplogo"
         android:layout_above="@+id/login_button"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/description"
+        android:clickable="false"
+        android:src="@drawable/minimaplogo"
+        android:adjustViewBounds="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentBottom="false" />
 
 
 </RelativeLayout>
