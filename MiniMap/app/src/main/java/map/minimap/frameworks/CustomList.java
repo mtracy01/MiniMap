@@ -1,14 +1,11 @@
 package map.minimap.frameworks;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.widget.ArrayAdapter;
-
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +32,6 @@ public class CustomList extends ArrayAdapter<String> {
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
         txtTitle.setText(web[position]);
-        //imageView.setImageResource(imageId[position]);
         imageView.setImageBitmap(imageId[position]);
         return rowView;
     }

@@ -28,7 +28,6 @@ public class ServerConnection extends Thread {
     public static final int SERVER_PORT = 2048;
     public static final String SERVER_IP = "tracy94.com";
 
-    //private map.minimap.MainActivity activity;
     private Socket socket;
     private String user_ID;
     // Input/output
@@ -41,7 +40,6 @@ public class ServerConnection extends Thread {
     private String newGameType;
 
     public ServerConnection( String ID) {
-      //  this.activity =  activity;
 
         connected = false;
         user_ID = ID;
@@ -77,7 +75,7 @@ public class ServerConnection extends Thread {
         // We are connected
         connected = true;
         try {
-            String line = null;
+            String line;
             while(in.hasNextLine()) {
                 line = in.nextLine();
                 handleMessage(line);

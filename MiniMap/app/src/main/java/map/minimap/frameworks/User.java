@@ -1,11 +1,8 @@
 package map.minimap.frameworks;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**

@@ -14,9 +14,9 @@ public class Team {
 	private ArrayList<Beacon> beacons;
 	
 	public Team(int tid) {
-		users = new ArrayList<User>();
+		users = new ArrayList<>();
 		this.teamID = tid;
-		beacons = new ArrayList<Beacon>();
+		beacons = new ArrayList<>();
 	}
 	
 	/**
