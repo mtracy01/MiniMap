@@ -158,18 +158,21 @@ public class ServerConnection extends Thread {
                 Data.user.setGame(new FriendFinderGame());
                 Data.user.setInGame(true);
             } else if (parts[0].equals("users")) {
-                Data.players = new ArrayList<>();
+                //Data. = new ArrayList<>();
                 for(int i =1; i < parts.length;i++){
+
+                    //If the user is in our friends list, add them to the invitable users list
                     User user = Data.user.findUserById(parts[i]);
-                    if(user!=null)
-                        Data.players.add(user);
-                    else
-                        Data.players.add(new User(parts[i]));
+                    if(user!=null && user.getID()!=Data.user.getID())
+                        Data.invitableUsers.add(user);
+                    /*else
+                        Data.players.add(new User(parts[i]));*/
                 }
-                for(User u : Data.players){
+               /*for(User u : Data.players){
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
-                }
+                }*/
                 LobbyFragment.changeGrid();
+                Data.clientDoneFlag=1;
             } else if(parts[0].equals("gameStart")) {
                 Maps.setCenterPosition(Data.user);
                 // TODO: Don't make this only start friend finder...

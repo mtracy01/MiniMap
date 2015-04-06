@@ -17,11 +17,10 @@ import com.google.android.gms.maps.GoogleMap;
  * Purpose: Store global data that is used throughout the application
  */
 public class Data {
-    // this will be our controller
     //Things for the application to store
     public static Activity mainAct;
-    public static User user;// = new User("a");
-    public static ArrayList<User> players;
+    public static User user;
+
     public static String gameId;
     public static ServerConnection client;
     public static GoogleMap map;
@@ -29,4 +28,10 @@ public class Data {
     public static GPSThread gps;
     public static int loggedInFlag=0;
 
+    public static ArrayList<User> lobbyUsers     = new ArrayList<>();         //Users in the lobby currently
+    public static ArrayList<User> invitableUsers = new ArrayList<>();        //Possible users that can be invited.  This is displayed in the invite dialog
+    public static ArrayList<User> selectedUsers  = new ArrayList<>();       //Users selected to be invited in the invite dialog
+    public static ArrayList<User> players        = new ArrayList<>();      //Players in the current game
+
+    public static int clientDoneFlag = 0;                                 //Flag for syncing between tasks
 }

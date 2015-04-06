@@ -1,10 +1,14 @@
 package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -16,12 +20,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import map.minimap.R;
 import map.minimap.frameworks.customUIResources.CustomList;
+import map.minimap.frameworks.customUIResources.CustomListInvite;
 import map.minimap.helperClasses.Data;
 
 /**
  * Created by Corey on 2/22/2015.
  */
 public class LobbyFragment extends android.support.v4.app.Fragment {
+
+    private String LOG_TAG = "LobbyFragment";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -99,9 +106,44 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
         //inviteButton.setBackground();
         inviteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //Data.client.getAllUsers();
+                /*Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.invite_dialog);
+                dialog.Set*/
                 Data.client.getAllUsers();
-                //  FacebookHelper helper = new FacebookHelper();
-                //  helper.inviteFriends(view.getContext());
+
+                //Do nothing while the client gets invitable users
+                while(Data.clientDoneFlag==0){}
+
+                //when done, reset the client done flag and perform the dialog task
+                Data.clientDoneFlag=0;
+                Log.v(LOG_TAG,"InvitableUsersSize: " + Data.invitableUsers.size());
+                String[] playersArray = new String[Data.invitableUsers.size()];
+                Bitmap[] playersPics  = new Bitmap[Data.invitableUsers.size()];
+                for(int i=0;i<Data.invitableUsers.size();i++){
+                    playersArray[i]=Data.invitableUsers.get(i).getID();
+                    playersPics[i]=Data.invitableUsers.get(i).getProfilePhoto();
+                }
+                CustomListInvite inviteAdapter = new CustomListInvite(getActivity(),playersArray,playersPics);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Invite Online Friends");
+                builder.setAdapter(inviteAdapter, null);
+                builder.setPositiveButton("Invite", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Data.client.sendMessage("invite");
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
 
             }
         });
@@ -115,10 +157,11 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
         }
         adapter = new CustomList(getActivity(),playersArray,playersPics);
         playerListView.setAdapter(adapter);
+
         return view;
     }
     public static void changeGrid(){
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
