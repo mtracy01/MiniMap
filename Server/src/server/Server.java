@@ -90,6 +90,7 @@ public class Server extends Thread {
 	 */
 	public boolean addUser(User u) {
 		synchronized (connectedUsers) {
+			// If the heartbeat is past the timeout, remove the old user
 			if (connectedUsers.contains(u)) {
 				User previous = null;
 				for (User user : connectedUsers) {
@@ -102,7 +103,8 @@ public class Server extends Thread {
 					long currentTime = System.currentTimeMillis();
 					if (currentTime - previous.getLastHeartBeat() > TIMEOUT) {
 						log.fine("Removing preexisting user");
-						connectedUsers.remove(u);
+						previous.closeSocket();
+						connectedUsers.remove(previous);
 					}
 				}
 			}
