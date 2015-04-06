@@ -122,7 +122,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
                     String[] playersArray = new String[Data.invitableUsers.size()];
                     Bitmap[] playersPics = new Bitmap[Data.invitableUsers.size()];
                     for (int i = 0; i < Data.invitableUsers.size(); i++) {
-                        playersArray[i] = Data.invitableUsers.get(i).getID();
+                        playersArray[i] = Data.invitableUsers.get(i).getName();
                         playersPics[i] = Data.invitableUsers.get(i).getProfilePhoto();
                     }
                     CustomListInvite inviteAdapter = new CustomListInvite(getActivity(), playersArray, playersPics);
