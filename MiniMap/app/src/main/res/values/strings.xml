@@ -26,6 +26,7 @@
     <string name="action_example">Example action</string>
     <string name="title_activity_sardines">Sardines</string>
     <string name="title_activity_marco_polo">MarcoPolo</string>
+    <string name="title_activity_assassins">Assassins</string>
 
     <!-- Login Activity Strings -->
     <string name="title_activity_login">LoginActivity</string>

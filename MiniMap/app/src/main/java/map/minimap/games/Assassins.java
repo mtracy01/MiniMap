@@ -22,7 +22,7 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        setContentView(R.layout.activity_marco_polo);
+        setContentView(R.layout.activity_assassins);
         if (savedInstanceState == null) {
           //  map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
           //  map.getMapAsync(this);
@@ -39,7 +39,7 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_marco_polo, menu);
+        getMenuInflater().inflate(R.menu.menu_assassins, menu);
         return true;
     }
 
