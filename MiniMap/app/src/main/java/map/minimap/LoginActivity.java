@@ -53,7 +53,6 @@ public class LoginActivity extends FragmentActivity {
         POST_STATUS_UPDATE
     }
 
-    private int logCount=0;
     private int startCount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class LoginActivity extends FragmentActivity {
         callbackManager = CallbackManager.Factory.create();
         Data.mainAct=this;
 
-        /*LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
+        LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
         if(loginButton!=null) {
             ArrayList<String> permissions = new ArrayList<>(2);
             permissions.add("public_profile");
@@ -76,8 +75,12 @@ public class LoginActivity extends FragmentActivity {
         }
         else{
             Log.e(LOG_TAG,"Null loginButton");
-        }*/
-
+        }
+        if(AccessToken.getCurrentAccessToken()!=null){
+            Log.i(LOG_TAG,"TRUE");
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
 
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -121,8 +124,7 @@ public class LoginActivity extends FragmentActivity {
                                 if (Data.client != null) {
                                     Log.v(LOG_TAG, "Client is not NULL, proceeding to login");
                                     FacebookHelper.getFriendsList();
-                                    logCount++;
-
+                                    Data.loggedInFlag=1;
                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                    startActivity(intent);
                                 }
@@ -179,7 +181,7 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==1 && logCount==1){
+        if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==1){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }

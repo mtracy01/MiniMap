@@ -32,6 +32,7 @@ public class FacebookHelper {
     public static void logout(){
 
         //Logout of Facebook
+        Data.loggedInFlag=0;
         LoginManager loginManager = LoginManager.getInstance();
         loginManager.logOut();
 
