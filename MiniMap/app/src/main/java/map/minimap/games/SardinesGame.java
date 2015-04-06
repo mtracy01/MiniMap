@@ -90,7 +90,7 @@ public class SardinesGame extends Game {
                     if (Data.map == null) {
                         return;
                     }
-                    for (User u : Data.users) {
+                    for (User u : Data.players) {
                         if (u.getMarker() != null) {
                             u.getMarker().remove();
                         }
