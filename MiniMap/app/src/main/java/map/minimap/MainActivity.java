@@ -66,7 +66,7 @@ public class MainActivity extends ActionBarActivity
         mMediaPlayer.setLooping(false);
         mMediaPlayer.start();
         Log.v("startMiniMap", "Starting MainActivity");
-
+        Data.loggedInFlag=1;
         //Create client if one is not already created
         if(Data.client==null) {
             GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
