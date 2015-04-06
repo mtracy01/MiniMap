@@ -24,6 +24,7 @@ import map.minimap.R;
 import map.minimap.frameworks.customUIResources.CustomList;
 import map.minimap.frameworks.customUIResources.CustomListInvite;
 import map.minimap.helperClasses.Data;
+import map.minimap.frameworks.User;
 
 /**
  * Created by Corey on 2/22/2015.
@@ -131,7 +132,14 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
                     builder.setPositiveButton("Invite", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Data.client.sendMessage("invite");
+                            StringBuilder builder = new StringBuilder();
+                            builder.append("invite ");
+                            builder.append(Data.gameId);
+                            for (User u : Data.selectedUsers) {
+                                builder.append(' ');
+                                builder.append(u.getID());
+                            }
+                            Data.client.sendMessage(builder.toString());
                             dialog.dismiss();
                         }
                     });
