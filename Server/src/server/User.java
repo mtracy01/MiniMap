@@ -54,18 +54,9 @@ public class User extends Thread {
 	private Location location;
 	
 	/**
-	 * @return the location
+	 * The time of the last heartbeat
 	 */
-	public Location getLocation() {
-		return location;
-	}
-
-	/**
-	 * @param location the location to set
-	 */
-	public void setLocation(Location location) {
-		this.location = location;
-	}
+	private long lastHeartBeat;
 
 	public User(Socket socket, Server server) {
 		this.socket = socket;
@@ -254,6 +245,34 @@ public class User extends Thread {
 	 */
 	public void setGameSession(GameSession gameSession) {
 		this.gameSession = gameSession;
+	}
+	
+	/**
+	 * @return the location
+	 */
+	public Location getLocation() {
+		return location;
+	}
+
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	/**
+	 * @return the lastHeartBeat
+	 */
+	public long getLastHeartBeat() {
+		return lastHeartBeat;
+	}
+
+	/**
+	 * @param lastHeartBeat the lastHeartBeat to set
+	 */
+	public void setLastHeartBeat(long lastHeartBeat) {
+		this.lastHeartBeat = lastHeartBeat;
 	}
 
 	/**

@@ -36,6 +36,10 @@ public class MessageHandler {
 		}
 		log.fine("message \"" + message + "\" received from user " + user);
 		switch(messageParts[0]) {
+			case "heartbeat":
+				log.fine("Heartbeat received from user: " + user);
+				user.setLastHeartBeat(System.currentTimeMillis());
+				break;
 			case "createGame":
 				//createGame(messageParts[1]);
 				

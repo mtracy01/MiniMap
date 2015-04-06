@@ -23,6 +23,11 @@ public class Server extends Thread {
 	public static final int SERVER_PORT = 2048;
 	
 	/**
+	 * Timeout is 11 seconds
+	 */
+	public static final long TIMEOUT = 11000;
+	
+	/**
 	 * A list of connected clients
 	 */
 	private Set<User> connectedUsers;
@@ -85,7 +90,22 @@ public class Server extends Thread {
 	 */
 	public boolean addUser(User u) {
 		synchronized (connectedUsers) {
-			log.fine("User already exists, removing old user.");
+			if (connectedUsers.contains(u)) {
+				User previous = null;
+				for (User user : connectedUsers) {
+					if (user.equals(u)) {
+						previous = user;
+						break;
+					}
+				}
+				if (previous != null) {
+					long currentTime = System.currentTimeMillis();
+					if (currentTime - previous.getLastHeartBeat() > TIMEOUT) {
+						log.fine("Removing preexisting user");
+						connectedUsers.remove(u);
+					}
+				}
+			}
 			boolean success = connectedUsers.add(u);
 			log.fine(connectedUsers.size() + " connected clients.");
 			return success;

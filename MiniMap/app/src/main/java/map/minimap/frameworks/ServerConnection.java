@@ -71,13 +71,16 @@ public class ServerConnection extends Thread {
             }
 
             Log.e("ServerConnection", "Could not connect to server");
-
+            closeSocket();
             // Return
             return;
         }
 
         // We are connected
         connected = true;
+
+        startHeartBeat();
+
         try {
             String line;
             while(in.hasNextLine()) {
@@ -230,6 +233,33 @@ public class ServerConnection extends Thread {
 
     public boolean isConnected() {
         return connected;
+    }
+
+    /**
+     * Start sending the heartbeat message every 5 seconds
+     */
+    private void startHeartBeat() {
+        new HeartBeatThread(this).start();
+    }
+
+    class HeartBeatThread extends Thread {
+        public static final int HEARTBEAT_INTERVAL = 5000;
+        private ServerConnection connection;
+
+        public HeartBeatThread(ServerConnection connection) {
+            this.connection = connection;
+        }
+
+        public void run() {
+            while (connection.isConnected()) {
+                connection.sendMessage("heartbeat");
+                try {
+                    Thread.sleep(HEARTBEAT_INTERVAL);
+                } catch (Exception e) {
+                    // Don't do anything
+                }
+            }
+        }
     }
 
     /**
