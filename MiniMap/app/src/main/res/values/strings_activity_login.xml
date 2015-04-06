@@ -10,4 +10,8 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+
+    <!-- Strings related to Friend Status fragment -->
+    <string name="refresh">Refresh</string>
+
 </resources>

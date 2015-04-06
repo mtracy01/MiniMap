@@ -1,7 +1,6 @@
 package map.minimap.helperClasses;
 import android.app.Activity;
-
-
+import android.widget.RadioButton;
 
 
 import java.util.ArrayList;
@@ -18,16 +17,18 @@ import com.google.android.gms.maps.GoogleMap;
  */
 public class Data {
     //Things for the application to store
-    public static Activity mainAct;
-    public static User user;
+    public static Activity mainAct;                               //The activity that is responsible for taking care of the GPS thread
+    public static User user;                                     //The user that is using this application
 
-    public static String gameId;
-    public static ServerConnection client;
-    public static GoogleMap map;
-    public static SyncedMapFragment mapFragment;
-    public static GPSThread gps;
-    public static int loggedInFlag=0;
+    public static String gameId;                                //The id of the application's current game session
+    public static ServerConnection client;                     //The client side server communication object
+    public static GoogleMap map;                              //The actual Google map displayed in the mapFragment when the game session is running
+    public static SyncedMapFragment mapFragment;             //Custom mapFragment for maintaining asynchronous location updates
+    public static GPSThread gps;                            //The client's current GPS thread
+    public static int loggedInFlag=0;                      //Flag used to determine whether the person is already logged in when the app is reopened
 
+
+    //Items used in Lobby fragment and game
     public static ArrayList<User> lobbyUsers     = new ArrayList<>();         //Users in the lobby currently
     public static ArrayList<User> invitableUsers = new ArrayList<>();        //Possible users that can be invited.  This is displayed in the invite dialog
     public static ArrayList<User> selectedUsers  = new ArrayList<>();       //Users selected to be invited in the invite dialog

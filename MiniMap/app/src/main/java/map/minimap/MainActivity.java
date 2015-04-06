@@ -27,6 +27,7 @@ import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
 import map.minimap.helperClasses.FacebookHelper;
+import map.minimap.mainActivityComponents.FriendStatus;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
 import map.minimap.mainActivityComponents.InvitationsFragment;
@@ -35,7 +36,7 @@ import map.minimap.mainActivityComponents.SettingsFragment;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, GamesFragment.OnFragmentInteractionListener, GroupsFragment.OnFragmentInteractionListener, InvitationsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener  {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, GamesFragment.OnFragmentInteractionListener, FriendStatus.OnFragmentInteractionListener, GroupsFragment.OnFragmentInteractionListener, InvitationsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener  {
 
     public void onFragmentInteraction(Uri uri){
 
@@ -136,10 +137,15 @@ public class MainActivity extends ActionBarActivity
                     break;
             case 2:
                 fragmentManager.beginTransaction()
+                        .replace(R.id.container, FriendStatus.newInstance("a","b"))
+                        .commit();
+                break;
+            case 3:
+                fragmentManager.beginTransaction()
                     .replace(R.id.container, InvitationsFragment.newInstance("a", "b"))
                     .commit();
                     break;
-            case 3:
+            case 4:
                 fragmentManager.beginTransaction()
                     .replace(R.id.container, SettingsFragment.newInstance("a", "b"))
                     .commit();

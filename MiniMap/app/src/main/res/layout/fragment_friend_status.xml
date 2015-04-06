@@ -1,0 +1,19 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="map.minimap.mainActivityComponents.FriendStatus">
+
+    <ListView
+        android:id="@+id/friendListView"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"></ListView>
+
+    <Button
+        android:id="@+id/refreshButton"
+        android:text="@string/refresh"
+        android:background="@drawable/com_facebook_tooltip_blue_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal|bottom"/>
+</FrameLayout>
