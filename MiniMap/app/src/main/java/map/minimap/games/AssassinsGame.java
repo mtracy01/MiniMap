@@ -5,21 +5,24 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
 import map.minimap.frameworks.Game;
-import map.minimap.frameworks.Maps;
+import map.minimap.frameworks.MapResources.LatLngInterpolator;
+import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 //TODO: Specifics of Sardines
 public class AssassinsGame extends Game {
 
+    private String LOG_TAG = "AssasinsGame";
     //private static final Logger log = Logger.getLogger( Server.class.getName() );
-
+    private User target;
 
     public AssassinsGame() {
-
+         target = null;
     }
 
 
@@ -33,10 +36,10 @@ public class AssassinsGame extends Game {
     @Override
     public void handleMessage(String message) {
         // TODO Auto-generated method stub
-        Log.v("Sardines Game", message); //I just changed this to Sardines...
+        Log.v("Assassins Game", message); //I just changed this to Sardines...
         String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
-            User u = findUserbyId(parts[1], Data.users);
+            User u = findUserbyId(parts[1], Data.players);
             if (u == null) {
                 return;
             }
@@ -54,13 +57,30 @@ public class AssassinsGame extends Game {
                     if (Data.map == null) {
                         return;
                     }
-                    for (User u : Data.users) {
+                   /* for (User u : Data.players) {
                         if (u.getMarker() != null) {
                             u.getMarker().remove();
                         }
                     }
-                    Data.map.clear();
-                    Maps.initializePlayers(Data.map, Data.users);
+                    Data.map.clear();*/
+                    ArrayList<User> players = new ArrayList<User>();
+                    players.add(owner);
+                    if (target != null) {
+                        players.add(target);
+                    }
+
+                    LatLngInterpolator mLatLngInterpolator;
+                    for(User u : players) {
+                        if(u.getMarker() != null){
+                            mLatLngInterpolator = new LatLngInterpolator.Linear();
+                            Data.mapFragment.animateMarkerToGB(u.getMarker(), u.getCoordinates(), mLatLngInterpolator, 1500);
+                        }
+                        else{
+                            //Note: this is safety code in case a user marker does not exist. **This should never be run!!!**
+                            Log.e(LOG_TAG,"User marker did not exist! Creating one in FriendFinderGame...");
+                            u.setMarker(Data.map.addMarker(new MarkerOptions().position(u.getCoordinates())));
+                        }
+                    }
                 }
             });
 
@@ -68,7 +88,28 @@ public class AssassinsGame extends Game {
 
         } else if (parts[0].equals("removebeacon")) {
 
+        } else if (parts[0].equals("target")) {
+            User u = findUserbyId(parts[1], Data.players);
+            if (u == null) {
+                return;
+            }
+            target = u;
+
+        } else if (parts[0].equals("acceptDeath")) {
+
+
+
+        } else if (parts[0].equals("acceptKill")) {
+            target = null;
+
+
+        } else if (parts[0].equals("kill")) {
+
+        } else {
+
         }
+
+
 
     }
 

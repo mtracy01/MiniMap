@@ -121,7 +121,7 @@ public class User extends Thread {
 		// We add the client to the server here because we know we can read/write from it
 		boolean added = server.addUser(this);
 		if (!added) {
-			log.log(Level.WARNING, "User not added, id already exists");
+			log.log(Level.WARNING, "User not added");
 			connected = false;
 			return;
 		}

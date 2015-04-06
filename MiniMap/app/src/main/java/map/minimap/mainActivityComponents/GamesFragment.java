@@ -38,7 +38,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
     private String mParam2;
 
 
-    private ArrayList<String> GamesList;                //The list of games we have available for users
+    private ArrayList<String> GamesList;                //The list of games we have available for players
     private static ListView GamesListView;    //The Actual UI element id for our games list
     private Context context;
     private OnFragmentInteractionListener mListener;
@@ -112,13 +112,13 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                         break;
                 }
 
-                // Add ourselves to the list of users
-                if (Data.users == null) {
-                    Data.users = new ArrayList<User>();
+                // Add ourselves to the list of players
+                if (Data.players == null) {
+                    Data.players = new ArrayList<User>();
                 } else {
-                    Data.users.clear();
+                    Data.players.clear();
                 }
-                Data.users.add(Data.user);
+                Data.players.add(Data.user);
 
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));

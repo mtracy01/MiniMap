@@ -85,6 +85,7 @@ public class Server extends Thread {
 	 */
 	public boolean addUser(User u) {
 		synchronized (connectedUsers) {
+			log.fine("User already exists, removing old user.");
 			boolean success = connectedUsers.add(u);
 			log.fine(connectedUsers.size() + " connected clients.");
 			return success;

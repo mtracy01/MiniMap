@@ -1,6 +1,10 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.MapResources;
 
 
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,6 +14,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import map.minimap.R;
+import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
 /**
@@ -20,7 +26,7 @@ import map.minimap.helperClasses.Data;
 public class Maps {
 
     //Debug variables
-    //private static String LOG_TAG= "Maps Helper";
+    private static String LOG_TAG= "Maps";
 
     //Elements of player fields
     private static int height;
@@ -42,14 +48,19 @@ public class Maps {
         switch(mapType){
             case 0:
                 map.setMapType(GoogleMap.MAP_TYPE_NONE);
+                break;
             case 1:
                 map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                break;
             case 2:
                 map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                break;
             case 3:
                 map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                break;
             case 4:
                 map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                break;
         }
 
     }
@@ -82,12 +93,13 @@ public class Maps {
     public static void readyMap(GoogleMap map){
 
         if(calledInitialize){
-            //enable my current location
-            map.setMyLocationEnabled(true);
+            map.setMyLocationEnabled(false);
+
             //initialize players, setting their markers
-            initializePlayers(map, Data.users);
+            initializePlayers(map, Data.players);
             //Move map's camera and set zoom level.  I will make the zoom a variable later
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(),13));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(),18));
+            Log.v("Maps", "Set Center");
             //addPlayersToField(map);
         }
         //if we don't initialize, call Sydney
@@ -112,12 +124,12 @@ public class Maps {
      * @param playerList the list of players in the game
      */
     public static void initializePlayers(GoogleMap map, ArrayList<User> playerList){
-        int length = playerList.size();
+
         hasBorders=false;
         /* create copy of users to store in class */
 
         /* Create markers and put them in respective locatons */
-        for(User user : Data.users){
+        for(User user : Data.players){
 
             /* Convert coordinates to latitude and longitude tuple */
             LatLng latLng = user.getCoordinates();
@@ -129,10 +141,18 @@ public class Maps {
                     //         .title(user.getName()).position(latLng)
                     //         .icon(BitmapDescriptorFactory
                     //                 .fromBitmap(user.getUserImage()))));
+                   if(user.getProfilePhoto()==null) {
+                       Log.e(LOG_TAG,"User didn't have a profile photo! Giving them default profile picture...");
+                       Bitmap big = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait);
+                       big = Bitmap.createScaledBitmap(big,big.getWidth() / 5,big.getHeight() / 5, false);
+                       user.setProfilePhoto(big);
+                   }
+                    Bitmap tmp = user.getProfilePhoto();
+                    Bitmap doubleSized = Bitmap.createScaledBitmap(tmp,tmp.getWidth() * 2,tmp.getHeight() * 2, false);
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+                                    .fromBitmap(doubleSized))));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
                     break;
                 case 1:
                     user.setMarker(map.addMarker(new MarkerOptions()

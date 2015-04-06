@@ -1,11 +1,13 @@
 package map.minimap.frameworks;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
+import android.os.AsyncTask;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import java.net.URL;
+import java.util.ArrayList;
+
+import map.minimap.helperClasses.FacebookHelper;
 
 /**
  * Created by Joe Coy on 2/20/2015.
@@ -22,8 +24,6 @@ public class User {
 
     private LatLng coordinates;
 
-    //Debug tag for logging errors in LogCat
-    private String LOG_TAG="User";
 
     private String name;
     private String ID;
@@ -35,7 +35,8 @@ public class User {
     private Game currentGame;
 
     private Marker marker;  //Location object for GoogleMap
-    private User friends[];
+    private ArrayList<User> friends;
+    private Bitmap profilePhoto;
 
     public User(String id) {
 
@@ -46,6 +47,16 @@ public class User {
         friends = null; //Needs to be specified later
         inGame = false;
         currentGame = null;
+
+        AsyncTask<Void,Void,Void> profileRetriever = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                profilePhoto = FacebookHelper.getFacebookProfilePicture(ID);
+                return null;
+            }
+        };
+        profileRetriever.execute();
+        //profilePhoto = null;//FacebookHelper.getFacebookProfilePicture(ID);
 
     }
 
@@ -62,35 +73,13 @@ public class User {
         this.name = name;
     }
 
-    public String getID() {
-        return ID;
-    }
+    public String getID() { return ID; }
 
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
-    public User[] getFriends() {
-        /*return friends;*/
-        /* make the API call */
-        /*new Request(
-                Data.session,
-                "/{friendlist-id}",
-                null,
-                HttpMethod.GET,
-                new Request.Callback() {
-                    public void onCompleted(Response response) {
-                        GraphObject ourFriends=response.getGraphObject();
-                    }
-                }
-        ).executeAsync();
-        */
+    public ArrayList<User> getFriends() {
         return friends;
     }
 
-    public void setFriends(User[] friends) {
-        this.friends = friends;
-    }
+    public void setFriends(ArrayList<User> friends) { this.friends = friends; }
 
     public void setMarker(Marker m){ marker = m; }
     public Marker getMarker(){ return marker;}
@@ -98,9 +87,7 @@ public class User {
     public void setTeam(int t){ team = t; }
     public int getTeam(){ return team; }
 
-    public boolean getInGame() {
-        return inGame;
-    }
+    public boolean getInGame() { return inGame; }
     public void setInGame(boolean g) {
         inGame = g;
     }
@@ -108,23 +95,18 @@ public class User {
     public Game getGame() {
         return currentGame;
     }
-    public void setGame(Game g) {
-        currentGame = g;
-    }
+    public void setGame(Game g) { currentGame = g;}
 
+    public Bitmap getProfilePhoto() {return profilePhoto;}
+    public void setProfilePhoto(Bitmap profilePhoto){ this.profilePhoto = profilePhoto;}
 
-    //Return the user image
-    public Bitmap getUserImage(){
-        Bitmap userIcon = Bitmap.createBitmap(50,50,Bitmap.Config.ARGB_4444);
-        try{
-            URL img_value;
-            img_value = new URL("https://graph.facebook.com/"+getID()+"/picture");
-            userIcon = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
+    public User findUserById(String id) {
+        for (User u: friends) {
+            if (u.getID().equals(id)) {
+                return u;
+            }
         }
-        catch(Exception e){
-            Log.e(LOG_TAG, "Failed to get User image " + e.getMessage());
+        return null;
 
-        }
-        return userIcon;
     }
 }

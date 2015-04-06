@@ -2,11 +2,14 @@ package map.minimap;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -21,14 +24,18 @@ import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.FacebookHelper;
 
 
 public class LoginActivity extends FragmentActivity {
@@ -40,29 +47,42 @@ public class LoginActivity extends FragmentActivity {
     private PendingAction pendingAction = PendingAction.NONE;
     private final String PENDING_ACTION_BUNDLE_KEY =
             "com.facebook.samples.hellofacebook:PendingAction";
-    private ProfileTracker profileTracker;
     private enum PendingAction {
         NONE,
         POST_PHOTO,
         POST_STATUS_UPDATE
     }
-    private LoginResult result=null;
 
     private int startCount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
+
+        setContentView(R.layout.activity_login);
+        //ImageView loginImage = (ImageView)findViewById(R.id.imageView);
+        //loginImage.setImageDrawable(getResources().getDrawable(R.drawable.minimaplogo));
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
+        Data.mainAct=getParent();
+
+        LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
+        if(loginButton!=null) {
+            ArrayList<String> permissions = new ArrayList<>(2);
+            permissions.add("public_profile");
+            permissions.add("user_friends");
+            loginButton.setReadPermissions(permissions);
+        }
+        else{
+            Log.e(LOG_TAG,"Null loginButton");
+        }
 
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.v(LOG_TAG, "SUCCESSful:D");
-
-                        result = loginResult;
+                        Log.v(LOG_TAG, "Granted Permissions: " + loginResult.getRecentlyGrantedPermissions());
 
                         //Graph request to get our user's Facebook data
                         GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
@@ -74,39 +94,51 @@ public class LoginActivity extends FragmentActivity {
                                 try {
                                     Data.user = new User(jsonObject.getString("id"));
                                     Data.user.setName(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
-                                } catch(JSONException e){
+                                } catch (JSONException e) {
                                     Log.e(LOG_TAG, e.getMessage());
                                 }
 
-                                /*try {
-                                    Thread.sleep(00);
-                                } catch (Exception e){
-                                    Log.e(LOG_TAG,"EXCEPTION ON SLEEP CALL");
-                                }*/
-                                //Starting client (We need to delay this action a little somehow)
-                                if (startCount ==0) {
-                                   Log.v("client", "Starting Client");
-                                   ServerConnection client = new ServerConnection(Data.user.getID());
-                                   Data.client = client;
-                                   client.start();
-                                   try {
-                                       Thread.sleep(200);
-                                   }catch (Exception e) {
-                                       e.printStackTrace();
-                                   }
-                                    GPSThread gpsThread = new GPSThread(Data.client);
+                                //Starting client
+                                if (startCount == 0) {
+                                    Log.v("client", "Starting Client");
+                                    ServerConnection client = new ServerConnection(Data.user.getID());
+                                    Data.client = client;
+                                    client.start();
+                                    try {
+                                        Thread.sleep(400);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    if (Data.client != null) {
+                                        Data.gps = new GPSThread(Data.client);
+                                    }
+                                    //If client fails to be created, log out the user from facebook and do not advance intents to next activity
                                 }
                                 startCount++;
+
+                                if (Data.client != null) {
+                                    Log.v(LOG_TAG, "Client is not NULL, proceeding to login");
+                                    FacebookHelper.getFriendsList();
+                                    Data.loggedInFlag=1;
+                                   // Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                   // startActivity(intent);
+                                }
+                                //We did not communicate successfully, log back out of facebook
+                                else {
+                                    //Display error
+                                    Log.e(LOG_TAG, "Unable to connect to our server, aborting login");
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Unable to connect to Server", Toast.LENGTH_SHORT);
+                                    toast.show();
+
+                                    //Logout
+                                    FacebookHelper.logout();
+                                }
                             }
                         };
                         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
                         graphRequest.executeAsync();
 
 
-                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
-                        //handlePendingAction();
-                        //updateUI();
                     }
 
                     @Override
@@ -115,8 +147,7 @@ public class LoginActivity extends FragmentActivity {
                             showAlert();
                             pendingAction = PendingAction.NONE;
                         }
-                        Log.v(LOG_TAG,"Cancelled");
-                        updateUI();
+                        Log.v(LOG_TAG, "Cancelled");
                     }
 
                     @Override
@@ -126,8 +157,7 @@ public class LoginActivity extends FragmentActivity {
                             showAlert();
                             pendingAction = PendingAction.NONE;
                         }
-                        Log.v(LOG_TAG,"Error!");
-                        updateUI();
+                        Log.v(LOG_TAG, "Error!");
                     }
 
                     private void showAlert() {
@@ -140,14 +170,13 @@ public class LoginActivity extends FragmentActivity {
                 });
 
 
-        setContentView(R.layout.activity_login);
+       // setContentView(R.layout.activity_login);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(AccessToken.getCurrentAccessToken()!=null){
-            //Data.
+        if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==0){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }
@@ -157,7 +186,6 @@ public class LoginActivity extends FragmentActivity {
         // launched into.
         AppEventsLogger.activateApp(this);
 
-        updateUI();
     }
 
     @Override
@@ -190,20 +218,6 @@ public class LoginActivity extends FragmentActivity {
        // profileTracker.stopTracking();
     }
 
-    private void updateUI() {
-
-        //If we are already logged in, go ahead to main activity.
-        if(result!=null){
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
-        }
-        boolean enableButtons = AccessToken.getCurrentAccessToken() != null;
-
-
-
-        Profile profile = Profile.getCurrentProfile();
-
-    }
 
 
 
@@ -214,23 +228,7 @@ public class LoginActivity extends FragmentActivity {
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
-    private void handlePendingAction() {
-        PendingAction previouslyPendingAction = pendingAction;
-        // These actions may re-set pendingAction if they are still pending, but we assume they
-        // will succeed.
-        pendingAction = PendingAction.NONE;
 
-        switch (previouslyPendingAction) {
-            case NONE:
-                break;
-            case POST_PHOTO:
-               // postPhoto();
-                break;
-            case POST_STATUS_UPDATE:
-               // postStatusUpdate();
-                break;
-        }
-    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

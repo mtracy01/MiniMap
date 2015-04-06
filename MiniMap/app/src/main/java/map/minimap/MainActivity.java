@@ -1,6 +1,9 @@
 package map.minimap;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +26,7 @@ import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
+import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
 import map.minimap.mainActivityComponents.InvitationsFragment;
@@ -55,52 +59,48 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_main);
-        Log.v("startMiniMap", "startMiniMap");
-
+        MediaPlayer mMediaPlayer;
+        mMediaPlayer = MediaPlayer.create(this,R.raw.hojus);
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.setLooping(false);
+        mMediaPlayer.start();
+        Log.v("startMiniMap", "Starting MainActivity");
 
         //Create client if one is not already created
-
-        GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
-            @Override
-            public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
-                //Add user data into our user object here
-                String rawResponse = jsonObject.toString();
-                Log.v(LOG_TAG, "Raw Response from Request:" + rawResponse);
-                try {
-                    Data.user = new User(jsonObject.getString("id"));
-                    Data.user.setName(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
-                } catch(JSONException e){
-                    Log.e(LOG_TAG, e.getMessage());
-                }
-
-                //Starting client (We need to delay this action a little somehow)
-                if (Data.client==null) {
-                    Log.v("client", "Starting Client");
-                    ServerConnection client = new ServerConnection(Data.user.getID());
-                    Data.client = client;
-                    client.start();
+        if(Data.client==null) {
+            GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
+                @Override
+                public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                    //Add user data into our user object here
+                    String rawResponse = jsonObject.toString();
+                    Log.v(LOG_TAG, "Raw Response from Request:" + rawResponse);
                     try {
-                        Thread.sleep(200);
-                    }catch (Exception e) {
-                        e.printStackTrace();
+                        Data.user = new User(jsonObject.getString("id"));
+                        Data.user.setName(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
+                    } catch (JSONException e) {
+                        Log.e(LOG_TAG, e.getMessage());
                     }
-                    GPSThread gpsThread = new GPSThread(Data.client);
+
+                    //Starting client (We need to delay this action a little somehow)
+                    if (Data.client == null) {
+                        Log.v("client", "Starting Client");
+                        ServerConnection client = new ServerConnection(Data.user.getID());
+                        Data.client = client;
+                        client.start();
+                        try {
+                            Thread.sleep(200);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Data.gps = new GPSThread(Data.client);
+                    }
+                    FacebookHelper.getFriendsList();
                 }
-            }
-        };
-        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
-        graphRequest.executeAsync();
-
-        //Get our variables from LoginActivity
-        /*Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            //Session.setActiveSession((Session) extras.getSerializable("fb_session"));
-
-            Log.e(LOG_TAG,"SUCCESS");
+            };
+            GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
+            graphRequest.executeAsync();
         }
-        else{
-            Log.e(LOG_TAG, "FAILURE");
-        }*/
+
         //Link to XML fragments
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);

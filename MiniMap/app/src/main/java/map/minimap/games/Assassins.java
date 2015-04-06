@@ -11,7 +11,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.R;
-import map.minimap.frameworks.Maps;
+import map.minimap.frameworks.MapResources.Maps;
 
 
 public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
@@ -24,8 +24,8 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_marco_polo);
         if (savedInstanceState == null) {
-            map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
-            map.getMapAsync(this);
+          //  map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
+          //  map.getMapAsync(this);
 
         }
     }

@@ -14,24 +14,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import map.minimap.FriendFinder;
-import map.minimap.LoginActivity;
+import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.games.AssassinsGame;
 import map.minimap.games.FriendFinderGame;
 import map.minimap.games.SardinesGame;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.LobbyFragment;
 
 import android.widget.Toast;
 
-import com.facebook.login.LoginManager;
-
 
 public class ServerConnection extends Thread {
+
+    private String LOG_TAG = "ServerConnection";
 
     public static final int SERVER_PORT = 2048;
     public static final String SERVER_IP = "tracy94.com";
 
-    //private map.minimap.MainActivity activity;
     private Socket socket;
     private String user_ID;
     // Input/output
@@ -44,7 +44,6 @@ public class ServerConnection extends Thread {
     private String newGameType;
 
     public ServerConnection( String ID) {
-      //  this.activity =  activity;
 
         connected = false;
         user_ID = ID;
@@ -80,7 +79,7 @@ public class ServerConnection extends Thread {
         // We are connected
         connected = true;
         try {
-            String line = null;
+            String line;
             while(in.hasNextLine()) {
                 line = in.nextLine();
                 handleMessage(line);
@@ -109,18 +108,28 @@ public class ServerConnection extends Thread {
 
             if(parts[0].equals("gameUsers")){
 
-                // Remove all current users
-                if (Data.users == null) {
-                    Data.users = new ArrayList<User>();
+                // Remove all current players
+                if (Data.players == null) {
+                    Data.players = new ArrayList<>();
                 } else {
-                    Data.users.clear();
+                    Data.players.clear();
                 }
                 for(int i =1; i < parts.length; i++){
                     // Add the existing user if it is us, otherwise create a new one
                     if (Data.user.getID().equals(parts[i])) {
-                        Data.users.add(Data.user);
+                        Data.players.add(Data.user);
                     } else {
-                        Data.users.add(new User(parts[i]));
+                        User user = Data.user.findUserById(parts[i]);
+                        if(user==null) {
+                            user = new User(parts[i]);
+                            //TODO: we need to add name here, but don't have the name from server yet***
+                            try{
+                                Thread.sleep(200);
+                            } catch(Exception e){
+                                Log.e(LOG_TAG,"Exception on sleep thread for null user handling!");
+                            }
+                        }
+                        Data.players.add(user);
                    }
                 }
                 LobbyFragment.changeGrid();
@@ -149,11 +158,15 @@ public class ServerConnection extends Thread {
                 Data.user.setGame(new FriendFinderGame());
                 Data.user.setInGame(true);
             } else if (parts[0].equals("users")) {
-                Data.users = new ArrayList<User>();
+                Data.players = new ArrayList<>();
                 for(int i =1; i < parts.length;i++){
-                    Data.users.add(new User(parts[i]));
+                    User user = Data.user.findUserById(parts[i]);
+                    if(user!=null)
+                        Data.players.add(user);
+                    else
+                        Data.players.add(new User(parts[i]));
                 }
-                for(User u : Data.users){
+                for(User u : Data.players){
                     Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
                 }
                 LobbyFragment.changeGrid();

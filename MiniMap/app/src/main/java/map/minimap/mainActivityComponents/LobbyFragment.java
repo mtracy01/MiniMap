@@ -2,7 +2,8 @@ package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,11 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import java.util.ArrayList;
 import map.minimap.R;
+import map.minimap.frameworks.customUIResources.CustomList;
 import map.minimap.helperClasses.Data;
 
 /**
@@ -25,7 +26,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static ArrayAdapter<String> adapter = null;
+    private static CustomList adapter = null;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -104,10 +105,15 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
 
             }
         });
-        String[] playersArray = new String[Data.users.size()];
-        for(int i =0; i < Data.users.size();i++)
-            playersArray[i] = Data.users.get(i).getName();
-        adapter = new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,playersArray);
+        String[] playersArray = new String[Data.players.size()];
+        Bitmap[] playersPics  = new Bitmap[Data.players.size()];
+        for(int i =0; i < Data.players.size();i++) {
+            playersArray[i] = Data.players.get(i).getName();
+            playersPics[i] = Data.players.get(i).getProfilePhoto();
+            if(playersPics[i]==null)
+                playersPics[i]= BitmapFactory.decodeResource(context.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait);
+        }
+        adapter = new CustomList(getActivity(),playersArray,playersPics);
         playerListView.setAdapter(adapter);
         return view;
     }

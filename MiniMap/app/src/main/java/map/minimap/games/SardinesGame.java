@@ -11,7 +11,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import map.minimap.frameworks.Game;
-import map.minimap.frameworks.Maps;
+import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 //TODO: Specifics of Sardines
@@ -38,7 +38,7 @@ public class SardinesGame extends Game {
         Log.v("Sardines Game", message); //I just changed this to Sardines...
         String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
-            User u = findUserbyId(parts[1], Data.users);
+            User u = findUserbyId(parts[1], Data.players);
             if (u == null) {
                 return;
             }
@@ -56,13 +56,13 @@ public class SardinesGame extends Game {
                     if (Data.map == null) {
                         return;
                     }
-                    for (User u : Data.users) {
+                    for (User u : Data.players) {
                         if (u.getMarker() != null) {
                             u.getMarker().remove();
                         }
                     }
                     Data.map.clear();
-                    Maps.initializePlayers(Data.map, Data.users);
+                    Maps.initializePlayers(Data.map, Data.players);
                 }
             });
 
