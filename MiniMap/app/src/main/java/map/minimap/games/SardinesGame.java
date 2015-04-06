@@ -4,7 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
@@ -65,13 +67,38 @@ public class SardinesGame extends Game {
             });
 
         } else if (parts[0].equals("addbeacon")) {
+            /**
+            LatLng sydney = new LatLng(-33.867, 151.206);
 
+            map.setMyLocationEnabled(true);
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+
+            map.addMarker(new MarkerOptions()
+                    .title("Sydney")
+                    .snippet("The most populous city in Australia.")
+                    .position(sydney));
+            */
         } else if (parts[0].equals("removebeacon")) {
 
         } else if (parts[0].equals("Found")) {
             //make a dialogue to ask if ___ has found this user
         } else if (parts[0].equals("TeamChange")) {
             //erase everyone from the map.
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
+                public void run() {
+                    if (Data.map == null) {
+                        return;
+                    }
+                    for (User u : Data.users) {
+                        if (u.getMarker() != null) {
+                            u.getMarker().remove();
+                        }
+                    }
+                    Data.map.clear();
+                    //Maps.initializePlayers(Data.map, Data.users);
+                }
+            });
         }
 		
 	}
