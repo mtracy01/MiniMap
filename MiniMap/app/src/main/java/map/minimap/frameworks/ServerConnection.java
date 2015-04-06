@@ -266,6 +266,14 @@ public class ServerConnection extends Thread {
      * Close the socket and any input/output streams
      */
     public void closeSocket() {
+        // Put any code we want to call if the connection fails here
+        Data.mainAct.runOnUiThread(new Runnable() {
+            public void run() {
+                Toast toast = Toast.makeText(Data.mainAct.getApplicationContext(), "Disconnected from server", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
         // Prevent double closings
         if (!connected) {
             return;
@@ -294,9 +302,7 @@ public class ServerConnection extends Thread {
             e.printStackTrace();
         }
 
-        // Put any code we want to call if the connection fails here
-        Toast toast = Toast.makeText(Data.mainAct.getApplicationContext(), "Disconnected from server", Toast.LENGTH_SHORT);
-        toast.show();
+        
 
     }
 
