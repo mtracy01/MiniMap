@@ -64,7 +64,7 @@ public class LoginActivity extends FragmentActivity {
         //loginImage.setImageDrawable(getResources().getDrawable(R.drawable.minimaplogo));
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
-        Data.mainAct=getParent();
+        Data.mainAct=this;
 
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
         if(loginButton!=null) {

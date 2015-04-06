@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import map.minimap.R;
 import map.minimap.frameworks.customUIResources.CustomList;
@@ -102,48 +104,50 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
 
         final Button inviteButton = (Button) view.findViewById(R.id.inviteButton);
 
-
-        //inviteButton.setBackground();
         inviteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //Data.client.getAllUsers();
-                /*Dialog dialog = new Dialog(context);
-                dialog.setContentView(R.layout.invite_dialog);
-                dialog.Set*/
                 Data.client.getAllUsers();
 
-                //Do nothing while the client gets invitable users
+                //Do nothing while the client gets invitable users and organizes them into list
                 while(Data.clientDoneFlag==0){}
 
                 //when done, reset the client done flag and perform the dialog task
                 Data.clientDoneFlag=0;
-                Log.v(LOG_TAG,"InvitableUsersSize: " + Data.invitableUsers.size());
-                String[] playersArray = new String[Data.invitableUsers.size()];
-                Bitmap[] playersPics  = new Bitmap[Data.invitableUsers.size()];
-                for(int i=0;i<Data.invitableUsers.size();i++){
-                    playersArray[i]=Data.invitableUsers.get(i).getID();
-                    playersPics[i]=Data.invitableUsers.get(i).getProfilePhoto();
-                }
-                CustomListInvite inviteAdapter = new CustomListInvite(getActivity(),playersArray,playersPics);
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Invite Online Friends");
-                builder.setAdapter(inviteAdapter, null);
-                builder.setPositiveButton("Invite", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Data.client.sendMessage("invite");
-                        dialog.dismiss();
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
 
+                Log.v(LOG_TAG,"InvitableUsersSize: " + Data.invitableUsers.size());
+
+                //If we have friends who are online, show the invite dialog
+                if(Data.invitableUsers.size()!=0) {
+                    String[] playersArray = new String[Data.invitableUsers.size()];
+                    Bitmap[] playersPics = new Bitmap[Data.invitableUsers.size()];
+                    for (int i = 0; i < Data.invitableUsers.size(); i++) {
+                        playersArray[i] = Data.invitableUsers.get(i).getID();
+                        playersPics[i] = Data.invitableUsers.get(i).getProfilePhoto();
+                    }
+                    CustomListInvite inviteAdapter = new CustomListInvite(getActivity(), playersArray, playersPics);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Invite Online Friends");
+                    builder.setAdapter(inviteAdapter, null);
+                    builder.setPositiveButton("Invite", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Data.client.sendMessage("invite");
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                //If we have no invitable friends online, just display a toast that says we have no invitable friends online
+                else{
+                   Toast.makeText(context,"Sorry, none of your friends are currently online.",Toast.LENGTH_LONG).show();
+                }
 
             }
         });
