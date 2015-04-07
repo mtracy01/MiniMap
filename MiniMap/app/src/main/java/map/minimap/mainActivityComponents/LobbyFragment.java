@@ -107,6 +107,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
 
         inviteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Data.invitableUsers.clear();
                 Data.client.getAllUsers();
 
                 //Do nothing while the client gets invitable users and organizes them into list
