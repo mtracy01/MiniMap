@@ -14,6 +14,7 @@ import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
+import map.minimap.frameworks.Beacon;
 //TODO: Specifics of Sardines
 public class SardinesGame extends Game {
 
@@ -77,18 +78,22 @@ public class SardinesGame extends Game {
             });
 
         } else if (parts[0].equals("addbeacon")) {
-            /**
-            LatLng sydney = new LatLng(-33.867, 151.206);
 
-            map.setMyLocationEnabled(true);
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
+            LatLng b = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
+            Beacon beac = new Beacon(b, Integer.parseInt(parts[1]));
+            Data.user.addBeacon(beac);
 
-            map.addMarker(new MarkerOptions()
-                    .title("Sydney")
-                    .snippet("The most populous city in Australia.")
-                    .position(sydney));
-            */
+            Data.map.setMyLocationEnabled(true);
+            Data.map.moveCamera(CameraUpdateFactory.newLatLngZoom(b, 13));
+
+            Data.map.addMarker(new MarkerOptions()
+                    .title("Beacon")
+                    .snippet("Beacon set by Player")
+                    .position(b)
+                    );
+
         } else if (parts[0].equals("removebeacon")) {
+            Data.user.removeBeaconByID((Integer.parseInt(parts[1])));
 
         } else if (parts[0].equals("Found")) {
             //make a dialogue to ask if ___ has found this user

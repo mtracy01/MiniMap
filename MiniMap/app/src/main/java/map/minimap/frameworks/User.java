@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.Marker;
 import java.util.ArrayList;
 
 import map.minimap.helperClasses.FacebookHelper;
+import map.minimap.frameworks.Beacon;
 
 /**
  * Created by Joe Coy on 2/20/2015.
@@ -37,6 +38,8 @@ public class User {
     private Marker marker;  //Location object for GoogleMap
     private ArrayList<User> friends;
     private Bitmap profilePhoto;
+
+    private ArrayList<Beacon> beacons;
 
     public User(String id) {
 
@@ -109,4 +112,19 @@ public class User {
         return null;
     }
 
+    public void addBeacon(Beacon b)
+    {
+        beacons.add(b);
+    }
+    public boolean removeBeaconByID(int id)
+    {
+        for (Beacon b: beacons)
+        {
+            if (b.getId() == id) {
+                beacons.remove((b));
+                return true;
+            }
+        }
+        return false;
+    }
 }
