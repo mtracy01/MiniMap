@@ -59,8 +59,6 @@ public class User {
             }
         };
         profileRetriever.execute();
-        //profilePhoto = null;//FacebookHelper.getFacebookProfilePicture(ID);
-
     }
 
     /* Getters and Setters */

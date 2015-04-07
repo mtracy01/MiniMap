@@ -61,7 +61,6 @@ public class FacebookHelper {
                     try {
                         User friend = new User(jsonArray.getJSONObject(i).getString("id"));
                         friend.setName(jsonArray.getJSONObject(i).getString("name"));
-                        //friend.setProfilePhoto(getFacebookProfilePicture(friend.getID()));
                         friends.add(friend);
                     } catch (JSONException e) {
                         Log.e(LOG_TAG, "JSON Exception when trying to convert friends to users!");

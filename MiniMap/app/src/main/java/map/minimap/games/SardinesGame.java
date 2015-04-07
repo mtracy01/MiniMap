@@ -62,7 +62,7 @@ public class SardinesGame extends Game {
                     if (Data.map == null) {
                         return;
                     }
-                    ArrayList<User> teammates = new ArrayList<User>();
+                    ArrayList<User> teammates = new ArrayList<>();
                     for (User u : Data.players) {
                         if (u.getMarker() != null) {
                             u.getMarker().remove();
@@ -111,7 +111,6 @@ public class SardinesGame extends Game {
                         }
                     }
                     Data.map.clear();
-                    //Maps.initializePlayers(Data.map, Data.users);
                 }
             });
         }
