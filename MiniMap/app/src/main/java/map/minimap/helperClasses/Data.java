@@ -1,8 +1,5 @@
 package map.minimap.helperClasses;
 import android.app.Activity;
-import android.widget.RadioButton;
-
-
 import java.util.ArrayList;
 
 import map.minimap.frameworks.GPSThread;

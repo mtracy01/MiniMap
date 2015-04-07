@@ -83,16 +83,6 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        //Attempt to get our active session
-        Bundle extras = getActivity().getIntent().getExtras();
-        if (extras != null) {
-            //Session.setActiveSession((Session) extras.getSerializable("fb_session"));
-            Log.e(LOG_TAG,"SUCCESS");
-        }
-        else{
-            Log.e(LOG_TAG,"FAILURE");
-        }
-
         //UI helper for facebook interactions
 
 
@@ -128,7 +118,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                     //TODO: Get the app on the play store so people can actually download this stuff
                     String appLinkUrl, previewImageUrl;
 
-                    appLinkUrl = "https://play.google.com/store/apps/details?id=com.pokeapp1.matthew.pokeapp";
+                    appLinkUrl = "https://fb.me/1637179893181427";
                     previewImageUrl = "https://lh3.ggpht.com/4j_GW-fYL2FaHsTavBHh54IXLCcQDSjr4DDeJI69IKg6SVLXNL47-0zPn7EH3RXTGK7_=h900-rw";
 
                     if (AppInviteDialog.canShow()) {

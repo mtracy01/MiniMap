@@ -4,7 +4,6 @@ import android.app.Application;
 
 import java.util.ArrayList;
 
-import map.minimap.frameworks.*;
 
 import com.google.android.gms.maps.model.LatLng;
 

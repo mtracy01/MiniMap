@@ -23,7 +23,6 @@ import map.minimap.games.SardinesGame;
 import map.minimap.games.Sardines;
 import map.minimap.games.Assassins;
 import map.minimap.helperClasses.Data;
-import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.LobbyFragment;
 
 import android.widget.Toast;
@@ -163,7 +162,6 @@ public class ServerConnection extends Thread {
                 processInvite(parts[1], parts[2]);
 
             } else if (parts[0].equals("users")) {
-                //Data. = new ArrayList<>();
                 for(int i =1; i < parts.length;i++){
 
                     //If the user is in our friends list, add them to the invitable users list
@@ -173,9 +171,7 @@ public class ServerConnection extends Thread {
                     /*else
                         Data.players.add(new User(parts[i]));*/
                 }
-               /*for(User u : Data.players){
-                    Data.client.sendMessage("invite " + Data.gameId +" "+u.getID());
-                }*/
+
                 LobbyFragment.changeGrid();
                 Data.clientDoneFlag=1;
             } else if(parts[0].equals("gameStart")) {

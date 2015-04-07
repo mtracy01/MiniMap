@@ -21,6 +21,7 @@ import com.facebook.GraphResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import bolts.AppLinks;
 import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
@@ -60,6 +61,10 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_main);
+        Uri targetUrl = AppLinks.getTargetUrlFromInboundIntent(this, getIntent());
+        if (targetUrl != null) {
+            Log.i("Activity", "App Link Target URL: " + targetUrl.toString());
+        }
         MediaPlayer mMediaPlayer;
         mMediaPlayer = MediaPlayer.create(this,R.raw.hojus);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);

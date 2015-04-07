@@ -10,7 +10,6 @@ import android.view.MenuItem;
 
 import com.facebook.FacebookSdk;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.MainActivity;

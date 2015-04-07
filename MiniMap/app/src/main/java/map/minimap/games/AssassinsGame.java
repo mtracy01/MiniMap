@@ -57,12 +57,6 @@ public class AssassinsGame extends Game {
                     if (Data.map == null) {
                         return;
                     }
-                   /* for (User u : Data.players) {
-                        if (u.getMarker() != null) {
-                            u.getMarker().remove();
-                        }
-                    }
-                    Data.map.clear();*/
                     ArrayList<User> players = new ArrayList<User>();
                     players.add(Data.user);
                     if (target != null) {
