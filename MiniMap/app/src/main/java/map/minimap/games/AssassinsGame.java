@@ -64,22 +64,20 @@ public class AssassinsGame extends Game {
                     }
                     Data.map.clear();*/
                     ArrayList<User> players = new ArrayList<User>();
-                    players.add(owner);
+                    players.add(Data.user);
                     if (target != null) {
                         players.add(target);
                     }
 
                     LatLngInterpolator mLatLngInterpolator;
                     for(User u : players) {
-                        if (u != null) { // Apparently this can happen
-                            if (u.getMarker() != null) {
-                                mLatLngInterpolator = new LatLngInterpolator.Linear();
-                                Data.mapFragment.animateMarkerToGB(u.getMarker(), u.getCoordinates(), mLatLngInterpolator, 1500);
-                            } else {
-                                //Note: this is safety code in case a user marker does not exist. **This should never be run!!!**
-                                Log.e(LOG_TAG, "User marker did not exist! Creating one in FriendFinderGame...");
-                                u.setMarker(Data.map.addMarker(new MarkerOptions().position(u.getCoordinates())));
-                            }
+                        if (u.getMarker() != null) {
+                            mLatLngInterpolator = new LatLngInterpolator.Linear();
+                            Data.mapFragment.animateMarkerToGB(u.getMarker(), u.getCoordinates(), mLatLngInterpolator, 1500);
+                        } else {
+                            //Note: this is safety code in case a user marker does not exist. **This should never be run!!!**
+                            Log.e(LOG_TAG, "User marker did not exist! Creating one in FriendFinderGame...");
+                            u.setMarker(Data.map.addMarker(new MarkerOptions().position(u.getCoordinates())));
                         }
                     }
                 }
@@ -133,7 +131,7 @@ public class AssassinsGame extends Game {
 	 * assign teams, etc...
 	 *  */
     public void startSession() {
-        Log.v("Friend Finder Game", "Starting game session " + this.getId());
+        Log.v("Assassins Game", "Starting game session " + this.getId());
         isRunning = true;
     }
 
