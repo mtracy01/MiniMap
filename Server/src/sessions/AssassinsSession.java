@@ -164,20 +164,27 @@ public class AssassinsSession extends GameSession {
 		isRunning = true;
 		
 		synchronized (users) {
-			// Assign each user a target
-			Object[] usersArray = users.toArray();
-			for (int i = 0; i < usersArray.length - 1; i++) {
-				targets.put((User) usersArray[i], (User) usersArray[i+1]);
-			}
-			targets.put((User) usersArray[usersArray.length - 1], (User) usersArray[0]);
-		
-			// Send the start message
-			sendStartMessage();
-		
-			// Send target assignments
-			for (Entry<User, User> entry : targets.entrySet()) {
-				String message = "target " + entry.getValue().getUserID();
-				entry.getKey().sendMessage(message);
+			// Only assign targets if there is more than 1 person in the game
+			if (users.size() >= 2) {
+				
+				// Assign each user a target
+				Object[] usersArray = users.toArray();
+				for (int i = 0; i < usersArray.length - 1; i++) {
+					targets.put((User) usersArray[i], (User) usersArray[i+1]);
+				}
+				targets.put((User) usersArray[usersArray.length - 1], (User) usersArray[0]);
+			
+				// Send the start message
+				sendStartMessage();
+			
+				// Send target assignments
+				for (Entry<User, User> entry : targets.entrySet()) {
+					String message = "target " + entry.getValue().getUserID();
+					entry.getKey().sendMessage(message);
+				}
+			} else {
+				// Just one person, start with no targets
+				sendStartMessage();
 			}
 		}
 	}
