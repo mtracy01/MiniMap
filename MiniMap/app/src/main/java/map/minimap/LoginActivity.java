@@ -25,7 +25,8 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-//import com.parse.Parse;
+import com.parse.Parse;
+import com.parse.ParseObject;
 
 
 import org.json.JSONException;
@@ -61,14 +62,14 @@ public class LoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         // Enable Local Datastore.
-       /* Parse.enableLocalDatastore(this);
+        Parse.enableLocalDatastore(this);
         Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
 
         //Test of Parse
         ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
         testObject.saveInBackground();
-*/
+
         setContentView(R.layout.activity_login);
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
