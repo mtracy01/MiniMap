@@ -28,6 +28,7 @@ public class Team {
 	public void addUser(User u) {
 		synchronized (users) {
 			users.add(u);
+			u.setTeamID(this.teamID);
 		}
 	}
 	
