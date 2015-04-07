@@ -12,6 +12,9 @@ public class Utility {
 	 * @return
 	 */
 	public static boolean areClose(User user1, User user2, double distance) {
+		if (user1.getLocation() == null || user2.getLocation() == null) {
+			return false;
+		}
 		Location loc1 = user1.getLocation();
 		Location loc2 = user2.getLocation();
 		Double lat1, lat2, lon1, lon2;
