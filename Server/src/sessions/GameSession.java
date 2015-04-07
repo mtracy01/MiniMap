@@ -127,6 +127,9 @@ public abstract class GameSession {
 			users.add(user);
 		}
 		log.fine("users: " + users);
+		if (user.isInGame()) {
+			user.getGameSession().removeUser(user);
+		}
 		user.setGameSession(this);
 		user.setInGame(true);
 		sendSessionUsers();
