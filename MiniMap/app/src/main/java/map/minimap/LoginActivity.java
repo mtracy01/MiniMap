@@ -25,6 +25,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.parse.Parse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,8 +60,8 @@ public class LoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         // Enable Local Datastore.
-        //Parse.enableLocalDatastore(this);
-        //Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
 
 
         setContentView(R.layout.activity_login);
