@@ -4,6 +4,8 @@ package map.minimap.frameworks;
  * Created by Corey on 2/17/2015.
  */
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 
@@ -158,21 +160,8 @@ public class ServerConnection extends Thread {
                 Log.v("invite", parts[2]);
                 // We got an invite, lets join (temporary, normally should ask)
                 // TODO handle the invite correctly, parts[1] contains the type, parts[2] contains the id
-                newGameType = parts[1];
-                acceptGameMessage(parts[2]);
-                Data.gameId = parts[2];
-                switch(newGameType) {
-                    case "friendFinder":
-                        Data.user.setGame(new FriendFinderGame());
-                        break;
-                    case "assassins":
-                        Data.user.setGame(new AssassinsGame());
-                        break;
-                    case "sardines":
-                        Data.user.setGame(new SardinesGame());
-                        break;
-                }
-                Data.user.setInGame(true);
+                processInvite(parts[1], parts[2]);
+
             } else if (parts[0].equals("users")) {
                 //Data. = new ArrayList<>();
                 for(int i =1; i < parts.length;i++){
@@ -256,6 +245,56 @@ public class ServerConnection extends Thread {
         }
     }
 
+
+    private void processInvite(final String gameType, final String gameID) {
+        Data.mainAct.runOnUiThread(new Runnable() {
+            public void run() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Data.mainAct);
+                // Add the buttons
+                String niceType = "";
+                switch (gameType) {
+                    case "friendFinder":
+                        niceType = "Friend Finder";
+                        break;
+                    case "assassins":
+                        niceType = "Assassins";
+                        break;
+                    case "sardines":
+                        niceType = "Sardines";
+                        break;
+                }
+                builder.setMessage("You have been invited to a " + niceType + " game.");
+                builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        newGameType = gameType;
+                        acceptGameMessage(gameID);
+                        Data.gameId = gameID;
+                        switch(newGameType) {
+                            case "friendFinder":
+                                Data.user.setGame(new FriendFinderGame());
+                                break;
+                            case "assassins":
+                                Data.user.setGame(new AssassinsGame());
+                                break;
+                            case "sardines":
+                                Data.user.setGame(new SardinesGame());
+                                break;
+                        }
+                        Data.user.setInGame(true);
+                    }
+                });
+                builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        rejectGameMessage(gameID);
+                    }
+                });
+
+                // Create the AlertDialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+    }
 
     public boolean isConnected() {
         return connected;
