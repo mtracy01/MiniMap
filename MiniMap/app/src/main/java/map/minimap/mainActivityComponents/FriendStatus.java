@@ -74,6 +74,7 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
         Data.invitableUsers.clear();
         Data.client.getAllUsers();
         while(Data.clientDoneFlag==0) {}
+        Data.clientDoneFlag=0;
 
         //Add necessary information to array needed for our status adapter
         for(int i=0; i<len;i++){
