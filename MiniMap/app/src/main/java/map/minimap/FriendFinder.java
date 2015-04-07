@@ -1,7 +1,11 @@
 package map.minimap;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,6 +16,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
+import map.minimap.mainActivityComponents.GamesFragment;
+import map.minimap.mainActivityComponents.LobbyFragment;
 
 
 public class FriendFinder extends FragmentActivity implements OnMapReadyCallback {
@@ -33,6 +39,22 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
 
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit the game?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        FriendFinder.super.onBackPressed();
+                        Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
+                        startActivity(new Intent(FriendFinder.this,MainActivity.class));
+                    }
+                }).create().show();
     }
 
 

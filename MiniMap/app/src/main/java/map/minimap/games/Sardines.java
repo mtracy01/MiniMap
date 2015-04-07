@@ -1,5 +1,8 @@
 package map.minimap.games;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,13 +13,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
+import map.minimap.MainActivity;
 import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;
+import map.minimap.frameworks.MapResources.SyncedMapFragment;
+import map.minimap.helperClasses.Data;
 
 
 public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
 
-    private MapFragment map;
+    private SyncedMapFragment map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +30,30 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_sardines);
         if (savedInstanceState == null) {
-          //  map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
-          //  map.getMapAsync(this);
+            map = new SyncedMapFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(android.R.id.content,map).commit();
+            Data.mapFragment=map;
+
+            Data.mapFragment.getMapAsync(this);
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit the game?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Sardines.super.onBackPressed();
+                        Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
+                        startActivity(new Intent(Sardines.this,MainActivity.class));
+                    }
+                }).create().show();
     }
 
     @Override
