@@ -18,6 +18,8 @@ import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.games.AssassinsGame;
 import map.minimap.games.FriendFinderGame;
 import map.minimap.games.SardinesGame;
+import map.minimap.games.Sardines;
+import map.minimap.games.Assassins;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.LobbyFragment;
@@ -146,7 +148,7 @@ public class ServerConnection extends Thread {
                     case "assassins":
                         Data.user.setGame(new AssassinsGame());
                         break;
-                    case "marcoPolo":
+                    case "sardines":
                         Data.user.setGame(new SardinesGame());
                         break;
                 }
@@ -156,9 +158,20 @@ public class ServerConnection extends Thread {
                 Log.v("invite", parts[2]);
                 // We got an invite, lets join (temporary, normally should ask)
                 // TODO handle the invite correctly, parts[1] contains the type, parts[2] contains the id
+                newGameType = parts[1];
                 acceptGameMessage(parts[2]);
                 Data.gameId = parts[2];
-                Data.user.setGame(new FriendFinderGame());
+                switch(newGameType) {
+                    case "friendFinder":
+                        Data.user.setGame(new FriendFinderGame());
+                        break;
+                    case "assassins":
+                        Data.user.setGame(new AssassinsGame());
+                        break;
+                    case "sardines":
+                        Data.user.setGame(new SardinesGame());
+                        break;
+                }
                 Data.user.setInGame(true);
             } else if (parts[0].equals("users")) {
                 //Data. = new ArrayList<>();
@@ -179,9 +192,22 @@ public class ServerConnection extends Thread {
             } else if(parts[0].equals("gameStart")) {
                 Maps.setCenterPosition(Data.user);
                 // TODO: Don't make this only start friend finder...
-                Intent intent = new Intent(Data.mainAct.getApplicationContext(), FriendFinder.class);
-                Data.mainAct.startActivity(intent);
-                Data.user.getGame().startSession();
+                Intent intent = null;
+                switch(newGameType) {
+                    case "friendFinder":
+                        intent = new Intent(Data.mainAct.getApplicationContext(), FriendFinder.class);
+                        break;
+                    case "assassins":
+                        intent = new Intent(Data.mainAct.getApplicationContext(), Assassins.class);
+                        break;
+                    case "sardines":
+                        intent = new Intent(Data.mainAct.getApplicationContext(), Sardines.class);
+                        break;
+                }
+                if (intent != null) {
+                    Data.mainAct.startActivity(intent);
+                    Data.user.getGame().startSession();
+                }
             }
             else if (Data.user.getInGame()) {
                 Data.user.getGame().handleMessage(message);

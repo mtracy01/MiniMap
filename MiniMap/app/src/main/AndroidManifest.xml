@@ -71,6 +71,10 @@
             android:name=".games.MarcoPolo"
             android:label="@string/title_activity_marco_polo" >
         </activity>
+        <activity
+            android:name=".games.Assassins"
+            android:label="@string/title_activity_assassins" >
+        </activity>
 
     </application>
 

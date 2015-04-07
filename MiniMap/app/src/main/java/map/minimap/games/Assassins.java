@@ -12,11 +12,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;
+import map.minimap.frameworks.MapResources.SyncedMapFragment;
+import map.minimap.helperClasses.Data;
 
 
 public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
 
-    private MapFragment map;
+    private SyncedMapFragment map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +26,17 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_assassins);
         if (savedInstanceState == null) {
-          //  map = (MapFragment)getFragmentManager().findFragmentById(R.id.map);
-          //  map.getMapAsync(this);
+            map = new SyncedMapFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(android.R.id.content,map).commit();
+            Data.mapFragment=map;
+
+            Data.mapFragment.getMapAsync(this);
 
         }
+
     }
 
-    @Override
-    public void onMapReady(GoogleMap map) {
-        Maps.readyMap(map);
-    }
 
 
     @Override
@@ -56,5 +59,10 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        Maps.readyMap(map);
     }
 }
