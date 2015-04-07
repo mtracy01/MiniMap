@@ -65,8 +65,6 @@ public class LoginActivity extends FragmentActivity {
 
 
         setContentView(R.layout.activity_login);
-        //ImageView loginImage = (ImageView)findViewById(R.id.imageView);
-        //loginImage.setImageDrawable(getResources().getDrawable(R.drawable.minimaplogo));
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
         Data.mainAct=this;
@@ -178,9 +176,6 @@ public class LoginActivity extends FragmentActivity {
                                 .show();
                     }
                 });
-
-
-       // setContentView(R.layout.activity_login);
     }
 
     @Override
