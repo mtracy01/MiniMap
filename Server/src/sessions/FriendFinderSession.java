@@ -53,9 +53,11 @@ public class FriendFinderSession extends GameSession {
 	public void endSession() {
 		isRunning = false;
 		
-		for (User user: this.users)
-		{
-			removeUser(user);
+		synchronized (users) {
+			Object[] userArray = users.toArray();
+			for (Object u : userArray) {
+				removeUser((User) u);
+			}
 		}
 		for (Team team: this.teams)
 		{

@@ -78,9 +78,11 @@ public class SardinesSession extends GameSession {
 	public void endSession() {
 		isRunning = false;
 		
-		for (User user: this.users)
-		{
-			removeUser(user);
+		synchronized (users) {
+			User[] userArray = (User[]) users.toArray();
+			for (User u : userArray) {
+				removeUser(u);
+			}
 		}
 		for (Team team: this.teams)
 		{
