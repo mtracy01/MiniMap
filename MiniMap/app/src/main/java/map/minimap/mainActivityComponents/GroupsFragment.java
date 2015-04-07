@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
+import com.facebook.share.model.AppInviteContent;
+import com.facebook.share.widget.AppInviteDialog;
 
 import java.util.ArrayList;
 
@@ -123,6 +125,19 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                 }
                 if(position==1){
                     //Invite friends to use the app
+                    //TODO: Get the app on the play store so people can actually download this stuff
+                    String appLinkUrl, previewImageUrl;
+
+                    appLinkUrl = "https://play.google.com/store/apps/details?id=com.pokeapp1.matthew.pokeapp";
+                    previewImageUrl = "https://lh3.ggpht.com/4j_GW-fYL2FaHsTavBHh54IXLCcQDSjr4DDeJI69IKg6SVLXNL47-0zPn7EH3RXTGK7_=h900-rw";
+
+                    if (AppInviteDialog.canShow()) {
+                        AppInviteContent content = new AppInviteContent.Builder()
+                                .setApplinkUrl(appLinkUrl)
+                                .setPreviewImageUrl(previewImageUrl)
+                                .build();
+                        AppInviteDialog.show(getActivity(), content);
+                    }
 
                 }
                 if(position==2){
