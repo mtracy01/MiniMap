@@ -32,4 +32,5 @@ public class Data {
     public static ArrayList<User> players        = new ArrayList<>();      //Players in the current game
 
     public static int clientDoneFlag = 0;                                 //Flag for syncing between tasks
+    public static int initialized = 0;
 }

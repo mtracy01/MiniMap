@@ -62,10 +62,12 @@ public class LoginActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        // Enable Local Datastore.
-       // Parse.enableLocalDatastore(this);
-       // Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
-
+         //Enable Local Datastore.
+        if(Data.initialized!=1) {
+            Parse.enableLocalDatastore(this);
+            Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
+            Data.initialized=1;
+        }
         //Test of Parse
         /*ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
