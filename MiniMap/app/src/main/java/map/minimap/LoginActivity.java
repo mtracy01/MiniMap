@@ -27,6 +27,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 
 import org.json.JSONException;
@@ -62,13 +63,13 @@ public class LoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
+       // Parse.enableLocalDatastore(this);
+       // Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
 
         //Test of Parse
-        ParseObject testObject = new ParseObject("TestObject");
+        /*ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
-        testObject.saveInBackground();
+        testObject.saveInBackground();*/
 
         setContentView(R.layout.activity_login);
         startCount=0;
@@ -98,6 +99,8 @@ public class LoginActivity extends FragmentActivity {
                         Log.v(LOG_TAG, "SUCCESSful:D");
                         Log.v(LOG_TAG, "Granted Permissions: " + loginResult.getRecentlyGrantedPermissions());
 
+                       // final ParseUser user = new ParseUser();
+
                         //Graph request to get our user's Facebook data
                         GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
                             @Override
@@ -108,6 +111,9 @@ public class LoginActivity extends FragmentActivity {
                                 try {
                                     Data.user = new User(jsonObject.getString("id"));
                                     Data.user.setName(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
+                                 /*   user.put("objectId",Data.user.getID());
+                                    user.put("username",Data.user.getName());
+                                    user.saveInBackground();*/
                                 } catch (JSONException e) {
                                     Log.e(LOG_TAG, e.getMessage());
                                 }
@@ -186,6 +192,8 @@ public class LoginActivity extends FragmentActivity {
 
     @Override
     protected void onResume() {
+  //      Parse.enableLocalDatastore(this);
+ //       Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
         super.onResume();
         if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==1){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
