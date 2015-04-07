@@ -199,9 +199,9 @@ public class AssassinsSession extends GameSession {
 		isRunning = false;
 		
 		synchronized (users) {
-			User[] userArray = (User[]) users.toArray();
-			for (User u : userArray) {
-				removeUser(u);
+			Object[] userArray = users.toArray();
+			for (Object u : userArray) {
+				removeUser((User) u);
 			}
 		}
 		
