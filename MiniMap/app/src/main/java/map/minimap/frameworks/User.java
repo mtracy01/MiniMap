@@ -29,7 +29,7 @@ public class User {
     private String ID;
 
     //The affiliated team of the player.  0 by default.
-    private int team;
+    private int team = -1;
 
     private boolean inGame;
     private Game currentGame;
@@ -107,6 +107,6 @@ public class User {
             }
         }
         return null;
-
     }
+
 }

@@ -15,8 +15,8 @@ public class SardinesSession extends GameSession {
 	
 	public SardinesSession(User owner, Server server) {
 		super("sardines", owner, server);
-		teams.add(new Team(-1));
-		teams.add(new Team(0)); //THIS SHOULD BE AUTOMATED
+		teams.add(new Team(2));
+		teams.add(new Team(3)); //THIS SHOULD BE AUTOMATED
 		//There is only one team in a friend finder session
 		// TODO: Add the owner to a team
 	}
@@ -157,6 +157,7 @@ public class SardinesSession extends GameSession {
 		m.append(" " + user.getUserID());
 		m.append(" " + loc.getLatitude());
 		m.append(" " + loc.getLongitude());
+		m.append(" " + user.getTeamID());
 		
 		int tid; //friendly team
 		int otid; //opposing team

@@ -38,16 +38,21 @@ public class SardinesGame extends Game {
         Log.v("Sardines Game", message); //I just changed this to Sardines...
         String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
-            User u = findUserbyId(parts[1], Data.players);
-            if (u == null) {
+            User user = findUserbyId(parts[1], Data.players);
+            if (user == null) {
                 return;
             }
             LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
+            if (user.getTeam() == -1)
+            {
+                user.setTeam(Integer.parseInt(parts[4]));
+            }
+
             Log.v("userid", parts[1]);
-            if (u == null) {
+            if (user == null) {
                 Log.v("userid", "is null");
             }
-            u.setCoordinates(ll);
+            user.setCoordinates(ll);
 
             // We can only update locations from the main thread
             Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -56,13 +61,18 @@ public class SardinesGame extends Game {
                     if (Data.map == null) {
                         return;
                     }
+                    ArrayList<User> teammates = new ArrayList<User>();
                     for (User u : Data.players) {
                         if (u.getMarker() != null) {
                             u.getMarker().remove();
                         }
+                        if (u.getTeam() == Data.user.getTeam())
+                        {
+                            teammates.add(u);
+                        }
                     }
                     Data.map.clear();
-                    Maps.initializePlayers(Data.map, Data.players);
+                    Maps.initializePlayers(Data.map, teammates);
                 }
             });
 
