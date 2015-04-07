@@ -71,14 +71,15 @@ public class AssassinsGame extends Game {
 
                     LatLngInterpolator mLatLngInterpolator;
                     for(User u : players) {
-                        if(u.getMarker() != null){
-                            mLatLngInterpolator = new LatLngInterpolator.Linear();
-                            Data.mapFragment.animateMarkerToGB(u.getMarker(), u.getCoordinates(), mLatLngInterpolator, 1500);
-                        }
-                        else{
-                            //Note: this is safety code in case a user marker does not exist. **This should never be run!!!**
-                            Log.e(LOG_TAG,"User marker did not exist! Creating one in FriendFinderGame...");
-                            u.setMarker(Data.map.addMarker(new MarkerOptions().position(u.getCoordinates())));
+                        if (u != null) { // Apparently this can happen
+                            if (u.getMarker() != null) {
+                                mLatLngInterpolator = new LatLngInterpolator.Linear();
+                                Data.mapFragment.animateMarkerToGB(u.getMarker(), u.getCoordinates(), mLatLngInterpolator, 1500);
+                            } else {
+                                //Note: this is safety code in case a user marker does not exist. **This should never be run!!!**
+                                Log.e(LOG_TAG, "User marker did not exist! Creating one in FriendFinderGame...");
+                                u.setMarker(Data.map.addMarker(new MarkerOptions().position(u.getCoordinates())));
+                            }
                         }
                     }
                 }
