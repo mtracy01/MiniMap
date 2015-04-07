@@ -60,16 +60,17 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
+
         setContentView(R.layout.activity_main);
         Uri targetUrl = AppLinks.getTargetUrlFromInboundIntent(this, getIntent());
         if (targetUrl != null) {
             Log.i("Activity", "App Link Target URL: " + targetUrl.toString());
         }
-        MediaPlayer mMediaPlayer;
+        /*MediaPlayer mMediaPlayer;
         mMediaPlayer = MediaPlayer.create(this,R.raw.hojus);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setLooping(false);
-        mMediaPlayer.start();
+        mMediaPlayer.start();*/
         Log.v("startMiniMap", "Starting MainActivity");
         Data.loggedInFlag=1;
         //Create client if one is not already created
