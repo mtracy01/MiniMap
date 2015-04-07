@@ -12,6 +12,7 @@ import com.facebook.FacebookSdk;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+//import com.parse.Parse;
 
 import map.minimap.MainActivity;
 import map.minimap.R;
@@ -28,6 +29,9 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
+        // Enable Local Datastore.
+    //    Parse.enableLocalDatastore(this);
+    //    Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
         setContentView(R.layout.activity_sardines);
         if (savedInstanceState == null) {
             map = new SyncedMapFragment();

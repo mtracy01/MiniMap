@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import com.facebook.FacebookSdk;
 import com.google.android.gms.maps.GoogleMap;;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.parse.Parse;
+//import com.parse.Parse;
 
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
@@ -26,9 +26,9 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         // Enable Local Datastore.
-        Parse.enableLocalDatastore(this);
+      /*  Parse.enableLocalDatastore(this);
         Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
-
+*/
         setContentView(R.layout.activity_friend_finder);
         if (savedInstanceState == null) {
             map = new SyncedMapFragment();
