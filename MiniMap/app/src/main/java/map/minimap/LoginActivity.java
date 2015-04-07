@@ -26,7 +26,7 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 //import com.parse.Parse;
-//import com.parse.ParseObject;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
