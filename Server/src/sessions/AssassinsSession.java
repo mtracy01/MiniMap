@@ -115,6 +115,10 @@ public class AssassinsSession extends GameSession {
 			potentialFinds.remove(toRemove);
 		}
 		
+		// If we start targeting ourselves, the game is over, end it
+		if (find.assassin.equals(targets.get(find.target))) {
+			endSession();
+		}
 		
 		// Set the new target for the assassin
 		targets.put(find.assassin, targets.get(find.target));
