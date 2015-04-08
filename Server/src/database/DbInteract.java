@@ -82,7 +82,7 @@ public class DbInteract {
 	
 	/** addGroup
 	* @param userID		The unique identifier associated with a given user
-	* @param group		A group in the form - "id,id,id,...etc" where ID is a unique identifier
+	* @param group		A group in the form - "groupname:id:id:id:...etc" where ID is a unique identifier
 	*/
 	public void addGroup(String userID, String group) {
 		String[] groups = getGroupsByID(userID);
