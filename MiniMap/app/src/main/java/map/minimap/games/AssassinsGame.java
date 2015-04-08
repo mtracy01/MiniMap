@@ -160,13 +160,13 @@ public class AssassinsGame extends Game {
             if (targetID.equals(Data.user.getID())) {
                 // We have been killed, leave the game
                 Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
-                startActivity(new Intent(Data.gameActivity,MainActivity.class));
                 Data.mainAct.runOnUiThread(new Runnable() {
                     public void run() {
-                    Toast toast = Toast.makeText(Data.mainAct.getApplicationContext(), "You were assassinated.", Toast.LENGTH_SHORT);
-                    toast.show();
+                        Toast toast = Toast.makeText(Data.mainAct.getApplicationContext(), "You were assassinated.", Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 });
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainActivity.class));
             }
         } else {
 
