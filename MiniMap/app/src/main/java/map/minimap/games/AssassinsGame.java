@@ -1,5 +1,7 @@
 package map.minimap.games;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -37,7 +39,7 @@ public class AssassinsGame extends Game {
     public void handleMessage(String message) {
         // TODO Auto-generated method stub
         Log.v("Assassins Game", message); //I just changed this to Sardines...
-        String[] parts = message.split(" ");
+        final String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
             User u = findUserbyId(parts[1], Data.players);
             if (u == null) {
@@ -89,11 +91,51 @@ public class AssassinsGame extends Game {
             target = u;
 
         } else if (parts[0].equals("acceptDeath")) {
-
+            Data.mainAct.runOnUiThread(new Runnable() {
+                public void run() {
+                    User assassin = findUserbyId(parts[1], Data.players);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Data.mainAct);
+                    // Add the buttons
+                    builder.setMessage("Confirm death from " + assassin.getName() + "?");
+                    builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Data.client.sendMessage("confirmDeath true");
+                        }
+                    });
+                    builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Data.client.sendMessage("confirmDeath false");
+                        }
+                    });
+                    // Create the AlertDialog
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            });
 
 
         } else if (parts[0].equals("acceptKill")) {
-            target = null;
+            Data.mainAct.runOnUiThread(new Runnable() {
+                public void run() {
+                    User targetUser = findUserbyId(parts[1], Data.players);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Data.mainAct);
+                    // Add the buttons
+                    builder.setMessage("Confirm kill of " + targetUser.getName() + "?");
+                    builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Data.client.sendMessage("confirmKill true");
+                        }
+                    });
+                    builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Data.client.sendMessage("confirmKill false");
+                        }
+                    });
+                    // Create the AlertDialog
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            });
 
 
         } else if (parts[0].equals("kill")) {

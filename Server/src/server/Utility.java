@@ -1,6 +1,10 @@
 package server;
 
+import java.util.logging.Logger;
+
 public class Utility {
+	
+	private static final Logger log = Logger.getLogger( Server.class.getName() );
 	
 	public static final double PROXIMITY_DISTANCE = 25;
 
@@ -27,6 +31,7 @@ public class Utility {
 		double a = Math.pow(Math.sin((lat2-lat1)/2.0), 2.0)+Math.cos(lat1)*Math.cos(lat2)*Math.pow(Math.sin((lon2-lon1)/2.0),2.0);
 		double c = 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		double d = R*c;
+		log.fine("Distance is: " + d);
 		if( d < distance){
 			return true;
 		}
