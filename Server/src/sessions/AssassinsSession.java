@@ -122,6 +122,7 @@ public class AssassinsSession extends GameSession {
 		// If we start targeting ourselves, the game is over, end it
 		if (find.assassin.equals(targets.get(find.assassin))) {
 			endSession();
+			return;
 		}
 		
 		String targetMessage = "target " + targets.get(find.assassin).getUserID();
@@ -196,6 +197,7 @@ public class AssassinsSession extends GameSession {
 
 	@Override
 	public void endSession() {
+		log.fine("Session ending");
 		isRunning = false;
 		
 		synchronized (users) {
