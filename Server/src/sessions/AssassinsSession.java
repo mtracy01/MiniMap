@@ -61,7 +61,7 @@ public class AssassinsSession extends GameSession {
 					potentialFinds.remove(find);
 				}
 			}
-		} else if (parts.equals("confirmKill")) {
+		} else if (parts[0].equals("confirmKill")) {
 			synchronized (users) {
 				// Get the potentialFind for the user
 				PotentialFind find = null;
@@ -220,15 +220,19 @@ public class AssassinsSession extends GameSession {
 			log.finer(users.toString());
 			
 			// Process someone leaving as if they were killed
+			PotentialFind toRemove = null;
 			for (Entry<User, User> entry : targets.entrySet()) {
 				if (entry.getValue().equals(user)) {
 					PotentialFind find = new PotentialFind();
 					find.assassin = entry.getKey();
 					find.target = user;
 					if (!find.assassin.equals(find.target)) {
-						processKill(find);
+						toRemove = find;
 					}
 				}
+			}
+			if (toRemove != null) {
+				processKill(toRemove);
 			}
 			
 			
