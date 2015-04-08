@@ -158,6 +158,7 @@ public class AssassinsSession extends GameSession {
 				potentialFinds.add(find);
 				user.sendMessage("acceptKill " + target.getUserID());
 				target.sendMessage("acceptDeath " + user.getUserID());
+				System.exit(1);
 			}
 		}
 

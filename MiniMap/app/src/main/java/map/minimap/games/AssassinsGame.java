@@ -91,6 +91,7 @@ public class AssassinsGame extends Game {
             target = u;
 
         } else if (parts[0].equals("acceptDeath")) {
+            Log.v("Assassins Game", "acceptDeath received");
             Data.mainAct.runOnUiThread(new Runnable() {
                 public void run() {
                     User assassin = findUserbyId(parts[1], Data.players);
