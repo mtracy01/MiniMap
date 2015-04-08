@@ -1,5 +1,7 @@
 package map.minimap.games;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -97,6 +99,22 @@ public class SardinesGame extends Game {
 
         } else if (parts[0].equals("Found")) {
             //make a dialogue to ask if ___ has found this user
+            final String id = parts[1];
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Has " + id + " Found You?");
+            //.setMessage("Are you sure you want to exit the game?")
+            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface arg0, int arg1) {
+                    Data.client.sendMessage("Found " + id + " false");
+                }
+            });
+            alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface arg0, int arg1) {
+                    Data.client.sendMessage("Found " + id + " true");
+                }
+            });
+            alert.show();
+			
         } else if (parts[0].equals("TeamChange")) {
             //erase everyone from the map.
             Handler mainHandler = new Handler(Looper.getMainLooper());
