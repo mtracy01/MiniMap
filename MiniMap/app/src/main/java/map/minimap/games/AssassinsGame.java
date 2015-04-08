@@ -92,12 +92,15 @@ public class AssassinsGame extends Game {
 
         } else if (parts[0].equals("acceptDeath")) {
             Log.v("Assassins Game", "acceptDeath received");
-            Data.mainAct.runOnUiThread(new Runnable() {
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
                 public void run() {
-                    User assassin = findUserbyId(parts[1], Data.players);
+                    Log.v("Assassins Game", "Running on ui thread");
+                    //User assassin = findUserbyId(parts[1], Data.players);
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.mainAct);
                     // Add the buttons
-                    builder.setMessage("Confirm death from " + assassin.getName() + "?");
+                    //builder.setMessage("Confirm death from " + assassin.getName() + "?");
+                    builder.setMessage("Confirm Death?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Data.client.sendMessage("confirmDeath true");
@@ -108,20 +111,26 @@ public class AssassinsGame extends Game {
                             Data.client.sendMessage("confirmDeath false");
                         }
                     });
+
+                    Log.v("Assassins Game", "builder created");
                     // Create the AlertDialog
                     AlertDialog dialog = builder.create();
                     dialog.show();
+                    Log.v("Assassins Game", "dialog show");
                 }
             });
 
 
         } else if (parts[0].equals("acceptKill")) {
-            Data.mainAct.runOnUiThread(new Runnable() {
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
                 public void run() {
-                    User targetUser = findUserbyId(parts[1], Data.players);
+                    Log.v("Assassins Game", "Running on ui thread");
+                    //User targetUser = findUserbyId(parts[1], Data.players);
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.mainAct);
                     // Add the buttons
-                    builder.setMessage("Confirm kill of " + targetUser.getName() + "?");
+                    //builder.setMessage("Confirm kill of " + targetUser.getName() + "?");
+                    builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Data.client.sendMessage("confirmKill true");
@@ -132,9 +141,12 @@ public class AssassinsGame extends Game {
                             Data.client.sendMessage("confirmKill false");
                         }
                     });
+
+                    Log.v("Assassins Game", "builder created");
                     // Create the AlertDialog
                     AlertDialog dialog = builder.create();
                     dialog.show();
+                    Log.v("Assassins Game", "dialog show");
                 }
             });
 

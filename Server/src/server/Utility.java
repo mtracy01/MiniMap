@@ -6,7 +6,7 @@ public class Utility {
 	
 	private static final Logger log = Logger.getLogger( Server.class.getName() );
 	
-	public static final double PROXIMITY_DISTANCE = 25;
+	public static final double PROXIMITY_DISTANCE = 50;
 
 	/**
 	 * Returns true if the two users are distance of each other
