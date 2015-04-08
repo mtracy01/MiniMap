@@ -2,15 +2,18 @@ package map.minimap.games;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import map.minimap.MainActivity;
 import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.LatLngInterpolator;
 import map.minimap.frameworks.MapResources.Maps;
@@ -152,7 +155,19 @@ public class AssassinsGame extends Game {
 
 
         } else if (parts[0].equals("kill")) {
-
+            String assassinID = parts[1];
+            String targetID = parts[2];
+            if (targetID.equals(Data.user.getID())) {
+                // We have been killed, leave the game
+                Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
+                startActivity(new Intent(Data.gameActivity,MainActivity.class));
+                Data.mainAct.runOnUiThread(new Runnable() {
+                    public void run() {
+                    Toast toast = Toast.makeText(Data.mainAct.getApplicationContext(), "You were assassinated.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    }
+                });
+            }
         } else {
 
         }

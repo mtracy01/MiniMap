@@ -211,7 +211,7 @@ public class AssassinsSession extends GameSession {
 
 	@Override
 	public void removeUser(User user) {
-		log.finer("Removing user from friendfinder session");
+		log.finer("Removing user " + user + " from friendfinder session");
 		
 		
 		user.setInGame(false);
@@ -232,6 +232,7 @@ public class AssassinsSession extends GameSession {
 				}
 			}
 			if (toRemove != null) {
+				log.fine("Removing find: " + toRemove.assassin.getUserID() + " -> " + toRemove.target.getUserID());
 				processKill(toRemove);
 			}
 			
