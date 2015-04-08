@@ -33,6 +33,8 @@ public class SardinesSession extends GameSession {
 			if (messageParts[2].equals("true"))
 			{
 				m.append("TeamChange");
+				m.append(" " + user.getUserID());
+				m.append(" " + teams.get(0).getTeamID());
 				teams.get(1).sendMessage(m.toString());
 				
 				User temp = server.getUserByID(messageParts[1]);

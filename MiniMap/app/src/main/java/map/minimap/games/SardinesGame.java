@@ -110,9 +110,12 @@ public class SardinesGame extends Game {
                             u.getMarker().remove();
                         }
                     }
+                    //remove all beacons from this user
                     Data.map.clear();
                 }
             });
+            if (Data.user.getID().equals(parts[1])); //If this is the user that is changing teams...
+                Data.user.setTeam(Integer.parseInt(parts[2])); //change the teamID
         }
 		
 	}
