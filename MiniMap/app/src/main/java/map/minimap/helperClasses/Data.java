@@ -21,6 +21,7 @@ public class Data {
     public static ServerConnection client;                     //The client side server communication object
     public static GoogleMap map;                              //The actual Google map displayed in the mapFragment when the game session is running
     public static SyncedMapFragment mapFragment;             //Custom mapFragment for maintaining asynchronous location updates
+    public static Activity gameActivity;                    // A reference to the current game activity.  Used to display popups in game.
     public static GPSThread gps;                            //The client's current GPS thread
     public static int loggedInFlag=0;                      //Flag used to determine whether the person is already logged in when the app is reopened
 

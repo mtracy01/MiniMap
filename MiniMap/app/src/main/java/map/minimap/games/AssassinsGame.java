@@ -96,11 +96,11 @@ public class AssassinsGame extends Game {
             mainHandler.post(new Runnable() {
                 public void run() {
                     Log.v("Assassins Game", "Running on ui thread");
-                    //User assassin = findUserbyId(parts[1], Data.players);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Data.mainAct);
+                    User assassin = findUserbyId(parts[1], Data.players);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
-                    //builder.setMessage("Confirm death from " + assassin.getName() + "?");
-                    builder.setMessage("Confirm Death?");
+                    builder.setMessage("Confirm death from " + assassin.getName() + "?");
+                    //builder.setMessage("Confirm Death?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Data.client.sendMessage("confirmDeath true");
@@ -126,11 +126,11 @@ public class AssassinsGame extends Game {
             mainHandler.post(new Runnable() {
                 public void run() {
                     Log.v("Assassins Game", "Running on ui thread");
-                    //User targetUser = findUserbyId(parts[1], Data.players);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Data.mainAct);
+                    User targetUser = findUserbyId(parts[1], Data.players);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
-                    //builder.setMessage("Confirm kill of " + targetUser.getName() + "?");
-                    builder.setMessage("Confirm Kill?");
+                    builder.setMessage("Confirm kill of " + targetUser.getName() + "?");
+                    //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Data.client.sendMessage("confirmKill true");

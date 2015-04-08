@@ -28,6 +28,7 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Data.gameActivity = this;
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         // Enable Local Datastore.
     //    Parse.enableLocalDatastore(this);

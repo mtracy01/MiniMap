@@ -79,6 +79,7 @@ public class SardinesGame extends Game {
                 }
             });
 
+
         } else if (parts[0].equals("addbeacon")) {
 
             LatLng b = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
@@ -100,20 +101,29 @@ public class SardinesGame extends Game {
         } else if (parts[0].equals("Found")) {
             //make a dialogue to ask if ___ has found this user
             final String id = parts[1];
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle("Has " + id + " Found You?");
-            //.setMessage("Are you sure you want to exit the game?")
-            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    Data.client.sendMessage("Found " + id + " false");
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
+                public void run() {
+                    User targetUser = findUserbyId(id, Data.players);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
+                    // Add the buttons
+                    builder.setMessage("Has " + targetUser.getName() + " found you?");
+                    //builder.setMessage("Confirm Kill?");
+                    builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Data.client.sendMessage("Found " + id + " false");
+                        }
+                    });
+                    builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Data.client.sendMessage("Found " + id + " true");
+                        }
+                    });
+                    // Create the AlertDialog
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
             });
-            alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    Data.client.sendMessage("Found " + id + " true");
-                }
-            });
-            alert.show();
 			
         } else if (parts[0].equals("TeamChange")) {
             //erase everyone from the map.
