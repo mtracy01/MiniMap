@@ -124,7 +124,12 @@ public class User extends Thread {
 			String line = null;
 			while(in.hasNextLine()) {
 				line = in.nextLine();
-				handleMessage(line);
+				try {
+					handleMessage(line);
+				} catch (Exception e) {
+					log.warning("Exception handling a messagae: " + line);
+					e.printStackTrace();
+				}
 			}
 		} catch (Exception e) {
 			// When the socket is closed, an exception may be thrown
