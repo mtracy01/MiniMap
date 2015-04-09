@@ -43,6 +43,7 @@ public class SardinesSession extends GameSession {
 					m.append(" " + user.getUserID());
 					m.append(" " + teams.get(0).getTeamID());
 					teams.get(1).sendMessage(m.toString());
+					teams.get(0).sendMessage(m.toString());
 					
 					User temp = server.getUserByID(messageParts[1]);
 					teams.get(1).removeUser(temp);
