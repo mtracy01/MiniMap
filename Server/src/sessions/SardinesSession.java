@@ -115,16 +115,30 @@ public class SardinesSession extends GameSession {
 		}
 		synchronized (users) {
 			log.finer(users.toString());
+			
+			// Actually remove the user
 			users.remove(user);
+			
+			// Send the remove message to all users, including the one getting removed
+			String removeMessage = "userRemoved " + user.getUserID();
+			for (User u : users) {
+				u.sendMessage(removeMessage);
+			}
+			user.sendMessage(removeMessage);
+			
 			log.finer(users.toString());
 			log.finer(users.size() + " users in session");
+			
+			// Check for empty sessions
 			if (users.isEmpty()) {
 				endSession();
 			}
+			// Check for owner succession
 			if (owner.equals(user) && !users.isEmpty()) {
 				owner = users.iterator().next();
 			}
 		}
+		sendSessionUsers();
 	}
 
 	@Override
