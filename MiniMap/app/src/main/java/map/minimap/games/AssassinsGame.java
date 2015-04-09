@@ -168,8 +168,29 @@ public class AssassinsGame extends Game {
                 });
                 Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainActivity.class));
             }
-        } else {
+        } else if (parts[0].equals("userRemoved")) {
+            if (parts[1].equals(Data.user.getID())) {
+                Data.user.setInGame(false);
+                Data.user.setGame(null);
+                Data.gameActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), "You have been removed from the game.", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainActivity.class));
+            } else {
+                final User removedUser = findUserbyId(parts[1], Data.players);
+                Data.gameActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), removedUser.getName() + " has left the game.", Toast.LENGTH_SHORT);
+                        toast.show();
+                        removedUser.getMarker().remove();
+                        Data.players.remove(removedUser);
+                    }
+                });
 
+            }
         }
 
 
@@ -237,9 +258,8 @@ public class AssassinsGame extends Game {
      * teamID should always be 0
      */
     @Override
-    public void removeBeacon(int teamid, Integer id) {
+    public void removeBeacon(Integer id) {
         // TODO Auto-generated method stub
-        getTeambyID(teams, teamid).removeBeacon((getTeambyID(teams, teamid).getBeaconbyID(id)));
     }
 
 

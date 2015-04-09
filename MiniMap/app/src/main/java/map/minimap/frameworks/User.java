@@ -50,6 +50,7 @@ public class User {
         friends = null; //Needs to be specified later
         inGame = false;
         currentGame = null;
+        beacons = new ArrayList<Beacon>();
 
         AsyncTask<Void,Void,Void> profileRetriever = new AsyncTask<Void, Void, Void>() {
             @Override
@@ -118,7 +119,8 @@ public class User {
     {
         for (Beacon b: beacons)
         {
-            if (b.getId() == id) {
+            if (b.getBeaconID() == id) {
+                b.removeBeacon();
                 beacons.remove((b));
                 return true;
             }

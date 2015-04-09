@@ -1,9 +1,12 @@
 package map.minimap.games;
 
+import android.content.Intent;
 import android.util.Log;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Toast;
 
+import map.minimap.MainActivity;
 import map.minimap.frameworks.*;
 import map.minimap.frameworks.MapResources.LatLngInterpolator;
 import map.minimap.helperClasses.Data;
@@ -87,10 +90,34 @@ public class FriendFinderGame extends Game {
             });
 
 		} else if (parts[0].equals("addbeacon")) {
-
+            int id = Integer.parseInt(parts[1]);
+            LatLng loc = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
+            addBeacon(id, loc);
 		} else if (parts[0].equals("removebeacon")) {
-
-		}
+            removeBeacon(Integer.parseInt(parts[1]));
+		} else if (parts[0].equals("userRemoved")) {
+            if (parts[1].equals(Data.user.getID())) {
+                Data.user.setInGame(false);
+                Data.user.setGame(null);
+                Data.gameActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                    Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), "You have been removed from the game.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    }
+                });
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainActivity.class));
+            } else {
+                final User removedUser = findUserbyId(parts[1], Data.players);
+                Data.gameActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                    Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), removedUser.getName() + " has left the game.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    removedUser.getMarker().remove();
+                    Data.players.remove(removedUser);
+                    }
+                });
+            }
+        }
 		
 	}
 
@@ -143,21 +170,18 @@ public class FriendFinderGame extends Game {
 	 */
 	
 	@Override
-	public void addBeacon(int teamid, LatLng loc) { 
-		// TODO Auto-generated method stub
-		// Beacon beacon = new Beacon(loc);
-		// beacon.setTeamId(teamid);
-		// getTeambyID(teams, teamid).addBeacon(beacon);
-
+	public void addBeacon(int beaconID, LatLng loc) {
+		// Add a beacon
+        Data.user.addBeacon(new Beacon(loc, beaconID, Data.user.getTeam()));
+        
 	}
 
 	/**
 	 * teamID should always be 0
 	 */
 	@Override
-	public void removeBeacon(int teamid, Integer id) {
-		// TODO Auto-generated method stub
-		getTeambyID(teams, teamid).removeBeacon((getTeambyID(teams, teamid).getBeaconbyID(id)));
+	public void removeBeacon(Integer id) {
+        Data.user.removeBeaconByID(id);
 	}
 	
 	

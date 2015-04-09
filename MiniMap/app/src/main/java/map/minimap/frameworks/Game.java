@@ -93,7 +93,7 @@ public abstract class Game extends Application{
 	 * Remove the specified beacon
 	 * @param id
 	 */
-	public abstract void removeBeacon(int teamid, Integer id);
+	public abstract void removeBeacon(Integer id);
     
 	public Team getTeambyID(ArrayList<Team> teamlist, int id) {
 		for (Team t: teamlist) {

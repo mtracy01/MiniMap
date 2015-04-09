@@ -37,7 +37,7 @@ public class Team {
 	
 	public Beacon getBeaconbyID(int id) {
 		for (Beacon b: beacons) {
-			if (b.getId() == id) {
+			if (b.getBeaconID() == id) {
 				return b;
 			}
 		}

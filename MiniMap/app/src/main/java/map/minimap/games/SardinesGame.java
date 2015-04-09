@@ -2,9 +2,11 @@ package map.minimap.games;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -12,6 +14,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import map.minimap.MainActivity;
 import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.User;
@@ -83,7 +86,7 @@ public class SardinesGame extends Game {
         } else if (parts[0].equals("addbeacon")) {
 
             LatLng b = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
-            Beacon beac = new Beacon(b, Integer.parseInt(parts[1]));
+            Beacon beac = new Beacon(b, Integer.parseInt(parts[1]), Data.user.getTeam());
             Data.user.addBeacon(beac);
 
             Data.map.setMyLocationEnabled(true);
@@ -144,6 +147,28 @@ public class SardinesGame extends Game {
             });
             if (Data.user.getID().equals(parts[1])); //If this is the user that is changing teams...
                 Data.user.setTeam(Integer.parseInt(parts[2])); //change the teamID
+        } else if (parts[0].equals("userRemoved")) {
+            if (parts[1].equals(Data.user.getID())) {
+                Data.user.setInGame(false);
+                Data.user.setGame(null);
+                Data.gameActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), "You have been removed from the game.", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainActivity.class));
+            } else {
+                final User removedUser = findUserbyId(parts[1], Data.players);
+                Data.gameActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                    Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), removedUser.getName() + " has left the game.", Toast.LENGTH_SHORT);
+                    toast.show();
+                    removedUser.getMarker().remove();
+                    Data.players.remove(removedUser);
+                    }
+                });
+            }
         }
 		
 	}
@@ -209,9 +234,8 @@ public class SardinesGame extends Game {
 	 * teamID should always be 0
 	 */
 	@Override
-	public void removeBeacon(int teamid, Integer id) {
+	public void removeBeacon(Integer id) {
 		// TODO Auto-generated method stub
-		getTeambyID(teams, teamid).removeBeacon((getTeambyID(teams, teamid).getBeaconbyID(id)));
 	}
 	
 	

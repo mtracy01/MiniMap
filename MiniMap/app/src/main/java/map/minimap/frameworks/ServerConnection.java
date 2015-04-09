@@ -88,7 +88,13 @@ public class ServerConnection extends Thread {
             String line;
             while(in.hasNextLine()) {
                 line = in.nextLine();
-                handleMessage(line);
+                // Wrapped in try catch to prevent crashes of the server thread
+                try {
+                    handleMessage(line);
+                } catch (Exception e) {
+                    Log.e("Server Connection", "Error handling message: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
         } catch (Exception e) {
             // When the socket is closed, an exception may be thrown
@@ -112,7 +118,7 @@ public class ServerConnection extends Thread {
             Log.v("Message", message);
             String[] parts = message.split(" ");
 
-            if(parts[0].equals("gameUsers")){
+            if (parts[0].equals("gameUsers")) {
 
                 // Remove all current players
                 if (Data.players == null) {
@@ -120,29 +126,29 @@ public class ServerConnection extends Thread {
                 } else {
                     Data.players.clear();
                 }
-                for(int i =1; i < parts.length; i++){
+                for (int i = 1; i < parts.length; i++) {
                     // Add the existing user if it is us, otherwise create a new one
                     if (Data.user.getID().equals(parts[i])) {
                         Data.players.add(Data.user);
                     } else {
                         User user = Data.user.findUserById(parts[i]);
-                        if(user==null) {
+                        if (user == null) {
                             user = new User(parts[i]);
                             //TODO: we need to add name here, but don't have the name from server yet***
-                            try{
+                            try {
                                 Thread.sleep(200);
-                            } catch(Exception e){
-                                Log.e(LOG_TAG,"Exception on sleep thread for null user handling!");
+                            } catch (Exception e) {
+                                Log.e(LOG_TAG, "Exception on sleep thread for null user handling!");
                             }
                         }
                         Data.players.add(user);
-                   }
+                    }
                 }
                 LobbyFragment.changeGrid();
-            } else if(parts[0].equals("game")){
+            } else if (parts[0].equals("game")) {
                 Log.v("gameId", parts[1]);
                 Data.gameId = parts[1];
-                switch(newGameType) {
+                switch (newGameType) {
                     case "friendFinder":
                         Data.user.setGame(new FriendFinderGame());
                         break;
@@ -162,23 +168,23 @@ public class ServerConnection extends Thread {
                 processInvite(parts[1], parts[2]);
 
             } else if (parts[0].equals("users")) {
-                for(int i =1; i < parts.length;i++){
+                for (int i = 1; i < parts.length; i++) {
 
                     //If the user is in our friends list, add them to the invitable users list
                     User user = Data.user.findUserById(parts[i]);
-                    if(user!=null && user.getID()!=Data.user.getID())
+                    if (user != null && user.getID() != Data.user.getID())
                         Data.invitableUsers.add(user);
                     /*else
                         Data.players.add(new User(parts[i]));*/
                 }
 
                 LobbyFragment.changeGrid();
-                Data.clientDoneFlag=1;
-            } else if(parts[0].equals("gameStart")) {
+                Data.clientDoneFlag = 1;
+            } else if (parts[0].equals("gameStart")) {
                 Maps.setCenterPosition(Data.user);
                 // TODO: Don't make this only start friend finder...
                 Intent intent = null;
-                switch(newGameType) {
+                switch (newGameType) {
                     case "friendFinder":
                         intent = new Intent(Data.mainAct.getApplicationContext(), FriendFinder.class);
                         break;
@@ -193,8 +199,7 @@ public class ServerConnection extends Thread {
                     Data.mainAct.startActivity(intent);
                     Data.user.getGame().startSession();
                 }
-            }
-            else if (Data.user.getInGame()) {
+            } else if (Data.user.getInGame()) {
                 Data.user.getGame().handleMessage(message);
             }
 
