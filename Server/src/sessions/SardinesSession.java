@@ -1,5 +1,6 @@
 package sessions;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import server.Beacon;
@@ -13,10 +14,16 @@ public class SardinesSession extends GameSession {
 	
 	private static final Logger log = Logger.getLogger( Server.class.getName() );
 	
+	/**
+	 * Store any potential finds
+	 */
+	private ArrayList<User> potentialFinds;
+	
 	public SardinesSession(User owner, Server server) {
 		super("sardines", owner, server);
 		teams.add(new Team(2));
 		teams.add(new Team(3)); //THIS SHOULD BE AUTOMATED
+		potentialFinds = new ArrayList<User>();
 		//There is only one team in a friend finder session
 		// TODO: Add the owner to a team
 	}
@@ -40,6 +47,8 @@ public class SardinesSession extends GameSession {
 				User temp = server.getUserByID(messageParts[1]);
 				teams.get(1).removeUser(temp);
 				teams.get(0).addUser(temp);
+			} else {
+				potentialFinds.remove(user);
 			}
 			break;
 		}
@@ -183,19 +192,30 @@ public class SardinesSession extends GameSession {
 		}
 		
 		//send confirmation message to sardines that are close by
-		for (User u: this.teams.get(otid).getUsers())
-		{
-			
-			boolean close = Utility.areClose(user, u, Utility.PROXIMITY_DISTANCE);
-			
-			if(close){
-				StringBuilder n = new StringBuilder();
-				//send location to all users for them to handle
-				n.append("Found");
-				n.append(" " + user.getUserID());
+		if (otid == 0) {
+			for (User u: this.teams.get(otid).getUsers())
+			{
+				// user finds person U
+				User finder = user;
+				User found = u;
+				boolean close = Utility.areClose(user, u, Utility.PROXIMITY_DISTANCE);
 				
-				u.sendMessage(n.toString());
-				break; //only send it to one person.  No need to spam
+				if(close){
+					if (!potentialFinds.contains(found)) {
+						StringBuilder n = new StringBuilder();
+						//send location to all users for them to handle
+						n.append("Found");
+						n.append(" " + user.getUserID());
+						
+						potentialFinds.add(found);
+						
+						found.sendMessage(n.toString());
+						break; //only send it to one person.  No need to spam
+						
+					}
+					
+					
+				}
 			}
 		}
 

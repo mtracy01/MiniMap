@@ -114,12 +114,12 @@ public class SardinesGame extends Game {
                     //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Data.client.sendMessage("Found " + id + " false");
+                            Data.client.sendMessage("Found " + id + " true");
                         }
                     });
                     builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Data.client.sendMessage("Found " + id + " true");
+                            Data.client.sendMessage("Found " + id + " false");
                         }
                     });
                     // Create the AlertDialog
