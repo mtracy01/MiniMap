@@ -35,22 +35,22 @@ public class SardinesSession extends GameSession {
 		String[] messageParts = message.split(" ");
 		StringBuilder m = new StringBuilder();
 		switch(messageParts[0]) {
-		//User reporting location to teammates
-		case "Found":
-			if (messageParts[2].equals("true"))
-			{
-				m.append("TeamChange");
-				m.append(" " + user.getUserID());
-				m.append(" " + teams.get(2).getTeamID());
-				teams.get(3).sendMessage(m.toString());
-				
-				User temp = server.getUserByID(messageParts[1]);
-				teams.get(3).removeUser(temp);
-				teams.get(2).addUser(temp);
-			} else {
-				potentialFinds.remove(user);
-			}
-			break;
+			//User reporting location to teammates
+			case "Found":
+				if (messageParts[2].equals("true"))
+				{
+					m.append("TeamChange");
+					m.append(" " + user.getUserID());
+					m.append(" " + teams.get(0).getTeamID());
+					teams.get(1).sendMessage(m.toString());
+					
+					User temp = server.getUserByID(messageParts[1]);
+					teams.get(1).removeUser(temp);
+					teams.get(0).addUser(temp);
+				} else {
+					potentialFinds.remove(user);
+				}
+				break;
 		}
 	}
 	
@@ -69,11 +69,11 @@ public class SardinesSession extends GameSession {
 		{
 			if (!hiddenChosen)
 			{
-				teams.get(2).addUser(user);
+				teams.get(0).addUser(user);
 				hiddenChosen = true;
 			}
 			else
-				teams.get(3).addUser(user);
+				teams.get(1).addUser(user);
 		}
 		
 		
@@ -175,15 +175,15 @@ public class SardinesSession extends GameSession {
 		int tid; //friendly team
 		int otid; //opposing team
 	
-		if (teams.get(2).contains(user))
+		if (teams.get(0).contains(user))
 		{
-			tid = 2;
-			otid = 3;
+			tid = 0;
+			otid = 1;
 		}
 		else
 		{
-			tid = 3;
-			otid = 2;
+			tid = 1;
+			otid = 0;
 		}
 			
 		for (User u: this.teams.get(tid).getUsers())
@@ -192,7 +192,7 @@ public class SardinesSession extends GameSession {
 		}
 		
 		//send confirmation message to sardines that are close by
-		if (otid == 2) {
+		if (otid == 0) {
 			for (User u: this.teams.get(otid).getUsers())
 			{
 				// user finds person U
