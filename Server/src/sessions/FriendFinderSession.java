@@ -127,7 +127,12 @@ public class FriendFinderSession extends GameSession {
 		Beacon beacon = new Beacon(loc);
 		beacon.setTeamId(teamid);
 		getTeambyID(teams, teamid).addBeacon(beacon);
-
+		synchronized (users) {
+			String message = "addbeacon " + beacon.getId() + " " + loc.getLatitude() + " " + loc.getLongitude();
+			for (User u : users) {
+				u.sendMessage(message);
+			}
+		}
 	}
 
 	/**
@@ -137,6 +142,12 @@ public class FriendFinderSession extends GameSession {
 	public void removeBeacon(int teamid, Integer id) {
 		// TODO Auto-generated method stub
 		getTeambyID(teams, teamid).removeBeacon((getTeambyID(teams, teamid).getBeaconbyID(id)));
+		synchronized (users) {
+			String message = "removebeacon " + id;
+			for (User u : users) {
+				u.sendMessage(message);
+			}
+		}
 	}
 
 	@Override
