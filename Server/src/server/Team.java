@@ -51,25 +51,29 @@ public class Team {
 	 */
 	public boolean contains(User user)
 	{
+		boolean found = false;
 		synchronized (users) {
 			for (User u: users)
 			{
 				if (u.equals(user))
 				{
-					return true;
+					found = true;
 				}
 			}
 		}
-		return false;
+		return found;
 	}
 	
 	public Beacon getBeaconbyID(int id) {
-		for (Beacon b: beacons) {
-			if (b.getId() == id) {
-				return b;
+		Beacon toReturn = null;
+		synchronized (beacons) {
+			for (Beacon b: beacons) {
+				if (b.getId() == id) {
+					toReturn = b;
+				}
 			}
 		}
-		return null;
+		return toReturn;
 	}
 	
 	/**
@@ -90,8 +94,10 @@ public class Team {
 	
 	
 	public void sendMessage(String message) {
-		for (User u : users) {
-			u.sendMessage(message);
+		synchronized (users) {
+			for (User u : users) {
+				u.sendMessage(message);
+			}
 		}
 	}
 	
