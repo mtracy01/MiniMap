@@ -189,6 +189,8 @@ public class SardinesSession extends GameSession {
 		int tid; //friendly team
 		int otid; //opposing team
 	
+		log.fine("User: " + user);
+		log.fine("Team: " + teams.get(0));
 		if (teams.get(0).contains(user))
 		{
 			tid = 0;

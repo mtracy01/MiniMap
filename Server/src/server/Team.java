@@ -51,11 +51,13 @@ public class Team {
 	 */
 	public boolean contains(User user)
 	{
-		for (User u: users)
-		{
-			if (u.equals(user))
+		synchronized (users) {
+			for (User u: users)
 			{
-				return true;
+				if (u.equals(user))
+				{
+					return true;
+				}
 			}
 		}
 		return false;
