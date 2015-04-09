@@ -204,13 +204,18 @@ public class SardinesSession extends GameSession {
 			
 		for (User u: this.teams.get(tid).getUsers())
 		{
-			u.sendMessage(m.toString());
+			if (u != null) {
+				u.sendMessage(m.toString());
+			}
 		}
 		
 		//send confirmation message to sardines that are close by
 		if (otid == 0) {
 			for (User u: this.teams.get(otid).getUsers())
 			{
+				if (u == null) {
+					continue;
+				}
 				// user finds person U
 				User finder = user;
 				User found = u;
