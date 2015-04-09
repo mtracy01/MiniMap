@@ -5,8 +5,9 @@
 
     <string name="title_section1">Games</string>
     <string name="title_section2">Groups</string>
-    <string name="title_section3">Invitations</string>
-    <string name="title_section4">Settings</string>
+    <string name="title_section3">Friends</string>
+    <string name="title_section4">Invitations</string>
+    <string name="title_section5">Settings</string>
 
     <string name="hello_world">Hello world!</string>
 
