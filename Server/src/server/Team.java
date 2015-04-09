@@ -55,7 +55,7 @@ public class Team {
 		synchronized (users) {
 			for (User u: users)
 			{
-				if (u.equals(user))
+				if (u != null && u.equals(user))
 				{
 					found = true;
 				}
