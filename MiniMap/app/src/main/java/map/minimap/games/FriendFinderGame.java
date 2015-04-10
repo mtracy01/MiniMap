@@ -24,7 +24,7 @@ public class FriendFinderGame extends Game {
 	private String LOG_TAG = "FriendFinderGame";
 
 	public FriendFinderGame() {
-
+        beaconsEnabled = true;
 	}
 
 

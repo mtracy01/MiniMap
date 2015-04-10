@@ -115,6 +115,16 @@ public class Maps {
                     .position(sydney));
         }
         Data.map = map;
+        // Add a listener for map clicks, used to add beacons
+        Data.map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            public void onMapClick(LatLng point) {
+                if (Data.user.getInGame()) {
+                    if (Data.user.getGame().isBeaconsEnabled()) {
+                        Data.client.sendMessage("addbeacon " + point.latitude + " " + point.longitude);
+                    }
+                }
+            }
+        });
     }
 
     /**
