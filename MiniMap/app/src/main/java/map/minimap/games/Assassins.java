@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 //import com.parse.Parse;
@@ -23,15 +24,13 @@ import map.minimap.helperClasses.Data;
 public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
 
     private SyncedMapFragment map;
-
+    private AppEventsLogger logger = AppEventsLogger.newLogger(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Data.gameActivity = this;
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        // Enable Local Datastore.
-      //  Parse.enableLocalDatastore(this);
-        //Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
+        logger.logEvent("Assassins launched", Data.players.size());
         setContentView(R.layout.activity_assassins);
         if (savedInstanceState == null) {
             map = new SyncedMapFragment();

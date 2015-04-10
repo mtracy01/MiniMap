@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,12 +21,14 @@ import map.minimap.helperClasses.Data;
 public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
 
     private SyncedMapFragment map;
-
+    private AppEventsLogger logger = AppEventsLogger.newLogger(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Data.gameActivity = this;
         FacebookSdk.sdkInitialize(this.getApplicationContext());
+        logger.logEvent("Marco Polo launched", Data.players.size());
+
         setContentView(R.layout.activity_marco_polo);
         if (savedInstanceState == null) {
             map = new SyncedMapFragment();
