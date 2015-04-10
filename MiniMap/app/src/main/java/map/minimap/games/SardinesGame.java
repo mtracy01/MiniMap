@@ -49,10 +49,7 @@ public class SardinesGame extends Game {
                 return;
             }
             LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
-            if (user.getTeam() == -1)
-            {
-                user.setTeam(Integer.parseInt(parts[4]));
-            }
+            user.setTeam(Integer.parseInt(parts[4]));
 
             Log.v("userid", parts[1]);
             if (user == null) {
@@ -98,19 +95,19 @@ public class SardinesGame extends Game {
             Handler mainHandler = new Handler(Looper.getMainLooper());
             mainHandler.post(new Runnable() {
                 public void run() {
-                    User targetUser = findUserbyId(id, Data.players);
+                    final User targetUser = findUserbyId(id, Data.players);
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
                     builder.setMessage("Has " + targetUser.getName() + " found you?");
                     //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Data.client.sendMessage("Found " + id + " true");
+                            Data.client.sendMessage("Found " + targetUser.getID() + " true");
                         }
                     });
                     builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Data.client.sendMessage("Found " + id + " false");
+                            Data.client.sendMessage("Found " + targetUser.getID() + " false");
                         }
                     });
                     // Create the AlertDialog
@@ -136,8 +133,10 @@ public class SardinesGame extends Game {
                     Data.map.clear();
                 }
             });
-            if (Data.user.getID().equals(parts[1])); //If this is the user that is changing teams...
-                Data.user.setTeam(Integer.parseInt(parts[2])); //change the teamID
+            User userMoved = findUserbyId(parts[1], Data.players);
+            if (userMoved != null) {
+                userMoved.setTeam(Integer.parseInt(parts[2]));
+            }
         } else if (parts[0].equals("userRemoved")) {
             if (parts[1].equals(Data.user.getID())) {
                 Data.user.setInGame(false);
