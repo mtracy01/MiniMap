@@ -89,15 +89,6 @@ public class SardinesGame extends Game {
             Beacon beac = new Beacon(b, Integer.parseInt(parts[1]), Data.user.getTeam());
             Data.user.addBeacon(beac);
 
-            Data.map.setMyLocationEnabled(true);
-            Data.map.moveCamera(CameraUpdateFactory.newLatLngZoom(b, 13));
-
-            Data.map.addMarker(new MarkerOptions()
-                    .title("Beacon")
-                    .snippet("Beacon set by Player")
-                    .position(b)
-                    );
-
         } else if (parts[0].equals("removebeacon")) {
             Data.user.removeBeaconByID((Integer.parseInt(parts[1])));
 
