@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,10 +48,6 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
     private ArrayList<String> OptionsList;                //The list of games we have available for players
     private static ListView OptionsListView;    //The Actual UI element id for our games list
     private Context context;
-
-    //Facebook communication protocols
-    //private facebookHelper facebook;
-    //private UiLifecycleHelper uiHelper;
 
     private OnFragmentInteractionListener mListener;
 
@@ -96,6 +93,8 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final FragmentManager fragmentManager = getFragmentManager();
+
         context = getActivity();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_groups, container, false);
@@ -107,11 +106,9 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                                     long id) {
 
                 if(position==0){
-                    //List friends who use the app
-                    //helper.listFriends(context);
-                    FacebookHelper.getFriendsList();
-
-
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, FriendStatus.newInstance("a","b"))
+                            .commit();
                 }
                 if(position==1){
                     //Invite friends to use the app

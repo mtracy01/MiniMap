@@ -14,6 +14,8 @@ import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
+import com.google.android.gms.ads.doubleclick.AppEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +44,7 @@ public class MainActivity extends ActionBarActivity
 
     //Debug tag for log console
     private String LOG_TAG="MainActivity";
+    private AppEventsLogger logger = AppEventsLogger.newLogger(this);
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -121,31 +124,35 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch(position) {
             case 0:
+                logger.logEvent("Open Games menu");
                 fragmentManager.beginTransaction()
                     .replace(R.id.container, GamesFragment.newInstance("a","b"))
                     .commit();
                     break;
             case 1:
+                logger.logEvent("Open Groups menu");
                 fragmentManager.beginTransaction()
                     .replace(R.id.container, GroupsFragment.newInstance("a","b"))
                     .commit();
                     break;
             case 2:
+                logger.logEvent("Open Friends menu");
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, FriendStatus.newInstance("a","b"))
                         .commit();
                 break;
             case 3:
+                logger.logEvent("Open Invitations menu");
                 fragmentManager.beginTransaction()
                     .replace(R.id.container, InvitationsFragment.newInstance("a", "b"))
                     .commit();
                     break;
             case 4:
+                logger.logEvent("Open Settings menu");
                 fragmentManager.beginTransaction()
                     .replace(R.id.container, SettingsFragment.newInstance("a", "b"))
                     .commit();

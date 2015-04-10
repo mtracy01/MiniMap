@@ -193,16 +193,11 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        AppEventsLogger.activateApp(this);
         if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==1){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }
-
-        // Call the 'activateApp' method to log an app event for use in analytics and advertising
-        // reporting.  Do so in the onResume methods of the primary Activities that an app may be
-        // launched into.
-        AppEventsLogger.activateApp(this);
-
     }
 
     @Override

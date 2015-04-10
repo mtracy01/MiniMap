@@ -53,14 +53,6 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
-
-
-
-
     }
     public void refresh(){
         //Set up arrays for inserting into custom adapter
@@ -93,9 +85,7 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //Set up our UI elements
         View view = inflater.inflate(R.layout.fragment_friend_status, container, false);
