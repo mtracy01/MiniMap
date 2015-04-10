@@ -65,16 +65,13 @@ public class SardinesSession extends GameSession {
 		
 		//First user is Hidden 
 		//Others are Seekers
-		boolean hiddenChosen = false;
 		for (User user: this.users)
 		{
-			if (!hiddenChosen)
-			{
-				teams.get(0).addUser(user);
-				hiddenChosen = true;
-			}
-			else
+			if (user.equals(owner)) {
+				teams.get(0).addUser(owner);
+			} else {
 				teams.get(1).addUser(user);
+			}
 		}
 		
 		
