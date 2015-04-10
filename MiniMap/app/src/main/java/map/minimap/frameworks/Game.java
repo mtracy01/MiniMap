@@ -33,10 +33,10 @@ public abstract class Game extends Application{
 	 */
 	protected int id;
 
-	public int getId() {
-		return id;
-	}
-	
+    /**
+     * Does this game mode support beacons?
+     */
+	protected boolean beaconsEnabled = false;
 	
 	/**
 	 * The server
@@ -103,7 +103,18 @@ public abstract class Game extends Application{
 		}
 		return null;
 	}
-	
+
+    public int getId() {
+        return id;
+    }
+
+    public boolean isBeaconsEnabled() {
+        return beaconsEnabled;
+    }
+
+    public void setBeaconsEnabled(boolean beaconsEnabled) {
+        this.beaconsEnabled = beaconsEnabled;
+    }
 	
     
     
