@@ -26,9 +26,6 @@ public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
         super.onCreate(savedInstanceState);
         Data.gameActivity = this;
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        // Enable Local Datastore.
-     //   Parse.enableLocalDatastore(this);
-     //   Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
         setContentView(R.layout.activity_marco_polo);
         if (savedInstanceState == null) {
             map = new SyncedMapFragment();

@@ -1,7 +1,5 @@
 package map.minimap;
 
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -16,8 +14,6 @@ import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.parse.Parse;
-//import com.parse.Parse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,22 +58,15 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
 
-        // Enable Local Datastore.
-        //Parse.enableLocalDatastore(this);
-        //Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
-
         setContentView(R.layout.activity_main);
         Uri targetUrl = AppLinks.getTargetUrlFromInboundIntent(this, getIntent());
         if (targetUrl != null) {
             Log.i("Activity", "App Link Target URL: " + targetUrl.toString());
         }
-        /*MediaPlayer mMediaPlayer;
-        mMediaPlayer = MediaPlayer.create(this,R.raw.hojus);
-        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mMediaPlayer.setLooping(false);
-        mMediaPlayer.start();*/
+
         Log.v("startMiniMap", "Starting MainActivity");
         Data.loggedInFlag=1;
+
         //Create client if one is not already created
         if(Data.client==null) {
             GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {

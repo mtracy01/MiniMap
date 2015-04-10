@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import map.minimap.MainActivity;
 import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.LatLngInterpolator;
-import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 //TODO: Specifics of Sardines

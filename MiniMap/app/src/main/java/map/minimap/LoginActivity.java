@@ -192,8 +192,6 @@ public class LoginActivity extends FragmentActivity {
 
     @Override
     protected void onResume() {
-  //      Parse.enableLocalDatastore(this);
- //       Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
         super.onResume();
         if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==1){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
@@ -235,12 +233,7 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       // profileTracker.stopTracking();
     }
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
