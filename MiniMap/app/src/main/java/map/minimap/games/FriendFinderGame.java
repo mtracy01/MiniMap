@@ -48,7 +48,7 @@ public class FriendFinderGame extends Game {
             LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
             Log.v("userid", parts[1]);
             if (u == null) {
-            	Log.v("userid", "is null");
+            	Log.e("userid", "is null");
             }
             u.setCoordinates(ll);
 
@@ -82,8 +82,8 @@ public class FriendFinderGame extends Game {
 						}
 						else{
 							//Note: this is safety code in case a user marker does not exist. **This should never be run!!!**
-							Log.e(LOG_TAG,"User marker did not exist! Creating one in FriendFinderGame...");
-							u.setMarker(Data.map.addMarker(new MarkerOptions().position(u.getCoordinates())));
+							//Log.e(LOG_TAG,"User marker did not exist! Creating one in FriendFinderGame...");
+							//u.setMarker(Data.map.addMarker(new MarkerOptions().position(u.getCoordinates())));
 						}
 					}
             	}

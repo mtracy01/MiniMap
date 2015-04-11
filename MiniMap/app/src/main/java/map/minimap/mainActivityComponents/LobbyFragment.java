@@ -161,6 +161,14 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
 
             }
         });
+        //Check if there is a null player, if so, remove that player
+        for(int i=0;i<Data.players.size();i++){
+            if(Data.players.get(i).getName().equals("")){
+                Log.e(LOG_TAG,"True null name");
+                Data.players.remove(i);
+            }
+        }
+
         String[] playersArray = new String[Data.players.size()];
         Bitmap[] playersPics  = new Bitmap[Data.players.size()];
         for(int i =0; i < Data.players.size();i++) {
