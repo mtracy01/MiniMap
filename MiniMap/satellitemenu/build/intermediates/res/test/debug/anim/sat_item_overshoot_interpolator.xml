@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<overshootInterpolator xmlns:android="http://schemas.android.com/apk/res/android" android:tension="3.0"/><!-- From: file:/C:/Users/Matthew/AndroidStudioProjects/MiniMap/MiniMap/satellitemenu/src/main/res/anim/sat_item_overshoot_interpolator.xml --><!-- From: file:/C:/Users/Matthew/AndroidStudioProjects/MiniMap/MiniMap/satellitemenu/build/intermediates/bundles/debug/res/anim/sat_item_overshoot_interpolator.xml -->

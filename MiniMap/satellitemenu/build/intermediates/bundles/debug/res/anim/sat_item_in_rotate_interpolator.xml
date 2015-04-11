@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<accelerateInterpolator xmlns:android="http://schemas.android.com/apk/res/android" android:factor="1.2"/><!-- From: file:/C:/Users/Matthew/AndroidStudioProjects/MiniMap/MiniMap/satellitemenu/src/main/res/anim/sat_item_in_rotate_interpolator.xml -->

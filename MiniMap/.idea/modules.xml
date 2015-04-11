@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MiniMap.iml" filepath="$PROJECT_DIR$/MiniMap.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/satellitemenu/satellitemenu.iml" filepath="$PROJECT_DIR$/satellitemenu/satellitemenu.iml" />
     </modules>
   </component>
 </project>
