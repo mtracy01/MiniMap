@@ -29,4 +29,6 @@ dependencies {
     compile files('src/main/libs/Parse-1.9.0.jar')
     compile files('src/main/libs/ParseFacebookUtilsV4-1.9.0.jar')
     compile project(":satellitemenu")
+    compile 'com.yalantis:sidemenu:1.0'
+    compile 'com.github.ozodrukh:CircularReveal:1.0.3@aar'
 }
