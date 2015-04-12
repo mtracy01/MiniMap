@@ -1,21 +1,20 @@
 package map.minimap;
 
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.widget.DrawerLayout;
 
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.ads.doubleclick.AppEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +24,6 @@ import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
-
 import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.FriendStatus;
 import map.minimap.mainActivityComponents.GamesFragment;

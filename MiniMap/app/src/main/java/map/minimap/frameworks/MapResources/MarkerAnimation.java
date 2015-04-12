@@ -4,21 +4,19 @@ package map.minimap.frameworks.MapResources;
    Licensed under Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0.html */
 
 
-        import android.animation.ObjectAnimator;
-        import android.animation.TypeEvaluator;
-        import android.animation.ValueAnimator;
-        import android.annotation.TargetApi;
-        import android.os.Build;
-        import android.os.Handler;
-        import android.os.SystemClock;
-        import android.util.Property;
-        import android.view.animation.AccelerateDecelerateInterpolator;
-        import android.view.animation.Interpolator;
+import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.util.Property;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Interpolator;
 
-        import com.google.android.gms.maps.model.LatLng;
-        import com.google.android.gms.maps.model.Marker;
-
-        import map.minimap.frameworks.MapResources.LatLngInterpolator;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 public class MarkerAnimation {
     static void animateMarkerToGB(final Marker marker, final LatLng finalPosition, final LatLngInterpolator latLngInterpolator) {

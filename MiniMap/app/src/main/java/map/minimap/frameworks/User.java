@@ -5,10 +5,10 @@ import android.os.AsyncTask;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+
 import java.util.ArrayList;
 
 import map.minimap.helperClasses.FacebookHelper;
-import map.minimap.frameworks.Beacon;
 
 /**
  * Created by Joe Coy on 2/20/2015.

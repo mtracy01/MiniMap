@@ -1,12 +1,15 @@
 package map.minimap.helperClasses;
+
 import android.app.Activity;
+
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.ArrayList;
 
 import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
-import com.google.android.gms.maps.GoogleMap;
 
 /**
  * Created by Matthew on 2/21/2015.

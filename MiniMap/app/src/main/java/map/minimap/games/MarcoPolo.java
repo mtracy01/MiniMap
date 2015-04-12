@@ -1,21 +1,21 @@
 package map.minimap.games;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-//import com.parse.Parse;
 
 import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
+
+//import com.parse.Parse;
 
 
 public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{

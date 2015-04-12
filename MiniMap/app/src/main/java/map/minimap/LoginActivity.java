@@ -2,8 +2,8 @@ package map.minimap;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,9 +23,6 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,10 +63,6 @@ public class LoginActivity extends FragmentActivity {
             ParseFacebookUtils.initialize(this);
             Data.initialized=1;
         }
-        //Test of Parse
-        /*ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();*/
 
         setContentView(R.layout.activity_login);
         startCount=0;

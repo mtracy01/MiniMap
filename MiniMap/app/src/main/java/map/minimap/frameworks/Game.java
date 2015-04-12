@@ -2,10 +2,9 @@ package map.minimap.frameworks;
 
 import android.app.Application;
 
-import java.util.ArrayList;
-
-
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
 
 /**
  * Created by joe on 2/21/2015.

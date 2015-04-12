@@ -1,22 +1,23 @@
 package map.minimap.games;
 
 import android.content.Intent;
-import android.util.Log;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
-
-import map.minimap.MainActivity;
-import map.minimap.frameworks.*;
-import map.minimap.frameworks.MapResources.LatLngInterpolator;
-import map.minimap.helperClasses.Data;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+
+import map.minimap.MainActivity;
+import map.minimap.frameworks.Beacon;
+import map.minimap.frameworks.Game;
+import map.minimap.frameworks.MapResources.LatLngInterpolator;
+import map.minimap.frameworks.User;
+import map.minimap.helperClasses.Data;
 
 public class FriendFinderGame extends Game {
 

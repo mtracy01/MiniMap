@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,15 +18,13 @@ import java.util.Scanner;
 
 import map.minimap.FriendFinder;
 import map.minimap.frameworks.MapResources.Maps;
+import map.minimap.games.Assassins;
 import map.minimap.games.AssassinsGame;
 import map.minimap.games.FriendFinderGame;
-import map.minimap.games.SardinesGame;
 import map.minimap.games.Sardines;
-import map.minimap.games.Assassins;
+import map.minimap.games.SardinesGame;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.LobbyFragment;
-
-import android.widget.Toast;
 
 
 public class ServerConnection extends Thread {

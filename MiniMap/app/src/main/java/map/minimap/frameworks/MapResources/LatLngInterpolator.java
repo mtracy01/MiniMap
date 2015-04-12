@@ -4,16 +4,16 @@ package map.minimap.frameworks.MapResources;
    Licensed under Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0.html */
 
 
-        import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLng;
 
-        import static java.lang.Math.asin;
-        import static java.lang.Math.atan2;
-        import static java.lang.Math.cos;
-        import static java.lang.Math.pow;
-        import static java.lang.Math.sin;
-        import static java.lang.Math.sqrt;
-        import static java.lang.Math.toDegrees;
-        import static java.lang.Math.toRadians;
+import static java.lang.Math.asin;
+import static java.lang.Math.atan2;
+import static java.lang.Math.cos;
+import static java.lang.Math.pow;
+import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.toDegrees;
+import static java.lang.Math.toRadians;
 
 public interface LatLngInterpolator {
     LatLng interpolate(float fraction, LatLng a, LatLng b);
