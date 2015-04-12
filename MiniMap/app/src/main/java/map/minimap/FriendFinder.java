@@ -28,12 +28,26 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
         Data.gameActivity = this;
         logger.logEvent("Friend finder launched", Data.players.size());
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-
+        //Set content to our current layout
         setContentView(R.layout.activity_friend_finder);
+
+        //Set up satellite menu
+        android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) findViewById(R.id.menu);
+        java.util.List<android.view.ext.SatelliteMenuItem> items = new java.util.ArrayList<>();
+        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
+        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
+        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
+        items.add(new android.view.ext.SatelliteMenuItem(3,R.drawable.sat_item));
+        items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
+        items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
+        menu.addItems(items);
+
+
+        //Initialize our map fragment
         if (savedInstanceState == null) {
             map = new SyncedMapFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(android.R.id.content,map).commit();
+                    .add(R.id.map, map).commit();
             Data.mapFragment=map;
 
             Data.mapFragment.getMapAsync(this);

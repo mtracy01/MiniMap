@@ -62,6 +62,7 @@ containing a value of this type.
         public static int ic_launcher=0x7f020000;
         public static int sat_item=0x7f020001;
         public static int sat_main=0x7f020002;
+        public static int sat_main1=0x7f020003;
     }
     public static final class id {
         public static int sat_item=0x7f060000;
