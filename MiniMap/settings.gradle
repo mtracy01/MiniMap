@@ -1,2 +1,1 @@
-include ':app'
-include ':satellitemenu'
+include 'app', ':satellitemenu'
