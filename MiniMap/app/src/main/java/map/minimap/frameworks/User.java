@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import map.minimap.helperClasses.FacebookHelper;
 
@@ -40,6 +41,10 @@ public class User {
 
     private ArrayList<Beacon> beacons;
 
+    //Structures for optimized procedures
+    private Hashtable<String,User> friendMap = new Hashtable<>();           //Mapping of User ID strings to the User object
+    private Hashtable<Integer,Integer> beaconMap = new Hashtable<>();       //Mapping of Beacon ID to index in Beacon ArrayList (since removal requires it)
+
     public User(String id) {
 
         coordinates = new LatLng(0,0);
@@ -49,7 +54,7 @@ public class User {
         friends = null; //Needs to be specified later
         inGame = false;
         currentGame = null;
-        beacons = new ArrayList<Beacon>();
+        beacons = new ArrayList<>();
 
         AsyncTask<Void,Void,Void> profileRetriever = new AsyncTask<Void, Void, Void>() {
             @Override
@@ -66,64 +71,55 @@ public class User {
     public LatLng getCoordinates(){return coordinates;}
     public void setCoordinates(LatLng newCoordinates){coordinates=newCoordinates;}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
     public String getID() { return ID; }
 
-    public ArrayList<User> getFriends() {
-        return friends;
+    public ArrayList<User> getFriends() { return friends; }
+    public void setFriends(ArrayList<User> friends) {
+        this.friends = friends;
+        /*
+         * Set up hashtable for fast list intersections of
+         * friends lists with server info
+         * result: O(1) friend lookups
+         */
+        friendMap.clear();
+        for(User u: friends)
+            friendMap.put(u.getID(), u);
     }
 
-    public void setFriends(ArrayList<User> friends) { this.friends = friends; }
-
-    public void setMarker(Marker m){ marker = m; }
     public Marker getMarker(){ return marker;}
+    public void setMarker(Marker m){ marker = m; }
 
-    public void setTeam(int t){ team = t; }
     public int getTeam(){ return team; }
+    public void setTeam(int t){ team = t; }
 
     public boolean getInGame() { return inGame; }
-    public void setInGame(boolean g) {
-        inGame = g;
-    }
+    public void setInGame(boolean g) { inGame = g; }
 
-    public Game getGame() {
-        return currentGame;
-    }
+    public Game getGame() { return currentGame; }
     public void setGame(Game g) { currentGame = g;}
 
     public Bitmap getProfilePhoto() {return profilePhoto;}
     public void setProfilePhoto(Bitmap profilePhoto){ this.profilePhoto = profilePhoto;}
 
-    public User findUserById(String id) {
-        for (User u: friends) {
-            if (u.getID().equals(id)) {
-                return u;
-            }
-        }
-        return null;
-    }
+    public User findUserById(String id) { return friendMap.get(id); }
 
     public void addBeacon(Beacon b)
     {
         beacons.add(b);
+        beaconMap.put(b.getBeaconID(),beacons.size()-1);
     }
     public boolean removeBeaconByID(int id)
     {
-        for (Beacon b: beacons)
-        {
-            if (b.getBeaconID() == id) {
-                b.removeBeacon();
-                beacons.remove((b));
-                return true;
-            }
-        }
-        return false;
+        Integer loc;
+        //if the beacon does not exist, return false
+        if((loc=beaconMap.get(id))==null)
+            return false;
+        //beacon does exist, remove it from map and ArrayList
+        beacons.remove(loc.intValue());
+        beaconMap.remove(id);
+        return true;
     }
 }
