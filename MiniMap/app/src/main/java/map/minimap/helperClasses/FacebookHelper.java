@@ -1,5 +1,6 @@
 package map.minimap.helperClasses;
 
+import android.app.DownloadManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -9,10 +10,12 @@ import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
@@ -88,6 +91,31 @@ public class FacebookHelper {
         graphRequest.executeAsync();
     }
 
+    public static String getFacebookName(String userID){
+        String name = null;
+        GraphRequest graphRequest = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(), userID, new GraphRequest.Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+                return;
+            }
+        });
+        GraphResponse graphResponse = graphRequest.executeAndWait();
+        if(graphResponse==null){
+            Log.e(LOG_TAG,"Failed to get info from ID");
+            return null;
+        }
+        try {
+            JSONObject jsonObject = graphResponse.getJSONObject();
+            name = jsonObject.getString("name");
+        } catch(Exception e){
+            Log.e(LOG_TAG,"Exception!");
+        }
+
+        return name;
+    }
+
+
+    //Get facebook profile picture and return it
     public static Bitmap getFacebookProfilePicture(String userID){
         Bitmap bitmap = null;
         try {

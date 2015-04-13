@@ -56,6 +56,17 @@ public class User {
         currentGame = null;
         beacons = new ArrayList<>();
 
+        // Name retrieval task
+        AsyncTask<String,Void,Void> nameRetriever = new AsyncTask<String, Void, Void>() {
+            @Override
+            protected Void doInBackground(String... params) {
+                name = FacebookHelper.getFacebookName(params[0]);
+                return null;
+            }
+        };
+        nameRetriever.execute(ID);
+
+        // Profile picture retrieval task
         AsyncTask<Void,Void,Void> profileRetriever = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -64,6 +75,7 @@ public class User {
             }
         };
         profileRetriever.execute();
+
     }
 
     /* Getters and Setters */

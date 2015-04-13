@@ -119,12 +119,9 @@ public class ServerConnection extends Thread {
 
             if (parts[0].equals("gameUsers")) {
 
-                // Remove all current players
-                if (Data.players == null) {
-                    Data.players = new ArrayList<>();
-                } else {
-                    Data.players.clear();
-                }
+                // Remove all players from previous game if list is not empty
+                Data.players.clear();
+
                 for (int i = 1; i < parts.length; i++) {
                     // Add the existing user if it is us, otherwise create a new one
                     if (Data.user.getID().equals(parts[i])) {
@@ -168,13 +165,10 @@ public class ServerConnection extends Thread {
 
             } else if (parts[0].equals("users")) {
                 for (int i = 1; i < parts.length; i++) {
-
                     //If the user is in our friends list, add them to the invitable users list
                     User user = Data.user.findUserById(parts[i]);
                     if (user != null && user.getID() != Data.user.getID())
                         Data.invitableUsers.add(user);
-                    /*else
-                        Data.players.add(new User(parts[i]));*/
                 }
 
                 LobbyFragment.changeGrid();
