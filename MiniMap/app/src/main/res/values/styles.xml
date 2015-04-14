@@ -6,4 +6,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- Theme for our new main menu -->
+    <style name="MainMenuTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+    </style>
+
 </resources>

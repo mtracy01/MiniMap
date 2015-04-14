@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <io.codetail.widget.RevealFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/MainMenuTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/container"
+        android:theme="@style/MainMenuTheme"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:scaleType="fitXY"
             android:id="@+id/image_content"
+            android:theme="@style/MainMenuTheme"
             android:src="@drawable/minimaplogo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
