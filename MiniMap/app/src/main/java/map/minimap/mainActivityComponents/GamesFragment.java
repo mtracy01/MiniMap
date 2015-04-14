@@ -118,7 +118,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                         break;
                     case 3:     //If we are testing the new menu, go to that
                         startActivity(new Intent(getActivity(),MainMenu.class));
-                        break;
+                        return;
                 }
 
                 // Add ourselves to the list of players

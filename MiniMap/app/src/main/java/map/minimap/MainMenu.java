@@ -1,7 +1,9 @@
 package map.minimap;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.Toolbar;
 
 import com.facebook.appevents.AppEventsLogger;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +44,7 @@ public class MainMenu extends ActionBarActivity
         implements GamesFragment.OnFragmentInteractionListener, FriendStatus.OnFragmentInteractionListener, GroupsFragment.OnFragmentInteractionListener, InvitationsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener,
          ViewAnimator.ViewAnimatorListener{
 
-    private int res = R.drawable.powered_by_google_light;
+    private int res = R.drawable.abc_item_background_holo_light;
     private Fragment fragment;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -64,9 +67,9 @@ public class MainMenu extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        contentFragment = ContentFragment.newInstance(R.drawable.powered_by_google_light);
+        contentFragment = ContentFragment.newInstance(R.drawable.abc_item_background_holo_light);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, contentFragment)
+                .replace(R.id.content_frame, GamesFragment.newInstance("a","b"))
                 .commit();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
@@ -87,9 +90,16 @@ public class MainMenu extends ActionBarActivity
 
     private void setActionBar() {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        //toolbar.setTitleTextColor(Color.WHITE);
+        //toolbar.setNavigationIcon(R.drawable.sat_main);
+
         setSupportActionBar(toolbar);
+        //getSupportActionBar().set
+        toolbar.setNavigationIcon(R.drawable.ic_launcher);
+       // toolbar.setLogo(R.drawable.minimaplogo);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //toolbar.setNavigationIcon(R.drawable.ic_launcher);
         drawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 drawerLayout,         /* DrawerLayout object */
@@ -162,17 +172,17 @@ public class MainMenu extends ActionBarActivity
         switch(name){
             case ContentFragment.GAMES:
                 Log.v(LOG_TAG, "Attempting switch to games");
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,GamesFragment.newInstance("a","b")).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).commit();
                 //We do nothing, so close
                 break;
             case ContentFragment.GROUPS:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,GroupsFragment.newInstance("a","b")).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GroupsFragment.newInstance("a","b")).commit();
                 break;
             case ContentFragment.FRIENDS:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,FriendStatus.newInstance("a","b")).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b")).commit();
                 break;
             case ContentFragment.SETTINGS:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,SettingsFragment.newInstance("a","b")).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,SettingsFragment.newInstance("a","b")).commit();
                 break;
             case "Logout":
                 //Logout?
@@ -209,5 +219,17 @@ public class MainMenu extends ActionBarActivity
     @Override
     public void addViewToContainer(View view) {
         linearLayout.addView(view);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 }
