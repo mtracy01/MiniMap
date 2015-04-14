@@ -3,6 +3,7 @@ package map.minimap.mainActivityComponents;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import map.minimap.MainActivity;
+import map.minimap.MainMenu;
 import map.minimap.R;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
@@ -83,6 +86,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
         GamesList.add("Assassins");
         GamesList.add("Sardines");
         //GamesList.add("Slender");
+        GamesList.add("Test Menu");
 
 
 
@@ -112,14 +116,13 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                     case 2:
                         Data.client.createGameMessage("sardines");
                         break;
+                    case 3:     //If we are testing the new menu, go to that
+                        startActivity(new Intent(getActivity(),MainMenu.class));
+                        break;
                 }
 
                 // Add ourselves to the list of players
-                if (Data.players == null) {
-                    Data.players = new ArrayList<User>();
-                } else {
-                    Data.players.clear();
-                }
+                Data.players.clear();
                 Data.players.add(Data.user);
 
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();

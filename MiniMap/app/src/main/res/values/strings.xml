@@ -36,5 +36,6 @@
     <string name="permission_not_granted">Permission not granted</string>
     <string name="action_logout">Logout</string>
     <string name="description">Image</string>
+    <string name="title_activity_main_menu">MainMenu</string>
 
 </resources>
