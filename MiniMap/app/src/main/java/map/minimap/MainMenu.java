@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,7 @@ public class MainMenu extends ActionBarActivity
          ViewAnimator.ViewAnimatorListener{
 
     private int res = R.drawable.powered_by_google_light;
+    private Fragment fragment;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private List<SlideMenuItem> list = new ArrayList<>();
@@ -126,7 +128,7 @@ public class MainMenu extends ActionBarActivity
         return true;
     }
 
-    @Override
+  /*  @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -139,7 +141,7 @@ public class MainMenu extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     /*@Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -211,24 +213,18 @@ public class MainMenu extends ActionBarActivity
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(ContentFragment.CLOSE, R.drawable.ic_launcher);
         list.add(menuItem0);
-        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.BUILDING, R.drawable.ic_launcher);
+        SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.GAMES, R.drawable.ic_launcher);
         list.add(menuItem);
-        SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.BOOK, R.drawable.ic_launcher);
+        SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.GROUPS, R.drawable.ic_launcher);
         list.add(menuItem2);
-        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.PAINT, R.drawable.ic_launcher);
+        SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.FRIENDS, R.drawable.ic_launcher);
         list.add(menuItem3);
-        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.CASE, R.drawable.ic_launcher);
+        SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.SETTINGS, R.drawable.ic_launcher);
         list.add(menuItem4);
-        SlideMenuItem menuItem5 = new SlideMenuItem(ContentFragment.SHOP, R.drawable.ic_launcher);
-        list.add(menuItem5);
-        SlideMenuItem menuItem6 = new SlideMenuItem(ContentFragment.PARTY, R.drawable.ic_launcher);
-        list.add(menuItem6);
-        SlideMenuItem menuItem7 = new SlideMenuItem(ContentFragment.MOVIE, R.drawable.ic_launcher);
-        list.add(menuItem7);
     }
 
-    private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition) {
-        this.res = this.res == R.drawable.com_facebook_tooltip_blue_xout ? R.drawable.com_facebook_button_icon : R.drawable.powered_by_google_light;
+    private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition, String name) {
+        //this.res = this.res == R.drawable.com_facebook_tooltip_blue_xout ? R.drawable.com_facebook_button_icon : R.drawable.powered_by_google_light;
         View view = findViewById(R.id.content_frame);
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
         SupportAnimator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
@@ -237,19 +233,71 @@ public class MainMenu extends ActionBarActivity
 
         findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         animator.start();
-        ContentFragment contentFragment = ContentFragment.newInstance(this.res);
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
+        //ContentFragment contentFragment = ContentFragment.newInstance(this.res);
+
+        //Switch depending on the name of the Menu
+        switch(name){
+            case ContentFragment.GAMES:
+                Log.v(LOG_TAG, "Attempting switch to games");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).commit();
+                //We do nothing, so close
+                break;
+            case ContentFragment.GROUPS:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GroupsFragment.newInstance("a","b")).commit();
+                break;
+            case ContentFragment.FRIENDS:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b")).commit();
+                break;
+            case ContentFragment.SETTINGS:
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,SettingsFragment.newInstance("a","b")).commit();
+                break;
+            case "Logout":
+                //Settings Fragment
+                break;
+            //case 5:
+                //Logout?
+            //    break;
+        }
+
+
+
+        //getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, contentFragment).commit();
         return contentFragment;
     }
 
     @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
+        /*switch(position){
+            case 0:
+                Log.v(LOG_TAG, "" + position);
+                //We do nothing, so close
+                return screenShotable;
+            case 1:
+                //set as Games Fragment
+                break;
+            case 2:
+                //Groups Fragment
+                break;
+            case 3:
+                //Friends Fragment
+                break;
+            case 4:
+                //Settings Fragment
+                break;
+            case 5:
+                //Logout?
+                break;
+        }*/
+
+        Log.v(LOG_TAG,""+position);
         switch (slideMenuItem.getName()) {
             case ContentFragment.CLOSE:
                 return screenShotable;
             default:
-                return replaceFragment(screenShotable, position);
+                Log.v(LOG_TAG,"Name = " + slideMenuItem.getName());
+                return replaceFragment(screenShotable, position, slideMenuItem.getName());
         }
+        //return replaceFragment(screenShotable,position);
     }
 
     @Override

@@ -27,6 +27,11 @@ public class ContentFragment extends Fragment implements ScreenShotable {
     public static final String PARTY = "Party";
     public static final String MOVIE = "Movie";
 
+    public static final String GAMES = "Games";
+    public static final String GROUPS = "Groups;";
+    public static final String FRIENDS = "Friends";
+    public static final String SETTINGS = "Settings";
+
     private View containerView;
     protected ImageView mImageView;
     protected int res;
