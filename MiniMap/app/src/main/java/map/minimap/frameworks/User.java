@@ -130,6 +130,8 @@ public class User {
         if((loc=beaconMap.get(id))==null)
             return false;
         //beacon does exist, remove it from map and ArrayList
+        Beacon b = beacons.get(loc.intValue());
+        b.removeBeacon();
         beacons.remove(loc.intValue());
         beaconMap.remove(id);
         return true;
