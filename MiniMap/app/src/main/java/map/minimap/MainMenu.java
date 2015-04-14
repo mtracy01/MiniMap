@@ -95,11 +95,11 @@ public class MainMenu extends ActionBarActivity
 
         setSupportActionBar(toolbar);
         //getSupportActionBar().set
-        toolbar.setNavigationIcon(R.drawable.ic_launcher);
+        //toolbar.setNavigationIcon(R.drawable.ic_launcher);
        // toolbar.setLogo(R.drawable.minimaplogo);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //toolbar.setNavigationIcon(R.drawable.ic_launcher);
+        toolbar.setNavigationIcon(R.drawable.ic_launcher);
         drawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 drawerLayout,         /* DrawerLayout object */
