@@ -126,7 +126,10 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                 Data.players.add(Data.user);
 
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
+                if(getActivity().findViewById(R.id.content_frame)==null)
+                    ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
+                else
+                    ft.replace(R.id.content_frame, LobbyFragment.newInstance("a","b"));
                 ft.addToBackStack(null);
                 ft.commit();
             }
