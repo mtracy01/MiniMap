@@ -17,10 +17,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import map.minimap.MainActivity;
 import map.minimap.MainMenu;
 import map.minimap.R;
-import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
 

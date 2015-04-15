@@ -1,15 +1,13 @@
 package map.minimap;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Menu;
@@ -17,21 +15,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
-import android.widget.Toolbar;
 
-import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.facebook.FacebookSdk;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
+import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.FriendStatus;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
 import map.minimap.mainActivityComponents.InvitationsFragment;
-import map.minimap.mainActivityComponents.NavigationDrawerFragment;
 import map.minimap.mainActivityComponents.SettingsFragment;
 import map.minimap.mainMenuComponents.ContentFragment;
 import yalantis.com.sidemenu.interfaces.Resourceble;
@@ -44,8 +41,6 @@ public class MainMenu extends ActionBarActivity
         implements GamesFragment.OnFragmentInteractionListener, FriendStatus.OnFragmentInteractionListener, GroupsFragment.OnFragmentInteractionListener, InvitationsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener,
          ViewAnimator.ViewAnimatorListener{
 
-    private int res = R.drawable.abc_item_background_holo_light;
-    private Fragment fragment;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private List<SlideMenuItem> list = new ArrayList<>();
@@ -67,6 +62,10 @@ public class MainMenu extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        FacebookSdk.sdkInitialize(this.getApplicationContext());
+        Data.loggedInFlag=1;
+        FacebookHelper.appInitializer();
+
         contentFragment = ContentFragment.newInstance(R.drawable.abc_item_background_holo_light);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, GamesFragment.newInstance("a","b"))
@@ -81,6 +80,9 @@ public class MainMenu extends ActionBarActivity
             }
         });
 
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        decorView.setSystemUiVisibility(uiOptions);
 
         setActionBar();
         createMenuList();
@@ -90,16 +92,21 @@ public class MainMenu extends ActionBarActivity
 
     private void setActionBar() {
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        //toolbar.setTitleTextColor(Color.WHITE);
-        //toolbar.setNavigationIcon(R.drawable.sat_main);
-
         setSupportActionBar(toolbar);
-        //getSupportActionBar().set
-        //toolbar.setNavigationIcon(R.drawable.ic_launcher);
-       // toolbar.setLogo(R.drawable.minimaplogo);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(R.drawable.ic_launcher);
+        toolbar.setNavigationIcon(R.drawable.ic_action_accept);
+        toolbar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Log.v(LOG_TAG, "Menu Item is: " + menuItem.getItemId());
+                if (menuItem.getItemId() == R.id.action_logout) {
+                    FacebookHelper.logout();
+                    startActivity(new Intent(MainMenu.this,LoginActivity.class));
+                }
+                return true;
+            }
+        });
         drawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
                 drawerLayout,         /* DrawerLayout object */
@@ -202,7 +209,6 @@ public class MainMenu extends ActionBarActivity
                 Log.v(LOG_TAG,"Name = " + slideMenuItem.getName());
                 return replaceFragment(screenShotable, position, slideMenuItem.getName());
         }
-        //return replaceFragment(screenShotable,position);
     }
 
     @Override

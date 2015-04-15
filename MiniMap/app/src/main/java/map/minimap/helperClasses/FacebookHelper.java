@@ -1,6 +1,5 @@
 package map.minimap.helperClasses;
 
-import android.app.DownloadManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 
 import org.json.JSONArray;
@@ -21,6 +19,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import map.minimap.frameworks.GPSThread;
+import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 
 /**
@@ -125,5 +125,43 @@ public class FacebookHelper {
             Log.e(LOG_TAG,"IOException when attempting to retrieve profile pictures!");
         }
         return bitmap;
+    }
+
+    public static void appInitializer(){
+
+        //Create client if one is not already created
+        if(Data.client==null) {
+            GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
+                @Override
+                public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                    //Add user data into our user object here
+                    String rawResponse = jsonObject.toString();
+                    Log.v(LOG_TAG, "Raw Response from Request:" + rawResponse);
+                    try {
+                        Data.user = new User(jsonObject.getString("id"));
+                        Data.user.setName(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
+                    } catch (JSONException e) {
+                        Log.e(LOG_TAG, e.getMessage());
+                    }
+
+                    //Starting client (We need to delay this action a little somehow)
+                    if (Data.client == null) {
+                        Log.v("client", "Starting Client");
+                        ServerConnection client = new ServerConnection(Data.user.getID());
+                        Data.client = client;
+                        client.start();
+                        try {
+                            Thread.sleep(200);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Data.gps = new GPSThread(Data.client);
+                    }
+                    FacebookHelper.getFriendsList();
+                }
+            };
+            GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
+            graphRequest.executeAsync();
+        }
     }
 }
