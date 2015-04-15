@@ -81,7 +81,7 @@ public class LoginActivity extends FragmentActivity {
         }
         if(AccessToken.getCurrentAccessToken()!=null){
             Log.i(LOG_TAG,"TRUE");
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this,MainMenu.class);
             startActivity(intent);
         }
 
@@ -133,7 +133,7 @@ public class LoginActivity extends FragmentActivity {
                                     Log.v(LOG_TAG, "Client is not NULL, proceeding to login");
                                     FacebookHelper.getFriendsList();
                                     Data.loggedInFlag=1;
-                                   Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                   Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                                    startActivity(intent);
                                 }
                                 //We did not communicate successfully, log back out of facebook
@@ -188,7 +188,7 @@ public class LoginActivity extends FragmentActivity {
         super.onResume();
         AppEventsLogger.activateApp(this);
         if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==1){
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this,MainMenu.class);
             startActivity(intent);
         }
     }

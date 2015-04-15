@@ -84,7 +84,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
         GamesList.add("Assassins");
         GamesList.add("Sardines");
         //GamesList.add("Slender");
-        GamesList.add("Test Menu");
+        //GamesList.add("Test Menu");
 
 
 
@@ -114,9 +114,9 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                     case 2:
                         Data.client.createGameMessage("sardines");
                         break;
-                    case 3:     //If we are testing the new menu, go to that
+                    /*case 3:     //If we are testing the new menu, go to that
                         startActivity(new Intent(getActivity(),MainMenu.class));
-                        return;
+                        return;*/
                 }
 
                 // Add ourselves to the list of players

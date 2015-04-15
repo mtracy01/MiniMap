@@ -96,13 +96,14 @@ public class MainMenu extends ActionBarActivity
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_action_accept);
+        getSupportActionBar().setTitle("Games");
         toolbar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 Log.v(LOG_TAG, "Menu Item is: " + menuItem.getItemId());
                 if (menuItem.getItemId() == R.id.action_logout) {
                     FacebookHelper.logout();
-                    startActivity(new Intent(MainMenu.this,LoginActivity.class));
+                    startActivity(new Intent(MainMenu.this, LoginActivity.class));
                 }
                 return true;
             }
@@ -180,22 +181,24 @@ public class MainMenu extends ActionBarActivity
             case ContentFragment.GAMES:
                 Log.v(LOG_TAG, "Attempting switch to games");
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).commit();
-                //We do nothing, so close
+                getSupportActionBar().setTitle("Games");
                 break;
             case ContentFragment.GROUPS:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GroupsFragment.newInstance("a","b")).commit();
+                getSupportActionBar().setTitle("Groups");
                 break;
             case ContentFragment.FRIENDS:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b")).commit();
+                getSupportActionBar().setTitle("Friends");
                 break;
             case ContentFragment.SETTINGS:
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,SettingsFragment.newInstance("a","b")).commit();
+                getSupportActionBar().setTitle("Settings");
                 break;
-            case "Logout":
+            /*case "Logout":
                 //Logout?
-                break;
+                break;*/
         }
-
         return contentFragment;
     }
 

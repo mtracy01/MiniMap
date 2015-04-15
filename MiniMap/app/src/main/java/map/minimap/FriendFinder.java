@@ -69,7 +69,7 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
                     public void onClick(DialogInterface arg0, int arg1) {
                         FriendFinder.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
-                        startActivity(new Intent(FriendFinder.this,MainActivity.class));
+                        startActivity(new Intent(FriendFinder.this,MainMenu.class));
                     }
                 }).create().show();
     }

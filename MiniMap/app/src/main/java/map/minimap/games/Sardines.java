@@ -14,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.MainActivity;
+import map.minimap.MainMenu;
 import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
@@ -55,7 +56,7 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
                     public void onClick(DialogInterface arg0, int arg1) {
                         Sardines.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
-                        startActivity(new Intent(Sardines.this,MainActivity.class));
+                        startActivity(new Intent(Sardines.this,MainMenu.class));
                     }
                 }).create().show();
     }
