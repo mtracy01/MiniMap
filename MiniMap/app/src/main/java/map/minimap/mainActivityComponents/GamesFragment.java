@@ -122,6 +122,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                 Data.players.add(Data.user);
 
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
                 if(getActivity().findViewById(R.id.content_frame)==null)
                     ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
                 else

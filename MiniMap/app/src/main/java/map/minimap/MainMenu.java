@@ -106,6 +106,7 @@ public class MainMenu extends ActionBarActivity
                 if (menuItem.getItemId() == R.id.action_logout) {
                     FacebookHelper.logout();
                     startActivity(new Intent(MainMenu.this, LoginActivity.class));
+                    overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_top);
                 }
                 return true;
             }

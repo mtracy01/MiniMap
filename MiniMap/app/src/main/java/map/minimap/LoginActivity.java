@@ -135,6 +135,7 @@ public class LoginActivity extends FragmentActivity {
                                     Data.loggedInFlag=1;
                                    Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                                    startActivity(intent);
+                                    overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
                                 }
                                 //We did not communicate successfully, log back out of facebook
                                 else {
