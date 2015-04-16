@@ -1,5 +1,6 @@
 package map.minimap;
 
+import android.animation.Animator;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -171,12 +172,13 @@ public class MainMenu extends ActionBarActivity
         //this.res = this.res == R.drawable.com_facebook_tooltip_blue_xout ? R.drawable.com_facebook_button_icon : R.drawable.powered_by_google_light;
         View view = findViewById(R.id.content_frame);
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
-        SupportAnimator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
-        animator.setInterpolator(new AccelerateInterpolator());
-        animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
+        //SupportAnimator animator = android.view.ViewAnimationUtils.createCircularReveal(view,0,topPosition,0,finalRadius);// ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
+       // Animator animator = android.view.animation//(view,0,topPosition,0,finalRadius);
+       // animator.setInterpolator(new AccelerateInterpolator());
+       // animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
 
         findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
-        animator.start();
+        //animator.start();
         //ContentFragment contentFragment = ContentFragment.newInstance(this.res);
 
         //Switch depending on the name of the Menu
