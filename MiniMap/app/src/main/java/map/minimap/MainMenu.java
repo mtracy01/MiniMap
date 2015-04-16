@@ -183,19 +183,19 @@ public class MainMenu extends ActionBarActivity
         switch(name){
             case ContentFragment.GAMES:
                 Log.v(LOG_TAG, "Attempting switch to games");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Games");
                 break;
             case ContentFragment.GROUPS:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GroupsFragment.newInstance("a","b")).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GroupsFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Groups");
                 break;
             case ContentFragment.FRIENDS:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b")).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Friends");
                 break;
             case ContentFragment.SETTINGS:
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,SettingsFragment.newInstance("a","b")).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,SettingsFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Settings");
                 break;
             /*case "Logout":

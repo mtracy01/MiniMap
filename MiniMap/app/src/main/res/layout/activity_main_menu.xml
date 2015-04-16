@@ -32,7 +32,6 @@
             android:layout_gravity="top"
             android:layout_width="match_parent"
             android:textAlignment="center"
-            android:titleTextAppearance="@style/centered"
             android:minHeight="?attr/actionBarSize"
             android:background="?attr/colorPrimary"/>
 

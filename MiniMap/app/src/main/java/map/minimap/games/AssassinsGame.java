@@ -21,7 +21,7 @@ import map.minimap.helperClasses.Data;
 //TODO: Specifics of Sardines
 public class AssassinsGame extends Game {
 
-    private String LOG_TAG = "AssasinsGame";
+    private String LOG_TAG = "AssassinsGame";
     //private static final Logger log = Logger.getLogger( Server.class.getName() );
     private User target;
 

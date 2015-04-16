@@ -11,6 +11,4 @@
         <item name="windowActionBarOverlay">false</item>
     </style>
 
-    <style name="centered">
-    </style>
 </resources>

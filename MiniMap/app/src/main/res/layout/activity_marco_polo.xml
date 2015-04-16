@@ -1,9 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context="map.minimap.games.MarcoPolo">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:sat="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="map.minimap.games.MarcoPolo"
+    tools:ignore="MergeRootFrame">
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -14,4 +15,25 @@
         android:layout_marginBottom="30dp"
         android:visibility="gone" />
 
-</RelativeLayout>
+    <fragment
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/map"
+        android:layout_weight="1"
+        class="map.minimap.frameworks.MapResources.SyncedMapFragment"></fragment>
+
+
+    <android.view.ext.SatelliteMenu
+        android:id="@+id/menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="8dp"
+        android:layout_weight="1"
+        sat:satelliteDistance="170dp"
+        sat:mainImage="@drawable/ic_launcher"
+        sat:totalSpacingDegree="90"
+        sat:closeOnClick="true"
+        sat:expandDuration="500"/>
+
+</FrameLayout>
