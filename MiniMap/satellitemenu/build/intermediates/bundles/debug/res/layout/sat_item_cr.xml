@@ -8,4 +8,4 @@
     android:visibility="gone"
     android:layout_gravity="bottom|left"    
     android:contentDescription="@string/empty"/>
-<!-- From: file:/C:/Users/Matthew/AndroidStudioProjects/MiniMap/MiniMap/satellitemenu/src/main/res/layout/sat_item_cr.xml -->
+<!-- From: file:/Users/nickiogg/Documents/School/Spring_2015/CS307/Project/MiniMap/MiniMap/satellitemenu/src/main/res/layout/sat_item_cr.xml -->

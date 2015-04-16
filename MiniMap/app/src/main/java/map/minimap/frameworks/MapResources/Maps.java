@@ -4,6 +4,7 @@ package map.minimap.frameworks.MapResources;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -144,54 +145,82 @@ public class Maps {
             /* Convert coordinates to latitude and longitude tuple */
             LatLng latLng = user.getCoordinates();
 
+            if(user.getProfilePhoto()==null) {
+                Log.e(LOG_TAG,"User didn't have a profile photo! Giving them default profile picture...");
+                Bitmap big = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait);
+                big = Bitmap.createScaledBitmap(big,big.getWidth() / 5,big.getHeight() / 5, false);
+                user.setProfilePhoto(big);
+            }
+            Bitmap tmp = user.getProfilePhoto();
+            Bitmap doubleSized = Bitmap.createScaledBitmap(tmp,tmp.getWidth() * 2,tmp.getHeight() * 2, false);
+
             switch (user.getTeam()-1){
                 case 0:
-                    /* Decode profile picture by calling Facebook Graph API */
-                    // user.setMarker(map.addMarker(new MarkerOptions()
-                    //         .title(user.getName()).position(latLng)
-                    //         .icon(BitmapDescriptorFactory
-                    //                 .fromBitmap(user.getUserImage()))));
-                   if(user.getProfilePhoto()==null) {
-                       Log.e(LOG_TAG,"User didn't have a profile photo! Giving them default profile picture...");
-                       Bitmap big = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait);
-                       big = Bitmap.createScaledBitmap(big,big.getWidth() / 5,big.getHeight() / 5, false);
-                       user.setProfilePhoto(big);
-                   }
-                    Bitmap tmp = user.getProfilePhoto();
-                    Bitmap doubleSized = Bitmap.createScaledBitmap(tmp,tmp.getWidth() * 2,tmp.getHeight() * 2, false);
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .fromBitmap(doubleSized))));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+                                    .fromBitmap(addBorder(doubleSized, Color.DKGRAY)))));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
                     break;
                 case 1:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .defaultMarker(BitmapDescriptorFactory.HUE_BLUE))));
+                                    .fromBitmap(addBorder(doubleSized, Color.BLUE)))));
                     break;
                 case 2:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .defaultMarker(BitmapDescriptorFactory.HUE_RED))));
+                                    .fromBitmap(addBorder(doubleSized, Color.RED)))));
                     break;
                 case 3:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))));
+                                    .fromBitmap(addBorder(doubleSized, Color.YELLOW)))));
                     break;
                 default:
                     user.setMarker(map.addMarker(new MarkerOptions()
                             .position(latLng)
                             .icon(BitmapDescriptorFactory
-                                    .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+                                    .fromBitmap(addBorder(doubleSized, Color.GREEN)))));
                     break;
             }
         }
 
     }
+
+    private static Bitmap addBorder(Bitmap original, int color) {
+        // Create a copy of the image so we don't modify the original
+        Bitmap picture = original.copy(Bitmap.Config.ARGB_8888, true);
+        picture.setHasAlpha(true);
+
+        int outerRadius = Math.min(picture.getHeight(), picture.getWidth()) / 2;
+        int innerRadius = (int) (0.95 * outerRadius);
+
+        int outerSquared = outerRadius * outerRadius;
+        int innerSquared = innerRadius * innerRadius;
+
+        for (int i = 0; i < picture.getWidth(); i++) {
+            for (int j = 0; j < picture.getHeight(); j++) {
+                int x = (picture.getWidth() / 2) - i;
+                int y = (picture.getHeight() / 2) - j;
+                int radiusSquared = x*x + y*y;
+
+                if (radiusSquared >= innerSquared && radiusSquared < outerSquared) {
+                    // Add the border
+                    picture.setPixel(i, j, color);
+                } else if (radiusSquared >= outerSquared) {
+                    // Set to transparent
+                    picture.setPixel(i, j, Color.alpha(Color.TRANSPARENT));
+
+                }
+            }
+        }
+
+        return picture;
+    }
+
     /*private static void addPlayersToField(GoogleMap map){
 
         //User[] users = new User[Data.users.size()];
