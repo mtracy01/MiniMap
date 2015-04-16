@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
-import map.minimap.MainActivity;
+import map.minimap.MainMenu;
 import map.minimap.frameworks.Beacon;
 import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.LatLngInterpolator;
@@ -106,7 +106,7 @@ public class FriendFinderGame extends Game {
                     toast.show();
                     }
                 });
-                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainActivity.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             } else {
                 final User removedUser = findUserbyId(parts[1], Data.players);
                 Data.gameActivity.runOnUiThread(new Runnable() {

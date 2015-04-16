@@ -1,11 +1,6 @@
 package map.minimap.helperClasses;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-
-import map.minimap.MainMenu;
 
 /**
  * Created by Matthew on 4/15/2015.
@@ -20,9 +15,9 @@ public class DialogHelper {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        context.getC.super.onBackPressed();
+                        MainMenu.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
-                        startActivity(new Intent(context,MainMenu.class));
+                        startActivity(new Intent(context, MainMenu.class));
                     }
                 }).create().show();*/
     }

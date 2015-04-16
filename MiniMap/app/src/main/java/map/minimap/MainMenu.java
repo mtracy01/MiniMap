@@ -1,5 +1,6 @@
 package map.minimap;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +30,6 @@ import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.FriendStatus;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
-import map.minimap.mainActivityComponents.InvitationsFragment;
 import map.minimap.mainActivityComponents.SettingsFragment;
 import map.minimap.mainMenuComponents.ContentFragment;
 import yalantis.com.sidemenu.interfaces.Resourceble;
@@ -38,7 +39,7 @@ import yalantis.com.sidemenu.util.ViewAnimator;
 
 
 public class MainMenu extends ActionBarActivity
-        implements GamesFragment.OnFragmentInteractionListener, FriendStatus.OnFragmentInteractionListener, GroupsFragment.OnFragmentInteractionListener, InvitationsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener,
+        implements GamesFragment.OnFragmentInteractionListener, FriendStatus.OnFragmentInteractionListener, GroupsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener,
          ViewAnimator.ViewAnimatorListener{
 
     private DrawerLayout drawerLayout;
@@ -97,6 +98,7 @@ public class MainMenu extends ActionBarActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_action_accept);
         getSupportActionBar().setTitle("Games");
+
         toolbar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

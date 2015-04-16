@@ -13,7 +13,6 @@ import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-import map.minimap.MainActivity;
 import map.minimap.MainMenu;
 import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;

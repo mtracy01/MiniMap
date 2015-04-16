@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-import map.minimap.MainActivity;
+import map.minimap.MainMenu;
 import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.LatLngInterpolator;
 import map.minimap.frameworks.User;
@@ -165,7 +165,7 @@ public class AssassinsGame extends Game {
                         toast.show();
                     }
                 });
-                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainActivity.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             }
         } else if (parts[0].equals("userRemoved")) {
             if (parts[1].equals(Data.user.getID())) {
@@ -177,7 +177,7 @@ public class AssassinsGame extends Game {
                         toast.show();
                     }
                 });
-                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainActivity.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             } else {
                 final User removedUser = findUserbyId(parts[1], Data.players);
                 Data.gameActivity.runOnUiThread(new Runnable() {

@@ -3,7 +3,6 @@ package map.minimap.mainActivityComponents;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -17,7 +16,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import map.minimap.MainMenu;
 import map.minimap.R;
 import map.minimap.helperClasses.Data;
 
