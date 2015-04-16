@@ -58,15 +58,21 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".games.Sardines"
-            android:label="@string/title_activity_sardines" >
+            android:label="@string/title_activity_sardines"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".games.MarcoPolo"
-            android:label="@string/title_activity_marco_polo" >
+            android:label="@string/title_activity_marco_polo"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".games.Assassins"
-            android:label="@string/title_activity_assassins" >
+            android:label="@string/title_activity_assassins"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".MainMenu"
