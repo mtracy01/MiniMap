@@ -48,7 +48,7 @@ public class DbInteract {
 			stmt = conn.createStatement();
 			stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace(); Exceptions are to be expected
 		}		
 	}
 	
