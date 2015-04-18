@@ -32,7 +32,7 @@ public class CustomListStatus extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView= inflater.inflate(R.layout.list_single_status, null, true);
+        View rowView = inflater.inflate(R.layout.list_single_status, null, true);
 
         //Get views of text, image, and status radio
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
@@ -44,10 +44,9 @@ public class CustomListStatus extends ArrayAdapter<String> {
         txtTitle.setText(web[position]);
         imageView.setImageBitmap(imageId[position]);
         radioButton.setClickable(false);                    //Do not allow people to click the radio button, it is just a status indicator
-        if(isOnline[position]==true){
-            radioButton.setBackgroundColor(Color.GREEN);
-        }
-
+        radioButton.setHighlightColor(Color.GREEN);
+        if (isOnline[position] == true)
+            radioButton.setChecked(true);
         return rowView;
     }
 }

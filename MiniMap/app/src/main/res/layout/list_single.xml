@@ -9,7 +9,7 @@
             android:layout_height="50dp"/>
         <TextView
             android:id="@+id/txt"
-            android:textSize="@dimen/abc_text_size_menu_material"
+            android:textSize="30dp"
             android:layout_width="wrap_content"
             android:layout_height="50dp" />
     </TableRow>
