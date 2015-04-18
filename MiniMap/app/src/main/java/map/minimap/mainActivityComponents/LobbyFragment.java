@@ -183,8 +183,12 @@ public class LobbyFragment extends Fragment {
         return view;
     }
     public static void changeGrid(){
-        adapter.notifyDataSetChanged();
-        playerListView.setAdapter(adapter);
+        Data.mainAct.runOnUiThread(new Runnable() {
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+       // playerListView.setAdapter(adapter);
+            });
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

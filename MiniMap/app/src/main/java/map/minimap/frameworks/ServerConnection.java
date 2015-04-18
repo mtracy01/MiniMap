@@ -140,6 +140,7 @@ public class ServerConnection extends Thread {
                                 Log.e(LOG_TAG, "Exception on sleep thread for null user handling!");
                             }
                         }
+                        Log.v("here", "gameuseres add");
                         Data.lobbyUsers.add(user.getName());
                         Data.players.add(user);
                     }
@@ -180,7 +181,7 @@ public class ServerConnection extends Thread {
                 Data.clientDoneFlag = 1;
             } else if (parts[0].equals("gameStart")) {
                 Maps.setCenterPosition(Data.user);
-                // TODO: Don't make this only start friend finder...
+
                 Intent intent = null;
                 switch (newGameType) {
                     case "friendFinder":
@@ -221,6 +222,11 @@ public class ServerConnection extends Thread {
         newGameType = gameType;
         if (connected) {
             out.println("createGame " + gameType);
+        }
+    }
+    public void createScrimmageLineMessage(String coord1, String coord2,String coord3,String coord4){
+        if (connected) {
+            out.println("lineOfScrimmage " + coord1 +" "+coord2 +" "+coord3 +" "+coord4);
         }
     }
     public void acceptGameMessage(String gameID){
@@ -281,7 +287,7 @@ public class ServerConnection extends Thread {
                         }
                         Data.user.setInGame(true);
 
-                        Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame,new LobbyFragNonHost()).commit();
+                        Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.container,new LobbyFragNonHost()).commit();
 
 
                     }

@@ -3,6 +3,7 @@ package map.minimap.mainActivityComponents;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +18,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import map.minimap.R;
+import map.minimap.frameworks.MapResources.Maps;
+import map.minimap.games.CTFscrimmage;
 import map.minimap.helperClasses.Data;
 
 
@@ -78,9 +81,9 @@ public class GamesFragment extends android.support.v4.app.Fragment{
         /* Add Application Names here as they are ready for testing to create their button in the UI */
         GamesList = new ArrayList<>();
         GamesList.add("Friend Finder");
-        //GamesList.add("Capture the Flag");
         GamesList.add("Assassins");
         GamesList.add("Sardines");
+        GamesList.add("Capture the Flag");
         //GamesList.add("Slender");
         //GamesList.add("Test Menu");
 
@@ -94,6 +97,7 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_games, container, false);
+
         /* Create reaction interfaces for the game buttons in our list */
         context =getActivity();
         GamesListView = (ListView)view.findViewById(R.id.listView);
@@ -111,6 +115,12 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                         break;
                     case 2:
                         Data.client.createGameMessage("sardines");
+                        break;
+                    case 3:
+                        Data.client.createGameMessage("ctf");
+
+                        Intent intent = new Intent(Data.mainAct.getApplicationContext(), CTFscrimmage.class);
+                        Data.mainAct.startActivity(intent);
                         break;
                     /*case 3:     //If we are testing the new menu, go to that
                         startActivity(new Intent(getActivity(),MainMenu.class));
