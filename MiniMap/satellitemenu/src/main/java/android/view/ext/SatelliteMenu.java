@@ -42,8 +42,8 @@ public class SatelliteMenu extends FrameLayout {
 	private SateliteClickedListener itemClickedListener;
 	private InternalSatelliteOnClickListener internalItemClickListener;
 
-	private List<SatelliteMenuItem> menuItems = new ArrayList<>();
-	private Map<View, SatelliteMenuItem> viewToItemMap = new HashMap<>();
+	private List<SatelliteMenuItem> menuItems = new ArrayList<SatelliteMenuItem>();
+	private Map<View, SatelliteMenuItem> viewToItemMap = new HashMap<View, SatelliteMenuItem>();
 
 	private AtomicBoolean plusAnimationActive = new AtomicBoolean(false);
 
@@ -240,7 +240,7 @@ public class SatelliteMenu extends FrameLayout {
 
 	private void resetItems() {
 		if (menuItems.size() > 0) {
-			List<SatelliteMenuItem> items = new ArrayList<>(
+			List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>(
 					menuItems);
 			menuItems.clear();
 			this.removeAllViews();
@@ -263,7 +263,7 @@ public class SatelliteMenu extends FrameLayout {
 		private int tag;
 		
 		public SatelliteItemClickAnimationListener(SatelliteMenu menu, int tag) {
-			this.menuRef = new WeakReference<>(menu);
+			this.menuRef = new WeakReference<SatelliteMenu>(menu);
 			this.tag = tag;
 		}
 		

@@ -12,7 +12,7 @@
             android:textSize="@dimen/abc_text_size_menu_material"
             android:layout_width="wrap_content"
             android:layout_height="50dp" />
-        <CheckBox
+        <com.rey.material.widget.CheckBox
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="50dp"/>
