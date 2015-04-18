@@ -3,6 +3,7 @@ package server;
 import java.util.logging.Logger;
 
 import sessions.AssassinsSession;
+import sessions.CTFSession;
 import sessions.FriendFinderSession;
 import sessions.GameSession;
 import sessions.SardinesSession;
@@ -159,6 +160,7 @@ public class MessageHandler {
 				gameSession = new FriendFinderSession(user, server);
 				break;
 			case "ctf":
+				gameSession = new CTFSession(user, server);
 				break;
 			case "marcoPolo":
 				break;
