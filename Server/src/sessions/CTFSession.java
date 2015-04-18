@@ -223,7 +223,7 @@ public class CTFSession extends GameSession {
 					if (!potentialFinds.contains(found)) {
 						//send message to each user asking to accept
 				
-						found.sendMessage("acceptTagged " + u.getUserID());
+						found.sendMessage("acceptTagged " + user.getUserID());
 						finder.sendMessage("acceptTag " + u.getUserID());
 	
 						break; 
