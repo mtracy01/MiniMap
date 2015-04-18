@@ -1,7 +1,5 @@
 package map.minimap;
 
-import android.animation.Animator;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -12,20 +10,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.LinearLayout;
+import android.support.v4.app.FragmentTransaction;
+
 
 import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.codetail.animation.SupportAnimator;
-import io.codetail.animation.ViewAnimationUtils;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.FriendStatus;
@@ -50,20 +47,17 @@ public class MainMenu extends ActionBarActivity
     private ViewAnimator viewAnimator;
     private LinearLayout linearLayout;
 
-    /**
-     * Used to store the last screen title.
-     */
-    private CharSequence mTitle;
 
     //Logging variables
     private String LOG_TAG = "MainMenu";
-    //private AppEventsLogger logger = AppEventsLogger.newLogger(this);
+    private AppEventsLogger logger = AppEventsLogger.newLogger(this);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        Data.mainAct=this;
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         Data.loggedInFlag=1;
         FacebookHelper.appInitializer();
@@ -82,9 +76,9 @@ public class MainMenu extends ActionBarActivity
             }
         });
 
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        decorView.setSystemUiVisibility(uiOptions);
+        //View decorView = getWindow().getDecorView();
+        //int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        //decorView.setSystemUiVisibility(uiOptions);
 
         setActionBar();
         createMenuList();
@@ -168,41 +162,31 @@ public class MainMenu extends ActionBarActivity
         list.add(menuItem4);
     }
 
-    private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition, String name) {
-        //this.res = this.res == R.drawable.com_facebook_tooltip_blue_xout ? R.drawable.com_facebook_button_icon : R.drawable.powered_by_google_light;
-        View view = findViewById(R.id.content_frame);
-        int finalRadius = Math.max(view.getWidth(), view.getHeight());
-        //SupportAnimator animator = android.view.ViewAnimationUtils.createCircularReveal(view,0,topPosition,0,finalRadius);// ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
-       // Animator animator = android.view.animation//(view,0,topPosition,0,finalRadius);
-       // animator.setInterpolator(new AccelerateInterpolator());
-       // animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
-
+    private ScreenShotable replaceFragment(ScreenShotable screenShotable, String name) {
         findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
-        //animator.start();
-        //ContentFragment contentFragment = ContentFragment.newInstance(this.res);
 
         //Switch depending on the name of the Menu
         switch(name){
             case ContentFragment.GAMES:
-                Log.v(LOG_TAG, "Attempting switch to games");
+                logger.logEvent("Games Menu");
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Games");
                 break;
             case ContentFragment.GROUPS:
+                logger.logEvent("Groups Menu");
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GroupsFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Groups");
                 break;
             case ContentFragment.FRIENDS:
+                logger.logEvent("Friends Menu");
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Friends");
                 break;
             case ContentFragment.SETTINGS:
+                logger.logEvent("Settings Menu");
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,SettingsFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Settings");
                 break;
-            /*case "Logout":
-                //Logout?
-                break;*/
         }
         return contentFragment;
     }
@@ -215,7 +199,7 @@ public class MainMenu extends ActionBarActivity
                 return screenShotable;
             default:
                 Log.v(LOG_TAG,"Name = " + slideMenuItem.getName());
-                return replaceFragment(screenShotable, position, slideMenuItem.getName());
+                return replaceFragment(screenShotable,slideMenuItem.getName());
         }
     }
 

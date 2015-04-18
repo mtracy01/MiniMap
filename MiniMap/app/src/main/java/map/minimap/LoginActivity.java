@@ -67,7 +67,7 @@ public class LoginActivity extends FragmentActivity {
         setContentView(R.layout.activity_login);
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
-        Data.mainAct=this;
+
 
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
         if(loginButton!=null) {

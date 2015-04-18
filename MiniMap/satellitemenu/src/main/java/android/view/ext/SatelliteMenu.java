@@ -1,12 +1,5 @@
 package android.view.ext;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -19,6 +12,13 @@ import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Provides a "Path" like menu for android. ??
@@ -293,7 +293,7 @@ public class SatelliteMenu extends FrameLayout {
 		private Map<View, SatelliteMenuItem> viewToItemMap;
 
 		public SatelliteAnimationListener(View view, boolean isIn, Map<View, SatelliteMenuItem> viewToItemMap) {
-			this.viewRef = new WeakReference<View>(view);
+			this.viewRef = new WeakReference<>(view);
 			this.isInAnimation = isIn;
 			this.viewToItemMap = viewToItemMap;
 		}
@@ -350,7 +350,7 @@ public class SatelliteMenu extends FrameLayout {
 		private WeakReference<SatelliteMenu> menuRef;
 		
 		public InternalSatelliteOnClickListener(SatelliteMenu menu) {
-			this.menuRef = new WeakReference<SatelliteMenu>(menu);
+			this.menuRef = new WeakReference<>(menu);
 		}
 
 		@Override
@@ -428,8 +428,6 @@ public class SatelliteMenu extends FrameLayout {
 
 	/**
 	 * Sets the image drawable for the center button.
-	 * 
-	 * @param resource The image drawable.
 	 */
 	public void setMainImage(Drawable drawable) {
 		this.imgMain.setImageDrawable(drawable);

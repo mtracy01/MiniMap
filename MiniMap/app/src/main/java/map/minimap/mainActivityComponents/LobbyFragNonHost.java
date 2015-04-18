@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import java.util.ArrayList;
 
 import map.minimap.R;
@@ -28,7 +28,7 @@ import map.minimap.helperClasses.Data;
 /**
  * Created by Corey on 2/22/2015.
  */
-public class LobbyFragment extends Fragment {
+public class LobbyFragNonHost extends Fragment {
 
     private String LOG_TAG = "LobbyFragment";
     // TODO: Rename parameter arguments, choose names that match
@@ -54,8 +54,8 @@ public class LobbyFragment extends Fragment {
      * @return A new instance of fragment InvitationsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LobbyFragment newInstance(String param1, String param2) {
-        LobbyFragment fragment = new LobbyFragment();
+    public static LobbyFragNonHost newInstance(String param1, String param2) {
+        LobbyFragNonHost fragment = new LobbyFragNonHost();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,7 +63,7 @@ public class LobbyFragment extends Fragment {
         return fragment;
     }
 
-    public LobbyFragment() {
+    public LobbyFragNonHost() {
         // Required empty public constructor
     }
 
@@ -79,11 +79,11 @@ public class LobbyFragment extends Fragment {
         //check server for other players
         final Handler handler = new Handler();
         handler.postDelayed( new Runnable() {
-        @Override
-        public void run() {
+            @Override
+            public void run() {
 
-            handler.postDelayed( this, 60 * 1000 );
-        }
+                handler.postDelayed( this, 60 * 1000 );
+            }
         }, 15 * 1000 );
     }
 
@@ -92,75 +92,11 @@ public class LobbyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view =  inflater.inflate(R.layout.fragment_grouplobby, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_lobbynonhost, container, false);
         context =getActivity();
         playerListView = (ListView)view.findViewById(R.id.listView);
 
-        final Button startButton = (Button) view.findViewById(R.id.startButton);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Data.client.startGame();
-            }
-        });
 
-        final Button inviteButton = (Button) view.findViewById(R.id.inviteButton);
-
-        inviteButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Data.invitableUsers.clear();
-                Data.selectedUsers.clear();
-                Data.client.getAllUsers();
-
-                //Do nothing while the client gets invitable users and organizes them into list
-                while(Data.clientDoneFlag==0){}
-
-                //when done, reset the client done flag and perform the dialog task
-                Data.clientDoneFlag=0;
-
-                Log.v(LOG_TAG,"InvitableUsersSize: " + Data.invitableUsers.size());
-
-                //If we have friends who are online, show the invite dialog
-                if(Data.invitableUsers.size()!=0) {
-                    String[] playersArray = new String[Data.invitableUsers.size()];
-                    Bitmap[] playersPics = new Bitmap[Data.invitableUsers.size()];
-                    for (int i = 0; i < Data.invitableUsers.size(); i++) {
-                        playersArray[i] = Data.invitableUsers.get(i).getName();
-                        playersPics[i] = Data.invitableUsers.get(i).getProfilePhoto();
-                    }
-                    CustomListInvite inviteAdapter = new CustomListInvite(getActivity(), playersArray, playersPics);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setTitle("Invite Online Friends");
-                    builder.setAdapter(inviteAdapter, null);
-                    builder.setPositiveButton("Invite", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            StringBuilder builder = new StringBuilder();
-                            builder.append("invite ");
-                            builder.append(Data.gameId);
-                            for (User u : Data.selectedUsers) {
-                                builder.append(' ');
-                                builder.append(u.getID());
-                            }
-                            Data.client.sendMessage(builder.toString());
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
-                //If we have no invitable friends online, just display a toast that says we have no invitable friends online
-                else{
-                   Toast.makeText(context,"Sorry, none of your friends are currently online.",Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
         //Check if there is a null player, if so, remove that player
         for(int i=0;i<Data.players.size();i++){
             if(Data.players.get(i).getName().equals("")){

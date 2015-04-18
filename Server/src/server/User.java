@@ -286,6 +286,24 @@ public class User extends Thread {
 	public boolean isConnected() {
 		return connected;
 	}
+	
+	/**
+	 * 
+	 * @return the socket
+	 */
+	public Socket getSocket() {
+		return socket;
+	}
+	
+	/**
+	 * 
+	 * @return the server
+	 */
+	public Server getServer() {
+		return server;
+	}
+	
+	
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
