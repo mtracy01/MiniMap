@@ -34,7 +34,7 @@ public class CustomListInvite extends ArrayAdapter<String> {
         View rowView= inflater.inflate(R.layout.list_single_invite, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
-        CheckBox checkBox = (CheckBox) rowView.findViewById(R.id.checkbox);
+        com.rey.material.widget.CheckBox checkBox = (com.rey.material.widget.CheckBox) rowView.findViewById(R.id.checkbox);
         final int rowPosition = position;
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
