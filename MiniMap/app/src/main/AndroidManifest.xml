@@ -49,6 +49,11 @@
             android:label="@string/title_activity_friend_finder"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".games.CTFscrimmage"
+            android:label="title_activity_ctf_scrimmage"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <!-- Facebook API Activities Declared Below -->
         <activity
