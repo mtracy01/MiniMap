@@ -119,7 +119,7 @@ public class FacebookHelper {
     public static Bitmap getFacebookProfilePicture(String userID){
         Bitmap bitmap = null;
         try {
-            URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=small");
+            URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=square");
             bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
         } catch( IOException e){
             Log.e(LOG_TAG,"IOException when attempting to retrieve profile pictures!");
