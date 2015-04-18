@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import map.minimap.R;
+import map.minimap.frameworks.Game;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
@@ -121,7 +122,9 @@ public class Maps {
             public void onMapClick(LatLng point) {
                 if (Data.user.getInGame()) {
                     if (Data.user.getGame().isBeaconsEnabled()) {
-                        Data.client.sendMessage("addbeacon " + point.latitude + " " + point.longitude);
+                        if (Data.user.getGame().getBeaconMode().equals(Game.BeaconMode.ADD)) {
+                            Data.client.sendMessage("addbeacon " + point.latitude + " " + point.longitude);
+                        }
                     }
                 }
             }

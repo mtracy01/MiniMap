@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ext.SatelliteMenu;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
+import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
@@ -23,6 +25,10 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
 
     private SyncedMapFragment map;
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
+
+    private final int NOTHING_BEACON_MENU_ID = 0;
+    private final int ADD_BEACON_MENU_ID = 1;
+    private final int REMOVE_BEACON_MENU_ID = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +42,37 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
         //Set up satellite menu
         android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) findViewById(R.id.menu);
         java.util.List<android.view.ext.SatelliteMenuItem> items = new java.util.ArrayList<>();
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(3,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
+
+        if (Data.user.getGame().isBeaconsEnabled()) {
+            items.add(new android.view.ext.SatelliteMenuItem(NOTHING_BEACON_MENU_ID, R.drawable.sat_item));
+            items.add(new android.view.ext.SatelliteMenuItem(ADD_BEACON_MENU_ID, R.drawable.sat_item));
+            items.add(new android.view.ext.SatelliteMenuItem(REMOVE_BEACON_MENU_ID, R.drawable.sat_item));
+        }
+
+//        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
+//        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
+//        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
+//        items.add(new android.view.ext.SatelliteMenuItem(3,R.drawable.sat_item));
+//        items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
+//        items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
         menu.addItems(items);
 
+        menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
+            @Override
+            public void eventOccured(int id) {
+                switch (id) {
+                    case NOTHING_BEACON_MENU_ID:
+                        Data.user.getGame().setBeaconMode(Game.BeaconMode.NOTHING);
+                        break;
+                    case ADD_BEACON_MENU_ID:
+                        Data.user.getGame().setBeaconMode(Game.BeaconMode.ADD);
+                        break;
+                    case REMOVE_BEACON_MENU_ID:
+                        Data.user.getGame().setBeaconMode(Game.BeaconMode.REMOVE);
+                        break;
+                }
+            }
+        });
 
         //Initialize our map fragment
         if (savedInstanceState == null) {

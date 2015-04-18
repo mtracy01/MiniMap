@@ -36,6 +36,12 @@ public abstract class Game extends Application{
      * Does this game mode support beacons?
      */
 	protected boolean beaconsEnabled = false;
+
+    public enum BeaconMode {
+        NOTHING, ADD, REMOVE
+    }
+
+    protected BeaconMode beaconMode = BeaconMode.NOTHING;
 	
 	/**
 	 * The server
@@ -114,13 +120,13 @@ public abstract class Game extends Application{
     public void setBeaconsEnabled(boolean beaconsEnabled) {
         this.beaconsEnabled = beaconsEnabled;
     }
-	
-    
-    
-    
-    
-    
-    
-    
 
+
+    public BeaconMode getBeaconMode() {
+        return beaconMode;
+    }
+
+    public void setBeaconMode(BeaconMode beaconMode) {
+        this.beaconMode = beaconMode;
+    }
 }
