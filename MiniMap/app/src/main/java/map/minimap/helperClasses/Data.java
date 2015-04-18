@@ -30,7 +30,7 @@ public class Data {
 
 
     //Items used in Lobby fragment and game
-    public static ArrayList<User> lobbyUsers     = new ArrayList<>();         //Users in the lobby currently
+    public static ArrayList<String> lobbyUsers     = new ArrayList<>();         //Users in the lobby currently
     public static ArrayList<User> invitableUsers = new ArrayList<>();        //Possible users that can be invited.  This is displayed in the invite dialog
     public static ArrayList<User> selectedUsers  = new ArrayList<>();       //Users selected to be invited in the invite dialog
     public static ArrayList<User> players        = new ArrayList<>();      //Players in the current game
