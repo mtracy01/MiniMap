@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -25,12 +26,14 @@ import java.util.Iterator;
  * Created by Matthew on 4/5/2015.
  */
 public class SyncedMapFragment extends SupportMapFragment {
+    public View mOriginalContentView;
     private MapViewWrapper mWrapper;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        mOriginalContentView = super.onCreateView(inflater, container, savedInstanceState);
         mWrapper = new MapViewWrapper(getActivity());
         mWrapper.addView(super.onCreateView(inflater, container, savedInstanceState));
         return mWrapper;
@@ -44,17 +47,37 @@ public class SyncedMapFragment extends SupportMapFragment {
         }
         mWrapper.animateMarkerToGB(marker, finalPosition, latLngInterpolator, duration);
     }
-
+    @Override
+    public View getView() {
+        return mOriginalContentView;
+    }
+    public void setOnDragListener(MapViewWrapper.OnDragListener onDragListener) {
+        mWrapper.setOnDragListener(onDragListener);
+    }
 
     public static class MapViewWrapper extends FrameLayout
     {
         private HashSet<MarkerAnimation> mAnimations = new HashSet<MarkerAnimation>();
-
+        private OnDragListener mOnDragListener;
 
         public MapViewWrapper(Context context)
         {
             super(context);
             setWillNotDraw(false);
+        }
+        public interface OnDragListener {
+            public void onDrag(MotionEvent motionEvent);
+        }
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent ev) {
+            if (mOnDragListener != null) {
+                mOnDragListener.onDrag(ev);
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+
+        public void setOnDragListener(OnDragListener mOnDragListener) {
+            this.mOnDragListener = mOnDragListener;
         }
 
         public void animateMarkerToGB(Marker marker, LatLng finalPosition, LatLngInterpolator latLngInterpolator,

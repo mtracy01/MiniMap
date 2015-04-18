@@ -28,6 +28,7 @@ import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.FriendStatus;
 import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
+import map.minimap.mainActivityComponents.LobbyFragment;
 import map.minimap.mainActivityComponents.SettingsFragment;
 import map.minimap.mainMenuComponents.ContentFragment;
 import yalantis.com.sidemenu.interfaces.Resourceble;
@@ -83,6 +84,11 @@ public class MainMenu extends ActionBarActivity
         setActionBar();
         createMenuList();
         viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, this);
+
+        if(getIntent().hasExtra("ctf"))
+            if((getIntent().getStringExtra("ctf")).equals("scrim line done")){
+              getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
+             }
 
     }
 
