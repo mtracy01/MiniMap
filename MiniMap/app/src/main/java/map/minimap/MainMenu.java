@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.support.v4.app.FragmentTransaction;
+
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -55,6 +57,7 @@ public class MainMenu extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        Data.mainAct=this;
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         Data.loggedInFlag=1;
         FacebookHelper.appInitializer();

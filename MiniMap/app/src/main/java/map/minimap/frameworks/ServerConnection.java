@@ -5,8 +5,10 @@ package map.minimap.frameworks;
  */
 
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import map.minimap.FriendFinder;
+import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.games.Assassins;
 import map.minimap.games.AssassinsGame;
@@ -23,6 +26,7 @@ import map.minimap.games.FriendFinderGame;
 import map.minimap.games.Sardines;
 import map.minimap.games.SardinesGame;
 import map.minimap.helperClasses.Data;
+import map.minimap.mainActivityComponents.LobbyFragNonHost;
 import map.minimap.mainActivityComponents.LobbyFragment;
 
 
@@ -136,6 +140,7 @@ public class ServerConnection extends Thread {
                                 Log.e(LOG_TAG, "Exception on sleep thread for null user handling!");
                             }
                         }
+                        Data.lobbyUsers.add(user.getName());
                         Data.players.add(user);
                     }
                 }
@@ -162,6 +167,7 @@ public class ServerConnection extends Thread {
                 // TODO handle the invite correctly, parts[1] contains the type, parts[2] contains the id
                 processInvite(parts[1], parts[2]);
 
+
             } else if (parts[0].equals("users")) {
                 for (int i = 1; i < parts.length; i++) {
                     //If the user is in our friends list, add them to the invitable users list
@@ -170,7 +176,7 @@ public class ServerConnection extends Thread {
                         Data.invitableUsers.add(user);
                 }
 
-                LobbyFragment.changeGrid();
+
                 Data.clientDoneFlag = 1;
             } else if (parts[0].equals("gameStart")) {
                 Maps.setCenterPosition(Data.user);
@@ -274,6 +280,10 @@ public class ServerConnection extends Thread {
                                 break;
                         }
                         Data.user.setInGame(true);
+
+                        Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame,new LobbyFragNonHost()).commit();
+
+
                     }
                 });
                 builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
