@@ -20,6 +20,7 @@ public class Data {
     public static Activity mainAct;                               //The activity that is responsible for taking care of the GPS thread
     public static User user;                                     //The user that is using this application
 
+    public static boolean host = false;
     public static String gameId;                                //The id of the application's current game session
     public static ServerConnection client;                     //The client side server communication object
     public static GoogleMap map;                              //The actual Google map displayed in the mapFragment when the game session is running

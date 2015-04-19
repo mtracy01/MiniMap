@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.support.v4.app.FragmentTransaction;
+
 
 
 import com.facebook.FacebookSdk;
@@ -22,8 +22,15 @@ import com.facebook.appevents.AppEventsLogger;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
+import android.support.v4.app.Fragment;
+=======
 
 import map.minimap.frameworks.GPSThread;
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.FriendStatus;
@@ -68,7 +75,7 @@ public class MainMenu extends ActionBarActivity
         FacebookHelper.appInitializer();
 
         contentFragment = ContentFragment.newInstance(R.drawable.abc_item_background_holo_light);
-        getSupportFragmentManager().beginTransaction()
+        getFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, GamesFragment.newInstance("a","b"))
                 .commit();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -91,7 +98,7 @@ public class MainMenu extends ActionBarActivity
 
         if(getIntent().hasExtra("ctf"))
             if((getIntent().getStringExtra("ctf")).equals("scrim line done")){
-              getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
+              getFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
              }
 
     }
@@ -179,7 +186,7 @@ public class MainMenu extends ActionBarActivity
         switch(name){
             case ContentFragment.GAMES:
                 logger.logEvent("Games Menu");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Games");
                 break;
             case ContentFragment.GROUPS:

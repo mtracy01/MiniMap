@@ -18,8 +18,10 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import map.minimap.FriendFinder;
+import map.minimap.MainMenu;
 import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;
+import map.minimap.frameworks.customUIResources.CustomList;
 import map.minimap.games.Assassins;
 import map.minimap.games.AssassinsGame;
 import map.minimap.games.FriendFinderGame;
@@ -140,15 +142,27 @@ public class ServerConnection extends Thread {
                                 Log.e(LOG_TAG, "Exception on sleep thread for null user handling!");
                             }
                         }
-                        Log.v("here", "gameuseres add");
-                        Data.lobbyUsers.add(user.getName());
+
                         Data.players.add(user);
+                        Data.lobbyUsers.add(user.getName());
+                        Log.v("user", user.getName());
+                        LobbyFragment.adapter.add(user.getName(),user.getProfilePhoto());
+                        Data.mainAct.runOnUiThread(new Runnable() {
+                            public void run() {
+                              //  LobbyFragment.adapter.notifyDataSetChanged();
+                                android.app.FragmentTransaction tr = Data.mainAct.getFragmentManager().beginTransaction();
+                                tr.replace(R.id.container, LobbyFragment.newInstance("a","b"));
+                                tr.commit();
+                            }});
+
                     }
+                    Log.v("here", Data.lobbyUsers.get(Data.lobbyUsers.size()-1));
+
                 }
-                LobbyFragment.changeGrid();
             } else if (parts[0].equals("game")) {
                 Log.v("gameId", parts[1]);
                 Data.gameId = parts[1];
+                Data.host = true;
                 switch (newGameType) {
                     case "friendFinder":
                         Data.user.setGame(new FriendFinderGame());
@@ -287,7 +301,7 @@ public class ServerConnection extends Thread {
                         }
                         Data.user.setInGame(true);
 
-                        Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.container,new LobbyFragNonHost()).commit();
+                        Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame,new LobbyFragment()).commit();
 
 
                     }
