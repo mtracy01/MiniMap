@@ -38,7 +38,7 @@ public class ServerConnection extends Thread {
     private String LOG_TAG = "ServerConnection";
 
     public static final int SERVER_PORT = 2048;
-    public static final String SERVER_IP = "tracy94.com";
+    public static final String SERVER_IP = "mtracy01-apollo.ninja"; //tracy94.com";
 
     private Socket socket;
     private String user_ID;
