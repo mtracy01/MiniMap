@@ -119,7 +119,7 @@ public class DbInteract {
 				
 		if(groups != null && !groups[0].equals("") && !groupName.equals("*")) {
 			for(int i = 0; i < groups.length; i++) {
-				if(!(groups[i].substring(0, groups[i].indexOf(","))).equals(groupName)) {
+				if(!(groups[i].substring(0, groups[i].indexOf(":"))).equals(groupName)) {
 					reducedGroups += groups[i] + ":";
 				}
 			}
