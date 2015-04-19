@@ -13,7 +13,7 @@ import java.util.ArrayList;
 * 
 * Users should be added upon account creation or initial login or whatever we call it.
 * Groups are represented by String arrays where the first element is the name of the group.
-* Please adhere to above convention so I don't have to spend 5 minutes making a proper class.
+* Please adhere to above convention so I don't have to spend 5 minutes making a proper class. Thanks.
 */
 
 public class DbInteract {
