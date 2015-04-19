@@ -7,4 +7,4 @@
         android:src="@drawable/sat_main" 
         android:layout_gravity="bottom|left" 
         android:contentDescription="@string/empty"/>        
-</merge><!-- From: file:/Users/nickiogg/Documents/School/Spring_2015/CS307/Project/MiniMap/MiniMap/satellitemenu/src/main/res/layout/sat_main.xml --><!-- From: file:/Users/nickiogg/Documents/School/Spring_2015/CS307/Project/MiniMap/MiniMap/satellitemenu/build/intermediates/bundles/debug/res/layout/sat_main.xml -->
+</merge><!-- From: file:/C:/Users/Matthew/AndroidStudioProjects/MiniMap/MiniMap/satellitemenu/src/main/res/layout/sat_main.xml --><!-- From: file:/C:/Users/Matthew/AndroidStudioProjects/MiniMap/MiniMap/satellitemenu/build/intermediates/bundles/debug/res/layout/sat_main.xml -->
