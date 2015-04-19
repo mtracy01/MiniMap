@@ -116,6 +116,9 @@ public class User extends Thread {
 			connected = false;
 			return;
 		}
+		
+		// TODO: connect to database, attempt to add user to database
+		
 		// Create the message handler
 		messageHandler = new MessageHandler(server, this);
 		
