@@ -39,5 +39,6 @@
     <string name="title_activity_main_menu">MainMenu</string>
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
+    <string name="title_activity_capture_the_flag">CaptureTheFlag</string>
 
 </resources>
