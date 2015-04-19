@@ -44,9 +44,10 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
         java.util.List<android.view.ext.SatelliteMenuItem> items = new java.util.ArrayList<>();
 
         if (Data.user.getGame().isBeaconsEnabled()) {
-            items.add(new android.view.ext.SatelliteMenuItem(NOTHING_BEACON_MENU_ID, R.drawable.sat_item));
-            items.add(new android.view.ext.SatelliteMenuItem(ADD_BEACON_MENU_ID, R.drawable.sat_item));
-            items.add(new android.view.ext.SatelliteMenuItem(REMOVE_BEACON_MENU_ID, R.drawable.sat_item));
+            // App icons by <a href="http://icons4android.com">Icons4Android</a>.
+            items.add(new android.view.ext.SatelliteMenuItem(REMOVE_BEACON_MENU_ID, R.drawable.sat_remove_beacon));
+            items.add(new android.view.ext.SatelliteMenuItem(ADD_BEACON_MENU_ID, R.drawable.sat_add_beacon));
+            items.add(new android.view.ext.SatelliteMenuItem(NOTHING_BEACON_MENU_ID, R.drawable.sat_map));
         }
 
 //        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
