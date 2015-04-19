@@ -32,6 +32,7 @@ public class DbInteract {
 		String url = "jdbc:mysql://localhost:3306/minimap";
 		String user = "root";
 		String pass = "raspberry";
+		log.fine("Opening connection to database");
 		
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
