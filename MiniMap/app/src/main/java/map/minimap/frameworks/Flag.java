@@ -48,8 +48,8 @@ public class Flag {
         Bitmap tmp = big;
         Bitmap doubleSized = Bitmap.createScaledBitmap(tmp,tmp.getWidth() * 2,tmp.getHeight() * 2, false);
 
-        this.mapMarker = BitmapDescriptorFactory.fromBitmap(addBorder(doubleSized, Color.DKGRAY)))));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
-    }
+        this.mapMarker = BitmapDescriptorFactory.fromBitmap(addBorder(doubleSized, Color.DKGRAY));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+}
 
     public void show() {
         Handler mainHandler = new Handler(Looper.getMainLooper());
