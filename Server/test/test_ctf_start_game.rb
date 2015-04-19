@@ -5,57 +5,47 @@ require 'timeout'
 
 require './connection_info.rb'
 
-# user1.puts "createGame assassins"
-# user1.puts "invite gameNum 2"
-# user1.puts "start gameNum"
-# user1.puts "location whereever"
-# user1.puts "confirmKill true"
+# Add two users
+# Send flag info, send los info
+# start the game
+# both users should get flag, los, team info
+
+# test tagging
+
+# test capturing a flag
 
 
-def testAssassinsGame(hostname, port)
+def testCTFStartGame(hostname, port)
 	begin
 		user1 = nil
 		user2 = nil
-		user3 = nil
 		Timeout::timeout(5) do
 			user1 = TCPSocket.open(hostname, port)
 			user1.puts "id 1"
 			user2 = TCPSocket.open(hostname, port)
 			user2.puts "id 2"
-			user3 = TCPSocket.open(hostname, port)
-			user3.puts "id 3"
 			
 			debug("Creating game")
 
-			user1.puts "createGame assassins"
+			user1.puts "createGame ctf"
 			gameInfo = user1.gets.chomp!
 			# Check to see if the game info is correct
 			if (!gameInfo.start_with? "game ")
 				user1.close
 				user2.close
-				user3.close
 				return false
 			end
 
 			gameNum = gameInfo.split(' ')[1]
 			debug("Game num: #{gameNum}")
 
-			user1.puts "invite #{gameNum} 2 3"
+			user1.puts "invite #{gameNum} 2"
 
 			invite2 = user2.gets.chomp!
-			invite3 = user3.gets.chomp!
 			if (!invite2.start_with? "invite ")
 				debug("Invite 2 not correnct")
 				user1.close
 				user2.close
-				user3.close
-				return false
-			end
-			if (!invite3.start_with? "invite ")
-				debug("Invite 3 not correnct")
-				user1.close
-				user2.close
-				user3.close
 				return false
 			end
 			debug ("Invites correct")
@@ -63,21 +53,14 @@ def testAssassinsGame(hostname, port)
 			user2.puts "accept #{gameNum}"
 			# ignore the game user messages
 			user1.gets
-			user2.gets
-
-			user3.puts "accept #{gameNum}"
-			# ignore the game user messages
-			user1.gets
-			user2.gets
-			gameUsers = user3.gets
+			gameUsers = user2.gets
 
 			userParts = gameUsers.split(' ')
 			# Test if all users are in the session
-			if (!(userParts[0].eql? "gameUsers") || !(userParts.length == 5))
+			if (!(userParts[0].eql? "gameUsers") || !(userParts.length == 4))
 				debug("Game users incorrect: #{gameUsers}")
 				user1.close
 				user2.close
-				user3.close
 				return false
 			end
 
@@ -92,7 +75,6 @@ def testAssassinsGame(hostname, port)
 				debug("Game start not received")
 				user1.close
 				user2.close
-				user3.close
 				return false
 			end
 			
@@ -108,7 +90,6 @@ def testAssassinsGame(hostname, port)
 				debug("Targets assigned incorrectly")
 				user1.close
 				user2.close
-				user3.close
 				return false
 			end
 
@@ -122,7 +103,6 @@ def testAssassinsGame(hostname, port)
 				debug("location received incorrectly: #{locationMessage}")
 				user1.close
 				user2.close
-				user3.close
 				return false
 			end
 			debug("Location received")
@@ -138,7 +118,6 @@ def testAssassinsGame(hostname, port)
 				debug("Accept death/kill messages incorrect")
 				user1.close
 				user2.close
-				user3.close
 				return false
 			end
 
@@ -155,13 +134,11 @@ def testAssassinsGame(hostname, port)
 				debug("Kill not reported")
 				user1.close
 				user2.close
-				user3.close
 				return false
 			end
 
 			user1.close
 			user2.close
-			user3.close
 			return true
 		end
 	rescue Timeout::Error
@@ -173,9 +150,6 @@ def testAssassinsGame(hostname, port)
 		end
 		if (!user2.nil?)
 			user2.close
-		end
-		if (!user3.nil?)
-			user3.close
 		end
 
 		return false
@@ -189,10 +163,11 @@ def debug(line)
 end
 
 if __FILE__ == $PROGRAM_NAME
-	if (!testAssassinsGame(TEST_HOSTNAME, TEST_PORT))
+	if (!testCTFStartGame(TEST_HOSTNAME, TEST_PORT))
 		puts "\e[31mTest: failed\e[0m"
 	end
 end
+
 
 
 
