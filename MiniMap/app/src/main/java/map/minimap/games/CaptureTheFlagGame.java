@@ -96,7 +96,7 @@ public class CaptureTheFlagGame extends Game {
                     final User targetUser = findUserbyId(id, Data.players);
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
-                    builder.setMessage("Has " + targetUser.getName() + " found you?");
+                    builder.setMessage("Has " + targetUser.getName() + " tagged you?");
                     //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -141,6 +141,17 @@ public class CaptureTheFlagGame extends Game {
                     Log.v("CTF Game", "dialog show");
                 }
             });
+        } else if (parts[0].equals("tag")) {
+            final String assassinID = parts[1];
+            String targetID = parts[2];
+            if (targetID.equals(Data.user.getID())) {
+                Data.mainAct.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast toast = Toast.makeText(Data.mainAct.getApplicationContext(), "You were tagged by " + findUserbyId(assassinID, Data.players).getName() + ".", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+            }
         } else if (parts[0].equals("userRemoved")) {
             if (parts[1].equals(Data.user.getID())) {
                 Data.user.setInGame(false);
@@ -165,14 +176,12 @@ public class CaptureTheFlagGame extends Game {
             }
         } else if (parts[0].equals("flagReturned")) {
             if (parts[1].equals(Data.user.getID())) {
-
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
                         Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), "You returned the flag.", Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 });
-                //Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             } else {
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
@@ -190,6 +199,7 @@ public class CaptureTheFlagGame extends Game {
                         toast.show();
                     }
                 });
+                Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
                 Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             } else {
                 Data.gameActivity.runOnUiThread(new Runnable() {
@@ -199,6 +209,7 @@ public class CaptureTheFlagGame extends Game {
                         toast.show();
                     }
                 });
+                Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
                 Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             }
         }
