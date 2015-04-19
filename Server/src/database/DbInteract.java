@@ -81,7 +81,7 @@ public class DbInteract {
 	
 	/** addGroup
 	* @param userID		The unique identifier associated with a given user
-	* @param group		A group in the form - "groupname:id:id:id:...etc" where ID is a unique identifier
+	* @param group		A group in the form - "groupname,id,id,id,...etc" where ID is a unique identifier
 	*/
 	public void addGroup(String userID, String group) {
 		String[] groups = getGroupsByID(userID);
@@ -119,7 +119,7 @@ public class DbInteract {
 				
 		if(groups != null && !groups[0].equals("") && !groupName.equals("*")) {
 			for(int i = 0; i < groups.length; i++) {
-				if(!(groups[i].substring(0, groups[i].indexOf(":"))).equals(groupName)) {
+				if(!(groups[i].substring(0, groups[i].indexOf(","))).equals(groupName)) {
 					reducedGroups += groups[i] + ":";
 				}
 			}
