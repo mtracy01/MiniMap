@@ -128,8 +128,6 @@ public class FacebookHelper {
     }
 
     public static void appInitializer(){
-
-        //Create client if one is not already created
         if(Data.client==null) {
             GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
                 @Override
@@ -144,7 +142,7 @@ public class FacebookHelper {
                         Log.e(LOG_TAG, e.getMessage());
                     }
 
-                    //Starting client (We need to delay this action a little somehow)
+                    //Starting client
                     if (Data.client == null) {
                         Log.v("client", "Starting Client");
                         ServerConnection client = new ServerConnection(Data.user.getID());

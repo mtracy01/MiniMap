@@ -29,7 +29,7 @@ import map.minimap.mainActivityComponents.GamesFragment;
 import map.minimap.mainActivityComponents.GroupsFragment;
 import map.minimap.mainActivityComponents.LobbyFragment;
 import map.minimap.mainActivityComponents.SettingsFragment;
-import map.minimap.mainMenuComponents.ContentFragment;
+import map.minimap.mainActivityComponents.ContentFragment;
 import yalantis.com.sidemenu.interfaces.Resourceble;
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 import yalantis.com.sidemenu.model.SlideMenuItem;

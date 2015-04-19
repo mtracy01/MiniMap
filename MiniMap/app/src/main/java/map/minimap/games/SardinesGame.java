@@ -21,25 +21,14 @@ import map.minimap.helperClasses.Data;
 //TODO: Specifics of Sardines
 public class SardinesGame extends Game {
 
-	//private static final Logger log = Logger.getLogger( Server.class.getName() );
-
-
-	public SardinesGame() {
-
-	}
-
+	public SardinesGame() {}
 
 	@Override
-	public void processLogic() {
-		// TODO Auto-generated method stub
-		
-		
-	}
+	public void processLogic() {}
 
 	@Override
 	public void handleMessage(String message) {
-        // TODO Auto-generated method stub
-        Log.v("Sardines Game", message); //I just changed this to Sardines...
+        Log.v("Sardines Game", message);
         String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
             User user = findUserbyId(parts[1], Data.players);
@@ -76,7 +65,6 @@ public class SardinesGame extends Game {
                     Maps.initializePlayers(Data.map, teammates);
                 }
             });
-
 
         } else if (parts[0].equals("addbeacon")) {
 
@@ -171,10 +159,6 @@ public class SardinesGame extends Game {
 
     }
 
-
-
-
-	
 	@Override
 	/* called when user presses start button
 	 * assign teams, etc...
@@ -191,7 +175,6 @@ public class SardinesGame extends Game {
 	 */
 	public void endSession() {
 		isRunning = false;
-		
 	}
 
 	@Override
@@ -201,30 +184,20 @@ public class SardinesGame extends Game {
 
 	@Override
 	/* mid-game */
-	public void addUser(User user, int teamid) {
-		// TODO Auto-generated method stub
-	}
+	public void addUser(User user, int teamid) {}
 
 	/**
 	 * teamID should always be 0 in FriendFinder
 	 */
 	
 	@Override
-	public void addBeacon(int teamid, LatLng loc) { 
-		// TODO Auto-generated method stub
-		// Beacon beacon = new Beacon(loc);
-		// beacon.setTeamId(teamid);
-		// getTeambyID(teams, teamid).addBeacon(beacon);
-
-	}
+	public void addBeacon(int teamid, LatLng loc) {}
 
 	/**
 	 * teamID should always be 0
 	 */
 	@Override
-	public void removeBeacon(Integer id) {
-		// TODO Auto-generated method stub
-	}
+	public void removeBeacon(Integer id) {}
 	
 	
 	
