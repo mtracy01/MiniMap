@@ -355,13 +355,24 @@ public class CTFSession extends GameSession {
 			tid = 1;
 			otid = 0;
 		}
-			
+		
+		if (user.equals(team2carrier)) {
+			for (User opp: this.teams.get(1).getUsers()) {
+				opp.sendMessage(m.toString());
+			}
+		}
+		if (user.equals(team3carrier)){
+			for (User opp: this.teams.get(0).getUsers()) {
+				opp.sendMessage(m.toString());
+			}
+		}			
+		
 		for (User u: this.teams.get(tid).getUsers())
 		{
 			if (u != null) {
-				u.sendMessage(m.toString());
+				u.sendMessage(m.toString());				
 			}
-		}
+		}		
 		
 		//send confirmation message 
 		if (otid == 0) {
