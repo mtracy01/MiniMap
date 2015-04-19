@@ -16,7 +16,7 @@ public class TestDB {
 		assignGroups(db,u1,u2,g1,g2,g3);
 		viewContents(db, "Groups added", u1,u2);
 		
-		db.removeGroup(u1, g1);
+		db.removeGroup(u1, "g1");
 
 		viewContents(db,"Group 1 removed", u1,u2);
 		clearGroups(db, u1, u2);
