@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import sessions.GameSession;
-
+import database.DbInteract;
 
 public class User extends Thread {
 
@@ -57,6 +57,11 @@ public class User extends Thread {
 	 * The time of the last heartbeat
 	 */
 	private long lastHeartBeat;
+
+    /**
+     * Object allowing interaction with database
+     */
+    private DbInteract db;
 
 	public User(Socket socket, Server server) {
 		this.socket = socket;
@@ -117,8 +122,11 @@ public class User extends Thread {
 			return;
 		}
 		
-		// TODO: connect to database, attempt to add user to database
-		
+		// connect to database, attempt to add user to database
+		db = new DbInteract();
+        db.addUser(userID);
+        db.closeConnection();
+
 		// Create the message handler
 		messageHandler = new MessageHandler(server, this);
 		
