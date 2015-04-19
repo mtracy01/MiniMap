@@ -23,6 +23,7 @@ import com.facebook.appevents.AppEventsLogger;
 import java.util.ArrayList;
 import java.util.List;
 
+import map.minimap.frameworks.GPSThread;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.FriendStatus;
@@ -59,6 +60,9 @@ public class MainMenu extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         Data.mainAct=this;
+        if (Data.client != null && Data.gps == null) {
+            Data.gps = new GPSThread(Data.client);
+        }
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         Data.loggedInFlag=1;
         FacebookHelper.appInitializer();

@@ -118,12 +118,9 @@ public class LoginActivity extends FragmentActivity {
                                     Data.client = client;
                                     client.start();
                                     try {
-                                        Thread.sleep(500);
+                                        Thread.sleep(400);
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                    }
-                                    if (Data.client != null) {
-                                        Data.gps = new GPSThread(Data.client);
                                     }
                                     //If client fails to be created, log out the user from facebook and do not advance intents to next activity
                                 }
