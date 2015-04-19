@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import server.Server;
 
 /* IMPORTANT USAGE DETAILS:
 * To interact with the database, instantiate a new DbInteract object. When you are done
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 */
 
 public class DbInteract {
+	private static final Logger log = Logger.getLogger( Server.class.getName() );
 	private Connection conn = null;
 	
 	public DbInteract() {
@@ -31,6 +35,7 @@ public class DbInteract {
 		
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
+			log.fine("Connection to database established: " + conn.toString());
 		} catch (SQLException ex) {
 			System.out.printf(ex.getMessage());
 		}
