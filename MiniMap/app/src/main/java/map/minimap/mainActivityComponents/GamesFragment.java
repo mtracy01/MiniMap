@@ -1,13 +1,13 @@
 package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +32,7 @@ import map.minimap.helperClasses.Data;
  * Use the {@link GamesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GamesFragment extends Fragment{
+public class GamesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -132,14 +132,8 @@ public class GamesFragment extends Fragment{
                 Data.players.clear();
                 Data.players.add(Data.user);
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                /*android.app.FragmentTransaction ft =*/ getActivity().getFragmentManager().beginTransaction().replace(R.id.container, LobbyFragment.newInstance("a","b")).commit();
                 //ft.setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
-                if(getActivity().findViewById(R.id.content_frame)==null)
-                    ft.replace(R.id.container, LobbyFragment.newInstance("a","b"));
-                else
-                    ft.replace(R.id.content_frame, LobbyFragment.newInstance("a","b"));
-                ft.addToBackStack(null);
-                ft.commit();
             }
         });
         String[] GamesArray = GamesList.toArray(new String[3]);

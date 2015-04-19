@@ -30,6 +30,7 @@ import map.minimap.games.SardinesGame;
 import map.minimap.helperClasses.Data;
 import map.minimap.mainActivityComponents.LobbyFragNonHost;
 import map.minimap.mainActivityComponents.LobbyFragment;
+import map.minimap.mainMenuComponents.ContentFragment;
 
 
 public class ServerConnection extends Thread {
@@ -154,9 +155,12 @@ public class ServerConnection extends Thread {
                         Data.mainAct.runOnUiThread(new Runnable() {
                             public void run() {
                                 //  LobbyFragment.adapter.notifyDataSetChanged();
-                                android.app.FragmentTransaction tr = Data.mainAct.getFragmentManager().beginTransaction();
-                                tr.replace(R.id.content_frame, LobbyFragment.newInstance("a", "b"));
-                                tr.commit();
+                                //android.support.v4.app.FragmentTransaction tr = Data.mainAct.getFragmentManager().beginTransaction();
+                                //tr.replace(R.id.content_frame, LobbyFragment.newInstance("a", "b"));
+                                //tr.commit();
+
+
+                                Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame, new LobbyFragment()).commit();
                             }
                         });
 

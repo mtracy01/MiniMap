@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-
+import android.support.v4.app.FragmentTransaction;
 
 
 import com.facebook.FacebookSdk;
@@ -72,7 +72,7 @@ public class MainMenu extends ActionBarActivity
         FacebookHelper.appInitializer();
 
         contentFragment = ContentFragment.newInstance(R.drawable.abc_item_background_holo_light);
-        getFragmentManager().beginTransaction()
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, GamesFragment.newInstance("a","b"))
                 .commit();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -183,21 +183,25 @@ public class MainMenu extends ActionBarActivity
         switch(name){
             case ContentFragment.GAMES:
                 logger.logEvent("Games Menu");
-                getFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
+                Log.v(LOG_TAG, "Games Menu");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Games");
                 break;
             case ContentFragment.GROUPS:
                 logger.logEvent("Groups Menu");
+                Log.v(LOG_TAG,"Groups Menu");
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GroupsFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Groups");
                 break;
             case ContentFragment.FRIENDS:
                 logger.logEvent("Friends Menu");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
+                Log.v(LOG_TAG,"Friends Menu");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b"))/*.setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom)*/.commit();
                 getSupportActionBar().setTitle("Friends");
                 break;
             case ContentFragment.SETTINGS:
                 logger.logEvent("Settings Menu");
+                Log.v(LOG_TAG,"Settings Menu");
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,SettingsFragment.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Settings");
                 break;
