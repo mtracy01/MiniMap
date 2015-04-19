@@ -146,7 +146,7 @@ public class ServerConnection extends Thread {
                         Data.players.add(user);
                         Data.lobbyUsers.add(user.getName());
                         Log.v("user", user.getName());
-                        LobbyFragment.adapter.add(user.getName(),user.getProfilePhoto());
+
                         Data.mainAct.runOnUiThread(new Runnable() {
                             public void run() {
                               //  LobbyFragment.adapter.notifyDataSetChanged();

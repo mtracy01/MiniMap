@@ -22,15 +22,12 @@ import com.facebook.appevents.AppEventsLogger;
 
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
+
 import android.support.v4.app.Fragment;
-=======
+
 
 import map.minimap.frameworks.GPSThread;
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
+
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.FriendStatus;
