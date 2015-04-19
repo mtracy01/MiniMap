@@ -1,9 +1,8 @@
 package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,16 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.app.Fragment;
+
 import java.util.ArrayList;
 
 import map.minimap.R;
-import map.minimap.frameworks.User;
 import map.minimap.frameworks.customUIResources.CustomList;
-import map.minimap.frameworks.customUIResources.CustomListInvite;
 import map.minimap.helperClasses.Data;
 
 /**

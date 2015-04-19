@@ -29,7 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import map.minimap.frameworks.GPSThread;
 import map.minimap.frameworks.ServerConnection;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;

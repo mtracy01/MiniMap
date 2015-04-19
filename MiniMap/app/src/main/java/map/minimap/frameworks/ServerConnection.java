@@ -5,10 +5,8 @@ package map.minimap.frameworks;
  */
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,10 +16,8 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import map.minimap.FriendFinder;
-import map.minimap.MainMenu;
 import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.frameworks.customUIResources.CustomList;
 import map.minimap.games.Assassins;
 import map.minimap.games.AssassinsGame;
 import map.minimap.games.CaptureTheFlag;
@@ -30,9 +26,7 @@ import map.minimap.games.FriendFinderGame;
 import map.minimap.games.Sardines;
 import map.minimap.games.SardinesGame;
 import map.minimap.helperClasses.Data;
-import map.minimap.mainActivityComponents.LobbyFragNonHost;
 import map.minimap.mainActivityComponents.LobbyFragment;
-import map.minimap.mainMenuComponents.ContentFragment;
 
 
 public class ServerConnection extends Thread {

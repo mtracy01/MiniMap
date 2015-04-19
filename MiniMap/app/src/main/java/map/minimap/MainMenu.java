@@ -14,8 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.support.v4.app.FragmentTransaction;
-
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -23,11 +21,7 @@ import com.facebook.appevents.AppEventsLogger;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.support.v4.app.Fragment;
-
-
 import map.minimap.frameworks.GPSThread;
-
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainActivityComponents.FriendStatus;
