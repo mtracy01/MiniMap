@@ -2,7 +2,7 @@
 compile:
 	-find . -name *.class | xargs rm
 	-git pull
-	javac server/Server.java
+	javac -cp .:~/jdbc-driver/mysql-connector-java-5.1.35/mysql-connector-java-5.1.35-bin.jar server/Server.java
 
 run: compile
-	java server.Server
+	java -cp .:~/jdbc-driver/mysql-connector-java-5.1.35/mysql-connector-java-5.1.35-bin.jar server.Server
