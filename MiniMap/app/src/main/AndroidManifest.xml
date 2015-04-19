@@ -63,28 +63,32 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".games.Sardines"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_sardines"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".games.MarcoPolo"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_marco_polo"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".games.Assassins"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_assassins"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MainMenu"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_main_menu"
-            android:theme="@style/MainMenuTheme"
             android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:theme="@style/MainMenuTheme" >
+        </activity>
+        <activity
+            android:name=".games.CaptureTheFlag"
+            android:label="@string/title_activity_capture_the_flag" >
         </activity>
     </application>
 
