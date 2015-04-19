@@ -100,17 +100,45 @@ public class CaptureTheFlagGame extends Game {
                     //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Data.client.sendMessage("confirmTagged " + targetUser.getID() + " true");
+                            Data.client.sendMessage("confirmTagged true");
                         }
                     });
                     builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Data.client.sendMessage("confirmTagged " + targetUser.getID() + " false");
+                            Data.client.sendMessage("confirmTagged false");
                         }
                     });
                     // Create the AlertDialog
                     AlertDialog dialog = builder.create();
                     dialog.show();
+                }
+            });
+        } else if (parts[0].equals("acceptTag")) {
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(new Runnable() {
+                public void run() {
+                    Log.v("CTF Game", "Running on ui thread");
+                    User targetUser = findUserbyId(parts[1], Data.players);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
+                    // Add the buttons
+                    builder.setMessage("Confirm tag of " + targetUser.getName() + "?");
+                    //builder.setMessage("Confirm Kill?");
+                    builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Data.client.sendMessage("confirmTag true");
+                        }
+                    });
+                    builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Data.client.sendMessage("confirmTag false");
+                        }
+                    });
+
+                    Log.v("CTF Game", "builder created");
+                    // Create the AlertDialog
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    Log.v("CTF Game", "dialog show");
                 }
             });
         } else if (parts[0].equals("userRemoved")) {
@@ -162,7 +190,7 @@ public class CaptureTheFlagGame extends Game {
                         toast.show();
                     }
                 });
-                //Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             } else {
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
@@ -171,6 +199,7 @@ public class CaptureTheFlagGame extends Game {
                         toast.show();
                     }
                 });
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             }
         }
 
