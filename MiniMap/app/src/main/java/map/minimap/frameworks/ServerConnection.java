@@ -24,6 +24,8 @@ import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.customUIResources.CustomList;
 import map.minimap.games.Assassins;
 import map.minimap.games.AssassinsGame;
+import map.minimap.games.CaptureTheFlag;
+import map.minimap.games.CaptureTheFlagGame;
 import map.minimap.games.FriendFinderGame;
 import map.minimap.games.Sardines;
 import map.minimap.games.SardinesGame;
@@ -182,6 +184,9 @@ public class ServerConnection extends Thread {
                     case "sardines":
                         Data.user.setGame(new SardinesGame());
                         break;
+                    case "ctf":
+                        Data.user.setGame(new CaptureTheFlagGame());
+                        break;
                 }
 
                 Data.user.setInGame(true);
@@ -215,6 +220,9 @@ public class ServerConnection extends Thread {
                         break;
                     case "sardines":
                         intent = new Intent(Data.mainAct.getApplicationContext(), Sardines.class);
+                        break;
+                    case "ctf":
+                        intent = new Intent(Data.mainAct.getApplicationContext(), CaptureTheFlag.class);
                         break;
                 }
                 if (intent != null) {
@@ -290,6 +298,9 @@ public class ServerConnection extends Thread {
                     case "sardines":
                         niceType = "Sardines";
                         break;
+                    case "ctf":
+                        niceType = "Capture the Flag";
+                        break;
                 }
                 builder.setMessage("You have been invited to a " + niceType + " game.");
                 builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
@@ -307,6 +318,9 @@ public class ServerConnection extends Thread {
                                 break;
                             case "sardines":
                                 Data.user.setGame(new SardinesGame());
+                                break;
+                            case "ctf":
+                                Data.user.setGame(new CaptureTheFlagGame());
                                 break;
                         }
                         Data.user.setInGame(true);
