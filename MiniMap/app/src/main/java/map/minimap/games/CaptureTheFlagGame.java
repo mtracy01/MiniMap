@@ -25,7 +25,7 @@ import map.minimap.helperClasses.Data;
 public class CaptureTheFlagGame extends Game {
 
     public CaptureTheFlagGame() {
-
+        beaconsEnabled = true;
     }
 
 

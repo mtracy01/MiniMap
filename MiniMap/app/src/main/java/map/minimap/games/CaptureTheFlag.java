@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ext.SatelliteMenu;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.MainMenu;
 import map.minimap.R;
+import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
@@ -26,6 +28,11 @@ public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallb
 
     private SyncedMapFragment map;
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
+
+    private final int NOTHING_BEACON_MENU_ID = 0;
+    private final int ADD_BEACON_MENU_ID = 1;
+    private final int REMOVE_BEACON_MENU_ID = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +44,31 @@ public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallb
         //Set up satellite menu, add elements
         android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) findViewById(R.id.menu);
         java.util.List<android.view.ext.SatelliteMenuItem> items = new java.util.ArrayList<>();
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(3,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
+        if (Data.user.getGame().isBeaconsEnabled()) {
+            // TODO: Need to include the following in the google play store listing:
+            // App icons by <a href="http://icons4android.com">Icons4Android</a>.
+            items.add(new android.view.ext.SatelliteMenuItem(REMOVE_BEACON_MENU_ID, R.drawable.sat_remove_beacon));
+            items.add(new android.view.ext.SatelliteMenuItem(ADD_BEACON_MENU_ID, R.drawable.sat_add_beacon));
+            items.add(new android.view.ext.SatelliteMenuItem(NOTHING_BEACON_MENU_ID, R.drawable.sat_map));
+        }
         menu.addItems(items);
+
+        menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
+            @Override
+            public void eventOccured(int id) {
+                switch (id) {
+                    case NOTHING_BEACON_MENU_ID:
+                        Data.user.getGame().setBeaconMode(Game.BeaconMode.NOTHING);
+                        break;
+                    case ADD_BEACON_MENU_ID:
+                        Data.user.getGame().setBeaconMode(Game.BeaconMode.ADD);
+                        break;
+                    case REMOVE_BEACON_MENU_ID:
+                        Data.user.getGame().setBeaconMode(Game.BeaconMode.REMOVE);
+                        break;
+                }
+            }
+        });
 
         //Initialize our map fragment
         if (savedInstanceState == null) {
