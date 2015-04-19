@@ -40,4 +40,24 @@ public class Utility {
 	}
 	
 	
+	public static boolean locsClose(Location loc1, Location loc2, double distance) {
+		Double lat1, lat2, lon1, lon2;
+		
+		lat1 = Math.toRadians(loc1.getLatitude());
+		lon1 = Math.toRadians(loc1.getLongitude());
+		lat2 = Math.toRadians(loc2.getLatitude());
+		lon2 = Math.toRadians(loc2.getLongitude());
+		double R = 20902231; //radius of earth in ft
+		double a = Math.pow(Math.sin((lat2-lat1)/2.0), 2.0)+Math.cos(lat1)*Math.cos(lat2)*Math.pow(Math.sin((lon2-lon1)/2.0),2.0);
+		double c = 2* Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		double d = R*c;
+		log.fine("Distance is: " + d);
+		if( d < distance){
+			return true;
+		}
+		return false;
+	}
+		
+	
+	
 }

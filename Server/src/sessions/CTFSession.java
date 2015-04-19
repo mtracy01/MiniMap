@@ -20,6 +20,8 @@ public class CTFSession extends GameSession {
 	private Location startLoc;
 	private Location endLoc; // This is for endpoints of line of scrimmage
 	private Location flag2loc;
+	private User team2carrier = null; //Someone on team2 carrying enemy flag
+	private User team3carrier = null; // Someone on team3 carrying enemy flag
 	private Location flag3loc;
 	public HashMap<Integer, Integer> sides = new HashMap<Integer, Integer>();
 	
@@ -215,6 +217,22 @@ public class CTFSession extends GameSession {
 		for (User u : users) {
 			u.sendMessage(tagMessage);
 		}
+		if (find.tagged.getTeamID() == 2) {
+			if (team2carrier != null && find.tagger.equals(team2carrier)) {
+				setTeam2carrier(null);
+				for (User u: users) {
+					u.sendMessage("flagReturned " + find.tagger.getUserID());
+				}
+			}
+		}
+		if (find.tagged.getTeamID() == 3) {
+			if (team3carrier != null && find.tagger.equals(team3carrier)) {
+				setTeam3carrier(null);
+				for (User u: users) {
+					u.sendMessage("flagReturned " + find.tagger.getUserID());
+				}
+			}
+		}
 		potentialFinds.remove(find);		
 		// Remove a potential find where the target is the assassin
 		PotentialFind toRemove = null;
@@ -230,6 +248,14 @@ public class CTFSession extends GameSession {
 			
 	}
 		
+	public void setTeam2carrier(User team2carrier) {
+		this.team2carrier = team2carrier;
+	}
+
+	public void setTeam3carrier(User team3carrier) {
+		this.team3carrier = team3carrier;
+	}
+
 	/**
 	 * teamID should always be 0 in FriendFinder
 	 */
@@ -255,6 +281,44 @@ public class CTFSession extends GameSession {
 	@Override
 	public void handleLocation(Location loc, User user) {
 		// TODO Auto-generated method stub
+		
+		if (user.getTeamID() == 2) {
+			if (Utility.locsClose(flag3loc, loc, Utility.PROXIMITY_DISTANCE)) {
+				if (team2carrier == null) {
+					team2carrier = user;
+					for (User player: users) {
+						player.sendMessage("flagPickup " + user.getUserID());
+					}
+				}
+			}
+		}
+		else {
+			if (Utility.locsClose(flag2loc, loc, Utility.PROXIMITY_DISTANCE)) {
+				if (team3carrier == null) {
+					team3carrier = user;
+					for (User player: users) {
+						player.sendMessage("flagPickup " + user.getUserID());
+					}
+				}
+			}
+		}
+		
+		if (team2carrier != null) {
+			if (checkSide(team2carrier.getLocation()) * checkSide(flag2loc) > 0) { //the flag carrier made it to his side
+				for (User player: users) {
+					player.sendMessage("flagCaptured " + team2carrier.getUserID());
+				}
+			}
+		}
+		
+		if (team3carrier != null) {
+			if (checkSide(team3carrier.getLocation()) * checkSide(flag3loc) > 0) { //the flag carrier made it to his side
+				for (User player: users) {
+					player.sendMessage("flagCaptured " + team3carrier.getUserID());
+				}
+			}
+		}
+		
 		
 		StringBuilder m = new StringBuilder();
 		//send location to all users for them to handle
