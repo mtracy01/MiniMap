@@ -6,9 +6,9 @@ public class TestDB {
 		String u1 = "user1";
 		String u2 = "user2";
 
-		String g1 = "g1:f1:f2:f3:f4:f5";
-		String g2 = "g2:f6:f7:f8:f9:f10";
-		String g3 = "g3:f11:f12:f13";
+		String g1 = "g1,f1,f2,f3,f4,f5";
+		String g2 = "g2,f6,f7,f8,f9,f10";
+		String g3 = "g3,f11,f12,f13";
 
 		db = new DbInteract();
 
