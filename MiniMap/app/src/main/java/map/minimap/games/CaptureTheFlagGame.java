@@ -74,8 +74,7 @@ public class CaptureTheFlagGame extends Game {
                         if (u.getMarker() != null) {
                             u.getMarker().remove();
                         }
-                        if (u.getTeam() == Data.user.getTeam())
-                        {
+                        if (u.getTeam() == Data.user.getTeam()) {
                             teammates.add(u);
                         }
                     }
@@ -161,8 +160,7 @@ public class CaptureTheFlagGame extends Game {
             LatLng loc = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
             if (Integer.parseInt(parts[1]) == 2) {
                 blueFlag = new Flag(loc, teams.get(0));
-            }
-            else {
+            } else {
                 redFlag = new Flag(loc, teams.get(1));
             }
         } else if (parts[0].equals("lineOfScrimmage")) {
@@ -178,7 +176,7 @@ public class CaptureTheFlagGame extends Game {
                         toast.show();
                     }
                 });
-                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity, MainMenu.class));
             } else {
                 final User removedUser = findUserbyId(parts[1], Data.players);
                 Data.gameActivity.runOnUiThread(new Runnable() {
@@ -189,6 +187,29 @@ public class CaptureTheFlagGame extends Game {
                         Data.players.remove(removedUser);
                     }
                 });
+            }
+        } else if (parts[0].equals("flagPickup")) {
+            if (parts[1].equals(Data.user.getID())) {
+                Data.gameActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), "You picked up the flag.", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+            } else {
+                Data.gameActivity.runOnUiThread(new Runnable() {
+                    public void run() {
+                        String name = findUserbyId(parts[1], Data.players).getName();
+                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(),  name + " has picked up the flag.", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+            }
+            if (Data.user.getTeam() == 2) {
+                blueFlag.hide();
+            }
+            else {
+                redFlag.hide();
             }
         } else if (parts[0].equals("flagReturned")) {
             if (parts[1].equals(Data.user.getID())) {
@@ -206,6 +227,12 @@ public class CaptureTheFlagGame extends Game {
                         toast.show();
                     }
                 });
+            }
+            if (Data.user.getTeam() == 2) {
+                blueFlag.show();
+            }
+            else {
+                redFlag.show();
             }
         } else if (parts[0].equals("flagCaptured")) {
             if (parts[1].equals(Data.user.getID())) {
@@ -243,9 +270,6 @@ public class CaptureTheFlagGame extends Game {
     }
 
 
-
-
-
     @Override
 	/* called when user presses start button
 	 * assign teams, etc...
@@ -253,6 +277,8 @@ public class CaptureTheFlagGame extends Game {
     public void startSession() {
         Log.v("Capture The Flag Game", "Starting game session " + this.getId());
         isRunning = true;
+        redFlag.show();
+        blueFlag.show();
     }
 
     @Override
