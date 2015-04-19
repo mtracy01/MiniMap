@@ -294,6 +294,7 @@ public class ServerConnection extends Thread {
                 builder.setMessage("You have been invited to a " + niceType + " game.");
                 builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        Data.host = false;
                         newGameType = gameType;
                         acceptGameMessage(gameID);
                         Data.gameId = gameID;

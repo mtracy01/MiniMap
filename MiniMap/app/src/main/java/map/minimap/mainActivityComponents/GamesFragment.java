@@ -131,6 +131,7 @@ public class GamesFragment extends Fragment {
                 // Add ourselves to the list of players
                 Data.players.clear();
                 Data.players.add(Data.user);
+                Data.host = true;
 
                 /*android.app.FragmentTransaction ft =*/ getActivity().getFragmentManager().beginTransaction().replace(R.id.container, LobbyFragment.newInstance("a","b")).commit();
                 //ft.setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
