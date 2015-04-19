@@ -20,11 +20,11 @@ public class DbInteract {
 	private Connection conn = null;
 	
 	public DbInteract() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Class.forName("com.mysql.jdbc.Driver").newInstance();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		String url = "jdbc:mysql://localhost:3306/minimap";
 		String user = "root";
 		String pass = "raspberry";
