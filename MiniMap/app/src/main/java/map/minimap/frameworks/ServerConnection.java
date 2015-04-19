@@ -127,7 +127,7 @@ public class ServerConnection extends Thread {
                 // Remove all players from previous game if list is not empty
                 Data.players.clear();
 
-                for (int i = 1; i < parts.length; i++) {
+                for (int i = 2; i < parts.length; i++) {
                     // Add the existing user if it is us, otherwise create a new one
                     if (Data.user.getID().equals(parts[i])) {
                         Data.players.add(Data.user);
@@ -143,17 +143,22 @@ public class ServerConnection extends Thread {
                             }
                         }
 
+
+                        while(user.getName() == null) {
+                            ;
+                        }
                         Data.players.add(user);
                         Data.lobbyUsers.add(user.getName());
                         Log.v("user", user.getName());
 
                         Data.mainAct.runOnUiThread(new Runnable() {
                             public void run() {
-                              //  LobbyFragment.adapter.notifyDataSetChanged();
+                                //  LobbyFragment.adapter.notifyDataSetChanged();
                                 android.app.FragmentTransaction tr = Data.mainAct.getFragmentManager().beginTransaction();
-                                tr.replace(R.id.container, LobbyFragment.newInstance("a","b"));
+                                tr.replace(R.id.content_frame, LobbyFragment.newInstance("a", "b"));
                                 tr.commit();
-                            }});
+                            }
+                        });
 
                     }
                     Log.v("here", Data.lobbyUsers.get(Data.lobbyUsers.size()-1));
