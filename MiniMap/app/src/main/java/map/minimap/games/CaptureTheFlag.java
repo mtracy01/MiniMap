@@ -21,9 +21,6 @@ import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 
-//import com.parse.Parse;
-
-
 public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallback{
 
     private SyncedMapFragment map;

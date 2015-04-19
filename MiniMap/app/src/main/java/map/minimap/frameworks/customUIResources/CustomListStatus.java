@@ -39,7 +39,6 @@ public class CustomListStatus extends ArrayAdapter<String> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
         RadioButton radioButton = (RadioButton) rowView.findViewById(R.id.radio);
 
-
         //Set text, photo, and status indicator appropriately
         txtTitle.setText(web[position]);
         imageView.setImageBitmap(imageId[position]);
