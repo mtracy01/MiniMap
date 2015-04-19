@@ -20,4 +20,4 @@
         android:duration="150"
         android:startOffset="250"/>
 	
-</set>	<!-- From: file:/Users/nickiogg/Documents/School/Spring_2015/CS307/Project/MiniMap/MiniMap/satellitemenu/src/main/res/anim/sat_item_anim_click.xml --><!-- From: file:/Users/nickiogg/Documents/School/Spring_2015/CS307/Project/MiniMap/MiniMap/satellitemenu/build/intermediates/bundles/debug/res/anim/sat_item_anim_click.xml -->
+</set>	<!-- From: file:/C:/Users/Matthew/AndroidStudioProjects/MiniMap/MiniMap/satellitemenu/src/main/res/anim/sat_item_anim_click.xml --><!-- From: file:/C:/Users/Matthew/AndroidStudioProjects/MiniMap/MiniMap/satellitemenu/build/intermediates/bundles/debug/res/anim/sat_item_anim_click.xml -->

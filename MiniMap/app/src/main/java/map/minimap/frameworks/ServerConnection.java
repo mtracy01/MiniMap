@@ -50,7 +50,6 @@ public class ServerConnection extends Thread {
 
     // Are we connected to the client?
     private boolean connected;
-
     private String newGameType;
 
     public ServerConnection( String ID) {
