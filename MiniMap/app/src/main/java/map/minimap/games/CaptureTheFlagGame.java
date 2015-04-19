@@ -14,15 +14,22 @@ import java.util.ArrayList;
 
 import map.minimap.MainMenu;
 import map.minimap.frameworks.Beacon;
+import map.minimap.frameworks.Flag;
 import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
 
+
 /**
  * Created by michael on 4/19/2015.
  */
 public class CaptureTheFlagGame extends Game {
+
+    Flag redFlag;
+    Flag blueFlag;
+    LatLng startLoc; // endpoints of the line of scrimmage
+    LatLng endLoc;
 
     public CaptureTheFlagGame() {
         beaconsEnabled = true;
@@ -76,7 +83,6 @@ public class CaptureTheFlagGame extends Game {
                     Maps.initializePlayers(Data.map, teammates);
                 }
             });
-
 
         } else if (parts[0].equals("addbeacon")) {
 
@@ -133,7 +139,6 @@ public class CaptureTheFlagGame extends Game {
                             Data.client.sendMessage("confirmTag false");
                         }
                     });
-
                     Log.v("CTF Game", "builder created");
                     // Create the AlertDialog
                     AlertDialog dialog = builder.create();
@@ -152,6 +157,17 @@ public class CaptureTheFlagGame extends Game {
                     }
                 });
             }
+        } else if (parts[0].equals("flag")) {
+            LatLng loc = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
+            if (Integer.parseInt(parts[1]) == 2) {
+                blueFlag = new Flag(loc, teams.get(0));
+            }
+            else {
+                redFlag = new Flag(loc, teams.get(1));
+            }
+        } else if (parts[0].equals("lineOfScrimmage")) {
+            startLoc = new LatLng(Double.parseDouble(parts[1]), Double.parseDouble(parts[2]));
+            endLoc = new LatLng(Double.parseDouble(parts[3]), Double.parseDouble(parts[4]));
         } else if (parts[0].equals("userRemoved")) {
             if (parts[1].equals(Data.user.getID())) {
                 Data.user.setInGame(false);

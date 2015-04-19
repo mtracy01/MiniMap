@@ -18,7 +18,7 @@ import map.minimap.frameworks.Game;
 import map.minimap.frameworks.MapResources.LatLngInterpolator;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
-//TODO: Specifics of Sardines
+
 public class AssassinsGame extends Game {
 
     private String LOG_TAG = "AssassinsGame";

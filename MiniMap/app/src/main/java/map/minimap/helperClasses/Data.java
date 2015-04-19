@@ -29,7 +29,6 @@ public class Data {
     public static Activity gameActivity;                    // A reference to the current game activity.  Used to display popups in game.
     public static GPSThread gps;                            //The client's current GPS thread
     public static int loggedInFlag=0;                      //Flag used to determine whether the person is already logged in when the app is reopened
-    public static Context mainContext = null;
 
     //Items used in Lobby fragment and game
     public static ArrayList<String> lobbyUsers     = new ArrayList<>();         //Users in the lobby currently
