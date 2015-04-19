@@ -53,6 +53,10 @@ public class Beacon {
 		this.teamID = id;
 	}
 
+    public Marker getMapMarker() {
+        return mapMarker;
+    }
+
     public void removeBeacon() {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(new Runnable() {
@@ -61,5 +65,22 @@ public class Beacon {
             }
         });
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Beacon beacon = (Beacon) o;
+
+        if (beaconID != beacon.beaconID) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return beaconID;
     }
 }

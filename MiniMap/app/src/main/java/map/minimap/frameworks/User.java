@@ -43,7 +43,7 @@ public class User {
 
     //Structures for optimized procedures
     private Hashtable<String,User> friendMap = new Hashtable<>();           //Mapping of User ID strings to the User object
-    private Hashtable<Integer,Integer> beaconMap = new Hashtable<>();       //Mapping of Beacon ID to index in Beacon ArrayList (since removal requires it)
+    private Hashtable<Integer,Beacon> beaconMap = new Hashtable<>();       //Mapping of Beacon ID to index in Beacon ArrayList (since removal requires it)
 
     public User(String id) {
 
@@ -121,19 +121,23 @@ public class User {
     public void addBeacon(Beacon b)
     {
         beacons.add(b);
-        beaconMap.put(b.getBeaconID(),beacons.size()-1);
+        beaconMap.put(b.getBeaconID(),b);
     }
     public boolean removeBeaconByID(int id)
     {
-        Integer loc;
+        Beacon beacon = beaconMap.get(id);
         //if the beacon does not exist, return false
-        if((loc=beaconMap.get(id))==null)
+        if(beacon == null) {
             return false;
+        }
         //beacon does exist, remove it from map and ArrayList
-        Beacon b = beacons.get(loc.intValue());
-        b.removeBeacon();
-        beacons.remove(loc.intValue());
+        beacon.removeBeacon();
+        beacons.remove(beacon);
         beaconMap.remove(id);
         return true;
+    }
+
+    public ArrayList<Beacon> getBeacons() {
+        return beacons;
     }
 }

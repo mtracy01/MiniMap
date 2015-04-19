@@ -109,6 +109,15 @@ public abstract class Game extends Application{
 		return null;
 	}
 
+    public Team getUserTeam(User u) {
+        for (Team t : teams) {
+            if (t.containsUser(u)) {
+                return t;
+            }
+        }
+        return null;
+    }
+
     public int getId() {
         return id;
     }

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.games.CTFscrimmage;
+//import map.minimap.games.CTFscrimmage;
 import map.minimap.helperClasses.Data;
 
 
@@ -119,8 +119,8 @@ public class GamesFragment extends android.support.v4.app.Fragment{
                     case 3:
                         Data.client.createGameMessage("ctf");
 
-                        Intent intent = new Intent(Data.mainAct.getApplicationContext(), CTFscrimmage.class);
-                        Data.mainAct.startActivity(intent);
+                        //Intent intent = new Intent(Data.mainAct.getApplicationContext(), CTFscrimmage.class);
+                        //Data.mainAct.startActivity(intent);
                         break;
                     /*case 3:     //If we are testing the new menu, go to that
                         startActivity(new Intent(getActivity(),MainMenu.class));

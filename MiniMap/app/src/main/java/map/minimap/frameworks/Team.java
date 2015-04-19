@@ -11,6 +11,8 @@ public class Team {
 	private ArrayList<User> users;
 	private int teamID;
 	private int id;
+
+    // WARNING: This is not used, the beacon list in User is used instead
 	private ArrayList<Beacon> beacons;
 	
 	public Team(int tid) {
@@ -34,7 +36,7 @@ public class Team {
 			beacons.add(b);
 		}
 	}
-	
+
 	public Beacon getBeaconbyID(int id) {
 		for (Beacon b: beacons) {
 			if (b.getBeaconID() == id) {
@@ -59,9 +61,21 @@ public class Team {
 			beacons.remove(b);
 		}
 	}
-	
-	
-	public void sendMessage(String message) {
+
+    public boolean containsUser(User user) {
+        for (User u : users) {
+            if (u.getID().equals(user.getID())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Beacon> getBeacons() {
+        return beacons;
+    }
+
+    public void sendMessage(String message) {
 		for (User u : users) {
 			//u.sendMessage(message);
 		}

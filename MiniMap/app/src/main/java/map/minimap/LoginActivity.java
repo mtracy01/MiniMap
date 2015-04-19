@@ -118,7 +118,7 @@ public class LoginActivity extends FragmentActivity {
                                     Data.client = client;
                                     client.start();
                                     try {
-                                        Thread.sleep(400);
+                                        Thread.sleep(500);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }

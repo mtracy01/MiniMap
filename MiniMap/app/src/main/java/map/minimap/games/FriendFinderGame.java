@@ -182,6 +182,7 @@ public class FriendFinderGame extends Game {
 	 */
 	@Override
 	public void removeBeacon(Integer id) {
+        Log.v("Friend Finder Game", "Removing beacon with id: " + id);
         Data.user.removeBeaconByID(id);
 	}
 	

@@ -11,11 +11,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
 import map.minimap.R;
+import map.minimap.frameworks.Beacon;
 import map.minimap.frameworks.Game;
 import map.minimap.frameworks.User;
 import map.minimap.helperClasses.Data;
@@ -126,6 +128,29 @@ public class Maps {
                             Data.client.sendMessage("addbeacon " + point.latitude + " " + point.longitude);
                         }
                     }
+                }
+            }
+        });
+        Data.map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            public boolean onMarkerClick(Marker marker) {
+                if (Data.user.getGame().isBeaconsEnabled()) {
+                    if (Data.user.getGame().getBeaconMode().equals(Game.BeaconMode.REMOVE)) {
+                        Beacon toRemove = null;
+                        ArrayList<Beacon> beacons = Data.user.getBeacons();
+                        for (Beacon b : beacons) {
+                            if (b.getMapMarker().equals(marker)) {
+                                toRemove = b;
+                            }
+                        }
+                        if (toRemove != null) {
+                            Data.client.sendMessage("removebeacon " + toRemove.getBeaconID());
+                        }
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
                 }
             }
         });
