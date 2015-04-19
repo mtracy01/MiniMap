@@ -1,6 +1,7 @@
 package sessions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import server.Beacon;
@@ -10,21 +11,28 @@ import server.Server;
 import server.Team;
 import server.User;
 import server.Utility;
-// TODO: make changes specific to Sardines
+// TODO: make changes specific to CTF
 public class CTFSession extends GameSession {
 	
 	private static final Logger log = Logger.getLogger( Server.class.getName() );
 	
+	public HashMap<User, CTFUser> ctfusers = new HashMap<User, CTFUser>();
+	private Location startLoc;
+	private Location endLoc; // This is for endpoints of line of scrimmage
+	private Location flag2loc;
+	private Location flag3loc;
+	public HashMap<Integer, Integer> sides = new HashMap<Integer, Integer>();
+	
 	/**
 	 * Store any potential finds
 	 */
-	private ArrayList<CTFUser> potentialFinds;
+	private ArrayList<PotentialFind> potentialFinds;
 	
 	public CTFSession(User owner, Server server) {
 		super("ctf", owner, server);
 		teams.add(new Team(2));
 		teams.add(new Team(3)); //THIS SHOULD BE AUTOMATED
-		potentialFinds = new ArrayList<CTFUser>();
+		potentialFinds = new ArrayList<PotentialFind>();
 		//There is only one team in a friend finder session
 		// TODO: Add the owner to a team
 	}
@@ -34,27 +42,75 @@ public class CTFSession extends GameSession {
 		// TODO Auto-generated method stub
 		
 		String[] messageParts = message.split(" ");
-		StringBuilder m = new StringBuilder();
 		switch(messageParts[0]) {
 			//User reporting location to teammates
 			case "confirmTagged":
-				CTFUser u = (CTFUser) user;
-				u.setInJail(true);
-				if (u.hasFlag()) {
-					u.setHasFlag(false);
+				synchronized (users) {
+					// Get the potentialFind for the user
+					PotentialFind find = null;
+					for (PotentialFind f : potentialFinds) {
+						if (f.tagged.equals(user)) {
+							find = f;
+							break;
+						}
+					}
+					if (find == null) {
+						return;
+					}
+					
+					if (messageParts[1].equals("true")) {
+						// The tagged confirmed
+						find.taggedConfirm = true;
+						if (find.bothConfirmed()) {
+							processTag(find);
+						}
+					} else {
+						// Reject happened, remove any potential find
+						potentialFinds.remove(find);
+					}
 				}
-				for (User player: users) {
-					player.sendMessage("flagReturned " + u.getUserID());
-				}
-				
 				break;
 			case "confirmTag":
+				synchronized (users) {
+					// Get the potentialFind for the user
+					PotentialFind find = null;
+					for (PotentialFind f : potentialFinds) {
+						if (f.tagger.equals(user)) {
+							find = f;
+							break;
+						}
+					}
+					if (find == null) {
+						return;
+					}					
+					
+					if (messageParts[1].equals("true")) {
+						// The assassin confirmed
+						find.taggerConfirm = true;
+						if (find.bothConfirmed()) {
+							processTag(find);
+						}
+					} else {
+						// Reject happened, remove any potential find
+						potentialFinds.remove(find);
+					}
+				}
 				break;
 			case "flag":
+				Location loc = new Location(Double.parseDouble(messageParts[2]), Double.parseDouble(messageParts[3]));
+				if (Integer.parseInt(messageParts[1]) == 2) {
+					flag2loc = loc;
+					sides.put(checkSide(loc), 2);
+				}
+				else {
+					flag3loc = loc;
+					sides.put(checkSide(loc), 3);
+				}			
 				break;
 			case "lineOfScrimmage":
-				break;
-				
+				startLoc = new Location(Double.parseDouble(messageParts[1]), Double.parseDouble(messageParts[2]));
+				endLoc = new Location(Double.parseDouble(messageParts[3]), Double.parseDouble(messageParts[4]));			
+				break;				
 		}
 	}
 	
@@ -71,6 +127,7 @@ public class CTFSession extends GameSession {
 		{
 			//this should add players to alternating teams
 			teams.get(lastteam % 2).addUser(user);
+			ctfusers.put(user, new CTFUser(user));
 			lastteam++;
 		}
 		
@@ -105,6 +162,7 @@ public class CTFSession extends GameSession {
 	@Override
 	public void removeUser(User user) {
 		log.finer("Removing user from ctf session");
+		ctfusers.remove(user);
 		user.setInGame(false);
 		user.setGameSession(null);
 		if (getTeambyID(teams, user.getTeamID()) != null) {
@@ -143,13 +201,35 @@ public class CTFSession extends GameSession {
 	public void addUser(User user, int teamid) {
 		// TODO Auto-generated method stub
 		user.setTeamID(teamid);
-		CTFUser u = new CTFUser(user.getSocket(), user.getServer());
-		getTeambyID(teams, teamid).addUser(u);
+		ctfusers.put(user, new CTFUser(user));
+		getTeambyID(teams, teamid).addUser(user);
 		synchronized (users) {
-			users.add(u);
+			users.add(user);
 		}
 	}
-
+	
+	private void processTag(PotentialFind find) {
+		// Send out the global kill message
+		String tagMessage = "tag " + find.tagger.getUserID() + " " + find.tagged.getUserID();
+		ctfusers.get(find.tagged).setInJail(true);
+		for (User u : users) {
+			u.sendMessage(tagMessage);
+		}
+		potentialFinds.remove(find);		
+		// Remove a potential find where the target is the assassin
+		PotentialFind toRemove = null;
+		for (PotentialFind f : potentialFinds) {
+			if (f.tagger.equals(find.tagged)) {
+				toRemove = f;
+				break;
+			}
+		}
+		if (toRemove != null) {
+			potentialFinds.remove(toRemove);
+		}
+			
+	}
+		
 	/**
 	 * teamID should always be 0 in FriendFinder
 	 */
@@ -215,21 +295,46 @@ public class CTFSession extends GameSession {
 					continue;
 				}
 				// user finds person U
-				CTFUser finder = (CTFUser) user;
-				CTFUser found = (CTFUser) u;
+				User finder = user;
+				User found = u;
 				boolean close = Utility.areClose(user, u, Utility.PROXIMITY_DISTANCE);
 				
 				if(close){
+					
+					double check1 = checkSide(user.getLocation());
+					double check2 = checkSide(u.getLocation());
+					if (check1 * check2 < 0) {
+						break; // players are on the opposite sides of the line of scrimmage, no one tags anyone
+					}
+					
+					
 					if (!potentialFinds.contains(found)) {
-						//send message to each user asking to accept
-				
-						found.sendMessage("acceptTagged " + user.getUserID());
-						finder.sendMessage("acceptTag " + u.getUserID());
-	
-						break; 
-					
-					}	
-					
+						//send message to each user asking to accept				
+						if (check1 > 0) { // both on positive side
+							if (user.getTeamID() == sides.get(1)) { 
+								user.sendMessage("acceptTag " + u.getUserID());
+								u.sendMessage("acceptTagged " + user.getUserID());
+								
+							}
+							else {
+								user.sendMessage("acceptTagged " + u.getUserID());
+								u.sendMessage("acceptTag " + user.getUserID());																
+							}
+							
+						}
+						else { // both on negative side
+							if (user.getTeamID() == sides.get(-1)) {	
+								user.sendMessage("acceptTag " + u.getUserID());
+								u.sendMessage("acceptTagged " + user.getUserID());								
+							}
+							else {
+								user.sendMessage("acceptTagged " + u.getUserID());
+								u.sendMessage("acceptTag " + user.getUserID());																
+							}							
+						}
+						
+						break; 					
+					}						
 				}
 			}
 		}
@@ -237,20 +342,97 @@ public class CTFSession extends GameSession {
 	}
 	
 	public void accept(User user) {
-		CTFUser u;
 		synchronized (users) {
-			u = new CTFUser(user.getSocket(), user.getServer());
-			users.add(u);
+			ctfusers.put(user,  new CTFUser(user));
+			users.add(user);
 		}
 		log.fine("users: " + users);
-		if (u.isInGame()) {
-			u.getGameSession().removeUser(u);
+		if (user.isInGame()) {
+			user.getGameSession().removeUser(user);
 		}
-		u.setGameSession(this);
-		u.setInGame(true);
+		user.setGameSession(this);
+		user.setInGame(true);
 		sendSessionUsers();
 	}
 	
 	
+	class PotentialFind {
+		public User tagger;
+		public User tagged;
+		public boolean taggerConfirm;
+		public boolean taggedConfirm;
+		
+		public boolean bothConfirmed() {
+			return taggerConfirm && taggedConfirm;
+		}
+
+		/* (non-Javadoc)
+		 * @see java.lang.Object#hashCode()
+		 */
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result
+					+ ((tagger == null) ? 0 : tagger.hashCode());
+			result = prime * result
+					+ ((tagged == null) ? 0 : tagged.hashCode());
+			return result;
+		}
+
+		/* (non-Javadoc)
+		 * @see java.lang.Object#equals(java.lang.Object)
+		 */
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			PotentialFind other = (PotentialFind) obj;
+			if (tagger == null) {
+				if (other.tagger != null)
+					return false;
+			} else if (!tagger.equals(other.tagger))
+				return false;
+			if (tagged == null) {
+				if (other.tagged != null)
+					return false;
+			} else if (!tagged.equals(other.tagged))
+				return false;
+			return true;
+		}
+		
+		
+	}
 	
+	
+	/**
+	 * 
+	 * @param loc
+	 * @return given a location, returns a negative value for being on one side of the line of scrimmage
+	 * positive for the other side
+	 */
+	public int checkSide(Location loc) {
+		double[] v1 = {getEndLoc().getLatitude() - getStartLoc().getLatitude(), getEndLoc().getLongitude() - getStartLoc().getLongitude()};
+		double[] v2 = {getEndLoc().getLatitude() - loc.getLatitude(), getEndLoc().getLongitude() - loc.getLongitude()};
+		if (v1[0] * v2[1] - v1[1] * v2[0] > 0) {
+			return 1;
+		}
+		return -1;
+		
+	
+	}
+
+
+
+	public Location getStartLoc() {
+		return startLoc;
+	}
+
+	public Location getEndLoc() {
+		return endLoc;
+	}
 }

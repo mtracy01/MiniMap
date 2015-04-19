@@ -2,25 +2,34 @@ package server;
 
 import java.net.Socket;
 
-public class CTFUser extends User {
+public class CTFUser {
 
+	private User user;
 	boolean inJail;
 	boolean hasFlag;
 	boolean isRetreating;
 	
-	public CTFUser(Socket socket, Server server) {
-		super(socket, server);
+	public CTFUser(User user) {
+		this.user = user;
 		this.inJail = false;
 		this.hasFlag = false;
 		this.isRetreating = false;
 	}
 
+	public User getUser() {
+		return user;
+	}
+	
 	public boolean isInJail() {
 		return inJail;
 	}
 
 	public boolean hasFlag() {
 		return hasFlag;
+	}
+	
+	public boolean isRetreating() {
+		return isRetreating;
 	}
 
 	public void setInJail(boolean inJail) {
@@ -33,11 +42,12 @@ public class CTFUser extends User {
 
 	public void setRetreating(boolean isRetreating) {
 		this.isRetreating = isRetreating;
+	}	
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public boolean isRetreating() {
-		return isRetreating;
-	}
 	
 	
 }
