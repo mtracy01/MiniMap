@@ -12,6 +12,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import map.minimap.R;
 import map.minimap.helperClasses.Data;
 
 /**
@@ -30,35 +31,35 @@ public class Flag {
     public Flag(LatLng location, Team team) {
         this.location = location;
         this.team = team;
+    }
 
-        Bitmap big;
-        if (this.team.getTeamID() == 2)
-            big = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_blue);
-        else if (this.team.getTeamID() == 3) {//red
-            big = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_red);
+    public void show() {
+        Bitmap flagImage;
+        if (this.team.getTeamID() == 2) {
+            flagImage = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_blue);
+        } else if (this.team.getTeamID() == 3) {//red
+            flagImage = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_red);
         }
         else {
             Log.e("Flag Picture", "Invalid team ID");
-            big = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_red);
+            flagImage = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_red);
         }
 
-        big = Bitmap.createScaledBitmap(big,big.getWidth() / 5,big.getHeight() / 5, false);
-        //user.setProfilePhoto(big);
+        final Bitmap tmp = flagImage;
 
-        Bitmap tmp = big;
-        Bitmap doubleSized = Bitmap.createScaledBitmap(tmp,tmp.getWidth() * 2,tmp.getHeight() * 2, false);
-
+<<<<<<< HEAD
         this.mapMarker = BitmapDescriptorFactory.fromBitmap(addBorder(doubleSized, Color.DKGRAY));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
 }
+=======
+>>>>>>> 9fc57f71801711d0c71895be83a0ba8474d0fb08
 
-    public void show() {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(new Runnable() {
             public void run() {
+
                 mapMarker = Data.map.addMarker(new MarkerOptions()
                         .position(location)
-                        .icon(BitmapDescriptorFactory
-                                .defaultMarker(TEAM_COLORS[team.getTeamID()])));
+                        .icon(BitmapDescriptorFactory.fromBitmap(tmp)));
             }
         });
     }
