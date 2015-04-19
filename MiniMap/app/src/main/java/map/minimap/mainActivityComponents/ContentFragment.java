@@ -1,4 +1,4 @@
-package map.minimap.mainMenuComponents;
+package map.minimap.mainActivityComponents;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookAuthorizationException;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
@@ -41,14 +40,6 @@ public class LoginActivity extends FragmentActivity {
     private String LOG_TAG = "LoginActivity";
 
     private CallbackManager callbackManager;
-    private PendingAction pendingAction = PendingAction.NONE;
-    private final String PENDING_ACTION_BUNDLE_KEY =
-            "com.facebook.samples.hellofacebook:PendingAction";
-    private enum PendingAction {
-        NONE,
-        POST_PHOTO,
-        POST_STATUS_UPDATE
-    }
 
     private int startCount=0;
     @Override
@@ -79,7 +70,6 @@ public class LoginActivity extends FragmentActivity {
             Log.e(LOG_TAG,"Null loginButton");
         }
         if(AccessToken.getCurrentAccessToken()!=null){
-            Log.i(LOG_TAG,"TRUE");
             Intent intent = new Intent(LoginActivity.this,MainMenu.class);
             startActivity(intent);
         }
@@ -88,10 +78,7 @@ public class LoginActivity extends FragmentActivity {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        Log.v(LOG_TAG, "SUCCESSful:D");
-                        Log.v(LOG_TAG, "Granted Permissions: " + loginResult.getRecentlyGrantedPermissions());
-
-                       // final ParseUser user = new ParseUser();
+                        Log.v(LOG_TAG, "Login Successful. Granted Permissions: " + loginResult.getRecentlyGrantedPermissions());
 
                         //Graph request to get our user's Facebook data
                         GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
@@ -103,9 +90,6 @@ public class LoginActivity extends FragmentActivity {
                                 try {
                                     Data.user = new User(jsonObject.getString("id"));
                                     Data.user.setName(jsonObject.getString("first_name") + " " + jsonObject.getString("last_name"));
-                                 /*   user.put("objectId",Data.user.getID());
-                                    user.put("username",Data.user.getName());
-                                    user.saveInBackground();*/
                                 } catch (JSONException e) {
                                     Log.e(LOG_TAG, e.getMessage());
                                 }
@@ -121,7 +105,6 @@ public class LoginActivity extends FragmentActivity {
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
-                                    //If client fails to be created, log out the user from facebook and do not advance intents to next activity
                                 }
                                 startCount++;
 
@@ -147,26 +130,16 @@ public class LoginActivity extends FragmentActivity {
                         };
                         GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
                         graphRequest.executeAsync();
-
-
                     }
 
                     @Override
                     public void onCancel() {
-                        if (pendingAction != PendingAction.NONE) {
-                            showAlert();
-                            pendingAction = PendingAction.NONE;
-                        }
                         Log.v(LOG_TAG, "Cancelled");
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
-                        if (pendingAction != PendingAction.NONE
-                                && exception instanceof FacebookAuthorizationException) {
-                            showAlert();
-                            pendingAction = PendingAction.NONE;
-                        }
+                        showAlert();
                         Log.v(LOG_TAG, "Error!");
                     }
 
@@ -193,8 +166,6 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        outState.putString(PENDING_ACTION_BUNDLE_KEY, pendingAction.name());
     }
 
 
@@ -238,7 +209,6 @@ public class LoginActivity extends FragmentActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
