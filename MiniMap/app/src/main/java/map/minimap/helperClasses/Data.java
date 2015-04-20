@@ -2,6 +2,7 @@ package map.minimap.helperClasses;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.ActionBarActivity;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -18,7 +19,7 @@ import map.minimap.frameworks.User;
  */
 public class Data {
     //Things for the application to store
-    public static Activity mainAct;                               //The activity that is responsible for taking care of the GPS thread
+    public static ActionBarActivity mainAct;                               //The activity that is responsible for taking care of the GPS thread
     public static User user;                                     //The user that is using this application
 
     public static boolean host = false;
@@ -38,4 +39,7 @@ public class Data {
 
     public static int clientDoneFlag = 0;                                 //Flag for syncing between tasks
     public static int initialized = 0;
+
+    public static boolean assassinKillRange;
+    public static User assassinateUser;
 }

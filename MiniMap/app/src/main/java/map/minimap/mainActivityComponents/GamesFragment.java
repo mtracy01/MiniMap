@@ -2,6 +2,7 @@ package map.minimap.mainActivityComponents;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import map.minimap.R;
+import map.minimap.games.CTFscrimmage;
 import map.minimap.helperClasses.Data;
 
 //import map.minimap.games.CTFscrimmage;
@@ -38,6 +40,7 @@ public class GamesFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private boolean ctfflag;
 
 
     private ArrayList<String> GamesList;                //The list of games we have available for players
@@ -99,10 +102,12 @@ public class GamesFragment extends Fragment {
         /* Create reaction interfaces for the game buttons in our list */
         context =getActivity();
         GamesListView = (ListView)view.findViewById(R.id.listView);
+        ctfflag = false;
         GamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView <?> a, View v, int position,
                                     long id) {
+                ctfflag = false;
                 Log.v("id", Data.client.toString());
                 switch(position){
                     case 0:
@@ -115,6 +120,7 @@ public class GamesFragment extends Fragment {
                         Data.client.createGameMessage("sardines");
                         break;
                     case 3:
+                        ctfflag=true;
                         Data.client.createGameMessage("ctf");
 
                         //Intent intent = new Intent(Data.mainAct.getApplicationContext(), CTFscrimmage.class);
@@ -129,9 +135,14 @@ public class GamesFragment extends Fragment {
                 Data.players.clear();
                 Data.players.add(Data.user);
                 Data.host = true;
-
-                /*android.app.FragmentTransaction ft =*/ getActivity().getFragmentManager().beginTransaction().replace(R.id.container, LobbyFragment.newInstance("a","b")).commit();
+                if(ctfflag){
+                    Intent intent = new Intent(getActivity(), CTFscrimmage.class);
+                    startActivity(intent);
+                } else {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).commit();
+                }
                 //ft.setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
+
             }
         });
         String[] GamesArray = GamesList.toArray(new String[3]);

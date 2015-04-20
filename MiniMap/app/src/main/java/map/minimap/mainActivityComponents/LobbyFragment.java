@@ -28,7 +28,7 @@ import map.minimap.helperClasses.Data;
 /**
  * Created by Corey on 2/22/2015.
  */
-public class LobbyFragment extends android.app.Fragment {
+public class LobbyFragment extends android.support.v4.app.Fragment {
 
     private String LOG_TAG = "LobbyFragment";
     // TODO: Rename parameter arguments, choose names that match
@@ -177,8 +177,9 @@ public class LobbyFragment extends android.app.Fragment {
         for(int i =0; i < Data.players.size();i++) {
             Data.lobbyUsers.add(Data.players.get(i).getName());
             playersPics[i] = Data.players.get(i).getProfilePhoto();
-            if(playersPics[i]==null)
-                playersPics[i]= BitmapFactory.decodeResource(context.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait);
+            if(playersPics[i]==null) {
+                playersPics[i] = BitmapFactory.decodeResource(context.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait);
+            }
         }
         adapter = new CustomList(getActivity(),Data.lobbyUsers.toArray(new String[Data.players.size()]),playersPics);
         playerListView.setAdapter(adapter);

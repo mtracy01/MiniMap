@@ -154,8 +154,10 @@ public class ServerConnection extends Thread {
                                 //tr.replace(R.id.content_frame, LobbyFragment.newInstance("a", "b"));
                                 //tr.commit();
 
+                             Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).commit();
+                                //Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame, new LobbyFragment()).commit();
 
-                                Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame, new LobbyFragment()).commit();
+
                             }
                         });
 
@@ -215,6 +217,7 @@ public class ServerConnection extends Thread {
                         intent = new Intent(Data.mainAct.getApplicationContext(), Sardines.class);
                         break;
                     case "ctf":
+                        Log.v("Server connection", "Starting ctf");
                         intent = new Intent(Data.mainAct.getApplicationContext(), CaptureTheFlag.class);
                         break;
                 }
@@ -318,7 +321,7 @@ public class ServerConnection extends Thread {
                         }
                         Data.user.setInGame(true);
 
-                        Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame,new LobbyFragment()).commit();
+                        Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new LobbyFragment()).commit();
 
 
                     }

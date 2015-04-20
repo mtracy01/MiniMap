@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import server.Server;
 
 /* IMPORTANT USAGE DETAILS:
 * To interact with the database, instantiate a new DbInteract object. When you are done
@@ -17,20 +20,23 @@ import java.util.ArrayList;
 */
 
 public class DbInteract {
+	private static final Logger log = Logger.getLogger( Server.class.getName() );
 	private Connection conn = null;
 	
 	public DbInteract() {
-//		try {
-//			Class.forName("com.mysql.jdbc.Driver").newInstance();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			java.sql.Driver d = new com.mysql.jdbc.Driver();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		String url = "jdbc:mysql://localhost:3306/minimap";
 		String user = "root";
 		String pass = "raspberry";
+		log.fine("Opening connection to database");
 		
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
+			log.fine("Connection to database established: " + conn.toString());
 		} catch (SQLException ex) {
 			System.out.printf(ex.getMessage());
 		}

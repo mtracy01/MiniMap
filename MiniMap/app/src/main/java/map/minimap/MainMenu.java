@@ -89,8 +89,9 @@ public class MainMenu extends ActionBarActivity
 
         if(getIntent().hasExtra("ctf"))
             if((getIntent().getStringExtra("ctf")).equals("scrim line done")){
-              getFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
+              getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
              }
+
 
     }
 
