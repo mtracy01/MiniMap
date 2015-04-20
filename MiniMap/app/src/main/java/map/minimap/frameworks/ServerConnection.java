@@ -215,6 +215,7 @@ public class ServerConnection extends Thread {
                         intent = new Intent(Data.mainAct.getApplicationContext(), Sardines.class);
                         break;
                     case "ctf":
+                        Log.v("Server connection", "Starting ctf");
                         intent = new Intent(Data.mainAct.getApplicationContext(), CaptureTheFlag.class);
                         break;
                 }
