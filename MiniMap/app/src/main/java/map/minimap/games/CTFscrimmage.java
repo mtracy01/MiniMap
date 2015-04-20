@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -92,7 +93,8 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
         SyncedMapFragment customMapFragment = ((SyncedMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
         mMap = customMapFragment.getMap();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(), 18));
-
+        Toast toast = Toast.makeText(getApplicationContext(), "Make a line of Scrimmage. Hit done when complete.", Toast.LENGTH_SHORT);
+        toast.show();
 
 
         customMapFragment.setOnDragListener(new SyncedMapFragment.MapViewWrapper.OnDragListener() {
