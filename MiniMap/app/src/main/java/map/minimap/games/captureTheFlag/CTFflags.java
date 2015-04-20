@@ -3,6 +3,7 @@ package map.minimap.games.captureTheFlag;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -22,13 +23,14 @@ import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import map.minimap.MainMenu;
 import map.minimap.R;
 import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
-import map.minimap.mainActivityComponents.LobbyFragment;
+import map.minimap.mainMenuComponents.LobbyFragment;
 
 /**
  * Created by Corey on 4/18/2015.
