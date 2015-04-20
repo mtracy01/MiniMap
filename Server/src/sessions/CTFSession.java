@@ -132,7 +132,7 @@ public class CTFSession extends GameSession {
 				teams.get(lastteam % 2).addUser(user);
 				user.setTeamID(teams.get(lastteam % 2).getTeamID());
 				for (User u : this.users) {
-					u.sendMessage("team " + user.getTeamID() + " " + user.getTeamID());
+					u.sendMessage("team " + user.getTeamID() + " " + user.getUserID());
 				}
 				ctfusers.put(user, new CTFUser(user));
 				lastteam++;
