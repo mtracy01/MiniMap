@@ -23,8 +23,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -50,6 +48,7 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
     private SyncedMapFragment map;
     private ArrayList<LatLng> val = new ArrayList<>();
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,17 +126,20 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
         }
         });
     }
+
     public void swap_Activity() {
         Intent intent = new Intent(this, MainMenu.class);
         intent.putExtra("ctf", "scrim line done");
         startActivity(intent);
 
     }
+
     public void Draw_Map() {
         Polyline rectOptions = mMap.addPolyline(new PolylineOptions()
         .add(val.get(0),val.get(val.size()-1)). color(Color.BLUE).width(5));
 
     }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -152,7 +154,6 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
                     }
                 }).create().show();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

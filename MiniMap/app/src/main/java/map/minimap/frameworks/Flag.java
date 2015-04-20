@@ -26,8 +26,6 @@ public class Flag {
     private Team team;
     private Marker mapMarker;
 
-    //R.id.drawable.ic_flag_red/blue
-
     public Flag(LatLng location, Team team) {
         this.location = location;
         this.team = team;
@@ -46,7 +44,6 @@ public class Flag {
         }
 
         final Bitmap tmp = flagImage;
-
 
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(new Runnable() {

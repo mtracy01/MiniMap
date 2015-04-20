@@ -3,7 +3,6 @@ package map.minimap;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -148,7 +147,6 @@ public class MainMenu extends ActionBarActivity
 
     }
 
-
     //Methods specialized for new menu here
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(ContentFragment.CLOSE, R.drawable.ic_action_remove);
@@ -164,8 +162,6 @@ public class MainMenu extends ActionBarActivity
     }
 
     private ScreenShotable replaceFragment(ScreenShotable screenShotable, String name) {
-        findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
-
         //Switch depending on the name of the Menu
         switch(name){
             case ContentFragment.GAMES:
@@ -183,7 +179,7 @@ public class MainMenu extends ActionBarActivity
             case ContentFragment.FRIENDS:
                 logger.logEvent("Friends Menu");
                 Log.v(LOG_TAG,"Friends Menu");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b"))/*.setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom)*/.commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance("a","b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Friends");
                 break;
             case ContentFragment.SETTINGS:

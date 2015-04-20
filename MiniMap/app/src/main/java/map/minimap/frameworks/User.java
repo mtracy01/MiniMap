@@ -24,11 +24,9 @@ public class User {
      * A User has friends[], a name, an ID, and coordinates
      */
 
-    private LatLng coordinates;
-
-
-    private String name;
-    private String ID;
+    private String ID;                //id of the user
+    private String name;             //name of the user
+    private LatLng coordinates;     //location of the user
 
     private int team;
 

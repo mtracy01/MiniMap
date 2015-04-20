@@ -24,9 +24,6 @@ public class SardinesGame extends Game {
 	public SardinesGame() {}
 
 	@Override
-	public void processLogic() {}
-
-	@Override
 	public void handleMessage(String message) {
         Log.v("Sardines Game", message);
         String[] parts = message.split(" ");

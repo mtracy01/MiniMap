@@ -38,6 +38,7 @@ public class ServerConnection extends Thread {
 
     private Socket socket;
     private String user_ID;
+
     // Input/output
     private PrintWriter out;
     private Scanner in;
@@ -47,7 +48,6 @@ public class ServerConnection extends Thread {
     private String newGameType;
 
     public ServerConnection( String ID) {
-
         connected = false;
         user_ID = ID;
     }
@@ -72,13 +72,10 @@ public class ServerConnection extends Thread {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-
             Log.e("ServerConnection", "Could not connect to server");
             closeSocket();
-            // Return
             return;
         }
-
         // We are connected
         connected = true;
         startHeartBeat();

@@ -49,7 +49,6 @@ public class CustomListInvite extends ArrayAdapter<String> {
         });
         txtTitle.setText(web[position]);
         imageView.setImageBitmap(imageId[position]);
-
         return rowView;
     }
 }

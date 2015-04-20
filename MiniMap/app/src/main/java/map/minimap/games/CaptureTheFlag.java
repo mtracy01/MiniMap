@@ -79,7 +79,6 @@ public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallb
         }
     }
 
-
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -95,7 +94,6 @@ public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallb
                     }
                 }).create().show();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

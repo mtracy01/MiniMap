@@ -11,21 +11,11 @@ import java.util.ArrayList;
  */
 public abstract class Game extends Application{
 
-
-
     /*
      *   Each specific game type will be a subclass of Game
      *   Game will not actually provide much except for a means of
-     *      refering to any game type as a Game
+     *      referring to any game type as a Game
      */
-
-
-	private static Integer baseId = 0;
-
-	/**
-	 * The game type
-	 */
-	private String gameType;
 
 	/**
 	 * The game session id
@@ -44,16 +34,6 @@ public abstract class Game extends Application{
     protected BeaconMode beaconMode = BeaconMode.NOTHING;
 	
 	/**
-	 * The server
-	 */
-//	protected Server server;
-	
-	/**
-	 * The owner of the game session (the person who started it)
-	 */
-	protected User owner;
-	
-	/**
 	 * Is the session running?
 	 */
 	protected boolean isRunning;
@@ -62,8 +42,7 @@ public abstract class Game extends Application{
 	 * The teams in the game session
 	 */
 	protected ArrayList<Team> teams;
-	
-    public abstract void processLogic ();
+
     public abstract void handleMessage(String message);
 	/**
 	 * Start the session
@@ -122,19 +101,11 @@ public abstract class Game extends Application{
         return id;
     }
 
-    public boolean isBeaconsEnabled() {
-        return beaconsEnabled;
-    }
-
-    public void setBeaconsEnabled(boolean beaconsEnabled) {
-        this.beaconsEnabled = beaconsEnabled;
-    }
-
+    public boolean isBeaconsEnabled() { return beaconsEnabled; }
 
     public BeaconMode getBeaconMode() {
         return beaconMode;
     }
-
     public void setBeaconMode(BeaconMode beaconMode) {
         this.beaconMode = beaconMode;
     }

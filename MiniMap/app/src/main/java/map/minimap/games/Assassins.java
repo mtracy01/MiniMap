@@ -57,7 +57,6 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
         }
     }
 
-
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -73,7 +72,6 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
                     }
                 }).create().show();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

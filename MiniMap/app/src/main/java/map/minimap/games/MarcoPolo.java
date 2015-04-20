@@ -40,16 +40,13 @@ public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
         items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
         menu.addItems(items);
 
-
         //Initialize our map fragment
         if (savedInstanceState == null) {
             map = new SyncedMapFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.map, map).commit();
             Data.mapFragment=map;
-
             Data.mapFragment.getMapAsync(this);
-
         }
     }
 
@@ -77,7 +74,6 @@ public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

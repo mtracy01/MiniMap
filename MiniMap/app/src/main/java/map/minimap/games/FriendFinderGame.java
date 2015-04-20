@@ -28,14 +28,6 @@ public class FriendFinderGame extends Game {
         beaconsEnabled = true;
 	}
 
-
-	@Override
-	public void processLogic() {
-		// TODO Auto-generated method stub
-		
-		
-	}
-
 	@Override
 	public void handleMessage(String message) {
 		// TODO Auto-generated method stub
