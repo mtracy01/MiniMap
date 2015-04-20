@@ -47,11 +47,9 @@ public class MainMenu extends ActionBarActivity
     private ViewAnimator viewAnimator;
     private LinearLayout linearLayout;
 
-
     //Logging variables
     private String LOG_TAG = "MainMenu";
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +77,6 @@ public class MainMenu extends ActionBarActivity
             }
         });
 
-        //View decorView = getWindow().getDecorView();
-        //int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        //decorView.setSystemUiVisibility(uiOptions);
-
         setActionBar();
         createMenuList();
         viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, this);
@@ -91,8 +85,6 @@ public class MainMenu extends ActionBarActivity
             if((getIntent().getStringExtra("ctf")).equals("scrim line done")){
               getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
              }
-
-
     }
 
     private void setActionBar() {

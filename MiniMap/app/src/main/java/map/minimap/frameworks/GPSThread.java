@@ -73,8 +73,6 @@ public class GPSThread {
         }
         else
             Log.v("gpsbroke", "network/gps providers both out");
-
-
     }
     public void destroyListener(){locationManager.removeUpdates(locationListener);}
 

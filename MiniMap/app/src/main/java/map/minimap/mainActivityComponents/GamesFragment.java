@@ -20,20 +20,10 @@ import map.minimap.R;
 import map.minimap.games.CTFscrimmage;
 import map.minimap.helperClasses.Data;
 
-//import map.minimap.games.CTFscrimmage;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GamesFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GamesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+//The games menu
 public class GamesFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -48,16 +38,6 @@ public class GamesFragment extends Fragment {
     private Context context;
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GamesFragment.
-     */
-
-    // TODO: Rename and change types and number of parameters
     public static GamesFragment newInstance(String param1, String param2) {
         GamesFragment fragment = new GamesFragment();
         Bundle args = new Bundle();
@@ -67,9 +47,8 @@ public class GamesFragment extends Fragment {
         return fragment;
     }
 
-    public GamesFragment() {
-        // Required empty public constructor
-    }
+    //required empty public constructor
+    public GamesFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,12 +64,6 @@ public class GamesFragment extends Fragment {
         GamesList.add("Assassins");
         GamesList.add("Sardines");
         GamesList.add("Capture the Flag");
-        //GamesList.add("Slender");
-        //GamesList.add("Test Menu");
-
-
-
-
     }
 
     @Override
@@ -122,13 +95,7 @@ public class GamesFragment extends Fragment {
                     case 3:
                         ctfflag=true;
                         Data.client.createGameMessage("ctf");
-
-                        //Intent intent = new Intent(Data.mainAct.getApplicationContext(), CTFscrimmage.class);
-                        //Data.mainAct.startActivity(intent);
                         break;
-                    /*case 3:     //If we are testing the new menu, go to that
-                        startActivity(new Intent(getActivity(),MainMenu.class));
-                        return;*/
                 }
 
                 // Add ourselves to the list of players
@@ -139,10 +106,8 @@ public class GamesFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), CTFscrimmage.class);
                     startActivity(intent);
                 } else {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
                 }
-                //ft.setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
-
             }
         });
         String[] GamesArray = GamesList.toArray(new String[3]);

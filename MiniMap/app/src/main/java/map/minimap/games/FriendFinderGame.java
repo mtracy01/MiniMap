@@ -131,10 +131,6 @@ public class FriendFinderGame extends Game {
         return null;
 
     }
-
-
-
-
 	
 	@Override
 	/* called when user presses start button

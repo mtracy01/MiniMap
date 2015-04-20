@@ -19,8 +19,6 @@ import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 
-;
-
 public class FriendFinder extends FragmentActivity implements OnMapReadyCallback {
 
     private SyncedMapFragment map;
@@ -50,15 +48,7 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
             items.add(new android.view.ext.SatelliteMenuItem(ADD_BEACON_MENU_ID, R.drawable.sat_add_beacon));
             items.add(new android.view.ext.SatelliteMenuItem(NOTHING_BEACON_MENU_ID, R.drawable.sat_map));
         }
-
-//        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(3,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
         menu.addItems(items);
-
         menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
             @Override
             public void eventOccured(int id) {
@@ -105,8 +95,6 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
                 }).create().show();
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -133,7 +121,4 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap map) {
         Maps.readyMap(map);
     }
-
-
-
 }

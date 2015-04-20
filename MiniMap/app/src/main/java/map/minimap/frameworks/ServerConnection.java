@@ -34,7 +34,7 @@ public class ServerConnection extends Thread {
     private String LOG_TAG = "ServerConnection";
 
     public static final int SERVER_PORT = 2048;
-    public static final String SERVER_IP = "mtracy01-apollo.ninja"; //tracy94.com";
+    public static final String SERVER_IP = "mtracy01-apollo.ninja";
 
     private Socket socket;
     private String user_ID;
@@ -81,7 +81,6 @@ public class ServerConnection extends Thread {
 
         // We are connected
         connected = true;
-
         startHeartBeat();
 
         try {
@@ -104,7 +103,6 @@ public class ServerConnection extends Thread {
                 e.printStackTrace();
             }
         }
-
         closeSocket();
     }
 
@@ -139,9 +137,8 @@ public class ServerConnection extends Thread {
                             }
                         }
 
-
                         while(user.getName() == null) {
-                            ;
+
                         }
                         Data.players.add(user);
                         Data.lobbyUsers.add(user.getName());
@@ -149,21 +146,11 @@ public class ServerConnection extends Thread {
 
                         Data.mainAct.runOnUiThread(new Runnable() {
                             public void run() {
-                                //  LobbyFragment.adapter.notifyDataSetChanged();
-                                //android.support.v4.app.FragmentTransaction tr = Data.mainAct.getFragmentManager().beginTransaction();
-                                //tr.replace(R.id.content_frame, LobbyFragment.newInstance("a", "b"));
-                                //tr.commit();
-
                              Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).commit();
-                                //Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame, new LobbyFragment()).commit();
-
-
                             }
                         });
-
                     }
                     Log.v("here", Data.lobbyUsers.get(Data.lobbyUsers.size()-1));
-
                 }
             } else if (parts[0].equals("game")) {
                 Log.v("gameId", parts[1]);
@@ -199,7 +186,6 @@ public class ServerConnection extends Thread {
                     if (user != null && user.getID() != Data.user.getID())
                         Data.invitableUsers.add(user);
                 }
-
 
                 Data.clientDoneFlag = 1;
             } else if (parts[0].equals("gameStart")) {
@@ -276,7 +262,6 @@ public class ServerConnection extends Thread {
             out.println("start " + Data.gameId);
         }
     }
-
 
     private void processInvite(final String gameType, final String gameID) {
         Data.mainAct.runOnUiThread(new Runnable() {
@@ -409,9 +394,6 @@ public class ServerConnection extends Thread {
             System.out.println(e);
             e.printStackTrace();
         }
-
-        
-
     }
 
     /**

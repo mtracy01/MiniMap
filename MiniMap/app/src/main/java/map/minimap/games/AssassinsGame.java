@@ -29,13 +29,8 @@ public class AssassinsGame extends Game {
          target = null;
     }
 
-
     @Override
-    public void processLogic() {
-        // TODO Auto-generated method stub
-
-
-    }
+    public void processLogic() {}
 
     @Override
     public void handleMessage(String message) {
@@ -132,7 +127,6 @@ public class AssassinsGame extends Game {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
                     builder.setMessage("Confirm kill of " + targetUser.getName() + "?");
-                    //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Data.client.sendMessage("confirmKill true");
@@ -191,9 +185,6 @@ public class AssassinsGame extends Game {
 
             }
         }
-
-
-
     }
 
     public User findUserbyId(String theid, ArrayList<User> users) {
@@ -205,10 +196,6 @@ public class AssassinsGame extends Game {
         return null;
 
     }
-
-
-
-
 
     @Override
 	/* called when user presses start button
@@ -236,30 +223,20 @@ public class AssassinsGame extends Game {
 
     @Override
 	/* mid-game */
-    public void addUser(User user, int teamid) {
-        // TODO Auto-generated method stub
-    }
+    public void addUser(User user, int teamid) {}
 
     /**
      * teamID should always be 0 in FriendFinder
      */
 
     @Override
-    public void addBeacon(int teamid, LatLng loc) {
-        // TODO Auto-generated method stub
-        // Beacon beacon = new Beacon(loc);
-        // beacon.setTeamId(teamid);
-        // getTeambyID(teams, teamid).addBeacon(beacon);
-
-    }
+    public void addBeacon(int teamid, LatLng loc) {}
 
     /**
      * teamID should always be 0
      */
     @Override
-    public void removeBeacon(Integer id) {
-        // TODO Auto-generated method stub
-    }
+    public void removeBeacon(Integer id) {}
 
 
 
