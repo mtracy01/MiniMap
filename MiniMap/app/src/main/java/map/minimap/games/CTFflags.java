@@ -37,6 +37,7 @@ import map.minimap.R;
 import map.minimap.frameworks.MapResources.Maps;
 import map.minimap.frameworks.MapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
+import map.minimap.mainActivityComponents.LobbyFragment;
 
 /**
  * Created by Corey on 4/18/2015.
@@ -100,6 +101,13 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(), 18));
         Toast toast = Toast.makeText(getApplicationContext(), "Place flag one, then Flag two. Hit clear to clear both and done when complete.", Toast.LENGTH_SHORT);
         toast.show();
+        Intent intent = getIntent();
+        if(intent.hasExtra("ctf")) {
+            String scrimLine = intent.getStringExtra("ctf");
+            String[] parts = scrimLine.split(" ");
+             mMap.addPolyline(new PolylineOptions()
+                     .add(new LatLng(Double.parseDouble(parts[0]),Double.parseDouble(parts[1])), new LatLng(Double.parseDouble(parts[2]),Double.parseDouble(parts[3]))).color(Color.BLUE).width(5));
+        }
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
@@ -121,7 +129,7 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
                 }
             }
         });
-        
+
     }
     public void swap_Activity() {
         Intent intent = new Intent(this, MainMenu.class);
