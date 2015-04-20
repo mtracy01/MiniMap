@@ -37,15 +37,10 @@ import map.minimap.helperClasses.Data;
  */
 public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
-    public static boolean mMapIsTouched = false;
-    SyncedMapFragment customMapFragment;
-    Projection projection;
     public double latitude;
     private boolean Is_MAP_Moveable = false;
     public double longitude;
-    private SyncedMapFragment map;
     private ArrayList<LatLng> val = new ArrayList<>();
-    private AppEventsLogger logger = AppEventsLogger.newLogger(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +105,8 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
 
     public void swap_Activity() {
         Intent intent = new Intent(this, CTFflags.class);
-        intent.putExtra("ctf", "scrim line done");
+        intent.putExtra("ctf", Double.toString(val.get(0).latitude)+" "+Double.toString(val.get(0).longitude)+" "+
+                Double.toString(val.get(val.size()-1).latitude)+" "+Double.toString(val.get(val.size()-1).longitude));
         startActivity(intent);
 
     }
