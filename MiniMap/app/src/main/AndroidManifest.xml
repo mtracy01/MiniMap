@@ -52,6 +52,13 @@
         <activity
             android:name=".games.CTFscrimmage"
             android:label="title_activity_ctf_scrimmage"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".games.CTFflags"
+            android:label="title_activity_ctf_scrimmage"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" >
         </activity>
 
@@ -90,6 +97,7 @@
             android:name=".games.CaptureTheFlag"
             android:label="@string/title_activity_capture_the_flag" >
         </activity>
+
     </application>
 
 </manifest>

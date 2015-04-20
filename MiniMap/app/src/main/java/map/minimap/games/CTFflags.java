@@ -22,7 +22,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.Projection;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -39,7 +41,7 @@ import map.minimap.helperClasses.Data;
 /**
  * Created by Corey on 4/18/2015.
  */
-public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback{
+public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
     public static boolean mMapIsTouched = false;
     SyncedMapFragment customMapFragment;
@@ -48,7 +50,8 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
     private boolean Is_MAP_Moveable = false;
     public double longitude;
     private SyncedMapFragment map;
-    private ArrayList<LatLng> val = new ArrayList<>();
+    private LatLng flag1;
+    private LatLng flag2;
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +66,8 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Data.client.createScrimmageLineMessage(Double.toString(val.get(0).latitude),Double.toString(val.get(0).longitude),
-                        Double.toString(val.get(val.size()-1).latitude),Double.toString(val.get(val.size()-1).longitude));
+                Data.client.ctfFlags(Double.toString(flag1.latitude),Double.toString(flag1.longitude), "2" );
+                Data.client.ctfFlags(Double.toString(flag1.latitude),Double.toString(flag1.longitude), "3" );
                 swap_Activity();
             }});
         Button clearLine = (Button) findViewById(R.id.clear_line);
@@ -72,7 +75,8 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 mMap.clear();
-                val = new ArrayList<LatLng>();
+                flag1 = null;
+                flag2 = null;
             }});
 
         Button btn_draw_State = (Button) findViewById(R.id.btn_draw_State);
@@ -94,35 +98,48 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
         SyncedMapFragment customMapFragment = ((SyncedMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
         mMap = customMapFragment.getMap();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(), 18));
-        Toast toast = Toast.makeText(getApplicationContext(), "Tap two points to make a line of Scrimmage. Hit done when complete.", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), "Place flag one, then Flag two. Hit clear to clear both and done when complete.", Toast.LENGTH_SHORT);
         toast.show();
+
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng point) {
-                Log.d("Map", "Map clicked");
-                if (Is_MAP_Moveable) {
-                    val.add(point);
+                Log.d("Map","Map clicked");
+                if(Is_MAP_Moveable) {
+                    if(flag1==null)
+                        flag1=point;
+                    else{
+                        if (flag2 != null) {
+                            Toast toast2 = Toast.makeText(getApplicationContext(), "Already placed both flags. Hit clear to place them again.", Toast.LENGTH_SHORT);
+                            toast2.show();
+                        } else {
+                            flag2 = point;
+                        }
+                    }
                     Draw_Map();
                 }
-            }});
-
-
+            }
+        });
+        
     }
     public void swap_Activity() {
-        Intent intent = new Intent(this, CTFflags.class);
+        Intent intent = new Intent(this, MainMenu.class);
         intent.putExtra("ctf", "scrim line done");
         startActivity(intent);
 
     }
     public void Draw_Map() {
-        if(val.size()<=2) {
-            Polyline rectOptions = mMap.addPolyline(new PolylineOptions()
-                    .add(val.get(0), val.get(val.size() - 1)).color(Color.BLUE).width(5));
-        }
+        if(flag2==null)
+        mMap.addMarker(new MarkerOptions()
+                .position(flag1)
+                .icon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
         else{
-            Toast toast = Toast.makeText(getApplicationContext(), "Already made a line. Hit clear to try again.", Toast.LENGTH_SHORT);
-            toast.show();
+            mMap.addMarker(new MarkerOptions()
+                .position(flag2)
+                .icon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         }
 
     }
@@ -135,8 +152,8 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        CTFscrimmage.super.onBackPressed();
-                        startActivity(new Intent(CTFscrimmage.this, MainMenu.class));
+                        CTFflags.super.onBackPressed();
+                        startActivity(new Intent(CTFflags.this, MainMenu.class));
                     }
                 }).create().show();
     }
