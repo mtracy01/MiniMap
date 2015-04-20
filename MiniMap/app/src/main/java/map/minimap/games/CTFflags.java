@@ -44,16 +44,11 @@ import map.minimap.mainActivityComponents.LobbyFragment;
  */
 public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
-    public static boolean mMapIsTouched = false;
-    SyncedMapFragment customMapFragment;
-    Projection projection;
     public double latitude;
     private boolean Is_MAP_Moveable = false;
     public double longitude;
-    private SyncedMapFragment map;
     private LatLng flag1;
     private LatLng flag2;
-    private AppEventsLogger logger = AppEventsLogger.newLogger(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

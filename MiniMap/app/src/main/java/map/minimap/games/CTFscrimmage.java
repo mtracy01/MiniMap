@@ -39,15 +39,10 @@ import map.minimap.helperClasses.Data;
  */
 public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
-    public static boolean mMapIsTouched = false;
-    SyncedMapFragment customMapFragment;
-    Projection projection;
     public double latitude;
     private boolean Is_MAP_Moveable = false;
     public double longitude;
-    private SyncedMapFragment map;
     private ArrayList<LatLng> val = new ArrayList<>();
-    private AppEventsLogger logger = AppEventsLogger.newLogger(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
