@@ -30,6 +30,7 @@ import map.minimap.R;
 import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
+import map.minimap.mainMenuComponents.LobbyFragment;
 
 /**
  * Created by Corey on 4/18/2015.
