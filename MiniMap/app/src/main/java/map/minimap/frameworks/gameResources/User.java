@@ -1,4 +1,4 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.gameResources;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;

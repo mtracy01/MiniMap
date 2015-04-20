@@ -1,16 +1,14 @@
-package map.minimap.games;
+package map.minimap.games.captureTheFlag;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -30,8 +28,8 @@ import java.util.ArrayList;
 
 import map.minimap.MainMenu;
 import map.minimap.R;
-import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.frameworks.MapResources.SyncedMapFragment;
+import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 
 /**
@@ -104,7 +102,8 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
                     val.add(point);
                     Draw_Map();
                 }
-            }});
+            }
+        });
 
 
     }

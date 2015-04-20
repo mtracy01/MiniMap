@@ -1,4 +1,4 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.coreResources;
 
 /**
  * Created by Corey on 2/17/2015.
@@ -15,18 +15,19 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-import map.minimap.FriendFinder;
+import map.minimap.games.friendFinder.FriendFinder;
 import map.minimap.R;
-import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.games.Assassins;
-import map.minimap.games.AssassinsGame;
-import map.minimap.games.CaptureTheFlag;
-import map.minimap.games.CaptureTheFlagGame;
-import map.minimap.games.FriendFinderGame;
-import map.minimap.games.Sardines;
-import map.minimap.games.SardinesGame;
+import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.frameworks.gameResources.User;
+import map.minimap.games.assassins.Assassins;
+import map.minimap.games.assassins.AssassinsGame;
+import map.minimap.games.captureTheFlag.CaptureTheFlag;
+import map.minimap.games.captureTheFlag.CaptureTheFlagGame;
+import map.minimap.games.friendFinder.FriendFinderGame;
+import map.minimap.games.sardines.Sardines;
+import map.minimap.games.sardines.SardinesGame;
 import map.minimap.helperClasses.Data;
-import map.minimap.mainActivityComponents.LobbyFragment;
+import map.minimap.mainMenuComponents.LobbyFragment;
 
 
 public class ServerConnection extends Thread {

@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import map.minimap.frameworks.GPSThread;
-import map.minimap.frameworks.ServerConnection;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.coreResources.GPSThread;
+import map.minimap.frameworks.coreResources.ServerConnection;
+import map.minimap.frameworks.gameResources.User;
 
 /**
  * Created by Matthew on 4/4/2015.

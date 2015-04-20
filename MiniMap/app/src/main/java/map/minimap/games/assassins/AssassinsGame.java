@@ -1,4 +1,4 @@
-package map.minimap.games;
+package map.minimap.games.assassins;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,9 +14,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import map.minimap.MainMenu;
-import map.minimap.frameworks.Game;
-import map.minimap.frameworks.MapResources.LatLngInterpolator;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.gameResources.Game;
+import map.minimap.frameworks.mapResources.LatLngInterpolator;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
 
 public class AssassinsGame extends Game {

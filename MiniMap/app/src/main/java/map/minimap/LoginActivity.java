@@ -28,8 +28,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import map.minimap.frameworks.ServerConnection;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.coreResources.ServerConnection;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 

@@ -55,7 +55,7 @@ ADDED from AndroidManifest.xml:20:9
 		ADDED from AndroidManifest.xml:22:13
 	android:name
 		ADDED from AndroidManifest.xml:21:13
-activity#map.minimap.FriendFinder
+activity#map.minimap.games.friendFinder.FriendFinder
 ADDED from AndroidManifest.xml:24:9
 	android:label
 		ADDED from AndroidManifest.xml:26:13

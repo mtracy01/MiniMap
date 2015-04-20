@@ -1,4 +1,4 @@
-package map.minimap.games;
+package map.minimap.games.assassins;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,24 +15,24 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.MainMenu;
 import map.minimap.R;
-import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.frameworks.MapResources.SyncedMapFragment;
+import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 
+//import com.parse.Parse;
 
-public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
+
+public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
 
     private SyncedMapFragment map;
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Data.gameActivity = this;
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        logger.logEvent("Sardines launched", Data.players.size());
-
-        setContentView(R.layout.activity_sardines);
+        logger.logEvent("Assassins launched", Data.players.size());
+        setContentView(R.layout.activity_assassins);
 
         //Set up satellite menu, add elements
         android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) findViewById(R.id.menu);
@@ -66,22 +66,17 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Sardines.super.onBackPressed();
+                        Assassins.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
-                        startActivity(new Intent(Sardines.this,MainMenu.class));
+                        startActivity(new Intent(Assassins.this, MainMenu.class));
                     }
                 }).create().show();
     }
 
     @Override
-    public void onMapReady(GoogleMap map) {
-        Maps.readyMap(map);
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_sardines, menu);
+        getMenuInflater().inflate(R.menu.menu_assassins, menu);
         return true;
     }
 
@@ -98,5 +93,10 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        Maps.readyMap(map);
     }
 }

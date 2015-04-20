@@ -1,4 +1,4 @@
-package map.minimap.mainActivityComponents;
+package map.minimap.mainMenuComponents;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -171,7 +171,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(Uri uri);
     }
 
 }

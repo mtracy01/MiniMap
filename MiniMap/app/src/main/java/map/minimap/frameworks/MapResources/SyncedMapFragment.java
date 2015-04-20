@@ -1,4 +1,4 @@
-package map.minimap.frameworks.MapResources;
+package map.minimap.frameworks.mapResources;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

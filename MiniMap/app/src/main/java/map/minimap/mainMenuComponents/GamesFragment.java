@@ -1,4 +1,4 @@
-package map.minimap.mainActivityComponents;
+package map.minimap.mainMenuComponents;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import map.minimap.R;
-import map.minimap.games.CTFscrimmage;
+import map.minimap.games.captureTheFlag.CTFscrimmage;
 import map.minimap.helperClasses.Data;
 
 

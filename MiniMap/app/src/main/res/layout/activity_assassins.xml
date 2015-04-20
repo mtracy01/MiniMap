@@ -4,7 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="map.minimap.games.Assassins"
+    tools:context="map.minimap.games.assassins.Assassins"
     tools:ignore="MergeRootFrame">
 
     <com.facebook.login.widget.LoginButton
@@ -21,7 +21,7 @@
         android:layout_height="fill_parent"
         android:id="@+id/map"
         android:layout_weight="1"
-        class="map.minimap.frameworks.MapResources.SyncedMapFragment"></fragment>
+        class="map.minimap.frameworks.mapResources.SyncedMapFragment"></fragment>
 
 
     <android.view.ext.SatelliteMenu

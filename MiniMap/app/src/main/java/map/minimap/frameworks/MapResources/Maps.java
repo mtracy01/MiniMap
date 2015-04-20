@@ -1,4 +1,4 @@
-package map.minimap.frameworks.MapResources;
+package map.minimap.frameworks.mapResources;
 
 
 
@@ -17,9 +17,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import map.minimap.R;
-import map.minimap.frameworks.Beacon;
-import map.minimap.frameworks.Game;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.gameResources.Beacon;
+import map.minimap.frameworks.gameResources.Game;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
 
 /**

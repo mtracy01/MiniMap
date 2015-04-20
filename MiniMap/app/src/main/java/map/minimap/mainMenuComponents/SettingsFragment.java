@@ -1,4 +1,4 @@
-package map.minimap.mainActivityComponents;
+package map.minimap.mainMenuComponents;
 
 import android.app.Activity;
 import android.app.Fragment;

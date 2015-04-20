@@ -1,4 +1,4 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.gameResources;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package map.minimap.mainActivityComponents;
+package map.minimap.mainMenuComponents;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,7 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import map.minimap.R;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.frameworks.customUIResources.CustomList;
 import map.minimap.frameworks.customUIResources.CustomListInvite;
 import map.minimap.helperClasses.Data;

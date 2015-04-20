@@ -1,8 +1,5 @@
-package map.minimap.games;
+package map.minimap.games.marcoPolo;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -13,26 +10,24 @@ import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-import map.minimap.MainMenu;
 import map.minimap.R;
-import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.frameworks.MapResources.SyncedMapFragment;
+import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 
-//import com.parse.Parse;
-
-
-public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
+public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
 
     private SyncedMapFragment map;
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Data.gameActivity = this;
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        logger.logEvent("Assassins launched", Data.players.size());
-        setContentView(R.layout.activity_assassins);
+        logger.logEvent("Marco Polo launched", Data.players.size());
+
+        setContentView(R.layout.activity_marco_polo);
 
         //Set up satellite menu, add elements
         android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) findViewById(R.id.menu);
@@ -51,32 +46,20 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.map, map).commit();
             Data.mapFragment=map;
-
             Data.mapFragment.getMapAsync(this);
-
         }
     }
 
     @Override
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Really Exit?")
-                .setMessage("Are you sure you want to exit the game?")
-                .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Assassins.super.onBackPressed();
-                        Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
-                        startActivity(new Intent(Assassins.this, MainMenu.class));
-                    }
-                }).create().show();
+    public void onMapReady(GoogleMap map) {
+        Maps.readyMap(map);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_assassins, menu);
+        getMenuInflater().inflate(R.menu.menu_marco_polo, menu);
         return true;
     }
 
@@ -91,12 +74,6 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onMapReady(GoogleMap map) {
-        Maps.readyMap(map);
     }
 }

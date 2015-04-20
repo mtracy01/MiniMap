@@ -1,10 +1,10 @@
-package map.minimap;
+package map.minimap.games.captureTheFlag;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ext.SatelliteMenu;
@@ -14,12 +14,14 @@ import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-import map.minimap.frameworks.Game;
-import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.frameworks.MapResources.SyncedMapFragment;
+import map.minimap.MainMenu;
+import map.minimap.R;
+import map.minimap.frameworks.gameResources.Game;
+import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 
-public class FriendFinder extends FragmentActivity implements OnMapReadyCallback {
+public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallback{
 
     private SyncedMapFragment map;
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
@@ -32,15 +34,13 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Data.gameActivity = this;
-        logger.logEvent("Friend finder launched", Data.players.size());
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        //Set content to our current layout
-        setContentView(R.layout.activity_friend_finder);
+        logger.logEvent("CTF launched", Data.players.size());
+        setContentView(R.layout.activity_capture_the_flag);
 
-        //Set up satellite menu
+        //Set up satellite menu, add elements
         android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) findViewById(R.id.menu);
         java.util.List<android.view.ext.SatelliteMenuItem> items = new java.util.ArrayList<>();
-
         if (Data.user.getGame().isBeaconsEnabled()) {
             // TODO: Need to include the following in the google play store listing:
             // App icons by <a href="http://icons4android.com">Icons4Android</a>.
@@ -49,6 +49,7 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
             items.add(new android.view.ext.SatelliteMenuItem(NOTHING_BEACON_MENU_ID, R.drawable.sat_map));
         }
         menu.addItems(items);
+
         menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
             @Override
             public void eventOccured(int id) {
@@ -76,7 +77,6 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
             Data.mapFragment.getMapAsync(this);
 
         }
-
     }
 
     @Override
@@ -88,9 +88,9 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        FriendFinder.super.onBackPressed();
+                        CaptureTheFlag.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
-                        startActivity(new Intent(FriendFinder.this,MainMenu.class));
+                        startActivity(new Intent(CaptureTheFlag.this, MainMenu.class));
                     }
                 }).create().show();
     }
@@ -98,7 +98,7 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_friend_finder, menu);
+        getMenuInflater().inflate(R.menu.menu_capture_the_flag, menu);
         return true;
     }
 

@@ -1,4 +1,4 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.coreResources;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import map.minimap.frameworks.coreResources.ServerConnection;
 import map.minimap.helperClasses.Data;
 
 /**

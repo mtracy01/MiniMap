@@ -1,4 +1,4 @@
-package map.minimap.mainActivityComponents;
+package map.minimap.mainMenuComponents;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,7 +14,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import map.minimap.R;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.frameworks.customUIResources.CustomListStatus;
 import map.minimap.helperClasses.Data;
 
