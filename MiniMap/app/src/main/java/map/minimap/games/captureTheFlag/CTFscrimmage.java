@@ -11,15 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -37,9 +34,7 @@ import map.minimap.helperClasses.Data;
  */
 public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
-    public double latitude;
     private boolean Is_MAP_Moveable = false;
-    public double longitude;
     private ArrayList<LatLng> val = new ArrayList<>();
 
     @Override
@@ -50,7 +45,6 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
 
         setContentView(R.layout.activity_ctfscrimmage);
 
-        FrameLayout fram_map = (FrameLayout) findViewById(R.id.fram_map);
         Button done = (Button) findViewById(R.id.scrim_done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +66,6 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
         btn_draw_State.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 if (Is_MAP_Moveable != true) {
                     Is_MAP_Moveable = true;
                     mMap.getUiSettings().setAllGesturesEnabled(false);
@@ -99,8 +92,6 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         });
-
-
     }
 
     public void swap_Activity() {
@@ -120,7 +111,6 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
             Toast toast = Toast.makeText(getApplicationContext(), "Already made a line. Hit clear to try again.", Toast.LENGTH_SHORT);
             toast.show();
         }
-
     }
 
     @Override
