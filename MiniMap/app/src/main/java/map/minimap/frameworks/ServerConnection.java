@@ -154,8 +154,8 @@ public class ServerConnection extends Thread {
                                 //tr.replace(R.id.content_frame, LobbyFragment.newInstance("a", "b"));
                                 //tr.commit();
 
-
-                                Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame, new LobbyFragment()).commit();
+                                Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.container, LobbyFragment.newInstance("a", "b")).commit();
+                                //Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame, new LobbyFragment()).commit();
                             }
                         });
 

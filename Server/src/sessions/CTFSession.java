@@ -295,7 +295,7 @@ public class CTFSession extends GameSession {
 		// TODO Auto-generated method stub
 		
 		if (user.getTeamID() == 2) {
-			if (Utility.locsClose(flag3loc, loc, Utility.PROXIMITY_DISTANCE)) {
+			if (flag3loc != null && Utility.locsClose(flag3loc, loc, Utility.PROXIMITY_DISTANCE)) {
 				if (team2carrier == null) {
 					team2carrier = user;
 					for (User player: users) {
@@ -305,7 +305,7 @@ public class CTFSession extends GameSession {
 			}
 		}
 		else {
-			if (Utility.locsClose(flag2loc, loc, Utility.PROXIMITY_DISTANCE)) {
+			if (flag2loc != null && Utility.locsClose(flag2loc, loc, Utility.PROXIMITY_DISTANCE)) {
 				if (team3carrier == null) {
 					team3carrier = user;
 					for (User player: users) {
