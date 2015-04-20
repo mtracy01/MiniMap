@@ -17,13 +17,20 @@
             android:id="@+id/btn_draw_State"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Free Draw" />
+            android:text="Draw/Lock" />
         <Button
-            android:id="@+id/scrim_done"
-            android:layout_gravity="bottom"
+        android:id="@+id/scrim_done"
+        android:layout_gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done" />
+
+        <Button
+            android:id="@+id/clear_line"
+            android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Done" />
+            android:text="Clear" />
     </FrameLayout>
 
 </FrameLayout>

@@ -24,6 +24,8 @@ import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
@@ -64,6 +66,12 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
                         Double.toString(val.get(val.size()-1).latitude),Double.toString(val.get(val.size()-1).longitude));
                 swap_Activity();
             }});
+        Button clearLine = (Button) findViewById(R.id.clear_line);
+        clearLine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.clear();
+            }});
 
         Button btn_draw_State = (Button) findViewById(R.id.btn_draw_State);
 
@@ -76,6 +84,7 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
                     mMap.getUiSettings().setAllGesturesEnabled(false);
                 } else {
                     Is_MAP_Moveable = false;
+                    mMap.getUiSettings().setAllGesturesEnabled(true);
                 }
             }
         });
@@ -122,12 +131,9 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
 
     }
     public void Draw_Map() {
-        PolygonOptions rectOptions = new PolygonOptions();
-        rectOptions.addAll(val);
-        rectOptions.strokeColor(Color.BLUE);
-        rectOptions.strokeWidth(5);
-        rectOptions.fillColor(Color.BLUE);
-        Polygon polygon = mMap.addPolygon(rectOptions);
+        Polyline rectOptions = mMap.addPolyline(new PolylineOptions()
+        .add(val.get(0),val.get(val.size()-1)). color(Color.BLUE).width(5));
+
     }
     @Override
     public void onBackPressed() {
