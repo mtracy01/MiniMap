@@ -3,12 +3,15 @@ package map.minimap.games;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,7 @@ public class CaptureTheFlagGame extends Game {
     Flag blueFlag;
     LatLng startLoc; // endpoints of the line of scrimmage
     LatLng endLoc;
+    Polyline lineOfScrimmage = null;
 
     public CaptureTheFlagGame() {
         beaconsEnabled = true;
@@ -80,6 +84,14 @@ public class CaptureTheFlagGame extends Game {
                     }
                     Data.map.clear();
                     Maps.initializePlayers(Data.map, teammates);
+                    if (lineOfScrimmage == null) {
+                        lineOfScrimmage = Data.map.addPolyline(new PolylineOptions()
+                                .add(startLoc, endLoc)
+                                .width(5)
+                                .color(Color.RED));
+                    } else {
+                        lineOfScrimmage.setVisible(true);
+                    }
                 }
             });
 
