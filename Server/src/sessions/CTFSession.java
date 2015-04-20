@@ -125,19 +125,25 @@ public class CTFSession extends GameSession {
 		isRunning = true;
 		
 		int lastteam = 0;
-		for (User user: this.users)
-		{
-			//this should add players to alternating teams
-			teams.get(lastteam % 2).addUser(user);
-			ctfusers.put(user, new CTFUser(user));
-			lastteam++;
-			user.sendMessage("flag 2 " + flag3loc.getLatitude() + " " + flag3loc.getLongitude());
-			user.sendMessage("flag 3 " + flag3loc.getLatitude() + " " + flag3loc.getLongitude());
-			user.sendMessage("lineOfScrimmage " + startLoc.getLatitude() + " " + startLoc.getLongitude() + " " + endLoc.getLatitude() + " " + endLoc.getLongitude());
+		synchronized (users) {
+			for (User user: this.users)
+			{
+				//this should add players to alternating teams
+				teams.get(lastteam % 2).addUser(user);
+				user.setTeamID(teams.get(lastteam % 2).getTeamID());
+				for (User u : this.users) {
+					u.sendMessage("team " + user.getTeamID() + " " + user.getTeamID());
+				}
+				ctfusers.put(user, new CTFUser(user));
+				lastteam++;
+				user.sendMessage("flag 2 " + flag3loc.getLatitude() + " " + flag3loc.getLongitude());
+				user.sendMessage("flag 3 " + flag3loc.getLatitude() + " " + flag3loc.getLongitude());
+				user.sendMessage("lineOfScrimmage " + startLoc.getLatitude() + " " + startLoc.getLongitude() + " " + endLoc.getLatitude() + " " + endLoc.getLongitude());
+			}
+			
+			// Last thing after setting up the game, send the start message
+			sendStartMessage();
 		}
-		
-		// Last thing after setting up the game, send the start message
-		sendStartMessage();
 	}
 
 	@Override

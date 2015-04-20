@@ -76,13 +76,23 @@ public class CaptureTheFlagGame extends Game {
                     }
                     Data.map.clear();
                     Maps.initializePlayers(Data.map, teammates);
-                    if (lineOfScrimmage == null) {
+                    if (lineOfScrimmage != null) {
+                        lineOfScrimmage.remove();
                         lineOfScrimmage = Data.map.addPolyline(new PolylineOptions()
                                 .add(startLoc, endLoc)
                                 .width(5)
                                 .color(Color.RED));
-                    } else {
                         lineOfScrimmage.setVisible(true);
+                    }
+
+
+                    if (blueFlag != null) {
+                        blueFlag.hide();
+                        blueFlag.show();
+                    }
+                    if (redFlag != null) {
+                        redFlag.hide();
+                        redFlag.show();
                     }
                 }
             });
@@ -258,6 +268,11 @@ public class CaptureTheFlagGame extends Game {
                 });
                 Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
                 Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
+            }
+        } else if (parts[0].equals("team")) {
+            User u = Data.user.findUserById(parts[2]);
+            if (u != null) {
+                u.setTeam(Integer.parseInt(parts[1]));
             }
         }
 

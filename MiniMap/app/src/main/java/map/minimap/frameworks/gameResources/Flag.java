@@ -31,6 +31,9 @@ public class Flag {
     }
 
     public void show() {
+        if (mapMarker != null) {
+            mapMarker.setVisible(true);
+        }
         Bitmap flagImage;
         if (this.team.getTeamID() == 2) {
             flagImage = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_blue);
@@ -47,7 +50,7 @@ public class Flag {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(new Runnable() {
             public void run() {
-
+                Log.v("Flag", "Showing flag");
                 mapMarker = Data.map.addMarker(new MarkerOptions()
                         .position(location)
                         .icon(BitmapDescriptorFactory.fromBitmap(tmp)));
@@ -60,6 +63,7 @@ public class Flag {
         mainHandler.post(new Runnable() {
             public void run() {
                 mapMarker.remove();
+                mapMarker = null;
             }
         });
     }
