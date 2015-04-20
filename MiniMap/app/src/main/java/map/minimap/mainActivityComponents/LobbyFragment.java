@@ -28,7 +28,7 @@ import map.minimap.helperClasses.Data;
 /**
  * Created by Corey on 2/22/2015.
  */
-public class LobbyFragment extends android.app.Fragment {
+public class LobbyFragment extends android.support.v4.app.Fragment {
 
     private String LOG_TAG = "LobbyFragment";
     // TODO: Rename parameter arguments, choose names that match

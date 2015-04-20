@@ -139,8 +139,10 @@ public class GamesFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), CTFscrimmage.class);
                     startActivity(intent);
                 } else {
-                    getActivity().getFragmentManager().beginTransaction().replace(R.id.container, LobbyFragment.newInstance("a", "b")).commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).commit();
                 }
+                //ft.setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
+
             }
         });
         String[] GamesArray = GamesList.toArray(new String[3]);
