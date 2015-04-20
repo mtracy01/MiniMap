@@ -72,6 +72,7 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 mMap.clear();
+                val = new ArrayList<LatLng>();
             }});
 
         Button btn_draw_State = (Button) findViewById(R.id.btn_draw_State);
