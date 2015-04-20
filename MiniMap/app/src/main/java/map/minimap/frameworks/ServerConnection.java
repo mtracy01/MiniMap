@@ -239,6 +239,11 @@ public class ServerConnection extends Thread {
             out.println("lineOfScrimmage " + coord1 +" "+coord2 +" "+coord3 +" "+coord4);
         }
     }
+    public void ctfFlags(String coord1, String coord2, String team){
+        if (connected) {
+            out.println("flag "+team+" " + coord1 +" "+coord2);
+        }
+    }
     public void acceptGameMessage(String gameID){
         if (connected) {
             out.println("accept " + gameID);
