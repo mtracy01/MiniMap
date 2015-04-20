@@ -17,6 +17,7 @@ import com.facebook.FacebookSdk;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -49,9 +50,15 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Data.client.createScrimmageLineMessage(Double.toString(val.get(0).latitude),Double.toString(val.get(0).longitude),
-                        Double.toString(val.get(val.size()-1).latitude),Double.toString(val.get(val.size()-1).longitude));
-                swap_Activity();
+                if(val.size()==0){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Draw a line", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else {
+                    Data.client.createScrimmageLineMessage(Double.toString(val.get(0).latitude), Double.toString(val.get(0).longitude),
+                            Double.toString(val.get(val.size() - 1).latitude), Double.toString(val.get(val.size() - 1).longitude));
+                    swap_Activity();
+                }
             }});
         Button clearLine = (Button) findViewById(R.id.clear_line);
         clearLine.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +86,7 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
         SyncedMapFragment customMapFragment = ((SyncedMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
         mMap = customMapFragment.getMap();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(), 18));
-        Toast toast = Toast.makeText(getApplicationContext(), "Tap two points to make a line of Scrimmage. Hit done when complete.", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), "Tap two points to make a line of Scrimmage. Hit done when complete.", Toast.LENGTH_LONG);
         toast.show();
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
@@ -103,9 +110,13 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void Draw_Map() {
-        if(val.size()<=2) {
+        if(val.size()==1){
+            mMap.addCircle(new CircleOptions().center(val.get(0)).radius(5));
+        }
+        else if(val.size()<=2) {
             Polyline rectOptions = mMap.addPolyline(new PolylineOptions()
                     .add(val.get(0), val.get(val.size() - 1)).color(Color.BLUE).width(5));
+            mMap.addCircle(new CircleOptions().center(val.get(1)).radius(5));
         }
         else{
             Toast toast = Toast.makeText(getApplicationContext(), "Already made a line. Hit clear to try again.", Toast.LENGTH_SHORT);

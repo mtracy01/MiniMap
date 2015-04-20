@@ -55,9 +55,15 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Data.client.ctfFlags(Double.toString(flag1.latitude),Double.toString(flag1.longitude), "2" );
-                Data.client.ctfFlags(Double.toString(flag1.latitude),Double.toString(flag1.longitude), "3" );
-                swap_Activity();
+                if(flag1==null || flag2==null){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Put the flags down", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else {
+                    Data.client.ctfFlags(Double.toString(flag1.latitude), Double.toString(flag1.longitude), "2");
+                    Data.client.ctfFlags(Double.toString(flag1.latitude), Double.toString(flag1.longitude), "3");
+                    swap_Activity();
+                }
             }});
         Button clearLine = (Button) findViewById(R.id.clear_line);
         clearLine.setOnClickListener(new View.OnClickListener() {
@@ -87,14 +93,14 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
         SyncedMapFragment customMapFragment = ((SyncedMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
         mMap = customMapFragment.getMap();
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(), 18));
-        Toast toast = Toast.makeText(getApplicationContext(), "Place flag one, then Flag two. Hit clear to clear both and done when complete.", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), "Place flag one, then Flag two. Hit clear to clear both and done when complete.", Toast.LENGTH_LONG);
         toast.show();
         Intent intent = getIntent();
         if(intent.hasExtra("ctf")) {
             String scrimLine = intent.getStringExtra("ctf");
             String[] parts = scrimLine.split(" ");
-             mMap.addPolyline(new PolylineOptions()
-                     .add(new LatLng(Double.parseDouble(parts[0]),Double.parseDouble(parts[1])), new LatLng(Double.parseDouble(parts[2]),Double.parseDouble(parts[3]))).color(Color.BLUE).width(5));
+            mMap.addPolyline(new PolylineOptions()
+                    .add(new LatLng(Double.parseDouble(parts[0]),Double.parseDouble(parts[1])), new LatLng(Double.parseDouble(parts[2]),Double.parseDouble(parts[3]))).color(Color.BLUE).width(5));
         }
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -127,15 +133,15 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
     }
     public void Draw_Map() {
         if(flag2==null)
-        mMap.addMarker(new MarkerOptions()
-                .position(flag1)
-                .icon(BitmapDescriptorFactory
-                        .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            mMap.addMarker(new MarkerOptions()
+                    .position(flag1)
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
         else{
             mMap.addMarker(new MarkerOptions()
-                .position(flag2)
-                .icon(BitmapDescriptorFactory
-                        .defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+                    .position(flag2)
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         }
 
     }
