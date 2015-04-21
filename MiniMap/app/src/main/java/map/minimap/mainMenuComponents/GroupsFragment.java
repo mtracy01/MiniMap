@@ -8,7 +8,10 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.provider.ContactsContract;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.facebook.share.model.AppInviteContent;
 import com.facebook.share.widget.AppInviteDialog;
@@ -107,7 +111,9 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View v) {
                 final ArrayList<User> friends = Data.user.getFriends();
-
+                for(User f : friends) {
+                    Log.v("friend", f.getID());
+                }
                 //If we have friends who are online, show the invite dialog
                 if(Data.invitableUsers.size()!=0) {
                     String[] playersArray = new String[friends.size()];
@@ -180,9 +186,20 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                     //List user created groups and give them the option to create a new group.
                     //Probably should be implemented in a new activity or heavily embedded into
                     //this one.
-					fragmentManager.beginTransaction()
-                            .replace(R.id.container, DisplayGroups.newInstance("a","b"))
-                            .commit();
+
+                    //Log.v("groups", Data.user.getGroups());
+                    Data.client.sendMessage("getGroupsByID " + Data.user.getID());
+
+                    while(Data.clientDoneFlag == 0) {}
+                    Data.clientDoneFlag = 0;
+
+                    if(Data.user.getGroups() != null) {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.container, DisplayGroups.newInstance("a", "b"))
+                                .commit();
+                    } else {
+                        Toast.makeText(Data.mainAct.getApplicationContext(), "You have no groups", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
