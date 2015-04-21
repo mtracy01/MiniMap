@@ -24,6 +24,7 @@ import map.minimap.frameworks.coreResources.GPSThread;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainMenuComponents.FriendStatus;
+import map.minimap.mainMenuComponents.DisplayGroups;
 import map.minimap.mainMenuComponents.GamesFragment;
 import map.minimap.mainMenuComponents.GroupsFragment;
 import map.minimap.mainMenuComponents.LobbyFragment;
@@ -36,7 +37,7 @@ import yalantis.com.sidemenu.util.ViewAnimator;
 
 
 public class MainMenu extends ActionBarActivity
-        implements GamesFragment.OnFragmentInteractionListener, FriendStatus.OnFragmentInteractionListener, GroupsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener,
+        implements GamesFragment.OnFragmentInteractionListener, FriendStatus.OnFragmentInteractionListener, DisplayGroups.OnFragmentInteractionListener, GroupsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener,
          ViewAnimator.ViewAnimatorListener{
 
     private DrawerLayout drawerLayout;

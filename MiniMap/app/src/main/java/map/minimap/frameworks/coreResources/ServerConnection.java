@@ -151,6 +151,7 @@ public class ServerConnection extends Thread {
                     Log.v("here", Data.lobbyUsers.get(Data.lobbyUsers.size()-1));
                 }
             }else if(parts[0].equals("groups")) {
+                Log.v("thing", "group has been gotten");
                 Data.user.setGroups(parts[1]);
             }else if (parts[0].equals("game")) {
                 Log.v("gameId", parts[1]);

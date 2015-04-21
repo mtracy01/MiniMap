@@ -120,6 +120,7 @@ public class MessageHandler {
 				db = new DbInteract();
 				String[] groups = db.getGroupsByID(messageParts[1]);
 				String groupString = DbInteract.convertToGroupString(groups);
+                log.fine("groups: " + groupString);
 				user.sendMessage("groups " + groupString);
 				db.closeConnection();
 				break;
