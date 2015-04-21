@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 import map.minimap.R;
 import map.minimap.frameworks.gameResources.User;
@@ -62,7 +63,6 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
     }
     public void refresh(){
-
         //Set up arrays for inserting into custom adapter
         Data.client.sendMessage("getGroupsByID " + Data.user.getID());
 
@@ -72,7 +72,9 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
         String groups[] = Data.user.getGroups().split(":");
         //for testing purposes
         String grp[] = groups[0].split(",");
-        Log.v("group", groups[0]);
+        Log.v("groupindex", groups[0]);
+        if(groups[0].indexOf(',') < 0) { return; }
+
         ArrayList<User> users = new ArrayList<User>();
         for(int i = 1; i < grp.length; i++) {
             users.add(new User(grp[i]));
