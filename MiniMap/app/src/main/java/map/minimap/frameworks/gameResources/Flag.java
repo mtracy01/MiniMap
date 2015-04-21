@@ -51,9 +51,11 @@ public class Flag {
         mainHandler.post(new Runnable() {
             public void run() {
                 Log.v("Flag", "Showing flag");
-                mapMarker = Data.map.addMarker(new MarkerOptions()
+                if (Data.map != null) {
+                    mapMarker = Data.map.addMarker(new MarkerOptions()
                         .position(location)
                         .icon(BitmapDescriptorFactory.fromBitmap(tmp)));
+                }
             }
         });
     }
@@ -62,8 +64,10 @@ public class Flag {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(new Runnable() {
             public void run() {
-                mapMarker.remove();
-                mapMarker = null;
+                if (mapMarker != null) {
+                    mapMarker.remove();
+                    mapMarker = null;
+                }
             }
         });
     }
