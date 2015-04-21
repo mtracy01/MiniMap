@@ -131,6 +131,7 @@ public class FriendFinderGame extends Game {
 	public void startSession() {
 		Log.v("Friend Finder Game", "Starting game session " + this.getId());
 		isRunning = true;
+        Data.gameStarted = true;
 	}
 
 	@Override

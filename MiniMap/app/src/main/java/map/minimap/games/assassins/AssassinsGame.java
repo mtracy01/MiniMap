@@ -201,6 +201,7 @@ public class AssassinsGame extends Game {
     public void startSession() {
         Log.v("Assassins Game", "Starting game session " + this.getId());
         isRunning = true;
+        Data.gameStarted = true;
     }
 
     @Override

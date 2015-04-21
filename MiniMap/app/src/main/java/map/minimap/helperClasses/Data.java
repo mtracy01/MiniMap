@@ -22,6 +22,7 @@ public class Data {
     public static User user;                                     //The user that is using this application
 
     public static boolean host = false;
+    public static boolean gameStarted = false;
     public static String gameId;                                //The id of the application's current game session
     public static ServerConnection client;                     //The client side server communication object
     public static GoogleMap map;                              //The actual Google map displayed in the mapFragment when the game session is running

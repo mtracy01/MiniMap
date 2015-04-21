@@ -68,6 +68,7 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
                     public void onClick(DialogInterface arg0, int arg1) {
                         Sardines.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
+                        Data.gameStarted = false;
                         startActivity(new Intent(Sardines.this,MainMenu.class));
                     }
                 }).create().show();

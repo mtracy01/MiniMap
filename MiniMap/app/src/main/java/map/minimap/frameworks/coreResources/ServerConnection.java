@@ -142,11 +142,13 @@ public class ServerConnection extends Thread {
                         Data.lobbyUsers.add(user.getName());
                         Log.v("user", user.getName());
 
-                        Data.mainAct.runOnUiThread(new Runnable() {
-                            public void run() {
-                             Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).commit();
-                            }
-                        });
+                        if (!Data.gameStarted) {
+                            Data.mainAct.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).commit();
+                                }
+                            });
+                        }
                     }
                     Log.v("here", Data.lobbyUsers.get(Data.lobbyUsers.size()-1));
                 }
