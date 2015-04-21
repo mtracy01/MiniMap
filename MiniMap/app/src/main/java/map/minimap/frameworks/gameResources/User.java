@@ -56,6 +56,7 @@ public class User {
         currentGame = null;
         groups = null;
         beacons = new ArrayList<>();
+        profilePhoto = null;
 
         // Name retrieval task
         AsyncTask<String,Void,Void> nameRetriever = new AsyncTask<String, Void, Void>() {

@@ -3,6 +3,7 @@ package map.minimap.mainMenuComponents;
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -61,11 +62,25 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
     }
     public void refresh(){
+
         //Set up arrays for inserting into custom adapter
         Data.client.sendMessage("getGroupsByID " + Data.user.getID());
+
+        while(Data.clientDoneFlag == 0) {}
+        Data.clientDoneFlag = 0;
+
         String groups[] = Data.user.getGroups().split(":");
-        ArrayList<User> users = Data.user.getFriends();
-        users.retainAll(Arrays.asList(groups));
+        //for testing purposes
+        String grp[] = groups[0].split(",");
+        Log.v("group", groups[0]);
+        ArrayList<User> users = new ArrayList<User>();
+        for(int i = 1; i < grp.length; i++) {
+            users.add(new User(grp[i]));
+        }
+        for(User u : users) {
+            while(u.getProfilePhoto() == null) {}
+        }
+
         int len= users.size();
         String[]  names    = new String[len];
         Bitmap[]  pictures = new Bitmap[len];
@@ -90,9 +105,12 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
                 }
             }
         }
-        CustomListStatus adapter = new CustomListStatus(getActivity(),names,pictures,isOnline);
+
+        CustomListStatus adapter = new CustomListStatus(getActivity(), names, pictures, isOnline);
         friendsListView.setAdapter(adapter);
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,6 +120,7 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
         friendsListView= (ListView)view.findViewById(R.id.friendListView);
         refreshButton = (Button)view.findViewById(R.id.refreshButton);
 
+        view.setBackgroundColor(Color.WHITE);
         refresh();
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override

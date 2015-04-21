@@ -153,6 +153,7 @@ public class ServerConnection extends Thread {
             }else if(parts[0].equals("groups")) {
                 Log.v("thing", "group has been gotten");
                 Data.user.setGroups(parts[1]);
+                Data.clientDoneFlag = 1;
             }else if (parts[0].equals("game")) {
                 Log.v("gameId", parts[1]);
                 Data.gameId = parts[1];
