@@ -330,6 +330,7 @@ public class CaptureTheFlagGame extends Game {
     public void startSession() {
         Log.v("Capture The Flag Game", "Starting game session " + this.getId());
         isRunning = true;
+        Data.gameStarted = true;
         redFlag.show();
         blueFlag.show();
         Handler mainHandler = new Handler(Looper.getMainLooper());

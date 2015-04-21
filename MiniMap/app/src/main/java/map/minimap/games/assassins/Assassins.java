@@ -68,6 +68,7 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
                     public void onClick(DialogInterface arg0, int arg1) {
                         Assassins.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
+                        Data.gameStarted = false;
                         startActivity(new Intent(Assassins.this, MainMenu.class));
                     }
                 }).create().show();

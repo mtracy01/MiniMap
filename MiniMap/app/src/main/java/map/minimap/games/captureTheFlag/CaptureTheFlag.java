@@ -90,6 +90,7 @@ public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallb
                     public void onClick(DialogInterface arg0, int arg1) {
                         CaptureTheFlag.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
+                        Data.gameStarted = false;
                         startActivity(new Intent(CaptureTheFlag.this, MainMenu.class));
                     }
                 }).create().show();
