@@ -300,6 +300,18 @@ public class CTFSession extends GameSession {
 	public void handleLocation(Location loc, User user) {
 		// TODO Auto-generated method stub
 		
+		if (!isRunning) {
+			StringBuilder m = new StringBuilder();
+			//send location to all users for them to handle
+			m.append("location");
+			m.append(" " + user.getUserID());
+			m.append(" " + loc.getLatitude());
+			m.append(" " + loc.getLongitude());
+			m.append(" " + user.getTeamID());
+			user.sendMessage(m.toString());
+			return;
+		}
+		
 		if (user.getTeamID() == 2) {
 			if (flag3loc != null && Utility.locsClose(flag3loc, loc, Utility.PROXIMITY_DISTANCE)) {
 				if (team2carrier == null) {

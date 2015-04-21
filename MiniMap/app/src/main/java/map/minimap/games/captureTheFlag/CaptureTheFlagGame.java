@@ -334,6 +334,19 @@ public class CaptureTheFlagGame extends Game {
         isRunning = true;
         redFlag.show();
         blueFlag.show();
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+        mainHandler.post(new Runnable() {
+            public void run() {
+                if (Data.map != null) {
+                    lineOfScrimmage = Data.map.addPolyline(new PolylineOptions()
+                            .add(startLoc, endLoc)
+                            .width(5)
+                            .color(Color.RED));
+                    lineOfScrimmage.setVisible(true);
+                }
+            }
+        });
+
     }
 
     @Override
