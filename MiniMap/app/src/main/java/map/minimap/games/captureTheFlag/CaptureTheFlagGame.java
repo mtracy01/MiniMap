@@ -138,7 +138,6 @@ public class CaptureTheFlagGame extends Game {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
                     builder.setMessage("Has " + targetUser.getName() + " tagged you?");
-                    //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Data.client.sendMessage("confirmTagged true");
@@ -163,7 +162,6 @@ public class CaptureTheFlagGame extends Game {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
                     builder.setMessage("Confirm tag of " + targetUser.getName() + "?");
-                    //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Data.client.sendMessage("confirmTag true");
@@ -356,7 +354,6 @@ public class CaptureTheFlagGame extends Game {
 	 */
     public void endSession() {
         isRunning = false;
-
     }
 
     @Override
