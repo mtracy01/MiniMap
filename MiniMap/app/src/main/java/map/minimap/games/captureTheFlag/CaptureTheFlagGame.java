@@ -92,14 +92,12 @@ public class CaptureTheFlagGame extends Game {
                     }
                     Data.map.clear();
                     Maps.initializePlayers(Data.map, teammates);
-                    if (lineOfScrimmage != null) {
-                        Log.v("CTF", "Drawing line of scrimmage");
-                        lineOfScrimmage = Data.map.addPolyline(new PolylineOptions()
-                                .add(startLoc, endLoc)
-                                .width(5)
-                                .color(Color.RED));
-                        lineOfScrimmage.setVisible(true);
-                    }
+                    Log.v("CTF", "Drawing line of scrimmage");
+                    lineOfScrimmage = Data.map.addPolyline(new PolylineOptions()
+                            .add(startLoc, endLoc)
+                            .width(5)
+                            .color(Color.RED));
+                    lineOfScrimmage.setVisible(true);
 
                     // Only show the flags if they are not being carried
                     if (blueFlag != null && team3Carrier == null) {
