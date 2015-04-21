@@ -61,7 +61,7 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
                 }
                 else {
                     Data.client.ctfFlags(Double.toString(flag1.latitude), Double.toString(flag1.longitude), "2");
-                    Data.client.ctfFlags(Double.toString(flag1.latitude), Double.toString(flag1.longitude), "3");
+                    Data.client.ctfFlags(Double.toString(flag2.latitude), Double.toString(flag2.longitude), "3");
                     swap_Activity();
                 }
             }});
@@ -136,7 +136,7 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
             mMap.addMarker(new MarkerOptions()
                     .position(flag1)
                     .icon(BitmapDescriptorFactory
-                            .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                            .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         else{
             mMap.addMarker(new MarkerOptions()
                     .position(flag2)

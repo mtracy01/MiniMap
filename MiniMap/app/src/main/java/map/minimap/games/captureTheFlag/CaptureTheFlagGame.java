@@ -19,6 +19,7 @@ import map.minimap.MainMenu;
 import map.minimap.frameworks.gameResources.Beacon;
 import map.minimap.frameworks.gameResources.Flag;
 import map.minimap.frameworks.gameResources.Game;
+import map.minimap.frameworks.gameResources.Team;
 import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
@@ -34,9 +35,14 @@ public class CaptureTheFlagGame extends Game {
     LatLng startLoc; // endpoints of the line of scrimmage
     LatLng endLoc;
     Polyline lineOfScrimmage = null;
+    User team2Carrier = null;
+    User team3Carrier = null;
 
     public CaptureTheFlagGame() {
         beaconsEnabled = true;
+        teams = new ArrayList<Team>();
+        teams.add(new Team(2));
+        teams.add(new Team(3));
     }
 
     @Override
@@ -74,25 +80,41 @@ public class CaptureTheFlagGame extends Game {
                             teammates.add(u);
                         }
                     }
+                    // Show the team carriers
+                    if (Data.user.getTeam() == 2) {
+                        if (team3Carrier != null) {
+                            teammates.add(team3Carrier);
+                        }
+                    } else {
+                        if (team2Carrier != null) {
+                            teammates.add(team2Carrier);
+                        }
+                    }
                     Data.map.clear();
                     Maps.initializePlayers(Data.map, teammates);
-                    if (lineOfScrimmage != null) {
-                        lineOfScrimmage.remove();
-                        lineOfScrimmage = Data.map.addPolyline(new PolylineOptions()
-                                .add(startLoc, endLoc)
-                                .width(5)
-                                .color(Color.RED));
-                        lineOfScrimmage.setVisible(true);
-                    }
+                    Log.v("CTF", "Drawing line of scrimmage");
+                    lineOfScrimmage = Data.map.addPolyline(new PolylineOptions()
+                            .add(startLoc, endLoc)
+                            .width(5)
+                            .color(Color.RED));
+                    lineOfScrimmage.setVisible(true);
 
-
-                    if (blueFlag != null) {
-                        blueFlag.hide();
+                    // Only show the flags if they are not being carried
+                    if (blueFlag != null && team3Carrier == null) {
+                        Log.v("CTF", "Drawing blue flag");
                         blueFlag.show();
+                    } else {
+                        if (blueFlag != null) {
+                            blueFlag.hide();
+                        }
                     }
-                    if (redFlag != null) {
-                        redFlag.hide();
+                    if (redFlag != null && team2Carrier == null) {
+                        Log.v("CTF", "Drawing red flag");
                         redFlag.show();
+                    } else {
+                        if (redFlag != null) {
+                            redFlag.hide();
+                        }
                     }
                 }
             });
@@ -219,11 +241,15 @@ public class CaptureTheFlagGame extends Game {
                     }
                 });
             }
-            if (Data.user.getTeam() == 2) {
+            User flagCarrier = findUserbyId(parts[1], Data.players);
+            int otherTeam = (flagCarrier.getTeam() == 2) ? 3 : 2;
+            if (otherTeam == 2) {
                 blueFlag.hide();
+                team3Carrier = flagCarrier;
             }
             else {
                 redFlag.hide();
+                team2Carrier = flagCarrier;
             }
         } else if (parts[0].equals("flagReturned")) {
             if (parts[1].equals(Data.user.getID())) {
@@ -242,11 +268,15 @@ public class CaptureTheFlagGame extends Game {
                     }
                 });
             }
-            if (Data.user.getTeam() == 2) {
+            User flagCarrier = findUserbyId(parts[1], Data.players);
+            int otherTeam = (flagCarrier.getTeam() == 2) ? 3 : 2;
+            if (otherTeam == 2) {
                 blueFlag.show();
+                team3Carrier = null;
             }
             else {
                 redFlag.show();
+                team2Carrier = null;
             }
         } else if (parts[0].equals("flagCaptured")) {
             if (parts[1].equals(Data.user.getID())) {
@@ -271,8 +301,14 @@ public class CaptureTheFlagGame extends Game {
             }
         } else if (parts[0].equals("team")) {
             User u = Data.user.findUserById(parts[2]);
+            Log.v("CTF", "Setting team for user: " + u);
             if (u != null) {
                 u.setTeam(Integer.parseInt(parts[1]));
+                if (parts[1].equals("2")) {
+                    teams.get(0).addUser(u);
+                } else {
+                    teams.get(1).addUser(u);
+                }
             }
         }
 
@@ -298,6 +334,19 @@ public class CaptureTheFlagGame extends Game {
         isRunning = true;
         redFlag.show();
         blueFlag.show();
+        Handler mainHandler = new Handler(Looper.getMainLooper());
+        mainHandler.post(new Runnable() {
+            public void run() {
+                if (Data.map != null) {
+                    lineOfScrimmage = Data.map.addPolyline(new PolylineOptions()
+                            .add(startLoc, endLoc)
+                            .width(5)
+                            .color(Color.RED));
+                    lineOfScrimmage.setVisible(true);
+                }
+            }
+        });
+
     }
 
     @Override

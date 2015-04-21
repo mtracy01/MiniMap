@@ -136,7 +136,7 @@ public class CTFSession extends GameSession {
 				}
 				ctfusers.put(user, new CTFUser(user));
 				lastteam++;
-				user.sendMessage("flag 2 " + flag3loc.getLatitude() + " " + flag3loc.getLongitude());
+				user.sendMessage("flag 2 " + flag2loc.getLatitude() + " " + flag2loc.getLongitude());
 				user.sendMessage("flag 3 " + flag3loc.getLatitude() + " " + flag3loc.getLongitude());
 				user.sendMessage("lineOfScrimmage " + startLoc.getLatitude() + " " + startLoc.getLongitude() + " " + endLoc.getLatitude() + " " + endLoc.getLongitude());
 			}
@@ -299,6 +299,18 @@ public class CTFSession extends GameSession {
 	@Override
 	public void handleLocation(Location loc, User user) {
 		// TODO Auto-generated method stub
+		
+		if (!isRunning) {
+			StringBuilder m = new StringBuilder();
+			//send location to all users for them to handle
+			m.append("location");
+			m.append(" " + user.getUserID());
+			m.append(" " + loc.getLatitude());
+			m.append(" " + loc.getLongitude());
+			m.append(" " + user.getTeamID());
+			user.sendMessage(m.toString());
+			return;
+		}
 		
 		if (user.getTeamID() == 2) {
 			if (flag3loc != null && Utility.locsClose(flag3loc, loc, Utility.PROXIMITY_DISTANCE)) {
