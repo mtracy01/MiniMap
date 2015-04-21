@@ -7,7 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7df006a2-2858-4b30-a24f-ba372bc2a7a7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MiniMap.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,16 +36,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-15.642858" vertical-offset="1602" max-vertical-offset="3723">
               <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DisplayGroups.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11461988" vertical-offset="1313" max-vertical-offset="3366">
-              <caret line="85" column="36" selection-start-line="85" selection-start-column="36" selection-end-line="85" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -52,45 +43,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerConnection.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java">
+      <file leaf-file-name="DisplayGroups.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2299" max-vertical-offset="7072">
-              <caret line="153" column="16" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="56" />
-              <folding>
-                <element signature="e#12407#12408#0" expanded="false" />
-                <element signature="e#12439#12440#0" expanded="false" />
-                <element signature="e#12551#12552#0" expanded="false" />
-                <element signature="e#12600#12601#0" expanded="false" />
-                <element signature="e#12811#12812#0" expanded="false" />
-                <element signature="e#12863#12864#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="20.642857" vertical-offset="918" max-vertical-offset="3366">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="23" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbInteract.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/database/DbInteract.java">
+      <file leaf-file-name="CustomListInvite.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomListInvite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2193" max-vertical-offset="3383">
-              <caret line="175" column="19" selection-start-line="175" selection-start-column="19" selection-end-line="175" selection-end-column="19" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#5417#5418#0" expanded="false" />
-                <element signature="e#5447#5448#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java">
+      <file leaf-file-name="GroupsFragment.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.142858" vertical-offset="590" max-vertical-offset="2584">
-              <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.7614035" vertical-offset="1525" max-vertical-offset="4063">
+              <caret line="128" column="44" selection-start-line="128" selection-start-column="44" selection-end-line="128" selection-end-column="44" />
               <folding>
-                <element signature="e#4517#4518#0" expanded="false" />
-                <element signature="e#4547#4548#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#5811#5812#0" expanded="true" />
+                <element signature="e#5882#5883#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,13 +94,14 @@
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/SardinesGame.java" />
         <option value="$PROJECT_DIR$/Server/src/server/User.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainActivityComponents/DisplayGroups.java" />
-        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/MainMenu.java" />
         <option value="$PROJECT_DIR$/Server/src/server/MessageHandler.java" />
         <option value="$PROJECT_DIR$/Server/src/database/DbInteract.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomListGroupAdd" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java" />
       </list>
     </option>
   </component>
@@ -153,6 +135,17 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiniMap" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -334,17 +327,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiniMap" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -357,6 +339,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="recentsLimit" value="5" />
+    <property name="LayoutCode.rearrangeEntriesJava" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -538,7 +521,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55333334" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -638,29 +621,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25380117" vertical-offset="1568" max-vertical-offset="2856">
-          <caret line="123" column="17" selection-start-line="123" selection-start-column="17" selection-end-line="123" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2299" max-vertical-offset="7072">
-          <caret line="153" column="16" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="56" />
-          <folding>
-            <element signature="e#12407#12408#0" expanded="false" />
-            <element signature="e#12439#12440#0" expanded="false" />
-            <element signature="e#12551#12552#0" expanded="false" />
-            <element signature="e#12600#12601#0" expanded="false" />
-            <element signature="e#12811#12812#0" expanded="false" />
-            <element signature="e#12863#12864#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/FriendStatus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30804077" vertical-offset="0" max-vertical-offset="2448">
@@ -680,43 +640,86 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.642858" vertical-offset="1602" max-vertical-offset="3723">
+          <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.142858" vertical-offset="590" max-vertical-offset="2584">
+        <state vertical-scroll-proportion="0.4631579" vertical-offset="590" max-vertical-offset="2584">
           <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
           <folding>
-            <element signature="e#4517#4518#0" expanded="false" />
-            <element signature="e#4547#4548#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34201586" vertical-offset="2299" max-vertical-offset="7072">
+          <caret line="153" column="16" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/database/DbInteract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2193" max-vertical-offset="3383">
+        <state vertical-scroll-proportion="0.7315968" vertical-offset="2193" max-vertical-offset="3383">
           <caret line="175" column="19" selection-start-line="175" selection-start-column="19" selection-end-line="175" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomListGroupAdd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44327486" vertical-offset="165" max-vertical-offset="1020">
+          <caret line="32" column="66" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="false" />
-            <element signature="e#5417#5418#0" expanded="false" />
-            <element signature="e#5447#5448#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomListInvite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.642858" vertical-offset="1602" max-vertical-offset="3723">
-          <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11461988" vertical-offset="1313" max-vertical-offset="3366">
-          <caret line="85" column="36" selection-start-line="85" selection-start-column="36" selection-end-line="85" selection-end-column="36" />
+        <state vertical-scroll-proportion="20.642857" vertical-offset="918" max-vertical-offset="3366">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="23" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7614035" vertical-offset="1525" max-vertical-offset="4063">
+          <caret line="128" column="44" selection-start-line="128" selection-start-column="44" selection-end-line="128" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#5811#5812#0" expanded="true" />
+            <element signature="e#5882#5883#0" expanded="true" />
           </folding>
         </state>
       </provider>

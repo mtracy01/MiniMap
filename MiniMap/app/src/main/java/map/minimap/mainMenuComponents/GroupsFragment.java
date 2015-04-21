@@ -2,7 +2,10 @@ package map.minimap.mainMenuComponents;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +23,9 @@ import com.facebook.share.widget.AppInviteDialog;
 import java.util.ArrayList;
 
 import map.minimap.R;
+import map.minimap.frameworks.customUIResources.CustomListInvite;
+import map.minimap.frameworks.gameResources.User;
+import map.minimap.helperClasses.Data;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -100,7 +106,45 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         addGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final ArrayList<User> friends = Data.user.getFriends();
 
+                //If we have friends who are online, show the invite dialog
+                if(Data.invitableUsers.size()!=0) {
+                    String[] playersArray = new String[friends.size()];
+                    Bitmap[] playersPics = new Bitmap[friends.size()];
+
+                    for (int i = 0; i < friends.size(); i++) {
+                        playersArray[i] = friends.get(i).getName();
+                        playersPics[i] = friends.get(i).getProfilePhoto();
+                    }
+                    CustomListInvite inviteAdapter = new CustomListInvite(getActivity(), playersArray, playersPics);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Add Friends to Groups");
+                    builder.setAdapter(inviteAdapter, null);
+                    builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            StringBuilder builder = new StringBuilder();
+                            builder.append("addGroup ");
+                            builder.append(Data.user.getID());
+                            builder.append("Group");
+                            for (User u : friends) {
+                                builder.append(',');
+                                builder.append(u.getID());
+                            }
+                            Data.client.sendMessage(builder.toString());
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
         });
 
