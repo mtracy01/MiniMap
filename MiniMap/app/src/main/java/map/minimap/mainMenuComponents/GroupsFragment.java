@@ -127,6 +127,9 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                     //List user created groups and give them the option to create a new group.
                     //Probably should be implemented in a new activity or heavily embedded into
                     //this one.
+					fragmentManager.beginTransaction()
+                            .replace(R.id.container, DisplayGroups.newInstance("a","b"))
+                            .commit();
                 }
             }
         });

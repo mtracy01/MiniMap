@@ -150,7 +150,9 @@ public class ServerConnection extends Thread {
                     }
                     Log.v("here", Data.lobbyUsers.get(Data.lobbyUsers.size()-1));
                 }
-            } else if (parts[0].equals("game")) {
+            }else if(parts[0].equals("groups")) {
+                Data.user.setGroups(parts[1]);
+            }else if (parts[0].equals("game")) {
                 Log.v("gameId", parts[1]);
                 Data.gameId = parts[1];
                 Data.host = true;

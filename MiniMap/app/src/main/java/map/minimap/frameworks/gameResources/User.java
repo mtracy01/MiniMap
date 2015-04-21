@@ -33,6 +33,8 @@ public class User {
     private boolean inGame;
     private Game currentGame;
 
+    private String groups;
+
     private Marker marker;  //Location object for GoogleMap
     private ArrayList<User> friends;
     private Bitmap profilePhoto;
@@ -52,6 +54,7 @@ public class User {
         friends = null; //Needs to be specified later
         inGame = false;
         currentGame = null;
+        groups = null;
         beacons = new ArrayList<>();
 
         // Name retrieval task
@@ -104,6 +107,9 @@ public class User {
 
     public int getTeam(){ return team; }
     public void setTeam(int t){ team = t; }
+
+    public String getGroups() {return groups;}
+    public void setGroups(String groups) {this.groups = groups;}
 
     public boolean getInGame() { return inGame; }
     public void setInGame(boolean g) { inGame = g; }
