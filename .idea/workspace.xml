@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7df006a2-2858-4b30-a24f-ba372bc2a7a7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/src/server/MessageHandler.java" afterPath="$PROJECT_DIR$/Server/src/server/MessageHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/src/database/DbInteract.java" afterPath="$PROJECT_DIR$/Server/src/database/DbInteract.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MiniMap.iws" />
@@ -54,10 +53,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MessageHandler.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MessageHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5122807" vertical-offset="1602" max-vertical-offset="3723">
+            <state vertical-scroll-proportion="-15.642858" vertical-offset="1602" max-vertical-offset="3723">
               <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -86,6 +85,16 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DbInteract.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Server/src/database/DbInteract.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.72098213" vertical-offset="2193" max-vertical-offset="3383">
+              <caret line="175" column="19" selection-start-line="175" selection-start-column="19" selection-end-line="175" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -119,7 +128,6 @@
       <list>
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/AssassinsGame.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/SardinesGame.java" />
-        <option value="$PROJECT_DIR$/Server/src/database/DbInteract.java" />
         <option value="$PROJECT_DIR$/Server/src/server/User.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainActivityComponents/DisplayGroups.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java" />
@@ -128,6 +136,7 @@
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" />
         <option value="$PROJECT_DIR$/Server/src/server/MessageHandler.java" />
+        <option value="$PROJECT_DIR$/Server/src/database/DbInteract.java" />
       </list>
     </option>
   </component>
@@ -659,14 +668,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/database/DbInteract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36049107" vertical-offset="0" max-vertical-offset="3383">
-          <caret line="27" column="60" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.178572" vertical-offset="1449" max-vertical-offset="2414">
@@ -711,11 +712,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5122807" vertical-offset="1602" max-vertical-offset="3723">
+        <state vertical-scroll-proportion="-15.642858" vertical-offset="1602" max-vertical-offset="3723">
           <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/database/DbInteract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.72098213" vertical-offset="2193" max-vertical-offset="3383">
+          <caret line="175" column="19" selection-start-line="175" selection-start-column="19" selection-end-line="175" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
