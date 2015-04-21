@@ -71,23 +71,36 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
 
         String groups[] = Data.user.getGroups().split(":");
         //for testing purposes
-        String grp[] = groups[0].split(",");
+        //String grp[] = groups[0].split(",");
         Log.v("groupindex", groups[0]);
         if(groups[0].indexOf(',') < 0) { return; }
 
         ArrayList<User> users = new ArrayList<User>();
-        for(int i = 1; i < grp.length; i++) {
-            users.add(new User(grp[i]));
+        ArrayList<Integer> nameOffsets = new ArrayList<Integer>();
+        ArrayList<String> groupHeaders = new ArrayList<String>();
+
+        int offset = 0;
+        int headers = 0;
+        for(int i = 0; i < groups.length; i++) {
+            String grp[] = groups[i].split(",");
+            nameOffsets.add(offset++);
+            groupHeaders.add(grp[0]);
+            for (int j = 1; j < grp.length; j++) {
+                users.add(new User(grp[j]));
+                offset++;
+            }
         }
+
+        headers = nameOffsets.size();
+
         for(User u : users) {
             while(u.getProfilePhoto() == null) {}
         }
 
         int len= users.size();
-        String[]  names    = new String[len];
-        Bitmap[]  pictures = new Bitmap[len];
-        boolean[] isOnline = new boolean[len];
-
+        String[]  names    = new String[len + headers];
+        Bitmap[]  pictures = new Bitmap[len + headers];
+        boolean[] isOnline = new boolean[len + headers];
 
         //Get the intersect of users online with users not online into user friends list.  The intersect is stored in invitable friends
         Data.invitableUsers.clear();
@@ -95,17 +108,27 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
         while(Data.clientDoneFlag==0) {}
         Data.clientDoneFlag=0;
 
+        int headerTrack = 0;
         //Add necessary information to array needed for our status adapter
-        for(int i=0; i<len;i++){
-            names[i]=users.get(i).getName();
-            pictures[i]=users.get(i).getProfilePhoto();
-            if(Data.invitableUsers.size()!=0){
-                for(int j=0;j<Data.invitableUsers.size();j++){
-                    if(Data.invitableUsers.get(j).getID().equals(users.get(i).getID())) {
-                        isOnline[i] = true;
+        for(int i=0; i<len + headers;i++){
+            if(headerTrack < nameOffsets.size() && i == nameOffsets.get(headerTrack)) {
+                names[i] = groupHeaders.get(headerTrack);
+                pictures[i]= null;
+                isOnline[i] = false;
+                headerTrack++;
+            } else {
+                names[i] = users.get(i-headerTrack).getName();
+                pictures[i]=users.get(i-headerTrack).getProfilePhoto();
+                if(Data.invitableUsers.size()!=0){
+                    for(int j=0;j<Data.invitableUsers.size();j++){
+                        if(Data.invitableUsers.get(j).getID().equals(users.get(i-headerTrack).getID())) {
+                            isOnline[i] = true;
+                        }
                     }
                 }
             }
+
+
         }
 
         CustomListStatus adapter = new CustomListStatus(getActivity(), names, pictures, isOnline);
