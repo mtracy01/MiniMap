@@ -62,7 +62,7 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
     }
     public void refresh(){
         //Set up arrays for inserting into custom adapter
-        Data.client.sendMessage("getGroupsByID" + Data.user.getID());
+        Data.client.sendMessage("getGroupsByID " + Data.user.getID());
         String groups[] = Data.user.getGroups().split(":");
         ArrayList<User> users = Data.user.getFriends();
         users.retainAll(Arrays.asList(groups));

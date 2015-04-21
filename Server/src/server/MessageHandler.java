@@ -118,6 +118,7 @@ public class MessageHandler {
 				break;
 			case "getGroupsByID":
 				db = new DbInteract();
+                log.fine("Groups of user: " + messageParts[1]);
 				String[] groups = db.getGroupsByID(messageParts[1]);
 				String groupString = DbInteract.convertToGroupString(groups);
                 log.fine("groups: " + groupString);

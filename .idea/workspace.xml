@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7df006a2-2858-4b30-a24f-ba372bc2a7a7" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/MainMenu.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/MainMenu.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/src/server/MessageHandler.java" afterPath="$PROJECT_DIR$/Server/src/server/MessageHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MiniMap.iws" />
@@ -47,8 +45,8 @@
       <file leaf-file-name="DisplayGroups.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.571428" vertical-offset="590" max-vertical-offset="2618">
-              <caret line="64" column="69" selection-start-line="64" selection-start-column="69" selection-end-line="64" selection-end-column="69" />
+            <state vertical-scroll-proportion="-10.178572" vertical-offset="769" max-vertical-offset="2618">
+              <caret line="64" column="21" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,8 +57,8 @@
       <file leaf-file-name="MessageHandler.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.69590646" vertical-offset="1479" max-vertical-offset="3706">
-              <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.5122807" vertical-offset="1602" max-vertical-offset="3723">
+              <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -703,8 +701,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.571428" vertical-offset="590" max-vertical-offset="2618">
-          <caret line="64" column="69" selection-start-line="64" selection-start-column="69" selection-end-line="64" selection-end-column="69" />
+        <state vertical-scroll-proportion="-10.178572" vertical-offset="769" max-vertical-offset="2618">
+          <caret line="64" column="21" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -713,8 +711,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69590646" vertical-offset="1479" max-vertical-offset="3706">
-          <caret line="122" column="49" selection-start-line="122" selection-start-column="49" selection-end-line="122" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.5122807" vertical-offset="1602" max-vertical-offset="3723">
+          <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
