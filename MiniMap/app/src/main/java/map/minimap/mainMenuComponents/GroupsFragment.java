@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.facebook.share.model.AppInviteContent;
@@ -95,6 +96,14 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_groups, container, false);
         /* Create reaction interfaces for the game buttons in our list */
         OptionsListView = (ListView)view.findViewById(R.id.listView);
+        Button addGroup =(Button) view.findViewById(R.id.addGroup);
+        addGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         OptionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView <?> a, View v, int position,
