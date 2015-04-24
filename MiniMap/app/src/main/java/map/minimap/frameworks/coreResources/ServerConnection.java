@@ -145,7 +145,7 @@ public class ServerConnection extends Thread {
                         if (!Data.gameStarted) {
                             Data.mainAct.runOnUiThread(new Runnable() {
                                 public void run() {
-                                    Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance("a", "b")).commit();
+                                    Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance()).commit();
                                 }
                             });
                         }

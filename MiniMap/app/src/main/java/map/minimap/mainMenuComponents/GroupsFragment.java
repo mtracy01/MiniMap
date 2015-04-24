@@ -38,16 +38,8 @@ import map.minimap.helperClasses.Data;
  * create an instance of this fragment.
  */
 public class GroupsFragment extends android.support.v4.app.Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private String LOG_TAG="GroupsFragment";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private ArrayList<String> OptionsList;                //The list of games we have available for players
     private static ListView OptionsListView;    //The Actual UI element id for our games list
@@ -55,20 +47,8 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GroupsFragment.
-     */
-    public static GroupsFragment newInstance(String param1, String param2) {
+    public static GroupsFragment newInstance() {
         GroupsFragment fragment = new GroupsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -79,14 +59,6 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-        //UI helper for facebook interactions
-
-
         //List of options for this fragment
         OptionsList = new ArrayList<>();
         OptionsList.add("Friends who use the app");
@@ -159,7 +131,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
 
                 if(position==0){
                     fragmentManager.beginTransaction()
-                            .replace(R.id.container, FriendStatus.newInstance("a","b"))
+                            .replace(R.id.container, FriendStatus.newInstance())
                             .commit();
                 }
                 if(position==1){
@@ -193,7 +165,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
 
                     if(Data.user.getGroups() != null) {
                         fragmentManager.beginTransaction()
-                                .replace(R.id.container, DisplayGroups.newInstance("a", "b"))
+                                .replace(R.id.container, DisplayGroups.newInstance())
                                 .commit();
                     } else {
                         Toast.makeText(Data.mainAct.getApplicationContext(), "You have no groups", Toast.LENGTH_SHORT).show();
@@ -207,7 +179,6 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

@@ -41,7 +41,7 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
      * @return A new instance of fragment FriendStatus.
      */
 
-    public static FriendStatus newInstance(String a, String b) {
+    public static FriendStatus newInstance() {
         FriendStatus fragment = new FriendStatus();
         return fragment;
     }

@@ -45,7 +45,7 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
      * @return A new instance of fragment FriendStatus.
      */
 
-    public static DisplayGroups newInstance(String a, String b) {
+    public static DisplayGroups newInstance() {
         DisplayGroups fragment = new DisplayGroups();
         return fragment;
     }
