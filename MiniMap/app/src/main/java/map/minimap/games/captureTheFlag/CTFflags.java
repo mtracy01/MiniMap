@@ -15,11 +15,9 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -30,7 +28,6 @@ import map.minimap.R;
 import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
-import map.minimap.mainMenuComponents.LobbyFragment;
 
 /**
  * Created by Corey on 4/18/2015.

@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +14,12 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.StringTokenizer;
 
 import map.minimap.R;
-import map.minimap.frameworks.gameResources.User;
 import map.minimap.frameworks.customUIResources.CustomListStatus;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
 
-//import database.DbInteract;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,9 +50,7 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
         return fragment;
     }
 
-    public DisplayGroups() {
-        // Required empty public constructor
-    }
+    public DisplayGroups() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,8 +64,6 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
         Data.clientDoneFlag = 0;
 
         String groups[] = Data.user.getGroups().split(":");
-        //for testing purposes
-        //String grp[] = groups[0].split(",");
         Log.v("groupindex", groups[0]);
         if(groups[0].indexOf(',') < 0) { return; }
 
@@ -90,7 +82,6 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
                 offset++;
             }
         }
-
         headers = nameOffsets.size();
 
         for(User u : users) {
@@ -127,15 +118,10 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
                     }
                 }
             }
-
-
         }
-
         CustomListStatus adapter = new CustomListStatus(getActivity(), names, pictures, isOnline);
         friendsListView.setAdapter(adapter);
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -192,5 +178,4 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
     }
-
 }

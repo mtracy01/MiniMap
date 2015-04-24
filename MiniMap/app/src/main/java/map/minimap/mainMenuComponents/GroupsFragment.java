@@ -1,15 +1,13 @@
 package map.minimap.mainMenuComponents;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.provider.ContactsContract;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;

@@ -8,9 +8,9 @@ import com.google.android.gms.maps.GoogleMap;
 import java.util.ArrayList;
 
 import map.minimap.frameworks.coreResources.GPSThread;
-import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.frameworks.coreResources.ServerConnection;
 import map.minimap.frameworks.gameResources.User;
+import map.minimap.frameworks.mapResources.SyncedMapFragment;
 
 /**
  * Created by Matthew on 2/21/2015.

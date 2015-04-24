@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 import map.minimap.MainMenu;
 import map.minimap.frameworks.gameResources.Game;
-import map.minimap.frameworks.mapResources.LatLngInterpolator;
 import map.minimap.frameworks.gameResources.User;
+import map.minimap.frameworks.mapResources.LatLngInterpolator;
 import map.minimap.helperClasses.Data;
 
 public class AssassinsGame extends Game {

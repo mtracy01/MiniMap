@@ -76,9 +76,7 @@ public class ContentFragment extends Fragment implements ScreenShotable {
                 }
             }
         };
-
         thread.start();
-
     }
 
     @Override

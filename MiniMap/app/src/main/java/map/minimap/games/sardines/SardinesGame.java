@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import map.minimap.MainMenu;
 import map.minimap.frameworks.gameResources.Beacon;
 import map.minimap.frameworks.gameResources.Game;
-import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.gameResources.User;
+import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.helperClasses.Data;
 //TODO: Specifics of Sardines
 public class SardinesGame extends Game {

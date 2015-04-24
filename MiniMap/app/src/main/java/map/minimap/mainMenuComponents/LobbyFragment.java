@@ -20,9 +20,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import map.minimap.R;
-import map.minimap.frameworks.gameResources.User;
 import map.minimap.frameworks.customUIResources.CustomList;
 import map.minimap.frameworks.customUIResources.CustomListInvite;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
 
 /**

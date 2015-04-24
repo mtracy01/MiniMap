@@ -58,7 +58,6 @@ public class LoginActivity extends FragmentActivity {
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
 
-
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
         if(loginButton!=null) {
             ArrayList<String> permissions = new ArrayList<>(2);
@@ -179,7 +178,6 @@ public class LoginActivity extends FragmentActivity {
     @Override
     public void onPause() {
         super.onPause();
-
         // Call the 'deactivateApp' method to log an app event for use in analytics and advertising
         // reporting.  Do so in the onPause methods of the primary Activities that an app may be
         // launched into.

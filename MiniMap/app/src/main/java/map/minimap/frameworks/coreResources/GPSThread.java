@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import map.minimap.frameworks.coreResources.ServerConnection;
 import map.minimap.helperClasses.Data;
 
 /**
