@@ -21,7 +21,6 @@ import map.minimap.helperClasses.Data;
 
 public class FriendFinderGame extends Game {
 
-	//private static final Logger log = Logger.getLogger( Server.class.getName() );
 	private String LOG_TAG = "FriendFinderGame";
 
 	public FriendFinderGame() {

@@ -34,20 +34,18 @@ import map.minimap.helperClasses.Data;
  */
 public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
     private GoogleMap mMap;
-    public double latitude;
     private boolean Is_MAP_Moveable = false;
-    public double longitude;
     private LatLng flag1;
     private LatLng flag2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Initialize fb sdk and set layout of this activity
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-
         setContentView(R.layout.activity_ctfscrimmage);
 
-        FrameLayout fram_map = (FrameLayout) findViewById(R.id.fram_map);
+        // Done button initialization
         Button done = (Button) findViewById(R.id.scrim_done);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +60,8 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
                     swap_Activity();
                 }
             }});
+
+        // Clear line button initialization
         Button clearLine = (Button) findViewById(R.id.clear_line);
         clearLine.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +71,11 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
                 flag2 = null;
             }});
 
+        // Draw state button initialization
         Button btn_draw_State = (Button) findViewById(R.id.btn_draw_State);
-
         btn_draw_State.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 if (Is_MAP_Moveable != true) {
                     Is_MAP_Moveable = true;
                     mMap.getUiSettings().setAllGesturesEnabled(false);
