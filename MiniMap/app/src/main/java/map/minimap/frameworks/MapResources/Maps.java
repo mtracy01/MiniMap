@@ -1,4 +1,4 @@
-package map.minimap.frameworks.MapResources;
+package map.minimap.frameworks.mapResources;
 
 
 
@@ -17,9 +17,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import map.minimap.R;
-import map.minimap.frameworks.Beacon;
-import map.minimap.frameworks.Game;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.gameResources.Beacon;
+import map.minimap.frameworks.gameResources.Game;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
 
 /**
@@ -104,7 +104,6 @@ public class Maps {
             //Move map's camera and set zoom level.  I will make the zoom a variable later
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(),18));
             Log.v("Maps", "Set Center");
-            //addPlayersToField(map);
         }
         //if we don't initialize, call Sydney
         else {
@@ -248,15 +247,4 @@ public class Maps {
 
         return picture;
     }
-
-    /*private static void addPlayersToField(GoogleMap map){
-
-        //User[] users = new User[Data.users.size()];
-        //System.arraycopy(Data.users.size,0,users,0,length);
-        //Data.users;
-        for(int i=0;i<users.length;i++){
-            map.addMarker(users[i].getMarker());
-        }
-    }*/
-
 }

@@ -1,4 +1,4 @@
-package map.minimap.games;
+package map.minimap.games.assassins;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,9 +14,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import map.minimap.MainMenu;
-import map.minimap.frameworks.Game;
-import map.minimap.frameworks.MapResources.LatLngInterpolator;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.gameResources.Game;
+import map.minimap.frameworks.gameResources.User;
+import map.minimap.frameworks.mapResources.LatLngInterpolator;
 import map.minimap.helperClasses.Data;
 
 public class AssassinsGame extends Game {
@@ -27,14 +27,6 @@ public class AssassinsGame extends Game {
 
     public AssassinsGame() {
          target = null;
-    }
-
-
-    @Override
-    public void processLogic() {
-        // TODO Auto-generated method stub
-
-
     }
 
     @Override
@@ -132,7 +124,6 @@ public class AssassinsGame extends Game {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
                     builder.setMessage("Confirm kill of " + targetUser.getName() + "?");
-                    //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Data.client.sendMessage("confirmKill true");
@@ -191,9 +182,6 @@ public class AssassinsGame extends Game {
 
             }
         }
-
-
-
     }
 
     public User findUserbyId(String theid, ArrayList<User> users) {
@@ -206,10 +194,6 @@ public class AssassinsGame extends Game {
 
     }
 
-
-
-
-
     @Override
 	/* called when user presses start button
 	 * assign teams, etc...
@@ -217,6 +201,7 @@ public class AssassinsGame extends Game {
     public void startSession() {
         Log.v("Assassins Game", "Starting game session " + this.getId());
         isRunning = true;
+        Data.gameStarted = true;
     }
 
     @Override
@@ -236,30 +221,20 @@ public class AssassinsGame extends Game {
 
     @Override
 	/* mid-game */
-    public void addUser(User user, int teamid) {
-        // TODO Auto-generated method stub
-    }
+    public void addUser(User user, int teamid) {}
 
     /**
      * teamID should always be 0 in FriendFinder
      */
 
     @Override
-    public void addBeacon(int teamid, LatLng loc) {
-        // TODO Auto-generated method stub
-        // Beacon beacon = new Beacon(loc);
-        // beacon.setTeamId(teamid);
-        // getTeambyID(teams, teamid).addBeacon(beacon);
-
-    }
+    public void addBeacon(int teamid, LatLng loc) {}
 
     /**
      * teamID should always be 0
      */
     @Override
-    public void removeBeacon(Integer id) {
-        // TODO Auto-generated method stub
-    }
+    public void removeBeacon(Integer id) {}
 
 
 

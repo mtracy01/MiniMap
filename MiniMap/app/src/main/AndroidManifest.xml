@@ -45,13 +45,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FriendFinder"
+            android:name=".games.friendFinder.FriendFinder"
             android:label="@string/title_activity_friend_finder"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".games.CTFscrimmage"
+            android:name=".games.captureTheFlag.CTFscrimmage"
             android:label="title_activity_ctf_scrimmage"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".games.captureTheFlag.CTFflags"
+            android:label="title_activity_ctf_scrimmage"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" >
         </activity>
 
@@ -62,19 +69,19 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
-            android:name=".games.Sardines"
+            android:name=".games.sardines.Sardines"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_sardines"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".games.MarcoPolo"
+            android:name=".games.marcoPolo.MarcoPolo"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_marco_polo"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".games.Assassins"
+            android:name=".games.assassins.Assassins"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_assassins"
             android:screenOrientation="portrait" >
@@ -87,9 +94,10 @@
             android:theme="@style/MainMenuTheme" >
         </activity>
         <activity
-            android:name=".games.CaptureTheFlag"
+            android:name=".games.captureTheFlag.CaptureTheFlag"
             android:label="@string/title_activity_capture_the_flag" >
         </activity>
+
     </application>
 
 </manifest>

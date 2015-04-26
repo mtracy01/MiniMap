@@ -1,4 +1,4 @@
-package map.minimap.games;
+package map.minimap.games.assassins;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,8 +15,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.MainMenu;
 import map.minimap.R;
-import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.frameworks.MapResources.SyncedMapFragment;
+import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 
 //import com.parse.Parse;
@@ -57,7 +57,6 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
         }
     }
 
-
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
@@ -69,11 +68,11 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
                     public void onClick(DialogInterface arg0, int arg1) {
                         Assassins.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
+                        Data.gameStarted = false;
                         startActivity(new Intent(Assassins.this, MainMenu.class));
                     }
                 }).create().show();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

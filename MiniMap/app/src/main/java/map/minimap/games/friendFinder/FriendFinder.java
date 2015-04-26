@@ -1,4 +1,4 @@
-package map.minimap;
+package map.minimap.games.friendFinder;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,12 +14,12 @@ import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-import map.minimap.frameworks.Game;
-import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.frameworks.MapResources.SyncedMapFragment;
+import map.minimap.MainMenu;
+import map.minimap.R;
+import map.minimap.frameworks.gameResources.Game;
+import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
-
-;
 
 public class FriendFinder extends FragmentActivity implements OnMapReadyCallback {
 
@@ -50,15 +50,7 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
             items.add(new android.view.ext.SatelliteMenuItem(ADD_BEACON_MENU_ID, R.drawable.sat_add_beacon));
             items.add(new android.view.ext.SatelliteMenuItem(NOTHING_BEACON_MENU_ID, R.drawable.sat_map));
         }
-
-//        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(3,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
-//        items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
         menu.addItems(items);
-
         menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
             @Override
             public void eventOccured(int id) {
@@ -100,12 +92,11 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
                     public void onClick(DialogInterface arg0, int arg1) {
                         FriendFinder.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
+                        Data.gameStarted = false;
                         startActivity(new Intent(FriendFinder.this,MainMenu.class));
                     }
                 }).create().show();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -133,7 +124,4 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap map) {
         Maps.readyMap(map);
     }
-
-
-
 }

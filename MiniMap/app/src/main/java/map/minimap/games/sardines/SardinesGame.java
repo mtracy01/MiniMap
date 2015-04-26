@@ -1,4 +1,4 @@
-package map.minimap.games;
+package map.minimap.games.sardines;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,18 +13,15 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 import map.minimap.MainMenu;
-import map.minimap.frameworks.Beacon;
-import map.minimap.frameworks.Game;
-import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.gameResources.Beacon;
+import map.minimap.frameworks.gameResources.Game;
+import map.minimap.frameworks.gameResources.User;
+import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.helperClasses.Data;
 //TODO: Specifics of Sardines
 public class SardinesGame extends Game {
 
 	public SardinesGame() {}
-
-	@Override
-	public void processLogic() {}
 
 	@Override
 	public void handleMessage(String message) {
@@ -166,6 +163,7 @@ public class SardinesGame extends Game {
 	public void startSession() {
 		Log.v("Friend Finder Game", "Starting game session " + this.getId());
 		isRunning = true;
+        Data.gameStarted = true;
 	}
 
 	@Override

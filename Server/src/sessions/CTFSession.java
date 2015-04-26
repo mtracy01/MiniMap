@@ -125,19 +125,25 @@ public class CTFSession extends GameSession {
 		isRunning = true;
 		
 		int lastteam = 0;
-		for (User user: this.users)
-		{
-			//this should add players to alternating teams
-			teams.get(lastteam % 2).addUser(user);
-			ctfusers.put(user, new CTFUser(user));
-			lastteam++;
-			user.sendMessage("flag 2 " + flag3loc.getLatitude() + " " + flag3loc.getLongitude());
-			user.sendMessage("flag 3 " + flag3loc.getLatitude() + " " + flag3loc.getLongitude());
-			user.sendMessage("lineOfScrimmage " + startLoc.getLatitude() + " " + startLoc.getLongitude() + " " + endLoc.getLatitude() + " " + endLoc.getLongitude());
+		synchronized (users) {
+			for (User user: this.users)
+			{
+				//this should add players to alternating teams
+				teams.get(lastteam % 2).addUser(user);
+				user.setTeamID(teams.get(lastteam % 2).getTeamID());
+				for (User u : this.users) {
+					u.sendMessage("team " + user.getTeamID() + " " + user.getUserID());
+				}
+				ctfusers.put(user, new CTFUser(user));
+				lastteam++;
+				user.sendMessage("flag 2 " + flag2loc.getLatitude() + " " + flag2loc.getLongitude());
+				user.sendMessage("flag 3 " + flag3loc.getLatitude() + " " + flag3loc.getLongitude());
+				user.sendMessage("lineOfScrimmage " + startLoc.getLatitude() + " " + startLoc.getLongitude() + " " + endLoc.getLatitude() + " " + endLoc.getLongitude());
+			}
+			
+			// Last thing after setting up the game, send the start message
+			sendStartMessage();
 		}
-		
-		// Last thing after setting up the game, send the start message
-		sendStartMessage();
 	}
 
 	@Override
@@ -294,8 +300,20 @@ public class CTFSession extends GameSession {
 	public void handleLocation(Location loc, User user) {
 		// TODO Auto-generated method stub
 		
+		if (!isRunning) {
+			StringBuilder m = new StringBuilder();
+			//send location to all users for them to handle
+			m.append("location");
+			m.append(" " + user.getUserID());
+			m.append(" " + loc.getLatitude());
+			m.append(" " + loc.getLongitude());
+			m.append(" " + user.getTeamID());
+			user.sendMessage(m.toString());
+			return;
+		}
+		
 		if (user.getTeamID() == 2) {
-			if (Utility.locsClose(flag3loc, loc, Utility.PROXIMITY_DISTANCE)) {
+			if (flag3loc != null && Utility.locsClose(flag3loc, loc, Utility.PROXIMITY_DISTANCE)) {
 				if (team2carrier == null) {
 					team2carrier = user;
 					for (User player: users) {
@@ -305,7 +323,7 @@ public class CTFSession extends GameSession {
 			}
 		}
 		else {
-			if (Utility.locsClose(flag2loc, loc, Utility.PROXIMITY_DISTANCE)) {
+			if (flag2loc != null && Utility.locsClose(flag2loc, loc, Utility.PROXIMITY_DISTANCE)) {
 				if (team3carrier == null) {
 					team3carrier = user;
 					for (User player: users) {
@@ -355,13 +373,24 @@ public class CTFSession extends GameSession {
 			tid = 1;
 			otid = 0;
 		}
-			
+		
+		if (user.equals(team2carrier)) {
+			for (User opp: this.teams.get(1).getUsers()) {
+				opp.sendMessage(m.toString());
+			}
+		}
+		if (user.equals(team3carrier)){
+			for (User opp: this.teams.get(0).getUsers()) {
+				opp.sendMessage(m.toString());
+			}
+		}			
+		
 		for (User u: this.teams.get(tid).getUsers())
 		{
 			if (u != null) {
-				u.sendMessage(m.toString());
+				u.sendMessage(m.toString());				
 			}
-		}
+		}		
 		
 		//send confirmation message 
 		if (otid == 0) {

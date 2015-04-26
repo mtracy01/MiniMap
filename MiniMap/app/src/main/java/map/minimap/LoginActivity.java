@@ -28,8 +28,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import map.minimap.frameworks.ServerConnection;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.coreResources.ServerConnection;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
 
@@ -57,7 +57,6 @@ public class LoginActivity extends FragmentActivity {
         setContentView(R.layout.activity_login);
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
-        Data.mainAct=this;
 
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
         if(loginButton!=null) {
@@ -179,7 +178,6 @@ public class LoginActivity extends FragmentActivity {
     @Override
     public void onPause() {
         super.onPause();
-
         // Call the 'deactivateApp' method to log an app event for use in analytics and advertising
         // reporting.  Do so in the onPause methods of the primary Activities that an app may be
         // launched into.

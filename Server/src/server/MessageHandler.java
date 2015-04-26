@@ -118,9 +118,11 @@ public class MessageHandler {
 				break;
 			case "getGroupsByID":
 				db = new DbInteract();
+                log.fine("Groups of user: " + messageParts[1]);
 				String[] groups = db.getGroupsByID(messageParts[1]);
 				String groupString = DbInteract.convertToGroupString(groups);
-				user.sendMessage(groupString);
+                log.fine("groups: " + groupString);
+				user.sendMessage("groups " + groupString);
 				db.closeConnection();
 				break;
 			case "addGroup":
@@ -197,14 +199,12 @@ public class MessageHandler {
 	private String getGameType(GameSession session) {
 		if (session instanceof FriendFinderSession) {
 			return "friendFinder";
-		} else if (session instanceof FriendFinderSession) {
+		} else if (session instanceof CTFSession) {
 			return "ctf";
 		} else if (session instanceof FriendFinderSession) {
 			return "marcoPolo";
 		} else if (session instanceof SardinesSession) {
 			return "sardines";
-		} else if (session instanceof FriendFinderSession) {
-			return "slender";
 		} else if (session instanceof AssassinsSession) {
 			return "assassins";
 		}

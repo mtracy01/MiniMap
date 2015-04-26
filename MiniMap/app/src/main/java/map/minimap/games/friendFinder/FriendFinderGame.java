@@ -1,4 +1,4 @@
-package map.minimap.games;
+package map.minimap.games.friendFinder;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -13,27 +13,18 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 import map.minimap.MainMenu;
-import map.minimap.frameworks.Beacon;
-import map.minimap.frameworks.Game;
-import map.minimap.frameworks.MapResources.LatLngInterpolator;
-import map.minimap.frameworks.User;
+import map.minimap.frameworks.gameResources.Beacon;
+import map.minimap.frameworks.gameResources.Game;
+import map.minimap.frameworks.gameResources.User;
+import map.minimap.frameworks.mapResources.LatLngInterpolator;
 import map.minimap.helperClasses.Data;
 
 public class FriendFinderGame extends Game {
 
-	//private static final Logger log = Logger.getLogger( Server.class.getName() );
 	private String LOG_TAG = "FriendFinderGame";
 
 	public FriendFinderGame() {
         beaconsEnabled = true;
-	}
-
-
-	@Override
-	public void processLogic() {
-		// TODO Auto-generated method stub
-		
-		
 	}
 
 	@Override
@@ -131,10 +122,6 @@ public class FriendFinderGame extends Game {
         return null;
 
     }
-
-
-
-
 	
 	@Override
 	/* called when user presses start button
@@ -143,6 +130,7 @@ public class FriendFinderGame extends Game {
 	public void startSession() {
 		Log.v("Friend Finder Game", "Starting game session " + this.getId());
 		isRunning = true;
+        Data.gameStarted = true;
 	}
 
 	@Override

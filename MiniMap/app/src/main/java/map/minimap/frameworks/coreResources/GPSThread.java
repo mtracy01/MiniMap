@@ -1,4 +1,4 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.coreResources;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -15,7 +15,6 @@ import map.minimap.helperClasses.Data;
  */
 public class GPSThread {
 
-
     private LocationListener locationListener;
     private static LocationManager locationManager;
     private Location location;
@@ -30,22 +29,17 @@ public class GPSThread {
         boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                // Called when a new location is found by the network location
-                // provider.
+                // Called when a new location is found by the network location provider.
                 Log.v("locs", Double.toString(location.getLatitude()));
                 client.sendMessage("location " +location.getLatitude() + " " + location.getLongitude());
             }
-            @Override
-            public void onProviderDisabled(String provider) {
-            }
-            @Override
-            public void onProviderEnabled(String provider) {
 
-            }
             @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
+            public void onProviderDisabled(String provider) {}
+            @Override
+            public void onProviderEnabled(String provider) {}
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
         };
         if (isGPSEnabled) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MINTIME,
@@ -73,8 +67,6 @@ public class GPSThread {
         }
         else
             Log.v("gpsbroke", "network/gps providers both out");
-
-
     }
     public void destroyListener(){locationManager.removeUpdates(locationListener);}
 

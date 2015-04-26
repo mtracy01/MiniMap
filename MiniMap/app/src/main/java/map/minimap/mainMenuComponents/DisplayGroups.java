@@ -1,10 +1,12 @@
-package map.minimap.mainActivityComponents;
+package map.minimap.mainMenuComponents;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import map.minimap.R;
-import map.minimap.frameworks.User;
 import map.minimap.frameworks.customUIResources.CustomListStatus;
+import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,10 +29,11 @@ import map.minimap.helperClasses.Data;
  * Use the {@link FriendStatus#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FriendStatus extends  android.support.v4.app.Fragment {
+public class DisplayGroups extends  android.support.v4.app.Fragment {
 
     private ListView friendsListView;
     private Button   refreshButton;
+    private Button   addGroupButton;
 
 
     private OnFragmentInteractionListener mListener;
@@ -41,14 +45,12 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
      * @return A new instance of fragment FriendStatus.
      */
 
-    public static FriendStatus newInstance(String a, String b) {
-        FriendStatus fragment = new FriendStatus();
+    public static DisplayGroups newInstance() {
+        DisplayGroups fragment = new DisplayGroups();
         return fragment;
     }
 
-    public FriendStatus() {
-        // Required empty public constructor
-    }
+    public DisplayGroups() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,11 +58,40 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
     }
     public void refresh(){
         //Set up arrays for inserting into custom adapter
-        ArrayList<User> friends = Data.user.getFriends();
-        int len= friends.size();
-        String[]  names    = new String[len];
-        Bitmap[]  pictures = new Bitmap[len];
-        boolean[] isOnline = new boolean[len];
+        Data.client.sendMessage("getGroupsByID " + Data.user.getID());
+
+        while(Data.clientDoneFlag == 0) {}
+        Data.clientDoneFlag = 0;
+
+        String groups[] = Data.user.getGroups().split(":");
+        Log.v("groupindex", groups[0]);
+        if(groups[0].indexOf(',') < 0) { return; }
+
+        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<Integer> nameOffsets = new ArrayList<Integer>();
+        ArrayList<String> groupHeaders = new ArrayList<String>();
+
+        int offset = 0;
+        int headers = 0;
+        for(int i = 0; i < groups.length; i++) {
+            String grp[] = groups[i].split(",");
+            nameOffsets.add(offset++);
+            groupHeaders.add(grp[0]);
+            for (int j = 1; j < grp.length; j++) {
+                users.add(new User(grp[j]));
+                offset++;
+            }
+        }
+        headers = nameOffsets.size();
+
+        for(User u : users) {
+            while(u.getProfilePhoto() == null) {}
+        }
+
+        int len= users.size();
+        String[]  names    = new String[len + headers];
+        Bitmap[]  pictures = new Bitmap[len + headers];
+        boolean[] isOnline = new boolean[len + headers];
 
         //Get the intersect of users online with users not online into user friends list.  The intersect is stored in invitable friends
         Data.invitableUsers.clear();
@@ -68,19 +99,27 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
         while(Data.clientDoneFlag==0) {}
         Data.clientDoneFlag=0;
 
+        int headerTrack = 0;
         //Add necessary information to array needed for our status adapter
-        for(int i=0; i<len;i++){
-            names[i]=friends.get(i).getName();
-            pictures[i]=friends.get(i).getProfilePhoto();
-            if(Data.invitableUsers.size()!=0){
-                for(int j=0;j<Data.invitableUsers.size();j++){
-                    if(Data.invitableUsers.get(j).getID().equals(friends.get(i).getID())) {
-                        isOnline[i] = true;
+        for(int i=0; i<len + headers;i++){
+            if(headerTrack < nameOffsets.size() && i == nameOffsets.get(headerTrack)) {
+                names[i] = groupHeaders.get(headerTrack);
+                pictures[i]= null;
+                isOnline[i] = false;
+                headerTrack++;
+            } else {
+                names[i] = users.get(i-headerTrack).getName();
+                pictures[i]=users.get(i-headerTrack).getProfilePhoto();
+                if(Data.invitableUsers.size()!=0){
+                    for(int j=0;j<Data.invitableUsers.size();j++){
+                        if(Data.invitableUsers.get(j).getID().equals(users.get(i-headerTrack).getID())) {
+                            isOnline[i] = true;
+                        }
                     }
                 }
             }
         }
-        CustomListStatus adapter = new CustomListStatus(getActivity(),names,pictures,isOnline);
+        CustomListStatus adapter = new CustomListStatus(getActivity(), names, pictures, isOnline);
         friendsListView.setAdapter(adapter);
     }
 
@@ -92,6 +131,7 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
         friendsListView= (ListView)view.findViewById(R.id.friendListView);
         refreshButton = (Button)view.findViewById(R.id.refreshButton);
 
+        view.setBackgroundColor(Color.WHITE);
         refresh();
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,5 +178,4 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
     }
-
 }

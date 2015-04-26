@@ -167,13 +167,13 @@ public class DbInteract {
 	* between client and server.
 	*/
 	public static String convertToGroupString(String[] group) {
-		String str = "";
-		for(int i = 0; i < group.length-1; i++) {
-			str.concat(group[i]);
-			str.concat(":");
-		}
-		str.concat(group[group.length - 1]);
-		return str;
+        String str = "";
+        for(int i = 0; i < group.length-1; i++) {
+
+            str += group[i] + ":";
+        }
+        str += group[group.length - 1];
+        return str;
 	}
 	
 	/** convertToGroupArray

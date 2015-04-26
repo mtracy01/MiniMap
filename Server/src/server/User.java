@@ -35,6 +35,12 @@ public class User extends Thread {
 	 * The userID
 	 */
 	private String userID;
+
+    /**
+     * The list of groups
+     */
+    private String groups;
+
 	/**
 	 * The teamID
 	 */
@@ -68,6 +74,7 @@ public class User extends Thread {
 		this.server = server;
 		connected = false;
 		location = null;
+        groups = null;
 	}
 	
 	/**
@@ -248,7 +255,16 @@ public class User extends Thread {
 	public String getUserID() {
 		return userID;
 	}
-	
+
+    /**
+     * @return the list of groups
+     */
+    public String getGroups() { return groups;}
+
+    /**
+     * set the list of groups
+     */
+    public void setGroups(String groups) {this.groups = groups;}
 	/**
 	 * @return the gameSession
 	 */

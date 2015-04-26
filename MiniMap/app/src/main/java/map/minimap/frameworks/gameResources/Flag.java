@@ -1,8 +1,7 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.gameResources;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -26,14 +25,15 @@ public class Flag {
     private Team team;
     private Marker mapMarker;
 
-    //R.id.drawable.ic_flag_red/blue
-
     public Flag(LatLng location, Team team) {
         this.location = location;
         this.team = team;
     }
 
     public void show() {
+        if (mapMarker != null) {
+            mapMarker.setVisible(true);
+        }
         Bitmap flagImage;
         if (this.team.getTeamID() == 2) {
             flagImage = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_blue);
@@ -47,19 +47,24 @@ public class Flag {
 
         final Bitmap tmp = flagImage;
 
+<<<<<<< HEAD:MiniMap/app/src/main/java/map/minimap/frameworks/Flag.java
 <<<<<<< HEAD
         this.mapMarker = BitmapDescriptorFactory.fromBitmap(addBorder(doubleSized, Color.DKGRAY));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
 }
 =======
 >>>>>>> 9fc57f71801711d0c71895be83a0ba8474d0fb08
 
+=======
+>>>>>>> 68df1c1ab3d09635a66515f6f3f711b1fbcf8fbf:MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/Flag.java
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(new Runnable() {
             public void run() {
-
-                mapMarker = Data.map.addMarker(new MarkerOptions()
+                Log.v("Flag", "Showing flag");
+                if (Data.map != null) {
+                    mapMarker = Data.map.addMarker(new MarkerOptions()
                         .position(location)
                         .icon(BitmapDescriptorFactory.fromBitmap(tmp)));
+                }
             }
         });
     }
@@ -68,7 +73,10 @@ public class Flag {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(new Runnable() {
             public void run() {
-                mapMarker.remove();
+                if (mapMarker != null) {
+                    mapMarker.remove();
+                    mapMarker = null;
+                }
             }
         });
     }

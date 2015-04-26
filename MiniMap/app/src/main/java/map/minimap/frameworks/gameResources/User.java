@@ -1,4 +1,4 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.gameResources;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -24,16 +24,16 @@ public class User {
      * A User has friends[], a name, an ID, and coordinates
      */
 
-    private LatLng coordinates;
-
-
-    private String name;
-    private String ID;
+    private String ID;                //id of the user
+    private String name;             //name of the user
+    private LatLng coordinates;     //location of the user
 
     private int team;
 
     private boolean inGame;
     private Game currentGame;
+
+    private String groups;
 
     private Marker marker;  //Location object for GoogleMap
     private ArrayList<User> friends;
@@ -54,7 +54,9 @@ public class User {
         friends = null; //Needs to be specified later
         inGame = false;
         currentGame = null;
+        groups = null;
         beacons = new ArrayList<>();
+        profilePhoto = null;
 
         // Name retrieval task
         AsyncTask<String,Void,Void> nameRetriever = new AsyncTask<String, Void, Void>() {
@@ -106,6 +108,9 @@ public class User {
 
     public int getTeam(){ return team; }
     public void setTeam(int t){ team = t; }
+
+    public String getGroups() {return groups;}
+    public void setGroups(String groups) {this.groups = groups;}
 
     public boolean getInGame() { return inGame; }
     public void setInGame(boolean g) { inGame = g; }

@@ -1,4 +1,4 @@
-package map.minimap.frameworks;
+package map.minimap.frameworks.coreResources;
 
 /**
  * Created by Corey on 2/17/2015.
@@ -15,18 +15,19 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-import map.minimap.FriendFinder;
 import map.minimap.R;
-import map.minimap.frameworks.MapResources.Maps;
-import map.minimap.games.Assassins;
-import map.minimap.games.AssassinsGame;
-import map.minimap.games.CaptureTheFlag;
-import map.minimap.games.CaptureTheFlagGame;
-import map.minimap.games.FriendFinderGame;
-import map.minimap.games.Sardines;
-import map.minimap.games.SardinesGame;
+import map.minimap.frameworks.gameResources.User;
+import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.games.assassins.Assassins;
+import map.minimap.games.assassins.AssassinsGame;
+import map.minimap.games.captureTheFlag.CaptureTheFlag;
+import map.minimap.games.captureTheFlag.CaptureTheFlagGame;
+import map.minimap.games.friendFinder.FriendFinder;
+import map.minimap.games.friendFinder.FriendFinderGame;
+import map.minimap.games.sardines.Sardines;
+import map.minimap.games.sardines.SardinesGame;
 import map.minimap.helperClasses.Data;
-import map.minimap.mainActivityComponents.LobbyFragment;
+import map.minimap.mainMenuComponents.LobbyFragment;
 
 
 public class ServerConnection extends Thread {
@@ -34,10 +35,11 @@ public class ServerConnection extends Thread {
     private String LOG_TAG = "ServerConnection";
 
     public static final int SERVER_PORT = 2048;
-    public static final String SERVER_IP = "mtracy01-apollo.ninja"; //tracy94.com";
+    public static final String SERVER_IP = "mtracy01-apollo.ninja";
 
     private Socket socket;
     private String user_ID;
+
     // Input/output
     private PrintWriter out;
     private Scanner in;
@@ -47,7 +49,6 @@ public class ServerConnection extends Thread {
     private String newGameType;
 
     public ServerConnection( String ID) {
-
         connected = false;
         user_ID = ID;
     }
@@ -72,16 +73,12 @@ public class ServerConnection extends Thread {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-
             Log.e("ServerConnection", "Could not connect to server");
             closeSocket();
-            // Return
             return;
         }
-
         // We are connected
         connected = true;
-
         startHeartBeat();
 
         try {
@@ -104,7 +101,6 @@ public class ServerConnection extends Thread {
                 e.printStackTrace();
             }
         }
-
         closeSocket();
     }
 
@@ -139,31 +135,32 @@ public class ServerConnection extends Thread {
                             }
                         }
 
-
                         while(user.getName() == null) {
-                            ;
+
                         }
                         Data.players.add(user);
                         Data.lobbyUsers.add(user.getName());
                         Log.v("user", user.getName());
 
-                        Data.mainAct.runOnUiThread(new Runnable() {
-                            public void run() {
-                                //  LobbyFragment.adapter.notifyDataSetChanged();
-                                //android.support.v4.app.FragmentTransaction tr = Data.mainAct.getFragmentManager().beginTransaction();
-                                //tr.replace(R.id.content_frame, LobbyFragment.newInstance("a", "b"));
-                                //tr.commit();
-
-
-                                Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame, new LobbyFragment()).commit();
-                            }
-                        });
-
+                        if (!Data.gameStarted) {
+                            Data.mainAct.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance()).commit();
+                                }
+                            });
+                        }
                     }
                     Log.v("here", Data.lobbyUsers.get(Data.lobbyUsers.size()-1));
-
                 }
-            } else if (parts[0].equals("game")) {
+            }else if(parts[0].equals("groups")) {
+                Log.v("thing", "group has been gotten");
+                if(parts.length > 1) {
+                    Data.user.setGroups(parts[1]);
+                } else {
+                    Data.user.setGroups(null);
+                }
+                Data.clientDoneFlag = 1;
+            }else if (parts[0].equals("game")) {
                 Log.v("gameId", parts[1]);
                 Data.gameId = parts[1];
                 Data.host = true;
@@ -198,7 +195,6 @@ public class ServerConnection extends Thread {
                         Data.invitableUsers.add(user);
                 }
 
-
                 Data.clientDoneFlag = 1;
             } else if (parts[0].equals("gameStart")) {
                 Maps.setCenterPosition(Data.user);
@@ -215,6 +211,7 @@ public class ServerConnection extends Thread {
                         intent = new Intent(Data.mainAct.getApplicationContext(), Sardines.class);
                         break;
                     case "ctf":
+                        Log.v("Server connection", "Starting ctf");
                         intent = new Intent(Data.mainAct.getApplicationContext(), CaptureTheFlag.class);
                         break;
                 }
@@ -253,6 +250,11 @@ public class ServerConnection extends Thread {
             out.println("lineOfScrimmage " + coord1 +" "+coord2 +" "+coord3 +" "+coord4);
         }
     }
+    public void ctfFlags(String coord1, String coord2, String team){
+        if (connected) {
+            out.println("flag "+team+" " + coord1 +" "+coord2);
+        }
+    }
     public void acceptGameMessage(String gameID){
         if (connected) {
             out.println("accept " + gameID);
@@ -273,7 +275,6 @@ public class ServerConnection extends Thread {
             out.println("start " + Data.gameId);
         }
     }
-
 
     private void processInvite(final String gameType, final String gameID) {
         Data.mainAct.runOnUiThread(new Runnable() {
@@ -318,7 +319,7 @@ public class ServerConnection extends Thread {
                         }
                         Data.user.setInGame(true);
 
-                        Data.mainAct.getFragmentManager().beginTransaction().replace(R.id.content_frame,new LobbyFragment()).commit();
+                        Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new LobbyFragment()).commit();
 
 
                     }
@@ -406,9 +407,6 @@ public class ServerConnection extends Thread {
             System.out.println(e);
             e.printStackTrace();
         }
-
-        
-
     }
 
     /**
