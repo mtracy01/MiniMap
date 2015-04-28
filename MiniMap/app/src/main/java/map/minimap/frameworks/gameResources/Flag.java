@@ -2,6 +2,7 @@ package map.minimap.frameworks.gameResources;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -47,15 +48,9 @@ public class Flag {
 
         final Bitmap tmp = flagImage;
 
-<<<<<<< HEAD:MiniMap/app/src/main/java/map/minimap/frameworks/Flag.java
-<<<<<<< HEAD
-        this.mapMarker = BitmapDescriptorFactory.fromBitmap(addBorder(doubleSized, Color.DKGRAY));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
+        /*this.mapMarker = BitmapDescriptorFactory.fromBitmap(addBorder(doubleSized, Color.DKGRAY));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
 }
-=======
->>>>>>> 9fc57f71801711d0c71895be83a0ba8474d0fb08
 
-=======
->>>>>>> 68df1c1ab3d09635a66515f6f3f711b1fbcf8fbf:MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/Flag.java
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(new Runnable() {
             public void run() {
@@ -66,7 +61,7 @@ public class Flag {
                         .icon(BitmapDescriptorFactory.fromBitmap(tmp)));
                 }
             }
-        });
+        });*/
     }
 
     public void hide() {
