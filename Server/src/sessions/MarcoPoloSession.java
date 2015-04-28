@@ -46,15 +46,12 @@ public class MarcoPoloSession extends GameSession {
 			case "Found":
 				if (messageParts[2].equals("true"))
 				{
-					m.append("TeamChange");
+					m.append("userRemoved");
 					m.append(" " + user.getUserID());
-					m.append(" " + teams.get(0).getTeamID());
 					teams.get(1).sendMessage(m.toString());
 					teams.get(0).sendMessage(m.toString());
+					removeUser(user);
 					
-					User temp = server.getUserByID(messageParts[1]);
-					teams.get(1).removeUser(temp);
-					teams.get(0).addUser(temp);
 				} else {
 					potentialFinds.remove(user);
 				}
