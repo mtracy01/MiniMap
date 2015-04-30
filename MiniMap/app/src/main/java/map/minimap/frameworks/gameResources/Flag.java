@@ -2,7 +2,6 @@ package map.minimap.frameworks.gameResources;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -19,8 +18,6 @@ import map.minimap.helperClasses.Data;
  * Created by nickiogg on 4/18/15.
  */
 public class Flag {
-
-    private final float[] TEAM_COLORS = { BitmapDescriptorFactory.HUE_GREEN, BitmapDescriptorFactory.HUE_GREEN, BitmapDescriptorFactory.HUE_BLUE, BitmapDescriptorFactory.HUE_RED, BitmapDescriptorFactory.HUE_YELLOW, BitmapDescriptorFactory.HUE_GREEN };
 
     private LatLng location;
     private Team team;
@@ -48,20 +45,17 @@ public class Flag {
 
         final Bitmap tmp = flagImage;
 
-        /*this.mapMarker = BitmapDescriptorFactory.fromBitmap(addBorder(doubleSized, Color.DKGRAY));//.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))));
-}
-
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(new Runnable() {
             public void run() {
                 Log.v("Flag", "Showing flag");
                 if (Data.map != null) {
                     mapMarker = Data.map.addMarker(new MarkerOptions()
-                        .position(location)
-                        .icon(BitmapDescriptorFactory.fromBitmap(tmp)));
+                            .position(location)
+                            .icon(BitmapDescriptorFactory.fromBitmap(tmp)));
                 }
             }
-        });*/
+        });
     }
 
     public void hide() {
@@ -95,3 +89,4 @@ public class Flag {
 
 
 }
+
