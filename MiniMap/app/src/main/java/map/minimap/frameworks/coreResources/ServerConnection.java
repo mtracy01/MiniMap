@@ -62,7 +62,7 @@ public class ServerConnection extends Thread {
             // Create a new PrintWriter with auto flush on
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new Scanner(socket.getInputStream());
-            out.println("id "+ user_ID);
+            out.println("id "+ IDCipher.toCipher(user_ID));
         } catch (IOException e) {
             // Something went wrong
             System.out.println(e);

@@ -7,18 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7df006a2-2858-4b30-a24f-ba372bc2a7a7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/assassins/Assassins.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/assassins/Assassins.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/captureTheFlag/CaptureTheFlag.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/captureTheFlag/CaptureTheFlag.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/friendFinder/FriendFinder.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/friendFinder/FriendFinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/LobbyFragment.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/LobbyFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/marcoPolo/MarcoPoloGame.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/marcoPolo/MarcoPoloGame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/src/server/MessageHandler.java" afterPath="$PROJECT_DIR$/Server/src/server/MessageHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/Sardines.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/Sardines.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/SardinesGame.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/SardinesGame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MiniMap.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,8 +33,8 @@
       <file leaf-file-name="ServerConnection.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="5.766082" vertical-offset="0" max-vertical-offset="7208">
-              <caret line="290" column="37" selection-start-line="290" selection-start-column="37" selection-end-line="290" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.39298245" vertical-offset="752" max-vertical-offset="7208">
+              <caret line="64" column="57" selection-start-line="64" selection-start-column="57" selection-end-line="64" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,10 +42,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="User.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.428572" vertical-offset="446" max-vertical-offset="2431">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="IDCipher.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/IDCipher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="1139">
+            <state vertical-scroll-proportion="0.0" vertical-offset="243" max-vertical-offset="1139">
               <caret line="52" column="44" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
               <folding />
             </state>
@@ -95,8 +94,8 @@
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/friendFinder/FriendFinder.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/Sardines.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/marcoPolo/MarcoPoloGame.java" />
-        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/IDCipher.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" />
       </list>
     </option>
   </component>
@@ -515,14 +514,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="1466" max-vertical-offset="2431">
-          <caret line="112" column="25" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomListInvite.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7315968" vertical-offset="0" max-vertical-offset="883">
@@ -603,10 +594,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.428572" vertical-offset="446" max-vertical-offset="2431">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.766082" vertical-offset="0" max-vertical-offset="7208">
-          <caret line="290" column="37" selection-start-line="290" selection-start-column="37" selection-end-line="290" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.39298245" vertical-offset="752" max-vertical-offset="7208">
+          <caret line="64" column="57" selection-start-line="64" selection-start-column="57" selection-end-line="64" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
