@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import map.minimap.R;
 import map.minimap.frameworks.customUIResources.CustomListStatus;
 import map.minimap.frameworks.gameResources.User;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.helperClasses.Data;
 
 
@@ -58,7 +59,7 @@ public class DisplayGroups extends  android.support.v4.app.Fragment {
     }
     public void refresh(){
         //Set up arrays for inserting into custom adapter
-        Data.client.sendMessage("getGroupsByID " + Data.user.getID());
+        Data.client.sendMessage("getGroupsByID " + IDCipher.toCipher(Data.user.getID()));
 
         while(Data.clientDoneFlag == 0) {}
         Data.clientDoneFlag = 0;

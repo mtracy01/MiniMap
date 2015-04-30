@@ -25,6 +25,7 @@ import com.facebook.share.widget.AppInviteDialog;
 import java.util.ArrayList;
 
 import map.minimap.R;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.frameworks.customUIResources.CustomListInvite;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
@@ -106,7 +107,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                             builder.append("Group");
                             for (User u : friends) {
                                 builder.append(',');
-                                builder.append(u.getID());
+                                builder.append(IDCipher.toCipher(u.getID()));
                             }
                             Data.client.sendMessage(builder.toString());
                             dialog.dismiss();
@@ -158,7 +159,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                     //this one.
 
                     //Log.v("groups", Data.user.getGroups());
-                    Data.client.sendMessage("getGroupsByID " + Data.user.getID());
+                    Data.client.sendMessage("getGroupsByID " + IDCipher.toCipher(Data.user.getID()));
 
                     while(Data.clientDoneFlag == 0) {}
                     Data.clientDoneFlag = 0;

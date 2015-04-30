@@ -17,6 +17,7 @@ import map.minimap.frameworks.gameResources.Beacon;
 import map.minimap.frameworks.gameResources.Game;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.helperClasses.Data;
 
 //TODO: Specifics of Sardines
@@ -86,12 +87,12 @@ public class MarcoPoloGame extends Game {
                     //builder.setMessage("Confirm Kill?");
                     builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Data.client.sendMessage("Found " + targetUser.getID() + " true");
+                            Data.client.sendMessage("Found " + IDCipher.toCipher(targetUser.getID()) + " true");
                         }
                     });
                     builder.setNegativeButton("Reject", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Data.client.sendMessage("Found " + targetUser.getID() + " false");
+                            Data.client.sendMessage("Found " + IDCipher.toCipher(targetUser.getID()) + " false");
                         }
                     });
                     // Create the AlertDialog

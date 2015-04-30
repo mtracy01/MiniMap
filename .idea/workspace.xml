@@ -7,7 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7df006a2-2858-4b30-a24f-ba372bc2a7a7" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/assassins/Assassins.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/assassins/Assassins.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/captureTheFlag/CaptureTheFlag.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/captureTheFlag/CaptureTheFlag.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/friendFinder/FriendFinder.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/friendFinder/FriendFinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/LobbyFragment.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/LobbyFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/marcoPolo/MarcoPoloGame.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/marcoPolo/MarcoPoloGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Server/src/server/MessageHandler.java" afterPath="$PROJECT_DIR$/Server/src/server/MessageHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/Sardines.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/Sardines.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/SardinesGame.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/SardinesGame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" afterPath="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -32,62 +41,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MessageHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.642858" vertical-offset="1602" max-vertical-offset="3723">
-              <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DisplayGroups.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.0" vertical-offset="663" max-vertical-offset="3366">
-              <caret line="69" column="32" selection-start-line="66" selection-start-column="8" selection-end-line="69" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CustomListInvite.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomListInvite.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
-              <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerConnection.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ServerConnection.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.464285" vertical-offset="1789" max-vertical-offset="6749">
-              <caret line="157" column="46" selection-start-line="157" selection-start-column="46" selection-end-line="157" selection-end-column="46" />
-              <folding />
+            <state vertical-scroll-proportion="5.766082" vertical-offset="0" max-vertical-offset="7208">
+              <caret line="290" column="37" selection-start-line="290" selection-start-column="37" selection-end-line="290" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroupsFragment.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java">
+      <file leaf-file-name="IDCipher.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/IDCipher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334" vertical-offset="3115" max-vertical-offset="4352">
-              <caret line="200" column="75" selection-start-line="200" selection-start-column="75" selection-end-line="200" selection-end-column="75" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#6043#6044#0" expanded="true" />
-                <element signature="e#6114#6115#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="1139">
+              <caret line="52" column="44" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,13 +81,22 @@
         <option value="$PROJECT_DIR$/Server/src/server/User.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainActivityComponents/DisplayGroups.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/MainMenu.java" />
-        <option value="$PROJECT_DIR$/Server/src/server/MessageHandler.java" />
         <option value="$PROJECT_DIR$/Server/src/database/DbInteract.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java" />
-        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomListGroupAdd" />
-        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" />
+        <option value="$PROJECT_DIR$/Server/src/server/MessageHandler.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/IDCipher" />
         <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/SardinesGame.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/assassins/Assassins.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/LobbyFragment.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/captureTheFlag/CaptureTheFlag.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/friendFinder/FriendFinder.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/Sardines.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/marcoPolo/MarcoPoloGame.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java" />
+        <option value="$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/IDCipher.java" />
       </list>
     </option>
   </component>
@@ -138,7 +118,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -150,198 +130,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiniMap" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiniMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiniMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiniMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiniMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiniMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="map" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="games" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minimap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MiniMap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -355,6 +143,10 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="recentsLimit" value="5" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
+    <property name="options.lastSelected" value="editor.preferences.import" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -568,11 +360,56 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1602" max-vertical-offset="3723">
+          <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1173" max-vertical-offset="3434">
+          <caret line="69" column="32" selection-start-line="66" selection-start-column="8" selection-end-line="69" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomListInvite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="833" max-vertical-offset="1020">
+          <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2703" max-vertical-offset="7276">
+          <caret line="159" column="46" selection-start-line="159" selection-start-column="46" selection-end-line="159" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3115" max-vertical-offset="4352">
+          <caret line="200" column="75" selection-start-line="200" selection-start-column="75" selection-end-line="200" selection-end-column="75" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/server/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2159" max-vertical-offset="6375">
           <caret line="127" column="8" selection-start-line="127" selection-start-column="8" selection-end-line="127" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -580,7 +417,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="3383">
           <caret line="27" column="60" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -588,7 +424,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2516">
           <caret line="110" column="40" selection-start-line="110" selection-start-column="40" selection-end-line="110" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -596,7 +431,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.050223213" vertical-offset="3797" max-vertical-offset="6035">
           <caret line="234" column="8" selection-start-line="234" selection-start-column="8" selection-end-line="234" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -612,17 +446,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5934315" vertical-offset="139" max-vertical-offset="4080">
           <caret line="39" column="218" selection-start-line="39" selection-start-column="218" selection-end-line="39" selection-end-column="218" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#3111#3112#0" expanded="false" />
-            <element signature="e#3170#3171#0" expanded="false" />
-            <element signature="e#5859#5860#0" expanded="false" />
-            <element signature="e#5923#5924#0" expanded="false" />
-            <element signature="e#9507#9508#0" expanded="false" />
-            <element signature="e#9572#9573#0" expanded="false" />
-            <element signature="e#9788#9789#0" expanded="false" />
-            <element signature="e#9830#9831#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -630,9 +453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.80860704" vertical-offset="0" max-vertical-offset="883">
           <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -651,17 +471,6 @@
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4631579" vertical-offset="590" max-vertical-offset="2584">
-          <caret line="58" column="28" selection-start-line="58" selection-start-column="28" selection-end-line="58" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -669,7 +478,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7315968" vertical-offset="2193" max-vertical-offset="3383">
           <caret line="175" column="19" selection-start-line="175" selection-start-column="19" selection-end-line="175" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -677,7 +485,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -685,58 +492,123 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44327486" vertical-offset="165" max-vertical-offset="1020">
           <caret line="32" column="66" selection-start-line="32" selection-start-column="60" selection-end-line="32" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84597963" vertical-offset="2874" max-vertical-offset="3757">
+          <caret line="213" column="0" selection-start-line="213" selection-start-column="0" selection-end-line="213" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/server/MessageHandler.java">
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.642858" vertical-offset="1602" max-vertical-offset="3723">
-          <caret line="120" column="63" selection-start-line="120" selection-start-column="63" selection-end-line="120" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.34385964" vertical-offset="2409" max-vertical-offset="3808">
+          <caret line="161" column="80" selection-start-line="161" selection-start-column="63" selection-end-line="161" selection-end-column="80" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java">
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/gameResources/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.0" vertical-offset="663" max-vertical-offset="3366">
-          <caret line="69" column="32" selection-start-line="66" selection-start-column="8" selection-end-line="69" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="1466" max-vertical-offset="2431">
+          <caret line="112" column="25" selection-start-line="112" selection-start-column="16" selection-end-line="112" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/customUIResources/CustomListInvite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1020">
+        <state vertical-scroll-proportion="0.7315968" vertical-offset="0" max-vertical-offset="883">
           <caret line="49" column="40" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/SardinesGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37777779" vertical-offset="0" max-vertical-offset="3553">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/assassins/Assassins.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37777779" vertical-offset="0" max-vertical-offset="1836">
+          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/LobbyFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49707603" vertical-offset="0" max-vertical-offset="3349">
+          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/DisplayGroups.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39766082" vertical-offset="0" max-vertical-offset="3128">
+          <caret line="20" column="53" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/captureTheFlag/CaptureTheFlag.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.75" vertical-offset="0" max-vertical-offset="2210">
+          <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/friendFinder/FriendFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41754386" vertical-offset="0" max-vertical-offset="2244">
+          <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/sardines/Sardines.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37777779" vertical-offset="0" max-vertical-offset="1836">
+          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/games/marcoPolo/MarcoPoloGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3653846" vertical-offset="0" max-vertical-offset="3213">
+          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/IDCipher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="175" max-vertical-offset="1139">
+          <caret line="52" column="44" selection-start-line="52" selection-start-column="44" selection-end-line="52" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/frameworks/coreResources/ServerConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.464285" vertical-offset="1789" max-vertical-offset="6749">
-          <caret line="157" column="46" selection-start-line="157" selection-start-column="46" selection-end-line="157" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MiniMap/app/src/main/java/map/minimap/mainMenuComponents/GroupsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="3115" max-vertical-offset="4352">
-          <caret line="200" column="75" selection-start-line="200" selection-start-column="75" selection-end-line="200" selection-end-column="75" />
+        <state vertical-scroll-proportion="5.766082" vertical-offset="0" max-vertical-offset="7208">
+          <caret line="290" column="37" selection-start-line="290" selection-start-column="37" selection-end-line="290" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6043#6044#0" expanded="true" />
-            <element signature="e#6114#6115#0" expanded="true" />
           </folding>
         </state>
       </provider>

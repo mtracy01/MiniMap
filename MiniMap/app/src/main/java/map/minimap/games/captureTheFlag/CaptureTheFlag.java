@@ -19,6 +19,7 @@ import map.minimap.R;
 import map.minimap.frameworks.gameResources.Game;
 import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.mapResources.SyncedMapFragment;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.helperClasses.Data;
 
 public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallback{
@@ -89,7 +90,7 @@ public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallb
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         CaptureTheFlag.super.onBackPressed();
-                        Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
+                        Data.client.sendMessage("remove " + Data.gameId + " " + IDCipher.toCipher(Data.user.getID()));
                         Data.gameStarted = false;
                         startActivity(new Intent(CaptureTheFlag.this, MainMenu.class));
                     }

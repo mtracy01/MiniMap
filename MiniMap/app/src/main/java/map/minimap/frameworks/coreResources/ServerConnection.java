@@ -12,12 +12,14 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.StringBuilder;
 import java.net.Socket;
 import java.util.Scanner;
 
 import map.minimap.R;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.frameworks.mapResources.Maps;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.games.assassins.Assassins;
 import map.minimap.games.assassins.AssassinsGame;
 import map.minimap.games.captureTheFlag.CaptureTheFlag;
@@ -121,12 +123,12 @@ public class ServerConnection extends Thread {
 
                 for (int i = 2; i < parts.length; i++) {
                     // Add the existing user if it is us, otherwise create a new one
-                    if (Data.user.getID().equals(parts[i])) {
+                    if (Data.user.getID().equals(IDCipher.unCipher(parts[i]))) {
                         Data.players.add(Data.user);
                     } else {
-                        User user = Data.user.findUserById(parts[i]);
+                        User user = Data.user.findUserById(IDCipher.unCipher(parts[i]));
                         if (user == null) {
-                            user = new User(parts[i]);
+                            user = new User(IDCipher.unCipher(parts[i]));
                             //TODO: we need to add name here, but don't have the name from server yet***
                             try {
                                 Thread.sleep(200);
@@ -155,7 +157,7 @@ public class ServerConnection extends Thread {
             }else if(parts[0].equals("groups")) {
                 Log.v("thing", "group has been gotten");
                 if(parts.length > 1) {
-                    Data.user.setGroups(parts[1]);
+                    Data.user.setGroups(IDCipher.unCipherGroups(parts[1]));
                 } else {
                     Data.user.setGroups(null);
                 }
@@ -190,7 +192,7 @@ public class ServerConnection extends Thread {
             } else if (parts[0].equals("users")) {
                 for (int i = 1; i < parts.length; i++) {
                     //If the user is in our friends list, add them to the invitable users list
-                    User user = Data.user.findUserById(parts[i]);
+                    User user = Data.user.findUserById(IDCipher.unCipher(parts[i]));
                     if (user != null && user.getID() != Data.user.getID())
                         Data.invitableUsers.add(user);
                 }

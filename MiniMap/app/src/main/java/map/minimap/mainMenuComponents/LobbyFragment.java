@@ -23,6 +23,7 @@ import map.minimap.R;
 import map.minimap.frameworks.customUIResources.CustomList;
 import map.minimap.frameworks.customUIResources.CustomListInvite;
 import map.minimap.frameworks.gameResources.User;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.helperClasses.Data;
 
 /**
@@ -117,7 +118,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
                             builder.append(Data.gameId);
                             for (User u : Data.selectedUsers) {
                                 builder.append(' ');
-                                builder.append(u.getID());
+                                builder.append(IDCipher.toCipher(u.getID()));
                             }
                             Data.client.sendMessage(builder.toString());
                             dialog.dismiss();
