@@ -1,12 +1,12 @@
 package server;
 
-import java.lang.StringBuilder;
 import java.util.logging.Logger;
 
 import sessions.AssassinsSession;
 import sessions.CTFSession;
 import sessions.FriendFinderSession;
 import sessions.GameSession;
+import sessions.MarcoPoloSession;
 import sessions.SardinesSession;
 import database.DbInteract;
 
@@ -166,6 +166,7 @@ public class MessageHandler {
 				gameSession = new CTFSession(user, server);
 				break;
 			case "marcoPolo":
+				gameSession = new MarcoPoloSession(user, server);
 				break;
 			case "sardines":
 				gameSession = new SardinesSession(user, server);
@@ -202,7 +203,7 @@ public class MessageHandler {
 			return "friendFinder";
 		} else if (session instanceof CTFSession) {
 			return "ctf";
-		} else if (session instanceof FriendFinderSession) {
+		} else if (session instanceof MarcoPoloSession) {
 			return "marcoPolo";
 		} else if (session instanceof SardinesSession) {
 			return "sardines";
