@@ -1,6 +1,7 @@
 package map.minimap.frameworks.coreResources;
 
 import java.lang.StringBuilder;
+import android.util.Log;
 
 public class IDCipher {
 
@@ -25,12 +26,16 @@ public class IDCipher {
     public static String unCipher(String id) {
         StringBuilder build = new StringBuilder(21);
         char character = 0;
+        int rawValue = 0;
         int newValue = 0;
+
         for(int i = 0; i < id.length(); i++) {
             character = id.charAt(i);
-            newValue = ((Character.getNumericValue(character) - i) - 4) % 10;
+            rawValue = Character.getNumericValue(character) - 4 - i;
+            newValue = rawValue >= 0 ? (rawValue) % 10 : (rawValue + 50) % 10;
             build.append(newValue);
         }
+        Log.v("Unencrypt: ", (build.toString()));
         return build.toString();
     }
 
@@ -38,6 +43,7 @@ public class IDCipher {
         StringBuilder build = new StringBuilder();
         char character = 0;
         int newValue = 0;
+        int rawValue = 0;
         String [] groupArray = groups.split(":");
         int j = 0;
         int groupNameEnd = 0;
@@ -51,7 +57,8 @@ public class IDCipher {
                     build.append(',');
                 } else {
                     character = group.charAt(i);
-                    newValue = ((Character.getNumericValue(character) - j) - 4) % 10;
+                    rawValue = Character.getNumericValue(character) - 4 - j;
+                    newValue = rawValue >= 0 ? (rawValue) % 10 : (rawValue + 50) % 10;
                     build.append(newValue);
                     j++;
                 }
