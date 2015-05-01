@@ -39,12 +39,8 @@ public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
             items.add(new android.view.ext.SatelliteMenuItem(5, R.drawable.sat_item));
         }
 
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
         items.add(new android.view.ext.SatelliteMenuItem(3,R.drawable.sat_item));
         items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
         menu.addItems(items);
 
         menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
