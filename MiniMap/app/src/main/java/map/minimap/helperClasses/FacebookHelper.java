@@ -40,9 +40,14 @@ public class FacebookHelper {
         loginManager.logOut();
 
         //Destroy GPS thread and client (if they exist)
-        if(Data.gps!=null)      Data.gps.destroyListener();
-        if(Data.client!=null)   Data.client.closeSocket();
-        Data.client = null;
+        if(Data.gps!=null) {
+            Data.gps.destroyListener();
+            Data.gps=null;
+        }
+        if(Data.client!=null) {
+            Data.client.closeSocket();
+            Data.client = null;
+        }
         Toast.makeText(Data.mainAct.getApplicationContext(), "Logout", Toast.LENGTH_SHORT).show();
     }
 
