@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import map.minimap.MainMenu;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.frameworks.gameResources.Game;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.frameworks.mapResources.LatLngInterpolator;
@@ -35,7 +36,7 @@ public class AssassinsGame extends Game {
         Log.v("Assassins Game", message); //I just changed this to Sardines...
         final String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
-            User u = findUserbyId(parts[1], Data.players);
+            User u = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
             if (u == null) {
                 return;
             }
@@ -78,7 +79,7 @@ public class AssassinsGame extends Game {
         } else if (parts[0].equals("removebeacon")) {
 
         } else if (parts[0].equals("target")) {
-            User u = findUserbyId(parts[1], Data.players);
+            User u = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
             if (u == null) {
                 return;
             }
@@ -90,7 +91,7 @@ public class AssassinsGame extends Game {
             mainHandler.post(new Runnable() {
                 public void run() {
                     Log.v("Assassins Game", "Running on ui thread");
-                    User assassin = findUserbyId(parts[1], Data.players);
+                    User assassin = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
                     builder.setMessage("Confirm death from " + assassin.getName() + "?");
@@ -120,7 +121,7 @@ public class AssassinsGame extends Game {
             mainHandler.post(new Runnable() {
                 public void run() {
                     Log.v("Assassins Game", "Running on ui thread");
-                    User targetUser = findUserbyId(parts[1], Data.players);
+                    User targetUser = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
                     builder.setMessage("Confirm kill of " + targetUser.getName() + "?");
@@ -170,7 +171,7 @@ public class AssassinsGame extends Game {
                 });
                 Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             } else {
-                final User removedUser = findUserbyId(parts[1], Data.players);
+                final User removedUser = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
                         Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), removedUser.getName() + " has left the game.", Toast.LENGTH_SHORT);

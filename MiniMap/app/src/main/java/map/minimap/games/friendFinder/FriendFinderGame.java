@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 import map.minimap.MainMenu;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.frameworks.gameResources.Beacon;
 import map.minimap.frameworks.gameResources.Game;
 import map.minimap.frameworks.gameResources.User;
@@ -32,7 +33,7 @@ public class FriendFinderGame extends Game {
 		Log.v("Friend Finder Game", message);
 		String[] parts = message.split(" ");
 		if (parts[0].equals("location")) {
-            User u = findUserbyId(parts[1], Data.players);
+            User u = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
             if (u == null) {
             	return;
             }
@@ -98,7 +99,7 @@ public class FriendFinderGame extends Game {
                 });
                 Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             } else {
-                final User removedUser = findUserbyId(parts[1], Data.players);
+                final User removedUser = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
                     Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), removedUser.getName() + " has left the game.", Toast.LENGTH_SHORT);

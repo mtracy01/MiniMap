@@ -43,8 +43,6 @@ public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallb
         android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) findViewById(R.id.menu);
         java.util.List<android.view.ext.SatelliteMenuItem> items = new java.util.ArrayList<>();
         if (Data.user.getGame().isBeaconsEnabled()) {
-            // TODO: Need to include the following in the google play store listing:
-            // App icons by <a href="http://icons4android.com">Icons4Android</a>.
             items.add(new android.view.ext.SatelliteMenuItem(REMOVE_BEACON_MENU_ID, R.drawable.sat_remove_beacon));
             items.add(new android.view.ext.SatelliteMenuItem(ADD_BEACON_MENU_ID, R.drawable.sat_add_beacon));
             items.add(new android.view.ext.SatelliteMenuItem(NOTHING_BEACON_MENU_ID, R.drawable.sat_map));

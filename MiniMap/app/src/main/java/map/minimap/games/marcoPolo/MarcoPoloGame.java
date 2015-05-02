@@ -30,7 +30,7 @@ public class MarcoPoloGame extends Game {
         Log.v("Sardines Game", message);
         String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
-            User user = findUserbyId(parts[1], Data.players);
+            User user = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
             if (user == null) {
                 return;
             }
@@ -113,7 +113,7 @@ public class MarcoPoloGame extends Game {
                 });
                 Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
             } else {
-                final User removedUser = findUserbyId(parts[1], Data.players);
+                final User removedUser = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
                     Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), removedUser.getName() + " has left the game.", Toast.LENGTH_SHORT);

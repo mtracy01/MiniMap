@@ -54,7 +54,6 @@ public class LoginActivity extends FragmentActivity {
             ParseFacebookUtils.initialize(this);
             Data.initialized=1;
         }
-
         setContentView(R.layout.activity_login);
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
@@ -112,7 +111,8 @@ public class LoginActivity extends FragmentActivity {
                                     Log.v(LOG_TAG, "Client is not NULL, proceeding to login");
                                     FacebookHelper.getFriendsList();
                                     Data.loggedInFlag=1;
-                                    Data.gps = new GPSThread(Data.client);
+                                    //for(int i=0;i<90000000;i++){;}
+                                    //Data.gps = new GPSThread(Data.client);
                                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                                     startActivity(intent);
                                     overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);

@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 
 import map.minimap.MainMenu;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.frameworks.gameResources.Beacon;
 import map.minimap.frameworks.gameResources.Flag;
 import map.minimap.frameworks.gameResources.Game;
@@ -51,7 +52,7 @@ public class CaptureTheFlagGame extends Game {
         Log.v("CTF Game", message); //I just changed this to Sardines...
         final String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
-            User user = findUserbyId(parts[1], Data.players);
+            User user = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
             if (user == null) {
                 return;
             }
@@ -158,7 +159,7 @@ public class CaptureTheFlagGame extends Game {
             mainHandler.post(new Runnable() {
                 public void run() {
                     Log.v("CTF Game", "Running on ui thread");
-                    User targetUser = findUserbyId(parts[1], Data.players);
+                    User targetUser = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
                     AlertDialog.Builder builder = new AlertDialog.Builder(Data.gameActivity);
                     // Add the buttons
                     builder.setMessage("Confirm tag of " + targetUser.getName() + "?");
@@ -212,7 +213,7 @@ public class CaptureTheFlagGame extends Game {
                 });
                 Data.gameActivity.startActivity(new Intent(Data.gameActivity, MainMenu.class));
             } else {
-                final User removedUser = findUserbyId(parts[1], Data.players);
+                final User removedUser = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
                         Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), removedUser.getName() + " has left the game.", Toast.LENGTH_SHORT);
@@ -233,13 +234,13 @@ public class CaptureTheFlagGame extends Game {
             } else {
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
-                        String name = findUserbyId(parts[1], Data.players).getName();
+                        String name = findUserbyId(IDCipher.unCipher(parts[1]), Data.players).getName();
                         Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(),  name + " has picked up the flag.", Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 });
             }
-            User flagCarrier = findUserbyId(parts[1], Data.players);
+            User flagCarrier = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
             int otherTeam = (flagCarrier.getTeam() == 2) ? 3 : 2;
             if (otherTeam == 2) {
                 blueFlag.hide();
@@ -260,13 +261,13 @@ public class CaptureTheFlagGame extends Game {
             } else {
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
-                        String name = findUserbyId(parts[1], Data.players).getName();
+                        String name = findUserbyId(IDCipher.unCipher(parts[1]), Data.players).getName();
                         Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(),  name + " has returned the flag.", Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 });
             }
-            User flagCarrier = findUserbyId(parts[1], Data.players);
+            User flagCarrier = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
             int otherTeam = (flagCarrier.getTeam() == 2) ? 3 : 2;
             if (otherTeam == 2) {
                 blueFlag.show();
@@ -289,7 +290,7 @@ public class CaptureTheFlagGame extends Game {
             } else {
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
-                        String name = findUserbyId(parts[1], Data.players).getName();
+                        String name = findUserbyId(IDCipher.unCipher(parts[1]), Data.players).getName();
                         Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(),  name + " has captured the flag.", Toast.LENGTH_SHORT);
                         toast.show();
                     }
