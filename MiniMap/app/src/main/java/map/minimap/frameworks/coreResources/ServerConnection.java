@@ -12,14 +12,12 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.StringBuilder;
 import java.net.Socket;
 import java.util.Scanner;
 
 import map.minimap.R;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.frameworks.mapResources.Maps;
-import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.games.assassins.Assassins;
 import map.minimap.games.assassins.AssassinsGame;
 import map.minimap.games.captureTheFlag.CaptureTheFlag;

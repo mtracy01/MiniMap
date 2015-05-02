@@ -15,9 +15,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 
 import map.minimap.MainMenu;
 import map.minimap.R;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.mapResources.SyncedMapFragment;
-import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.helperClasses.Data;
 
 //import com.parse.Parse;

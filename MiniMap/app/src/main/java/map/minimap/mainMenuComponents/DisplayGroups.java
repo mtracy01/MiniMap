@@ -16,9 +16,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import map.minimap.R;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.frameworks.customUIResources.CustomListStatus;
 import map.minimap.frameworks.gameResources.User;
-import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.helperClasses.Data;
 
 

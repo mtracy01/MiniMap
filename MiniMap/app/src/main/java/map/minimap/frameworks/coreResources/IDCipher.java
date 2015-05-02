@@ -1,6 +1,5 @@
 package map.minimap.frameworks.coreResources;
 
-import java.lang.StringBuilder;
 import android.util.Log;
 
 public class IDCipher {

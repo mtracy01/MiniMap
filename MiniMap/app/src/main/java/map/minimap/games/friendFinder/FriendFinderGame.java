@@ -29,7 +29,6 @@ public class FriendFinderGame extends Game {
 
 	@Override
 	public void handleMessage(String message) {
-		// TODO Auto-generated method stub
 		Log.v("Friend Finder Game", message);
 		String[] parts = message.split(" ");
 		if (parts[0].equals("location")) {
@@ -120,7 +119,6 @@ public class FriendFinderGame extends Game {
             }
         }
         return null;
-
     }
 	
 	@Override
@@ -150,9 +148,7 @@ public class FriendFinderGame extends Game {
 
 	@Override
 	/* mid-game */
-	public void addUser(User user, int teamid) {
-		// TODO Auto-generated method stub
-	}
+	public void addUser(User user, int teamid) {}
 
 	/**
 	 * teamID should always be 0 in FriendFinder
@@ -162,7 +158,6 @@ public class FriendFinderGame extends Game {
 	public void addBeacon(int beaconID, LatLng loc) {
 		// Add a beacon
         Data.user.addBeacon(new Beacon(loc, beaconID, Data.user.getTeam()));
-        
 	}
 
 	/**
@@ -173,9 +168,4 @@ public class FriendFinderGame extends Game {
         Log.v("Friend Finder Game", "Removing beacon with id: " + id);
         Data.user.removeBeaconByID(id);
 	}
-	
-	
-	
-	
-	
 }
