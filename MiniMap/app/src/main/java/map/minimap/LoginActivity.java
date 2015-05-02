@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import map.minimap.frameworks.coreResources.GPSThread;
 import map.minimap.frameworks.coreResources.ServerConnection;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
@@ -111,8 +112,9 @@ public class LoginActivity extends FragmentActivity {
                                     Log.v(LOG_TAG, "Client is not NULL, proceeding to login");
                                     FacebookHelper.getFriendsList();
                                     Data.loggedInFlag=1;
-                                   Intent intent = new Intent(LoginActivity.this, MainMenu.class);
-                                   startActivity(intent);
+                                    Data.gps = new GPSThread(Data.client);
+                                    Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+                                    startActivity(intent);
                                     overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
                                 }
                                 //We did not communicate successfully, log back out of facebook
