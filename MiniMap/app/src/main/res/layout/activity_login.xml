@@ -14,7 +14,7 @@
         android:layout_marginTop="40dp"
         android:scaleType="fitCenter"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/minimaplogo"/>
+        android:src="@drawable/loginlogo"/>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
