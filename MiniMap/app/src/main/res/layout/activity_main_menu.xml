@@ -33,7 +33,8 @@
             android:layout_width="match_parent"
             android:textAlignment="center"
             android:minHeight="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"/>
+            android:background="#F7F7F7"/>
+            <!--android:background="?attr/colorPrimary"-->
 
     </io.codetail.widget.RevealFrameLayout>
 
@@ -54,11 +55,6 @@
             android:divider="@android:color/transparent"
             android:dividerHeight="0dp"
             android:background="@android:color/transparent">
-            <!-- Layout of Drawer -->
-            <!--<fragment android:id="@+id/navigation_drawer"
-                android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
-                android:layout_gravity="start" android:name="map.minimap.mainActivityComponents.NavigationDrawerFragment"
-                tools:layout="@layout/fragment_navigation_drawer" />-->
         </LinearLayout>
     </ScrollView>
 </android.support.v4.widget.DrawerLayout>

@@ -154,8 +154,8 @@ public class MainMenu extends ActionBarActivity
         list.add(menuItem0);
         SlideMenuItem menuItem = new SlideMenuItem(ContentFragment.GAMES, R.drawable.ic_action_gamepad);
         list.add(menuItem);
-        SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.GROUPS, R.drawable.ic_action_group);
-        list.add(menuItem2);
+        //SlideMenuItem menuItem2 = new SlideMenuItem(ContentFragment.GROUPS, R.drawable.ic_action_group);
+        //list.add(menuItem2);
         SlideMenuItem menuItem3 = new SlideMenuItem(ContentFragment.FRIENDS, R.drawable.ic_action_person);
         list.add(menuItem3);
         SlideMenuItem menuItem4 = new SlideMenuItem(ContentFragment.SETTINGS, R.drawable.ic_action_settings);
