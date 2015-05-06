@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import map.minimap.R;
+import map.minimap.frameworks.customUIResources.CustomListSettings;
 
 
 /**
@@ -27,20 +29,25 @@ public class SettingsFragment extends android.support.v4.app.Fragment{
         return fragment;
     }
 
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
+    public SettingsFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View v = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        ListView listView = (ListView) v.findViewById(R.id.listView);
+        String[] settingOptions = {"Toggle Wifi"};
+        CustomListSettings adapter = new CustomListSettings(getActivity(),settingOptions);
+        listView.setAdapter(adapter);
+        return v;
     }
 
     public void onButtonPressed(Uri uri) {
