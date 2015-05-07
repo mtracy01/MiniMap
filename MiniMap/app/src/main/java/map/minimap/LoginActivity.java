@@ -47,12 +47,12 @@ public class LoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
          //Enable Local Datastore.
-        if(Data.initialized!=1) {
+        /*(Data.initialized!=1) {
             Parse.enableLocalDatastore(this);
             Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
             ParseFacebookUtils.initialize(this);
             Data.initialized=1;
-        }
+        }*/
         setContentView(R.layout.activity_login);
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
@@ -110,13 +110,11 @@ public class LoginActivity extends FragmentActivity {
                                     Log.v(LOG_TAG, "Client is not NULL, proceeding to login");
                                     FacebookHelper.getFriendsList();
                                     Data.loggedInFlag=1;
-                                    //for(int i=0;i<90000000;i++){;}
-                                    //Data.gps = new GPSThread(Data.client);
                                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                                     startActivity(intent);
                                     overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
                                 }
-                                //We did not communicate successfully, log back out of facebook
+                                //We did not communicate successfully, logout of facebook
                                 else {
                                     //Display error
                                     Log.e(LOG_TAG, "Unable to connect to our server, aborting login");
