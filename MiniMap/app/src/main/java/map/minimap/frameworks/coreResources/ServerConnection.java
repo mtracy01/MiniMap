@@ -96,7 +96,7 @@ public class ServerConnection extends Thread {
                     e.printStackTrace();
                 }
             }
-            Log.i(LOG_TAG, "Outside of in.hasNextLine()");
+            //Log.i(LOG_TAG, "Outside of in.hasNextLine()");
         } catch (Exception e) {
             // When the socket is closed, an exception may be thrown
             // We only care about exceptions when we are still connected
@@ -244,6 +244,8 @@ public class ServerConnection extends Thread {
         if (connected) {
             out.println(message);
         }
+        else
+            Log.e(LOG_TAG, "Error, attempt to send message when not connected!");
     }
     public void createGameMessage(String gameType){
         newGameType = gameType;
@@ -275,7 +277,7 @@ public class ServerConnection extends Thread {
         Log.i(LOG_TAG,"Requesting all users");
         if (connected) {
             out.println("getAllUsers");
-            return;
+            out.println("getAllUsers");
         }
         else{
             Log.e(LOG_TAG,"getAllUsers() failed!");
