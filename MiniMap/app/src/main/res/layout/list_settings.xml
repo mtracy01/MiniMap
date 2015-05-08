@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:stretchColumns="1,2">
     <TableRow>
         <TextView
             android:id="@+id/txt"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:layout_width="wrap_content"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            />
         <Switch
             android:id="@+id/toggle"
-            android:layout_gravity="right"/>
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="right"
+            />
     </TableRow>
 </TableLayout>

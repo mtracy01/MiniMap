@@ -10,7 +10,7 @@
             android:layout_height="50dp"/>
         <TextView
             android:id="@+id/txt"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="50dp" />
