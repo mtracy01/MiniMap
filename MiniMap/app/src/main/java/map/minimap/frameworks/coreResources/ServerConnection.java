@@ -109,7 +109,7 @@ public class ServerConnection extends Thread {
      * @param message
      */
     private void handleMessage(String message) {
-
+        Log.i(LOG_TAG,"At handle message");
         try {
             Log.v("Message", message);
             String[] parts = message.split(" ");
@@ -188,6 +188,7 @@ public class ServerConnection extends Thread {
 
 
             } else if (parts[0].equals("users")) {
+                Log.i(LOG_TAG,"At users received part of Server incoming handler");
                 for (int i = 1; i < parts.length; i++) {
                     //If the user is in our friends list, add them to the invitable users list
                     User user = Data.user.findUserById(IDCipher.unCipher(parts[i]));
@@ -266,9 +267,15 @@ public class ServerConnection extends Thread {
         }
     }
     public void getAllUsers(){
+        Log.i(LOG_TAG,"Requesting all users");
         if (connected) {
             out.println("getAllUsers");
+            return;
         }
+        else{
+            Log.e(LOG_TAG,"getAllUsers() failed!");
+        }
+
     }
     public void startGame() {
         if (connected) {

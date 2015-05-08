@@ -62,7 +62,11 @@ public class FacebookHelper {
                     return;
                 }
                 Log.v(LOG_TAG, "Raw Response from getFriendsList: " + graphResponse.getRawResponse());
+                if(graphResponse.getRawResponse()==null){
+                    Log.e(LOG_TAG,"Raw response is null, returning error");
+                    return;
 
+                }
                 //Parse our friends into a friends list, then set the friends of the global user object
                 ArrayList<User> friends = new ArrayList<>();
                 for (int i = 0; i < jsonArray.length(); i++) {

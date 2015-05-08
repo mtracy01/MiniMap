@@ -100,6 +100,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
 
                 //If we have friends who are online, show the invite dialog
                 if(Data.invitableUsers.size()!=0) {
+                    Log.i(LOG_TAG,"There are " + Data.invitableUsers.size() + " friends online");
                     String[] playersArray = new String[Data.invitableUsers.size()];
                     Bitmap[] playersPics = new Bitmap[Data.invitableUsers.size()];
                     for (int i = 0; i < Data.invitableUsers.size(); i++) {
@@ -135,7 +136,8 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
                 }
                 //If we have no invitable friends online, just display a toast that says we have no invitable friends online
                 else{
-                   Toast.makeText(context,"Sorry, none of your friends are currently online.",Toast.LENGTH_LONG).show();
+                    Log.v(LOG_TAG,"No friends online");
+                    Toast.makeText(context,"Sorry, none of your friends are currently online.",Toast.LENGTH_LONG).show();
                 }
 
             }

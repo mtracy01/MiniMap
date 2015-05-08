@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ import map.minimap.helperClasses.Data;
  * create an instance of this fragment.
  */
 public class FriendStatus extends  android.support.v4.app.Fragment {
+
+    private String LOG_TAG = "FriendStatus";
 
     private ListView friendsListView;
     private Button   refreshButton;
@@ -65,7 +68,9 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
         //Get the intersect of users online with users not online into user friends list.  The intersect is stored in invitable friends
         Data.invitableUsers.clear();
         Data.client.getAllUsers();
+        Log.i(LOG_TAG, "Before client return");
         while(Data.clientDoneFlag==0) {}
+        Log.i(LOG_TAG, "After client return");
         Data.clientDoneFlag=0;
 
         //Add necessary information to array needed for our status adapter

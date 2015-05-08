@@ -52,9 +52,7 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.map, map).commit();
             Data.mapFragment=map;
-
             Data.mapFragment.getMapAsync(this);
-
         }
     }
 
