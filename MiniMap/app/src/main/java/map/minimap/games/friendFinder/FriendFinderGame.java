@@ -30,6 +30,7 @@ public class FriendFinderGame extends Game {
 
 	@Override
 	public void handleMessage(String message) {
+
 		Log.v("Friend Finder Game", message);
 		String[] parts = message.split(" ");
 		if (parts[0].equals("location")) {
@@ -59,7 +60,7 @@ public class FriendFinderGame extends Game {
 							Log.i(LOG_TAG, "User: " + u.getName() + "Animating to: " + u.getCoordinates().toString());
 							Data.mapFragment.animateMarkerToGB(u.getMarker(), u.getCoordinates(), mLatLngInterpolator, 1500);
 							if(u.getID().equals(Data.user.getID()))
-								//Data.map.moveCamera(CameraUpdateFactory.newLatLngZoom(Data.user.getCoordinates(), 15));
+
 								Data.map.animateCamera(CameraUpdateFactory.newLatLng(Data.user.getCoordinates()), 1500, new GoogleMap.CancelableCallback() {
 									@Override
 									public void onFinish() {

@@ -1,6 +1,7 @@
 package map.minimap.helperClasses;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -42,4 +43,8 @@ public class Data {
 
     public static boolean assassinKillRange;
     public static User assassinateUser;
+
+    public static int errorTrigger=0;                   //Error trigger tells us that we had a server disconnect, and therefore will display a dialog after rerouting to the login page
+    public static Context mainContext=null;
+
 }

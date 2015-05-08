@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+import map.minimap.LoginActivity;
 import map.minimap.R;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.frameworks.mapResources.Maps;
@@ -27,6 +28,7 @@ import map.minimap.games.friendFinder.FriendFinderGame;
 import map.minimap.games.sardines.Sardines;
 import map.minimap.games.sardines.SardinesGame;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.FacebookHelper;
 import map.minimap.mainMenuComponents.LobbyFragment;
 
 
@@ -244,8 +246,14 @@ public class ServerConnection extends Thread {
         if (connected) {
             out.println(message);
         }
-        else
+        else {
             Log.e(LOG_TAG, "Error, attempt to send message when not connected!");
+            Data.errorTrigger = 1;
+            FacebookHelper.logout();
+            if(Data.errorTrigger==1){
+                Data.mainContext.startActivity(new Intent(Data.mainContext, LoginActivity.class));
+            }
+        }
     }
     public void createGameMessage(String gameType){
         newGameType = gameType;

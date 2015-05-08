@@ -1,6 +1,7 @@
 package map.minimap;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -20,7 +21,6 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
 
 import org.json.JSONException;
@@ -56,7 +56,7 @@ public class LoginActivity extends FragmentActivity {
         setContentView(R.layout.activity_login);
         startCount=0;
         callbackManager = CallbackManager.Factory.create();
-
+        Data.mainContext=getApplicationContext();
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
         if(loginButton!=null) {
             ArrayList<String> permissions = new ArrayList<>(2);
@@ -149,11 +149,27 @@ public class LoginActivity extends FragmentActivity {
                                 .show();
                     }
                 });
+
+        //Handle if an error rerouted us back to the login page
+        if(Data.errorTrigger==1) {
+            Data.errorTrigger=0;
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle("Sorry!");
+            dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            dialog.setMessage("It looks like our application disconnected from the server. Sorry about that!  We've recorded the bug, and sent information to our servers so we can fix it as soon as possible.");
+            dialog.show();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Data.mainContext=this;
         AppEventsLogger.activateApp(this);
         if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==1){
             Intent intent = new Intent(LoginActivity.this,MainMenu.class);

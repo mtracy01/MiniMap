@@ -56,6 +56,7 @@ public class MainMenu extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         Data.mainAct=this;
+        Data.mainContext=this;
         if (Data.client != null && Data.gps == null) {
             Data.gps = new GPSThread(Data.client);
         }
