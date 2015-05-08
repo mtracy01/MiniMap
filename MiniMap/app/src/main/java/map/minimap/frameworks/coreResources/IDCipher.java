@@ -4,15 +4,13 @@ import android.util.Log;
 
 public class IDCipher {
 
-    public IDCipher() {
-
-    }
+    public IDCipher() {}
 
     // makes a poor attempt to obscure the user ID
     public static String toCipher(String id) {
         StringBuilder build = new StringBuilder(21);
-        char character = 0;
-        int newValue = 0;
+        char character;
+        int newValue;
         for(int i = 0; i < id.length(); i++) {
             character = id.charAt(i);
             newValue = ((Character.getNumericValue(character) + i) + 4) % 10;
@@ -24,9 +22,9 @@ public class IDCipher {
     // unobscures user ID
     public static String unCipher(String id) {
         StringBuilder build = new StringBuilder(21);
-        char character = 0;
-        int rawValue = 0;
-        int newValue = 0;
+        char character;
+        int rawValue;
+        int newValue;
 
         for(int i = 0; i < id.length(); i++) {
             character = id.charAt(i);
@@ -40,12 +38,12 @@ public class IDCipher {
 
     public static String unCipherGroups(String groups) {
         StringBuilder build = new StringBuilder();
-        char character = 0;
-        int newValue = 0;
-        int rawValue = 0;
+        char character;
+        int newValue;
+        int rawValue;
         String [] groupArray = groups.split(":");
         int j = 0;
-        int groupNameEnd = 0;
+        int groupNameEnd;
         for(String group : groupArray) {
             groupNameEnd = group.indexOf(',') + 1;
             for (int i = 0; i < group.length(); i++) {

@@ -32,7 +32,6 @@ public class AssassinsGame extends Game {
 
     @Override
     public void handleMessage(String message) {
-        // TODO Auto-generated method stub
         Log.v("Assassins Game", message); //I just changed this to Sardines...
         final String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
