@@ -83,19 +83,24 @@ public class ServerConnection extends Thread {
 
         try {
             String line;
-            while(in.hasNextLine()) {
+            while (in.hasNextLine()) {
+                Log.v(LOG_TAG, "Before received line");
                 line = in.nextLine();
+                Log.i(LOG_TAG, "Line is: " + line);
                 // Wrapped in try catch to prevent crashes of the server thread
                 try {
+                    Log.i(LOG_TAG, "Calling handleMessage on: " + line);
                     handleMessage(line);
                 } catch (Exception e) {
                     Log.e("Server Connection", "Error handling message: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
+            Log.i(LOG_TAG, "Outside of in.hasNextLine()");
         } catch (Exception e) {
             // When the socket is closed, an exception may be thrown
             // We only care about exceptions when we are still connected
+            Log.e(LOG_TAG,"Exception from serverConnection!");
             if (connected) {
                 System.out.println(e);
                 e.printStackTrace();
