@@ -30,7 +30,6 @@ public class FacebookHelper {
 
     private static String LOG_TAG= "FacebookHelper";
 
-
     //Log out of facebook
     public static void logout(){
 
