@@ -29,7 +29,6 @@ public class SyncedMapFragment extends SupportMapFragment {
     public View mOriginalContentView;
     private MapViewWrapper mWrapper;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
