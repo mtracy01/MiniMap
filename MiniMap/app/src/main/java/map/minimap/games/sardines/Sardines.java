@@ -36,7 +36,7 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_sardines);
 
         //Set up satellite menu, add elements
-        android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) findViewById(R.id.menu);
+        /*android.view.ext.SatelliteMenu menu = (android.view.ext.SatelliteMenu) findViewById(R.id.menu);
         java.util.List<android.view.ext.SatelliteMenuItem> items = new java.util.ArrayList<>();
         items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
         items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
@@ -45,7 +45,7 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
         items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
         items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
         menu.addItems(items);
-
+        */
         //Initialize our map fragment
         if (savedInstanceState == null) {
             map = new SyncedMapFragment();
