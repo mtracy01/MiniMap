@@ -176,7 +176,7 @@ public class FacebookHelper {
     public static void inviteFriends(){
         String appLinkUrl, previewImageUrl;
 
-        appLinkUrl = "https://play.google.com/store/apps/details?id=map.minimap";
+        appLinkUrl = "https://fb.me/1652069115025838";
         previewImageUrl = "https://lh3.googleusercontent.com/Ea61S49W6RaGvr9Wd3NbByJjpBSyceUk7pfAD7tokZzntV1OdhQNAwPS3mGJWfFNf2M=w300-rw";
 
         if (AppInviteDialog.canShow()) {
