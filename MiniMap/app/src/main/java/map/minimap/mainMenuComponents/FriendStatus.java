@@ -94,6 +94,7 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
 
         //Set up our UI elements
         View view = inflater.inflate(R.layout.fragment_friend_status, container, false);
+
         friendsListView= (ListView)view.findViewById(R.id.friendListView);
         refreshButton = (Button)view.findViewById(R.id.refreshButton);
 
@@ -143,5 +144,4 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
     public interface OnFragmentInteractionListener {
         public void onFragmentInteraction(Uri uri);
     }
-
 }

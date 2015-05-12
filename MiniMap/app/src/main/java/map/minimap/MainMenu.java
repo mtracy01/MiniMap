@@ -62,9 +62,7 @@ public class MainMenu extends ActionBarActivity
         setContentView(R.layout.activity_main_menu);
         Data.mainAct=this;
         Data.mainContext=this;
-        /*if (Data.client != null && Data.gps == null) {
-            Data.gps = new GPSThread(Data.client);
-        }*/
+
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         Data.loggedInFlag=1;
         FacebookHelper.appInitializer();
@@ -86,7 +84,6 @@ public class MainMenu extends ActionBarActivity
         setActionBar();
         createMenuList();
         viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, this);
-
         if(getIntent().hasExtra("ctf"))
             if((getIntent().getStringExtra("ctf")).equals("scrim line done")){
               getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
@@ -109,6 +106,8 @@ public class MainMenu extends ActionBarActivity
                     FacebookHelper.logout();
                     startActivity(new Intent(MainMenu.this, LoginActivity.class));
                     overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_out_top);
+                } else if (menuItem.getItemId() == R.id.invite_friends) {
+                    FacebookHelper.inviteFriends();
                 }
                 return true;
             }

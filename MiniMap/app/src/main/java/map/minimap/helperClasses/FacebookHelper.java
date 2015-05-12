@@ -10,6 +10,8 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
+import com.facebook.share.model.AppInviteContent;
+import com.facebook.share.widget.AppInviteDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -161,13 +163,28 @@ public class FacebookHelper {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        //Data.gps = new GPSThread(Data.client);
                     }
                     FacebookHelper.getFriendsList();
                 }
             };
             GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), userData);
             graphRequest.executeAsync();
+        }
+    }
+
+    //Invite friends to get the app on facebook
+    public static void inviteFriends(){
+        String appLinkUrl, previewImageUrl;
+
+        appLinkUrl = "https://play.google.com/store/apps/details?id=map.minimap";
+        previewImageUrl = "https://lh3.googleusercontent.com/Ea61S49W6RaGvr9Wd3NbByJjpBSyceUk7pfAD7tokZzntV1OdhQNAwPS3mGJWfFNf2M=w300-rw";
+
+        if (AppInviteDialog.canShow()) {
+            AppInviteContent content = new AppInviteContent.Builder()
+                    .setApplinkUrl(appLinkUrl)
+                    .setPreviewImageUrl(previewImageUrl)
+                    .build();
+            AppInviteDialog.show(Data.mainAct, content);
         }
     }
 }

@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/edit_item"
+        android:icon="@drawable/invite_friend"
+        android:orderInCategory="10"
+        android:title="Invite Friends">
+    </item>
+</menu>
+
+    <!--android:showAsAction="ifRoom"-->
