@@ -19,6 +19,7 @@ import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.GPSHelper;
 
 //import com.parse.Parse;
 
@@ -68,6 +69,7 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         Assassins.super.onBackPressed();
+                        GPSHelper.killGPSThread();
                         Data.client.sendMessage("remove " + Data.gameId + " " + IDCipher.toCipher(Data.user.getID()));
                         Data.gameStarted = false;
                         startActivity(new Intent(Assassins.this, MainMenu.class));

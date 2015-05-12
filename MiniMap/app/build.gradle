@@ -8,8 +8,8 @@ android {
         applicationId "map.minimap"
         minSdkVersion 16
         targetSdkVersion 21
-        versionCode 9
-        versionName "1.08"
+        versionCode 10
+        versionName "1.09"
     }
     buildTypes {
         release {

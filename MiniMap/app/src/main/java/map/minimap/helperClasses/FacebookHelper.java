@@ -161,7 +161,7 @@ public class FacebookHelper {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        Data.gps = new GPSThread(Data.client);
+                        //Data.gps = new GPSThread(Data.client);
                     }
                     FacebookHelper.getFriendsList();
                 }

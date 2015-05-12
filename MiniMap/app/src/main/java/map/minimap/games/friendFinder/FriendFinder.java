@@ -21,6 +21,7 @@ import map.minimap.frameworks.gameResources.Game;
 import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.GPSHelper;
 
 public class FriendFinder extends FragmentActivity implements OnMapReadyCallback {
 
@@ -90,6 +91,7 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
 
                     public void onClick(DialogInterface arg0, int arg1) {
                         FriendFinder.super.onBackPressed();
+                        GPSHelper.killGPSThread();
                         Data.client.sendMessage("remove " + Data.gameId + " " + IDCipher.toCipher(Data.user.getID()));
                         Data.gameStarted = false;
                         startActivity(new Intent(FriendFinder.this,MainMenu.class));

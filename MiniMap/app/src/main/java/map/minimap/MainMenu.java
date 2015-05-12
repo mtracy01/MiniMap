@@ -1,5 +1,8 @@
 package map.minimap;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -21,8 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import map.minimap.frameworks.coreResources.GPSThread;
+import map.minimap.frameworks.coreResources.IDCipher;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.FacebookHelper;
+import map.minimap.helperClasses.GPSHelper;
 import map.minimap.mainMenuComponents.ContentFragment;
 import map.minimap.mainMenuComponents.DisplayGroups;
 import map.minimap.mainMenuComponents.FriendStatus;
@@ -57,9 +62,9 @@ public class MainMenu extends ActionBarActivity
         setContentView(R.layout.activity_main_menu);
         Data.mainAct=this;
         Data.mainContext=this;
-        if (Data.client != null && Data.gps == null) {
+        /*if (Data.client != null && Data.gps == null) {
             Data.gps = new GPSThread(Data.client);
-        }
+        }*/
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         Data.loggedInFlag=1;
         FacebookHelper.appInitializer();
@@ -169,7 +174,7 @@ public class MainMenu extends ActionBarActivity
             case ContentFragment.GAMES:
                 logger.logEvent("Games Menu");
                 Log.v(LOG_TAG, "Games Menu");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).addToBackStack("Games").commit();
                 getSupportActionBar().setTitle("Games");
                 break;
             case ContentFragment.GROUPS:
@@ -203,6 +208,32 @@ public class MainMenu extends ActionBarActivity
             default:
                 Log.v(LOG_TAG,"Name = " + slideMenuItem.getName());
                 return replaceFragment(screenShotable,slideMenuItem.getName());
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        final Context context = this;
+
+        //If we are in a lobby, ask the user if they would like to leave the lobby
+        if (getSupportFragmentManager().getBackStackEntryAt(0).getName().equals("lobby")) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Really Exit?")
+                    .setMessage("Are you sure you want to exit the lobby?")
+                    .setNegativeButton(android.R.string.no, null)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            MainMenu.super.onBackPressed();
+                            Data.client.sendMessage("remove " + Data.gameId + " " + IDCipher.toCipher(Data.user.getID()));
+                            GPSHelper.killGPSThread();
+                            startActivity(new Intent(context, MainMenu.class));
+                        }
+                    }).create().show();
+        }
+        else{
+            super.onBackPressed();
+            GPSHelper.killGPSThread();
         }
     }
 

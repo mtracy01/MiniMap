@@ -25,6 +25,7 @@ import map.minimap.frameworks.customUIResources.CustomList;
 import map.minimap.frameworks.customUIResources.CustomListInvite;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.GPSHelper;
 
 /**
  * Created by Corey on 2/22/2015.
@@ -50,6 +51,9 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //If there is no GPS thread running, start one
+        GPSHelper.startGPSThread();
 
         Log.v("name",Data.user.getName());
         //check server for other players
@@ -91,16 +95,17 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
                 Data.client.getAllUsers();
 
                 //Do nothing while the client gets invitable users and organizes them into list
-                while(Data.clientDoneFlag==0){}
+                while (Data.clientDoneFlag == 0) {
+                }
 
                 //when done, reset the client done flag and perform the dialog task
-                Data.clientDoneFlag=0;
+                Data.clientDoneFlag = 0;
 
-                Log.v(LOG_TAG,"InvitableUsersSize: " + Data.invitableUsers.size());
+                Log.v(LOG_TAG, "InvitableUsersSize: " + Data.invitableUsers.size());
 
                 //If we have friends who are online, show the invite dialog
-                if(Data.invitableUsers.size()!=0) {
-                    Log.i(LOG_TAG,"There are " + Data.invitableUsers.size() + " friends online");
+                if (Data.invitableUsers.size() != 0) {
+                    Log.i(LOG_TAG, "There are " + Data.invitableUsers.size() + " friends online");
                     String[] playersArray = new String[Data.invitableUsers.size()];
                     Bitmap[] playersPics = new Bitmap[Data.invitableUsers.size()];
                     for (int i = 0; i < Data.invitableUsers.size(); i++) {
@@ -135,9 +140,9 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
                     dialog.show();
                 }
                 //If we have no invitable friends online, just display a toast that says we have no invitable friends online
-                else{
-                    Log.v(LOG_TAG,"No friends online");
-                    Toast.makeText(context,"Sorry, none of your friends are currently online.",Toast.LENGTH_LONG).show();
+                else {
+                    Log.v(LOG_TAG, "No friends online");
+                    Toast.makeText(context, "Sorry, none of your friends are currently online.", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -150,7 +155,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
             }
         }
 
-        Data.lobbyUsers = new ArrayList<String>();
+        Data.lobbyUsers = new ArrayList<>();
         Bitmap[] playersPics  = new Bitmap[Data.players.size()];
         for(int i =0; i < Data.players.size();i++) {
             Data.lobbyUsers.add(Data.players.get(i).getName());

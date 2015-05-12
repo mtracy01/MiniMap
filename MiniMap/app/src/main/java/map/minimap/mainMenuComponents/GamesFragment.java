@@ -90,7 +90,7 @@ public class GamesFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), CTFscrimmage.class);
                     startActivity(intent);
                 } else {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).addToBackStack("lobby").commit();
                 }
             }
         });
