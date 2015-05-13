@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import map.minimap.frameworks.coreResources.GPSThread;
 import map.minimap.frameworks.coreResources.ServerConnection;
 import map.minimap.frameworks.gameResources.User;
 
