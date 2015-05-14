@@ -20,6 +20,7 @@ import map.minimap.helperClasses.FacebookHelper;
 
 /**
  * Created by Matthew on 5/6/2015.
+ * Custom list for setting toggles
  */
 public class CustomListSettings extends ArrayAdapter<String> {
     private final Activity context;

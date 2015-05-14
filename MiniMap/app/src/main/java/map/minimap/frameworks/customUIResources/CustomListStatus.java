@@ -15,6 +15,7 @@ import map.minimap.R;
 
 /**
  * Created by Matthew on 4/6/2015.
+ * Custom list for friend status fragment
  */
 public class CustomListStatus extends ArrayAdapter<String> {
     private final Activity context;

@@ -41,9 +41,6 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
         java.util.List<android.view.ext.SatelliteMenuItem> items = new java.util.ArrayList<>();
         items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
         items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(4,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(3,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
         items.add(new android.view.ext.SatelliteMenuItem(1,R.drawable.sat_item));
         menu.addItems(items);*/
 

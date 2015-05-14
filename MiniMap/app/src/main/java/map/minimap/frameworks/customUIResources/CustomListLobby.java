@@ -13,13 +13,14 @@ import map.minimap.R;
 
 /**
  * Created by Matthew on 4/4/2015.
+ * Custom list for players in game lobbies
  */
-public class CustomList extends ArrayAdapter<String> {
+public class CustomListLobby extends ArrayAdapter<String> {
     private final Activity context;
     private final String[] web;
     private final Bitmap[] imageId;
-    public CustomList(Activity context,
-                      String[] web, Bitmap[] imageId) {
+    public CustomListLobby(Activity context,
+                           String[] web, Bitmap[] imageId) {
         super(context, R.layout.list_single, web);
         this.context = context;
         this.web = web;

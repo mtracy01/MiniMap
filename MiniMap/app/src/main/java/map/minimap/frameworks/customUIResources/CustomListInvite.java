@@ -15,6 +15,7 @@ import map.minimap.helperClasses.Data;
 
 /**
  * Created by Matthew on 4/5/2015.
+ * Custom list for friend invitaiton dialog in game lobbies
  */
 public class CustomListInvite extends ArrayAdapter<String> {
     private final Activity context;

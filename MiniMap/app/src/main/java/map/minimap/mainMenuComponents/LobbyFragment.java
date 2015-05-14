@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import map.minimap.R;
 import map.minimap.frameworks.coreResources.IDCipher;
-import map.minimap.frameworks.customUIResources.CustomList;
+import map.minimap.frameworks.customUIResources.CustomListLobby;
 import map.minimap.frameworks.customUIResources.CustomListInvite;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
@@ -33,7 +33,7 @@ import map.minimap.helperClasses.GPSHelper;
 public class LobbyFragment extends android.support.v4.app.Fragment {
 
     private String LOG_TAG = "LobbyFragment";
-    public static CustomList adapter = null;
+    public static CustomListLobby adapter = null;
     private static ListView playerListView;
     private Context context;
 
@@ -164,7 +164,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
                 playersPics[i] = BitmapFactory.decodeResource(context.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait);
             }
         }
-        adapter = new CustomList(getActivity(),Data.lobbyUsers.toArray(new String[Data.players.size()]),playersPics);
+        adapter = new CustomListLobby(getActivity(),Data.lobbyUsers.toArray(new String[Data.players.size()]),playersPics);
         playerListView.setAdapter(adapter);
 
         return view;
