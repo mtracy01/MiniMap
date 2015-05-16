@@ -60,8 +60,7 @@ public class FriendFinderGame extends Game {
 							Log.i(LOG_TAG, "User: " + u.getName() + "Animating to: " + u.getCoordinates().toString());
 							Data.mapFragment.animateMarkerToGB(u.getMarker(), u.getCoordinates(), mLatLngInterpolator, 1500);
 							if(u.getID().equals(Data.user.getID()))
-								//LatLng latLng;
-							   // Data.user.getCoordinates();
+
 								Data.map.animateCamera(CameraUpdateFactory.newLatLng(Data.user.getCoordinates()), 1500, new GoogleMap.CancelableCallback() {
 									@Override
 									public void onFinish() {
