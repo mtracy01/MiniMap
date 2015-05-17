@@ -10,11 +10,20 @@
         android:layout_height="fill_parent"></ListView>
 
     <Button
+        android:id="@+id/inviteButton"
+        android:text="Invite Friends to App"
+        android:background="@drawable/com_facebook_tooltip_blue_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        />
+
+    <Button
         android:id="@+id/refreshButton"
         android:text="@string/refresh"
         android:background="@drawable/com_facebook_tooltip_blue_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"/>
+        android:layout_gravity="left|bottom"/>
 
 </FrameLayout>

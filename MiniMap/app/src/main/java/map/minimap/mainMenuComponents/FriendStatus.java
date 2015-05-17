@@ -18,6 +18,7 @@ import map.minimap.R;
 import map.minimap.frameworks.customUIResources.CustomListStatus;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
+import map.minimap.helperClasses.FacebookHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +34,7 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
 
     private ListView friendsListView;
     private Button   refreshButton;
+    private Button   inviteButton;
 
 
     private OnFragmentInteractionListener mListener;
@@ -97,12 +99,19 @@ public class FriendStatus extends  android.support.v4.app.Fragment {
 
         friendsListView= (ListView)view.findViewById(R.id.friendListView);
         refreshButton = (Button)view.findViewById(R.id.refreshButton);
+        inviteButton  = (Button)view.findViewById(R.id.inviteButton);
 
         refresh();
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 refresh();
+            }
+        });
+        inviteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FacebookHelper.inviteFriends();
             }
         });
         return view;
