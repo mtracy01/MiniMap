@@ -35,9 +35,8 @@ public class FriendFinderGame extends Game {
 		String[] parts = message.split(" ");
 		if (parts[0].equals("location")) {
             User u = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
-            if (u == null) {
+            if (u == null)
             	return;
-            }
             LatLng ll = new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]));
             Log.v("userid", parts[1]);
             if (u == null) {
