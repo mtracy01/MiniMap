@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 import map.minimap.R;
 import map.minimap.frameworks.coreResources.IDCipher;
-import map.minimap.frameworks.customUIResources.CustomListLobby;
 import map.minimap.frameworks.customUIResources.CustomListInvite;
+import map.minimap.frameworks.customUIResources.CustomListLobby;
 import map.minimap.frameworks.gameResources.User;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.GPSHelper;
