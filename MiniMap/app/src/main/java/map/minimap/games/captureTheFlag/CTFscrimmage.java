@@ -33,7 +33,7 @@ import map.minimap.helperClasses.Data;
 /**
  * Created by Corey on 4/18/2015.
  */
-public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback{
+public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private boolean Is_MAP_Moveable = false;
     private ArrayList<LatLng> val = new ArrayList<>();
@@ -50,23 +50,24 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(val.size()==0){
+                if (val.size() == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Draw a line", Toast.LENGTH_SHORT);
                     toast.show();
-                }
-                else {
+                } else {
                     Data.client.createScrimmageLineMessage(Double.toString(val.get(0).latitude), Double.toString(val.get(0).longitude),
                             Double.toString(val.get(val.size() - 1).latitude), Double.toString(val.get(val.size() - 1).longitude));
                     swap_Activity();
                 }
-            }});
+            }
+        });
         Button clearLine = (Button) findViewById(R.id.clear_line);
         clearLine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mMap.clear();
                 val = new ArrayList<LatLng>();
-            }});
+            }
+        });
 
         Button btn_draw_State = (Button) findViewById(R.id.btn_draw_State);
 
@@ -103,22 +104,20 @@ public class CTFscrimmage extends FragmentActivity implements OnMapReadyCallback
 
     public void swap_Activity() {
         Intent intent = new Intent(this, CTFflags.class);
-        intent.putExtra("ctf", Double.toString(val.get(0).latitude)+" "+Double.toString(val.get(0).longitude)+" "+
-                Double.toString(val.get(val.size()-1).latitude)+" "+Double.toString(val.get(val.size()-1).longitude));
+        intent.putExtra("ctf", Double.toString(val.get(0).latitude) + " " + Double.toString(val.get(0).longitude) + " " +
+                Double.toString(val.get(val.size() - 1).latitude) + " " + Double.toString(val.get(val.size() - 1).longitude));
         startActivity(intent);
 
     }
 
     public void Draw_Map() {
-        if(val.size()==1){
+        if (val.size() == 1) {
             mMap.addCircle(new CircleOptions().center(val.get(0)).radius(5));
-        }
-        else if(val.size()<=2) {
+        } else if (val.size() <= 2) {
             Polyline rectOptions = mMap.addPolyline(new PolylineOptions()
                     .add(val.get(0), val.get(val.size() - 1)).color(Color.BLUE).width(5));
             mMap.addCircle(new CircleOptions().center(val.get(1)).radius(5));
-        }
-        else{
+        } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Already made a line. Hit clear to try again.", Toast.LENGTH_SHORT);
             toast.show();
         }

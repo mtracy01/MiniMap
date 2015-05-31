@@ -40,7 +40,7 @@ import map.minimap.helperClasses.Data;
  */
 public class GroupsFragment extends android.support.v4.app.Fragment {
 
-    private String LOG_TAG="GroupsFragment";
+    private String LOG_TAG = "GroupsFragment";
 
     private ArrayList<String> OptionsList;                //The list of games we have available for players
     private static ListView OptionsListView;    //The Actual UI element id for our games list
@@ -76,17 +76,17 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_groups, container, false);
         /* Create reaction interfaces for the game buttons in our list */
-        OptionsListView = (ListView)view.findViewById(R.id.listView);
-        Button addGroup =(Button) view.findViewById(R.id.addGroup);
+        OptionsListView = (ListView) view.findViewById(R.id.listView);
+        Button addGroup = (Button) view.findViewById(R.id.addGroup);
         addGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final ArrayList<User> friends = Data.user.getFriends();
-                for(User f : friends) {
+                for (User f : friends) {
                     Log.v("friend", f.getID());
                 }
                 //If we have friends who are online, show the invite dialog
-                if(Data.invitableUsers.size()!=0) {
+                if (Data.invitableUsers.size() != 0) {
                     String[] playersArray = new String[friends.size()];
                     Bitmap[] playersPics = new Bitmap[friends.size()];
 
@@ -125,17 +125,17 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        OptionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        OptionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView <?> a, View v, int position,
+            public void onItemClick(AdapterView<?> a, View v, int position,
                                     long id) {
 
-                if(position==0){
+                if (position == 0) {
                     fragmentManager.beginTransaction()
                             .replace(R.id.container, FriendStatus.newInstance())
                             .commit();
                 }
-                if(position==1){
+                if (position == 1) {
                     //Invite friends to use the app
                     //TODO: Get the app on the play store so people can actually download this stuff
                     String appLinkUrl, previewImageUrl;
@@ -152,7 +152,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                     }
 
                 }
-                if(position==2){
+                if (position == 2) {
                     //facebookHelper.listFriends(context);
                     //List user created groups and give them the option to create a new group.
                     //Probably should be implemented in a new activity or heavily embedded into
@@ -161,10 +161,11 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
                     //Log.v("groups", Data.user.getGroups());
                     Data.client.sendMessage("getGroupsByID " + IDCipher.toCipher(Data.user.getID()));
 
-                    while(Data.clientDoneFlag == 0) {}
+                    while (Data.clientDoneFlag == 0) {
+                    }
                     Data.clientDoneFlag = 0;
 
-                    if(Data.user.getGroups() != null) {
+                    if (Data.user.getGroups() != null) {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.container, DisplayGroups.newInstance())
                                 .commit();
@@ -175,7 +176,7 @@ public class GroupsFragment extends android.support.v4.app.Fragment {
             }
         });
         String[] GamesArray = OptionsList.toArray(new String[3]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,android.R.layout.simple_list_item_1,GamesArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, GamesArray);
         OptionsListView.setAdapter(adapter);
         return view;
     }

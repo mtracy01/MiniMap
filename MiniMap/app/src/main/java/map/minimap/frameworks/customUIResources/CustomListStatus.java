@@ -22,6 +22,7 @@ public class CustomListStatus extends ArrayAdapter<String> {
     private final String[] web;                //String of user names
     private final Bitmap[] imageId;           //Bitmaps of user images
     private final boolean[] isOnline;        //Status of whether user is online or not
+
     public CustomListStatus(Activity context,
                             String[] web, Bitmap[] imageId, boolean[] isOnline) {
         super(context, R.layout.list_single_status, web);
@@ -30,6 +31,7 @@ public class CustomListStatus extends ArrayAdapter<String> {
         this.imageId = imageId;
         this.isOnline = isOnline;
     }
+
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();

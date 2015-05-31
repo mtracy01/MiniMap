@@ -73,7 +73,7 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
             map = new SyncedMapFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.map, map).commit();
-            Data.mapFragment=map;
+            Data.mapFragment = map;
 
             Data.mapFragment.getMapAsync(this);
 
@@ -94,7 +94,7 @@ public class FriendFinder extends FragmentActivity implements OnMapReadyCallback
                         GPSHelper.killGPSThread();
                         Data.client.sendMessage("remove " + Data.gameId + " " + IDCipher.toCipher(Data.user.getID()));
                         Data.gameStarted = false;
-                        startActivity(new Intent(FriendFinder.this,MainMenu.class));
+                        startActivity(new Intent(FriendFinder.this, MainMenu.class));
                     }
                 }).create().show();
     }

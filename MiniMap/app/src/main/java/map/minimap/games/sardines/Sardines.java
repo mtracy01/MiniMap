@@ -51,7 +51,7 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
             map = new SyncedMapFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.map, map).commit();
-            Data.mapFragment=map;
+            Data.mapFragment = map;
             Data.mapFragment.getMapAsync(this);
         }
     }
@@ -68,7 +68,7 @@ public class Sardines extends ActionBarActivity implements OnMapReadyCallback {
                         Sardines.super.onBackPressed();
                         Data.client.sendMessage("remove " + Data.gameId + " " + IDCipher.toCipher(Data.user.getID()));
                         Data.gameStarted = false;
-                        startActivity(new Intent(Sardines.this,MainMenu.class));
+                        startActivity(new Intent(Sardines.this, MainMenu.class));
                     }
                 }).create().show();
     }

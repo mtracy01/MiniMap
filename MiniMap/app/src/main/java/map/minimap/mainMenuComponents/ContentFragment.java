@@ -67,7 +67,7 @@ public class ContentFragment extends Fragment implements ScreenShotable {
         Thread thread = new Thread() {
             @Override
             public void run() {
-                if(containerView!=null) {
+                if (containerView != null) {
                     Bitmap bitmap = Bitmap.createBitmap(containerView.getWidth(),
                             containerView.getHeight(), Bitmap.Config.ARGB_8888);
                     Canvas canvas = new Canvas(bitmap);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by joe on 2/21/2015.
  */
-public abstract class Game extends Application{
+public abstract class Game extends Application {
 
     /*
      *   Each specific game type will be a subclass of Game
@@ -17,76 +17,81 @@ public abstract class Game extends Application{
      *      referring to any game type as a Game
      */
 
-	/**
-	 * The game session id
-	 */
-	protected int id;
+    /**
+     * The game session id
+     */
+    protected int id;
 
     /**
      * Does this game mode support beacons?
      */
-	protected boolean beaconsEnabled = false;
+    protected boolean beaconsEnabled = false;
 
     public enum BeaconMode {
         NOTHING, ADD, REMOVE
     }
 
     protected BeaconMode beaconMode = BeaconMode.NOTHING;
-	
-	/**
-	 * Is the session running?
-	 */
-	protected boolean isRunning;
-	
-	/**
-	 * The teams in the game session
-	 */
-	protected ArrayList<Team> teams;
+
+    /**
+     * Is the session running?
+     */
+    protected boolean isRunning;
+
+    /**
+     * The teams in the game session
+     */
+    protected ArrayList<Team> teams;
 
     public abstract void handleMessage(String message);
-	/**
-	 * Start the session
-	 */
-	public abstract void startSession();
-	
-	/**
-	 * End the current session.
-	 * Perform any necessary cleanup.
-	 */
-	public abstract void endSession();
-	
-	/**
-	 * Remove a user from the game session
-	 * @param user The user to remove
-	 */
-	public abstract void removeUser(User user);
 
-	/**
-	 * Add a user to the game session
-	 * @param user
-	 */
-	public abstract void addUser(User user, int teamid);
-	
-	/**
-	 * Add a beacon at the specified location
-	 * @param loc
-	 */
-	public abstract void addBeacon(int teamid, LatLng loc);
-	
-	/**
-	 * Remove the specified beacon
-	 * @param id
-	 */
-	public abstract void removeBeacon(Integer id);
-    
-	public Team getTeambyID(ArrayList<Team> teamlist, int id) {
-		for (Team t: teamlist) {
-			if (t.getTeamID() == id) {
-				return t;
-			}
-		}
-		return null;
-	}
+    /**
+     * Start the session
+     */
+    public abstract void startSession();
+
+    /**
+     * End the current session.
+     * Perform any necessary cleanup.
+     */
+    public abstract void endSession();
+
+    /**
+     * Remove a user from the game session
+     *
+     * @param user The user to remove
+     */
+    public abstract void removeUser(User user);
+
+    /**
+     * Add a user to the game session
+     *
+     * @param user
+     */
+    public abstract void addUser(User user, int teamid);
+
+    /**
+     * Add a beacon at the specified location
+     *
+     * @param loc
+     */
+    public abstract void addBeacon(int teamid, LatLng loc);
+
+    /**
+     * Remove the specified beacon
+     *
+     * @param id
+     */
+    public abstract void removeBeacon(Integer id);
+
+    public Team getTeambyID(ArrayList<Team> teamlist, int id) {
+        for (Team t : teamlist) {
+            if (t.getTeamID() == id) {
+                return t;
+            }
+        }
+        return null;
+    }
 
     public Team getUserTeam(User u) {
         for (Team t : teams) {
@@ -101,11 +106,14 @@ public abstract class Game extends Application{
         return id;
     }
 
-    public boolean isBeaconsEnabled() { return beaconsEnabled; }
+    public boolean isBeaconsEnabled() {
+        return beaconsEnabled;
+    }
 
     public BeaconMode getBeaconMode() {
         return beaconMode;
     }
+
     public void setBeaconMode(BeaconMode beaconMode) {
         this.beaconMode = beaconMode;
     }

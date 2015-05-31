@@ -41,12 +41,13 @@ public class LoginActivity extends FragmentActivity {
 
     private CallbackManager callbackManager;
 
-    private int startCount=0;
+    private int startCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-         //Enable Local Datastore.
+        //Enable Local Datastore.
         /*(Data.initialized!=1) {
             Parse.enableLocalDatastore(this);
             Parse.initialize(this, "dfxawm7UMzEWbPPRObtn73GRLUHwdQTZybnNnrZw", "fdCWMSD5OXw1z3KCFuW73kLxDr8iRvWmJ0KWiKTs");
@@ -54,21 +55,20 @@ public class LoginActivity extends FragmentActivity {
             Data.initialized=1;
         }*/
         setContentView(R.layout.activity_login);
-        startCount=0;
+        startCount = 0;
         callbackManager = CallbackManager.Factory.create();
-        Data.mainContext=getApplicationContext();
-        LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
-        if(loginButton!=null) {
+        Data.mainContext = getApplicationContext();
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        if (loginButton != null) {
             ArrayList<String> permissions = new ArrayList<>(2);
             permissions.add("public_profile");
             permissions.add("user_friends");
             loginButton.setReadPermissions(permissions);
+        } else {
+            Log.e(LOG_TAG, "Null loginButton");
         }
-        else{
-            Log.e(LOG_TAG,"Null loginButton");
-        }
-        if(AccessToken.getCurrentAccessToken()!=null){
-            Intent intent = new Intent(LoginActivity.this,MainMenu.class);
+        if (AccessToken.getCurrentAccessToken() != null) {
+            Intent intent = new Intent(LoginActivity.this, MainMenu.class);
             startActivity(intent);
         }
 
@@ -109,10 +109,10 @@ public class LoginActivity extends FragmentActivity {
                                 if (Data.client != null) {
                                     Log.v(LOG_TAG, "Client is not NULL, proceeding to login");
                                     FacebookHelper.getFriendsList();
-                                    Data.loggedInFlag=1;
+                                    Data.loggedInFlag = 1;
                                     Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                                     startActivity(intent);
-                                    overridePendingTransition(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom);
+                                    overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom);
                                 }
                                 //We did not communicate successfully, logout of facebook
                                 else {
@@ -151,8 +151,8 @@ public class LoginActivity extends FragmentActivity {
                 });
 
         //Handle if an error rerouted us back to the login page
-        if(Data.errorTrigger==1) {
-            Data.errorTrigger=0;
+        if (Data.errorTrigger == 1) {
+            Data.errorTrigger = 0;
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("Sorry!");
             dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -169,10 +169,10 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Data.mainContext=this;
+        Data.mainContext = this;
         AppEventsLogger.activateApp(this);
-        if(AccessToken.getCurrentAccessToken()!=null && Data.loggedInFlag==1){
-            Intent intent = new Intent(LoginActivity.this,MainMenu.class);
+        if (AccessToken.getCurrentAccessToken() != null && Data.loggedInFlag == 1) {
+            Intent intent = new Intent(LoginActivity.this, MainMenu.class);
             startActivity(intent);
         }
     }

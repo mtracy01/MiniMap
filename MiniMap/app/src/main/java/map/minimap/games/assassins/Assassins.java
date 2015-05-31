@@ -24,10 +24,11 @@ import map.minimap.helperClasses.GPSHelper;
 //import com.parse.Parse;
 
 
-public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
+public class Assassins extends ActionBarActivity implements OnMapReadyCallback {
 
     private SyncedMapFragment map;
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class Assassins extends ActionBarActivity implements OnMapReadyCallback{
             map = new SyncedMapFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.map, map).commit();
-            Data.mapFragment=map;
+            Data.mapFragment = map;
 
             Data.mapFragment.getMapAsync(this);
 

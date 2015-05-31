@@ -50,7 +50,7 @@ public class ServerConnection extends Thread {
     private boolean connected;
     private String newGameType;
 
-    public ServerConnection( String ID) {
+    public ServerConnection(String ID) {
         connected = false;
         user_ID = ID;
     }
@@ -62,7 +62,7 @@ public class ServerConnection extends Thread {
             // Create a new PrintWriter with auto flush on
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new Scanner(socket.getInputStream());
-            out.println("id "+ IDCipher.toCipher(user_ID));
+            out.println("id " + IDCipher.toCipher(user_ID));
         } catch (IOException e) {
             // Something went wrong
             System.out.println(e);
@@ -102,7 +102,7 @@ public class ServerConnection extends Thread {
         } catch (Exception e) {
             // When the socket is closed, an exception may be thrown
             // We only care about exceptions when we are still connected
-            Log.e(LOG_TAG,"Exception from serverConnection!");
+            Log.e(LOG_TAG, "Exception from serverConnection!");
             if (connected) {
                 System.out.println(e);
                 e.printStackTrace();
@@ -113,10 +113,11 @@ public class ServerConnection extends Thread {
 
     /**
      * Deal with an incoming message
+     *
      * @param message
      */
     private void handleMessage(String message) {
-        Log.i(LOG_TAG,"At handle message");
+        Log.i(LOG_TAG, "At handle message");
         try {
             Log.v("Message", message);
             String[] parts = message.split(" ");
@@ -142,7 +143,7 @@ public class ServerConnection extends Thread {
                             }
                         }
 
-                        while(user.getName() == null) {
+                        while (user.getName() == null) {
 
                         }
                         Data.players.add(user);
@@ -157,17 +158,17 @@ public class ServerConnection extends Thread {
                             });
                         }
                     }
-                    Log.v("here", Data.lobbyUsers.get(Data.lobbyUsers.size()-1));
+                    Log.v("here", Data.lobbyUsers.get(Data.lobbyUsers.size() - 1));
                 }
-            }else if(parts[0].equals("groups")) {
+            } else if (parts[0].equals("groups")) {
                 Log.v("thing", "group has been gotten");
-                if(parts.length > 1) {
+                if (parts.length > 1) {
                     Data.user.setGroups(IDCipher.unCipherGroups(parts[1]));
                 } else {
                     Data.user.setGroups(null);
                 }
                 Data.clientDoneFlag = 1;
-            }else if (parts[0].equals("game")) {
+            } else if (parts[0].equals("game")) {
                 Log.v("gameId", parts[1]);
                 Data.gameId = parts[1];
                 Data.host = true;
@@ -195,7 +196,7 @@ public class ServerConnection extends Thread {
 
 
             } else if (parts[0].equals("users")) {
-                Log.i(LOG_TAG,"At users received part of Server incoming handler");
+                Log.i(LOG_TAG, "At users received part of Server incoming handler");
                 for (int i = 1; i < parts.length; i++) {
                     //If the user is in our friends list, add them to the invitable users list
                     User user = Data.user.findUserById(IDCipher.unCipher(parts[i]));
@@ -240,58 +241,64 @@ public class ServerConnection extends Thread {
 
     /**
      * Send a message to the client
+     *
      * @param message
      */
     public void sendMessage(String message) {
         if (connected) {
             out.println(message);
-        }
-        else {
+        } else {
             Log.e(LOG_TAG, "Error, attempt to send message when not connected!");
             Data.errorTrigger = 1;
             FacebookHelper.logout();
-            if(Data.errorTrigger==1){
+            if (Data.errorTrigger == 1) {
                 Data.mainContext.startActivity(new Intent(Data.mainContext, LoginActivity.class));
             }
         }
     }
-    public void createGameMessage(String gameType){
+
+    public void createGameMessage(String gameType) {
         newGameType = gameType;
         if (connected) {
             out.println("createGame " + gameType);
         }
     }
-    public void createScrimmageLineMessage(String coord1, String coord2,String coord3,String coord4){
+
+    public void createScrimmageLineMessage(String coord1, String coord2, String coord3, String coord4) {
         if (connected) {
-            out.println("lineOfScrimmage " + coord1 +" "+coord2 +" "+coord3 +" "+coord4);
+            out.println("lineOfScrimmage " + coord1 + " " + coord2 + " " + coord3 + " " + coord4);
         }
     }
-    public void ctfFlags(String coord1, String coord2, String team){
+
+    public void ctfFlags(String coord1, String coord2, String team) {
         if (connected) {
-            out.println("flag "+team+" " + coord1 +" "+coord2);
+            out.println("flag " + team + " " + coord1 + " " + coord2);
         }
     }
-    public void acceptGameMessage(String gameID){
+
+    public void acceptGameMessage(String gameID) {
         if (connected) {
             out.println("accept " + gameID);
         }
     }
-    public void rejectGameMessage(String gameID){
+
+    public void rejectGameMessage(String gameID) {
         if (connected) {
             out.println("reject " + gameID);
         }
     }
-    public void getAllUsers(){
-        Log.i(LOG_TAG,"Requesting all users");
+
+    public void getAllUsers() {
+        Log.i(LOG_TAG, "Requesting all users");
         if (connected) {
             out.println("getAllUsers");
             out.println("getAllUsers");
-        }
-        else{
-            Log.e(LOG_TAG,"getAllUsers() failed!");
+        } else {
+            Log.e(LOG_TAG, "getAllUsers() failed!");
         }
 
     }
+
     public void startGame() {
         if (connected) {
             out.println("start " + Data.gameId);
@@ -325,7 +332,7 @@ public class ServerConnection extends Thread {
                         newGameType = gameType;
                         acceptGameMessage(gameID);
                         Data.gameId = gameID;
-                        switch(newGameType) {
+                        switch (newGameType) {
                             case "friendFinder":
                                 Data.user.setGame(new FriendFinderGame());
                                 break;
@@ -341,7 +348,7 @@ public class ServerConnection extends Thread {
                         }
                         Data.user.setInGame(true);
 
-                        Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,new LobbyFragment()).commit();
+                        Data.mainAct.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new LobbyFragment()).commit();
 
 
                     }
@@ -439,7 +446,7 @@ public class ServerConnection extends Thread {
         if (socket == null) {
             return "Client: null";
         }
-        return "Client: " + user_ID + " "+ socket.getRemoteSocketAddress();
+        return "Client: " + user_ID + " " + socket.getRemoteSocketAddress();
     }
 
 }

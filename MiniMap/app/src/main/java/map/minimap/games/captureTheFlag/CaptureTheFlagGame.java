@@ -234,7 +234,7 @@ public class CaptureTheFlagGame extends Game {
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
                         String name = findUserbyId(IDCipher.unCipher(parts[1]), Data.players).getName();
-                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(),  name + " has picked up the flag.", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), name + " has picked up the flag.", Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 });
@@ -244,8 +244,7 @@ public class CaptureTheFlagGame extends Game {
             if (otherTeam == 2) {
                 blueFlag.hide();
                 team3Carrier = flagCarrier;
-            }
-            else {
+            } else {
                 redFlag.hide();
                 team2Carrier = flagCarrier;
             }
@@ -261,7 +260,7 @@ public class CaptureTheFlagGame extends Game {
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
                         String name = findUserbyId(IDCipher.unCipher(parts[1]), Data.players).getName();
-                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(),  name + " has returned the flag.", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), name + " has returned the flag.", Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 });
@@ -271,8 +270,7 @@ public class CaptureTheFlagGame extends Game {
             if (otherTeam == 2) {
                 blueFlag.show();
                 team3Carrier = null;
-            }
-            else {
+            } else {
                 redFlag.show();
                 team2Carrier = null;
             }
@@ -285,17 +283,17 @@ public class CaptureTheFlagGame extends Game {
                     }
                 });
                 Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
-                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity, MainMenu.class));
             } else {
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
                         String name = findUserbyId(IDCipher.unCipher(parts[1]), Data.players).getName();
-                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(),  name + " has captured the flag.", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), name + " has captured the flag.", Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 });
                 Data.client.sendMessage("remove " + Data.gameId + " " + Data.user.getID());
-                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity, MainMenu.class));
             }
         } else if (parts[0].equals("team")) {
             User u = Data.user.findUserById(parts[2]);
@@ -313,7 +311,7 @@ public class CaptureTheFlagGame extends Game {
     }
 
     public User findUserbyId(String theid, ArrayList<User> users) {
-        for (User u: users) {
+        for (User u : users) {
             if (u.getID().equals(theid)) {
                 return u;
             }
@@ -324,7 +322,7 @@ public class CaptureTheFlagGame extends Game {
 
 
     @Override
-	/* called when user presses start button
+    /* called when user presses start button
 	 * assign teams, etc...
 	 *  */
     public void startSession() {
@@ -388,7 +386,6 @@ public class CaptureTheFlagGame extends Game {
     public void removeBeacon(Integer id) {
         // TODO Auto-generated method stub
     }
-
 
 
 }

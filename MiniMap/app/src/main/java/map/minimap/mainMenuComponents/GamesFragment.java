@@ -36,7 +36,8 @@ public class GamesFragment extends Fragment {
     }
 
     //required empty public constructor
-    public GamesFragment() {}
+    public GamesFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,16 +58,16 @@ public class GamesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_games, container, false);
 
         /* Create reaction interfaces for the game buttons in our list */
-        context =getActivity();
-        GamesListView = (ListView)view.findViewById(R.id.listView);
+        context = getActivity();
+        GamesListView = (ListView) view.findViewById(R.id.listView);
         ctfflag = false;
-        GamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        GamesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView <?> a, View v, int position,
+            public void onItemClick(AdapterView<?> a, View v, int position,
                                     long id) {
                 ctfflag = false;
                 Log.v("id", Data.client.toString());
-                switch(position){
+                switch (position) {
                     case 0:
                         Data.client.createGameMessage("friendFinder");
                         break;
@@ -77,7 +78,7 @@ public class GamesFragment extends Fragment {
                         Data.client.createGameMessage("sardines");
                         break;
                     case 3:
-                        ctfflag=true;
+                        ctfflag = true;
                         Data.client.createGameMessage("ctf");
                         break;
                 }
@@ -86,16 +87,16 @@ public class GamesFragment extends Fragment {
                 Data.players.clear();
                 Data.players.add(Data.user);
                 Data.host = true;
-                if(ctfflag){
+                if (ctfflag) {
                     Intent intent = new Intent(getActivity(), CTFscrimmage.class);
                     startActivity(intent);
                 } else {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).addToBackStack("lobby").commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).addToBackStack("lobby").commit();
                 }
             }
         });
         String[] GamesArray = GamesList.toArray(new String[3]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,GamesArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, GamesArray);
         GamesListView.setAdapter(adapter);
         return view;
     }

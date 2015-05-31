@@ -23,10 +23,11 @@ import map.minimap.helperClasses.Data;
 //TODO: Specifics of Sardines
 public class MarcoPoloGame extends Game {
 
-	public MarcoPoloGame() {}
+    public MarcoPoloGame() {
+    }
 
-	@Override
-	public void handleMessage(String message) {
+    @Override
+    public void handleMessage(String message) {
         Log.v("Sardines Game", message);
         String[] parts = message.split(" ");
         if (parts[0].equals("location")) {
@@ -55,8 +56,7 @@ public class MarcoPoloGame extends Game {
                         if (u.getMarker() != null) {
                             u.getMarker().remove();
                         }
-                        if (u.getTeam() == Data.user.getTeam())
-                        {
+                        if (u.getTeam() == Data.user.getTeam()) {
                             teammates.add(u);
                         }
                     }
@@ -100,7 +100,7 @@ public class MarcoPoloGame extends Game {
                     dialog.show();
                 }
             });
-			
+
         } else if (parts[0].equals("userRemoved")) {
             if (parts[1].equals(Data.user.getID())) {
                 Data.user.setInGame(false);
@@ -111,24 +111,24 @@ public class MarcoPoloGame extends Game {
                         toast.show();
                     }
                 });
-                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity, MainMenu.class));
             } else {
                 final User removedUser = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
                 Data.gameActivity.runOnUiThread(new Runnable() {
                     public void run() {
-                    Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), removedUser.getName() + " has left the game.", Toast.LENGTH_SHORT);
-                    toast.show();
-                    removedUser.getMarker().remove();
-                    Data.players.remove(removedUser);
+                        Toast toast = Toast.makeText(Data.gameActivity.getApplicationContext(), removedUser.getName() + " has left the game.", Toast.LENGTH_SHORT);
+                        toast.show();
+                        removedUser.getMarker().remove();
+                        Data.players.remove(removedUser);
                     }
                 });
             }
         }
-		
-	}
+
+    }
 
     public User findUserbyId(String theid, ArrayList<User> users) {
-        for (User u: users) {
+        for (User u : users) {
             if (u.getID().equals(theid)) {
                 return u;
             }
@@ -137,49 +137,49 @@ public class MarcoPoloGame extends Game {
 
     }
 
-	@Override
-	/* called when user presses start button
+    @Override
+    /* called when user presses start button
 	 * assign teams, etc...
 	 *  */
-	public void startSession() {
-		Log.v("Friend Finder Game", "Starting game session " + this.getId());
-		isRunning = true;
+    public void startSession() {
+        Log.v("Friend Finder Game", "Starting game session " + this.getId());
+        isRunning = true;
         Data.gameStarted = true;
-	}
+    }
 
-	@Override
+    @Override
 	/*
 	 * everyone is gone? 
 	 * @see sessions.GameSession#endSession()
 	 */
-	public void endSession() {
-		isRunning = false;
-	}
+    public void endSession() {
+        isRunning = false;
+    }
 
-	@Override
-	public void removeUser(User user) {
-		Log.v("Friend Finder Game", "Removing user from friendfinder session");
-	}
+    @Override
+    public void removeUser(User user) {
+        Log.v("Friend Finder Game", "Removing user from friendfinder session");
+    }
 
-	@Override
+    @Override
 	/* mid-game */
-	public void addUser(User user, int teamid) {}
+    public void addUser(User user, int teamid) {
+    }
 
-	/**
-	 * teamID should always be 0 in FriendFinder
-	 */
-	
-	@Override
-	public void addBeacon(int teamid, LatLng loc) {}
+    /**
+     * teamID should always be 0 in FriendFinder
+     */
 
-	/**
-	 * teamID should always be 0
-	 */
-	@Override
-	public void removeBeacon(Integer id) {}
-	
-	
-	
-	
-	
+    @Override
+    public void addBeacon(int teamid, LatLng loc) {
+    }
+
+    /**
+     * teamID should always be 0
+     */
+    @Override
+    public void removeBeacon(Integer id) {
+    }
+
+
 }

@@ -23,7 +23,7 @@ import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 import map.minimap.helperClasses.GPSHelper;
 
-public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallback{
+public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallback {
 
     private SyncedMapFragment map;
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
@@ -72,7 +72,7 @@ public class CaptureTheFlag extends ActionBarActivity implements OnMapReadyCallb
             map = new SyncedMapFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.map, map).commit();
-            Data.mapFragment=map;
+            Data.mapFragment = map;
 
             Data.mapFragment.getMapAsync(this);
 

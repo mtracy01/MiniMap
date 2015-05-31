@@ -37,8 +37,7 @@ public class Flag {
             flagImage = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_blue);
         } else if (this.team.getTeamID() == 3) {//red
             flagImage = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_red);
-        }
-        else {
+        } else {
             Log.e("Flag Picture", "Invalid team ID");
             flagImage = BitmapFactory.decodeResource(Data.mainAct.getResources(), R.drawable.ic_flag_red);
         }
@@ -85,7 +84,6 @@ public class Flag {
     public void setTeam(Team team) {
         this.team = team;
     }
-
 
 
 }

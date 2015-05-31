@@ -21,7 +21,7 @@ import map.minimap.frameworks.customUIResources.CustomListSettings;
  * Use the {@link SettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SettingsFragment extends android.support.v4.app.Fragment{
+public class SettingsFragment extends android.support.v4.app.Fragment {
     private OnFragmentInteractionListener mListener;
 
     public static SettingsFragment newInstance() {
@@ -29,7 +29,8 @@ public class SettingsFragment extends android.support.v4.app.Fragment{
         return fragment;
     }
 
-    public SettingsFragment() {}
+    public SettingsFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class SettingsFragment extends android.support.v4.app.Fragment{
 
         ListView listView = (ListView) v.findViewById(R.id.listView);
         String[] settingOptions = {"Toggle Wifi"};
-        CustomListSettings adapter = new CustomListSettings(getActivity(),settingOptions);
+        CustomListSettings adapter = new CustomListSettings(getActivity(), settingOptions);
         listView.setAdapter(adapter);
         return v;
     }

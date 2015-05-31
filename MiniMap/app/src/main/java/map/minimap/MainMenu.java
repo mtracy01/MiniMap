@@ -42,7 +42,7 @@ import yalantis.com.sidemenu.util.ViewAnimator;
 
 public class MainMenu extends ActionBarActivity
         implements GamesFragment.OnFragmentInteractionListener, FriendStatus.OnFragmentInteractionListener, DisplayGroups.OnFragmentInteractionListener, GroupsFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener,
-         ViewAnimator.ViewAnimatorListener{
+        ViewAnimator.ViewAnimatorListener {
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -59,11 +59,11 @@ public class MainMenu extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Data.mainAct=this;
-        Data.mainContext=this;
+        Data.mainAct = this;
+        Data.mainContext = this;
 
         FacebookSdk.sdkInitialize(this.getApplicationContext());
-        Data.loggedInFlag=1;
+        Data.loggedInFlag = 1;
         FacebookHelper.appInitializer();
 
         contentFragment = ContentFragment.newInstance(R.drawable.abc_item_background_holo_light);
@@ -83,10 +83,10 @@ public class MainMenu extends ActionBarActivity
         setActionBar();
         createMenuList();
         viewAnimator = new ViewAnimator<>(this, list, contentFragment, drawerLayout, this);
-        if(getIntent().hasExtra("ctf"))
-            if((getIntent().getStringExtra("ctf")).equals("scrim line done")){
-              getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
-             }
+        if (getIntent().hasExtra("ctf"))
+            if ((getIntent().getStringExtra("ctf")).equals("scrim line done")) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, LobbyFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
+            }
     }
 
     private void setActionBar() {
@@ -148,7 +148,8 @@ public class MainMenu extends ActionBarActivity
         getMenuInflater().inflate(R.menu.menu_main_menu, menu);
         return true;
     }
-    public void onFragmentInteraction(Uri uri){
+
+    public void onFragmentInteraction(Uri uri) {
 
     }
 
@@ -168,29 +169,29 @@ public class MainMenu extends ActionBarActivity
 
     private ScreenShotable replaceFragment(ScreenShotable screenShotable, String name) {
         //Switch depending on the name of the Menu
-        switch(name){
+        switch (name) {
             case ContentFragment.GAMES:
                 logger.logEvent("Games Menu");
                 Log.v(LOG_TAG, "Games Menu");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GamesFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).addToBackStack("Games").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, GamesFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).addToBackStack("Games").commit();
                 getSupportActionBar().setTitle("Games");
                 break;
             case ContentFragment.GROUPS:
                 logger.logEvent("Groups Menu");
-                Log.v(LOG_TAG,"Groups Menu");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,GroupsFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
+                Log.v(LOG_TAG, "Groups Menu");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, GroupsFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Groups");
                 break;
             case ContentFragment.FRIENDS:
                 logger.logEvent("Friends Menu");
-                Log.v(LOG_TAG,"Friends Menu");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,FriendStatus.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
+                Log.v(LOG_TAG, "Friends Menu");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, FriendStatus.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Friends");
                 break;
             case ContentFragment.SETTINGS:
                 logger.logEvent("Settings Menu");
-                Log.v(LOG_TAG,"Settings Menu");
-                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame,SettingsFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom,R.anim.abc_slide_out_bottom).commit();
+                Log.v(LOG_TAG, "Settings Menu");
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, SettingsFragment.newInstance()).setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom).commit();
                 getSupportActionBar().setTitle("Settings");
                 break;
         }
@@ -199,13 +200,13 @@ public class MainMenu extends ActionBarActivity
 
     @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
-        Log.v(LOG_TAG,""+position);
+        Log.v(LOG_TAG, "" + position);
         switch (slideMenuItem.getName()) {
             case ContentFragment.CLOSE:
                 return screenShotable;
             default:
-                Log.v(LOG_TAG,"Name = " + slideMenuItem.getName());
-                return replaceFragment(screenShotable,slideMenuItem.getName());
+                Log.v(LOG_TAG, "Name = " + slideMenuItem.getName());
+                return replaceFragment(screenShotable, slideMenuItem.getName());
         }
     }
 
@@ -228,8 +229,7 @@ public class MainMenu extends ActionBarActivity
                             startActivity(new Intent(context, MainMenu.class));
                         }
                     }).create().show();
-        }
-        else{
+        } else {
             super.onBackPressed();
             GPSHelper.killGPSThread();
         }

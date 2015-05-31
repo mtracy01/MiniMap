@@ -22,7 +22,7 @@ public class GPSThread {
     public GPSThread(final ServerConnection client) {
         final int MINTIME = 1000;
         final int MINDIST = 0;
-         locationManager =(LocationManager) Data.mainAct.getSystemService(Data.mainAct.LOCATION_SERVICE);
+        locationManager = (LocationManager) Data.mainAct.getSystemService(Data.mainAct.LOCATION_SERVICE);
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         // getting network status
@@ -31,15 +31,20 @@ public class GPSThread {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 Log.v("locs", Double.toString(location.getLatitude()));
-                client.sendMessage("location " +location.getLatitude() + " " + location.getLongitude());
+                client.sendMessage("location " + location.getLatitude() + " " + location.getLongitude());
             }
 
             @Override
-            public void onProviderDisabled(String provider) {}
+            public void onProviderDisabled(String provider) {
+            }
+
             @Override
-            public void onProviderEnabled(String provider) {}
+            public void onProviderEnabled(String provider) {
+            }
+
             @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
         };
         if (isGPSEnabled) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MINTIME,
@@ -64,10 +69,12 @@ public class GPSThread {
                     Data.user.setCoordinates(new LatLng(location.getLatitude(), location.getLongitude()));
                 }
             }
-        }
-        else
+        } else
             Log.v("gpsbroke", "network/gps providers both out");
     }
-    public void destroyListener(){locationManager.removeUpdates(locationListener);}
+
+    public void destroyListener() {
+        locationManager.removeUpdates(locationListener);
+    }
 
 }

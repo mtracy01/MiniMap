@@ -55,16 +55,16 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
         //If there is no GPS thread running, start one
         GPSHelper.startGPSThread();
 
-        Log.v("name",Data.user.getName());
+        Log.v("name", Data.user.getName());
         //check server for other players
         final Handler handler = new Handler();
-        handler.postDelayed( new Runnable() {
-        @Override
-        public void run() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
-            handler.postDelayed( this, 60 * 1000 );
-        }
-        }, 15 * 1000 );
+                handler.postDelayed(this, 60 * 1000);
+            }
+        }, 15 * 1000);
     }
 
 
@@ -72,9 +72,9 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view =  inflater.inflate(R.layout.fragment_grouplobby, container, false);
-        context =getActivity();
-        playerListView = (ListView)view.findViewById(R.id.listView);
+        final View view = inflater.inflate(R.layout.fragment_grouplobby, container, false);
+        context = getActivity();
+        playerListView = (ListView) view.findViewById(R.id.listView);
 
         final Button startButton = (Button) view.findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,7 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
         });
 
         final Button inviteButton = (Button) view.findViewById(R.id.inviteButton);
-        if(Data.host == false){
+        if (Data.host == false) {
             startButton.setVisibility(View.GONE);
             inviteButton.setVisibility(View.GONE);
         }
@@ -148,23 +148,23 @@ public class LobbyFragment extends android.support.v4.app.Fragment {
             }
         });
         //Check if there is a null player, if so, remove that player
-        for(int i=0;i<Data.players.size();i++){
-            if(Data.players.get(i).getName().equals("")){
-                Log.e(LOG_TAG,"True null name");
+        for (int i = 0; i < Data.players.size(); i++) {
+            if (Data.players.get(i).getName().equals("")) {
+                Log.e(LOG_TAG, "True null name");
                 Data.players.remove(i);
             }
         }
 
         Data.lobbyUsers = new ArrayList<>();
-        Bitmap[] playersPics  = new Bitmap[Data.players.size()];
-        for(int i =0; i < Data.players.size();i++) {
+        Bitmap[] playersPics = new Bitmap[Data.players.size()];
+        for (int i = 0; i < Data.players.size(); i++) {
             Data.lobbyUsers.add(Data.players.get(i).getName());
             playersPics[i] = Data.players.get(i).getProfilePhoto();
-            if(playersPics[i]==null) {
+            if (playersPics[i] == null) {
                 playersPics[i] = BitmapFactory.decodeResource(context.getResources(), R.drawable.com_facebook_profile_picture_blank_portrait);
             }
         }
-        adapter = new CustomListLobby(getActivity(),Data.lobbyUsers.toArray(new String[Data.players.size()]),playersPics);
+        adapter = new CustomListLobby(getActivity(), Data.lobbyUsers.toArray(new String[Data.players.size()]), playersPics);
         playerListView.setAdapter(adapter);
 
         return view;

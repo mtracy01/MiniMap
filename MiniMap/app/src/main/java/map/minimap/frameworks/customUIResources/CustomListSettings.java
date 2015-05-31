@@ -25,7 +25,8 @@ import map.minimap.helperClasses.FacebookHelper;
 public class CustomListSettings extends ArrayAdapter<String> {
     private final Activity context;
     private final String[] settingTitles;
-    public CustomListSettings(Activity context,String[] settingTitles) {
+
+    public CustomListSettings(Activity context, String[] settingTitles) {
         super(context, R.layout.list_single_invite, settingTitles);
         this.context = context;
         this.settingTitles = settingTitles;
@@ -34,19 +35,19 @@ public class CustomListSettings extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         final int rowPosition = position;
-        final WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+        final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView= inflater.inflate(R.layout.list_settings, null, true);
+        View rowView = inflater.inflate(R.layout.list_settings, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-        final Switch   switc    = (Switch)   rowView.findViewById(R.id.toggle);
+        final Switch switc = (Switch) rowView.findViewById(R.id.toggle);
 
         txtTitle.setText(settingTitles[position]);
 
         //Set up prior state of switch
-        switch(position){
+        switch (position) {
             case 0: //Toggle wifi switch
                 //If we are connected to wifi, set switch state to on, if not, set to off
-                if(wifiManager.isWifiEnabled())
+                if (wifiManager.isWifiEnabled())
                     switc.setChecked(true);
                 else
                     switc.setChecked(false);
@@ -57,9 +58,9 @@ public class CustomListSettings extends ArrayAdapter<String> {
         switc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch(rowPosition){
+                switch (rowPosition) {
                     case 0:     //WiFi toggle
-                        if(wifiManager.isWifiEnabled()){
+                        if (wifiManager.isWifiEnabled()) {
 
                             final AlertDialog.Builder warning = new AlertDialog.Builder(context);
                             warning.setTitle("Warning!");
@@ -88,18 +89,15 @@ public class CustomListSettings extends ArrayAdapter<String> {
 
                             warning.show();
 
-                        }
-                        else{
+                        } else {
                             wifiManager.setWifiEnabled(true);
                             switc.setChecked(true);
-                            Toast.makeText(context,"Wifi enabled",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Wifi enabled", Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
             }
         });
-
-
 
 
         return rowView;

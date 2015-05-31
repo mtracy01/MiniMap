@@ -31,11 +31,12 @@ import map.minimap.helperClasses.Data;
 /**
  * Created by Corey on 4/18/2015.
  */
-public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
+public class CTFflags extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private boolean Is_MAP_Moveable = false;
     private LatLng flag1;
     private LatLng flag2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,16 +50,16 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(flag1==null || flag2==null){
+                if (flag1 == null || flag2 == null) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Put the flags down", Toast.LENGTH_SHORT);
                     toast.show();
-                }
-                else {
+                } else {
                     Data.client.ctfFlags(Double.toString(flag1.latitude), Double.toString(flag1.longitude), "2");
                     Data.client.ctfFlags(Double.toString(flag2.latitude), Double.toString(flag2.longitude), "3");
                     swap_Activity();
                 }
-            }});
+            }
+        });
 
         // Clear line button initialization
         Button clearLine = (Button) findViewById(R.id.clear_line);
@@ -68,7 +69,8 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
                 mMap.clear();
                 flag1 = null;
                 flag2 = null;
-            }});
+            }
+        });
 
         // Draw state button initialization
         Button btn_draw_State = (Button) findViewById(R.id.btn_draw_State);
@@ -91,22 +93,22 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
         Toast toast = Toast.makeText(getApplicationContext(), "Place flag one, then Flag two. Hit clear to clear both and done when complete.", Toast.LENGTH_LONG);
         toast.show();
         Intent intent = getIntent();
-        if(intent.hasExtra("ctf")) {
+        if (intent.hasExtra("ctf")) {
             String scrimLine = intent.getStringExtra("ctf");
             String[] parts = scrimLine.split(" ");
             mMap.addPolyline(new PolylineOptions()
-                    .add(new LatLng(Double.parseDouble(parts[0]),Double.parseDouble(parts[1])), new LatLng(Double.parseDouble(parts[2]),Double.parseDouble(parts[3]))).color(Color.BLUE).width(5));
+                    .add(new LatLng(Double.parseDouble(parts[0]), Double.parseDouble(parts[1])), new LatLng(Double.parseDouble(parts[2]), Double.parseDouble(parts[3]))).color(Color.BLUE).width(5));
         }
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng point) {
-                Log.d("Map","Map clicked");
-                if(Is_MAP_Moveable) {
-                    if(flag1==null)
-                        flag1=point;
-                    else{
+                Log.d("Map", "Map clicked");
+                if (Is_MAP_Moveable) {
+                    if (flag1 == null)
+                        flag1 = point;
+                    else {
                         if (flag2 != null) {
                             Toast toast2 = Toast.makeText(getApplicationContext(), "Already placed both flags. Hit clear to place them again.", Toast.LENGTH_SHORT);
                             toast2.show();
@@ -120,19 +122,21 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
         });
 
     }
+
     public void swap_Activity() {
         Intent intent = new Intent(this, MainMenu.class);
         intent.putExtra("ctf", "scrim line done");
         startActivity(intent);
 
     }
+
     public void Draw_Map() {
-        if(flag2==null)
+        if (flag2 == null)
             mMap.addMarker(new MarkerOptions()
                     .position(flag1)
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-        else{
+        else {
             mMap.addMarker(new MarkerOptions()
                     .position(flag2)
                     .icon(BitmapDescriptorFactory
@@ -140,6 +144,7 @@ public class CTFflags extends FragmentActivity implements OnMapReadyCallback{
         }
 
     }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)

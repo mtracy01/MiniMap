@@ -30,13 +30,13 @@ public class Data {
     public static SyncedMapFragment mapFragment;             //Custom mapFragment for maintaining asynchronous location updates
     public static Activity gameActivity;                    // A reference to the current game activity.  Used to display popups in game.
     public static GPSThread gps;                            //The client's current GPS thread
-    public static int loggedInFlag=0;                      //Flag used to determine whether the person is already logged in when the app is reopened
+    public static int loggedInFlag = 0;                      //Flag used to determine whether the person is already logged in when the app is reopened
 
     //Items used in Lobby fragment and game
-    public static ArrayList<String> lobbyUsers     = new ArrayList<>();         //Users in the lobby currently
+    public static ArrayList<String> lobbyUsers = new ArrayList<>();         //Users in the lobby currently
     public static ArrayList<User> invitableUsers = new ArrayList<>();        //Possible users that can be invited.  This is displayed in the invite dialog
-    public static ArrayList<User> selectedUsers  = new ArrayList<>();       //Users selected to be invited in the invite dialog
-    public static ArrayList<User> players        = new ArrayList<>();      //Players in the current game
+    public static ArrayList<User> selectedUsers = new ArrayList<>();       //Users selected to be invited in the invite dialog
+    public static ArrayList<User> players = new ArrayList<>();      //Players in the current game
 
     public static int clientDoneFlag = 0;                                 //Flag for syncing between tasks
     public static int initialized = 0;
@@ -44,7 +44,7 @@ public class Data {
     public static boolean assassinKillRange;
     public static User assassinateUser;
 
-    public static int errorTrigger=0;                   //Error trigger tells us that we had a server disconnect, and therefore will display a dialog after rerouting to the login page
-    public static Context mainContext=null;
+    public static int errorTrigger = 0;                   //Error trigger tells us that we had a server disconnect, and therefore will display a dialog after rerouting to the login page
+    public static Context mainContext = null;
 
 }

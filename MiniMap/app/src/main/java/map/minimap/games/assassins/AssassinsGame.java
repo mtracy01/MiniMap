@@ -27,7 +27,7 @@ public class AssassinsGame extends Game {
     private User target;
 
     public AssassinsGame() {
-         target = null;
+        target = null;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class AssassinsGame extends Game {
                     }
 
                     LatLngInterpolator mLatLngInterpolator;
-                    for(User u : players) {
+                    for (User u : players) {
                         if (u.getMarker() != null) {
                             mLatLngInterpolator = new LatLngInterpolator.Linear();
                             Data.mapFragment.animateMarkerToGB(u.getMarker(), u.getCoordinates(), mLatLngInterpolator, 1500);
@@ -156,7 +156,7 @@ public class AssassinsGame extends Game {
                         toast.show();
                     }
                 });
-                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity, MainMenu.class));
             }
         } else if (parts[0].equals("userRemoved")) {
             if (parts[1].equals(Data.user.getID())) {
@@ -168,7 +168,7 @@ public class AssassinsGame extends Game {
                         toast.show();
                     }
                 });
-                Data.gameActivity.startActivity(new Intent(Data.gameActivity,MainMenu.class));
+                Data.gameActivity.startActivity(new Intent(Data.gameActivity, MainMenu.class));
             } else {
                 final User removedUser = findUserbyId(IDCipher.unCipher(parts[1]), Data.players);
                 Data.gameActivity.runOnUiThread(new Runnable() {
@@ -185,7 +185,7 @@ public class AssassinsGame extends Game {
     }
 
     public User findUserbyId(String theid, ArrayList<User> users) {
-        for (User u: users) {
+        for (User u : users) {
             if (u.getID().equals(theid)) {
                 return u;
             }
@@ -195,7 +195,7 @@ public class AssassinsGame extends Game {
     }
 
     @Override
-	/* called when user presses start button
+    /* called when user presses start button
 	 * assign teams, etc...
 	 *  */
     public void startSession() {
@@ -221,23 +221,23 @@ public class AssassinsGame extends Game {
 
     @Override
 	/* mid-game */
-    public void addUser(User user, int teamid) {}
+    public void addUser(User user, int teamid) {
+    }
 
     /**
      * teamID should always be 0 in FriendFinder
      */
 
     @Override
-    public void addBeacon(int teamid, LatLng loc) {}
+    public void addBeacon(int teamid, LatLng loc) {
+    }
 
     /**
      * teamID should always be 0
      */
     @Override
-    public void removeBeacon(Integer id) {}
-
-
-
+    public void removeBeacon(Integer id) {
+    }
 
 
 }

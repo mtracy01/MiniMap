@@ -16,7 +16,7 @@ import map.minimap.frameworks.mapResources.Maps;
 import map.minimap.frameworks.mapResources.SyncedMapFragment;
 import map.minimap.helperClasses.Data;
 
-public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
+public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback {
 
     private SyncedMapFragment map;
     private AppEventsLogger logger = AppEventsLogger.newLogger(this);
@@ -40,8 +40,8 @@ public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
             items.add(new android.view.ext.SatelliteMenuItem(5, R.drawable.sat_item));
         }
 
-        items.add(new android.view.ext.SatelliteMenuItem(3,R.drawable.sat_item));
-        items.add(new android.view.ext.SatelliteMenuItem(2,R.drawable.sat_item));
+        items.add(new android.view.ext.SatelliteMenuItem(3, R.drawable.sat_item));
+        items.add(new android.view.ext.SatelliteMenuItem(2, R.drawable.sat_item));
         menu.addItems(items);
 
         menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
@@ -61,7 +61,7 @@ public class MarcoPolo extends ActionBarActivity implements OnMapReadyCallback{
             map = new SyncedMapFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.map, map).commit();
-            Data.mapFragment=map;
+            Data.mapFragment = map;
             Data.mapFragment.getMapAsync(this);
         }
     }

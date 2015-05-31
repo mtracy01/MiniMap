@@ -29,22 +29,22 @@ import map.minimap.frameworks.gameResources.User;
  */
 public class FacebookHelper {
 
-    private static String LOG_TAG= "FacebookHelper";
+    private static String LOG_TAG = "FacebookHelper";
 
     //Log out of facebook
-    public static void logout(){
+    public static void logout() {
 
         //Logout of Facebook
-        Data.loggedInFlag=0;
+        Data.loggedInFlag = 0;
         LoginManager loginManager = LoginManager.getInstance();
         loginManager.logOut();
 
         //Destroy GPS thread and client (if they exist)
-        if(Data.gps!=null) {
+        if (Data.gps != null) {
             Data.gps.destroyListener();
-            Data.gps=null;
+            Data.gps = null;
         }
-        if(Data.client!=null) {
+        if (Data.client != null) {
             Data.client.closeSocket();
             Data.client = null;
         }
@@ -52,7 +52,7 @@ public class FacebookHelper {
     }
 
     //returns a list of JSON objects containing the friendsList of a user and relevant information
-    public static void getFriendsList(){
+    public static void getFriendsList() {
         //Run facebook graph request
         GraphRequest graphRequest = GraphRequest.newMyFriendsRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONArrayCallback() {
             @Override
@@ -62,8 +62,8 @@ public class FacebookHelper {
                     return;
                 }
                 Log.v(LOG_TAG, "Raw Response from getFriendsList: " + graphResponse.getRawResponse());
-                if(graphResponse.getRawResponse()==null){
-                    Log.e(LOG_TAG,"Raw response is null, returning error");
+                if (graphResponse.getRawResponse() == null) {
+                    Log.e(LOG_TAG, "Raw response is null, returning error");
                     return;
 
                 }
@@ -83,11 +83,11 @@ public class FacebookHelper {
                 Data.user.setFriends(friends);
 
                 //Create a task to get the profile photos of those friends
-                AsyncTask<Void,Void,Void> addPhotos = new AsyncTask<Void, Void, Void>() {
+                AsyncTask<Void, Void, Void> addPhotos = new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {
                         ArrayList<User> ourFriends = Data.user.getFriends();
-                        for(int i=0;i<ourFriends.size();i++)
+                        for (int i = 0; i < ourFriends.size(); i++)
                             ourFriends.get(i).setProfilePhoto(getFacebookProfilePicture(ourFriends.get(i).getID()));
                         Data.user.setFriends(ourFriends);
                         Data.user.setProfilePhoto(getFacebookProfilePicture(Data.user.getID()));
@@ -100,7 +100,7 @@ public class FacebookHelper {
         graphRequest.executeAsync();
     }
 
-    public static String getFacebookName(String userID){
+    public static String getFacebookName(String userID) {
         String name = null;
         GraphRequest graphRequest = GraphRequest.newGraphPathRequest(AccessToken.getCurrentAccessToken(), userID, new GraphRequest.Callback() {
             @Override
@@ -109,15 +109,15 @@ public class FacebookHelper {
             }
         });
         GraphResponse graphResponse = graphRequest.executeAndWait();
-        if(graphResponse==null){
-            Log.e(LOG_TAG,"Failed to get info from ID");
+        if (graphResponse == null) {
+            Log.e(LOG_TAG, "Failed to get info from ID");
             return null;
         }
         try {
             JSONObject jsonObject = graphResponse.getJSONObject();
             name = jsonObject.getString("name");
-        } catch(Exception e){
-            Log.e(LOG_TAG,"Exception!");
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Exception!");
         }
 
         return name;
@@ -125,19 +125,19 @@ public class FacebookHelper {
 
 
     //Get facebook profile picture and return it
-    public static Bitmap getFacebookProfilePicture(String userID){
+    public static Bitmap getFacebookProfilePicture(String userID) {
         Bitmap bitmap = null;
         try {
             URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=square");
             bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
-        } catch( IOException e){
-            Log.e(LOG_TAG,"IOException when attempting to retrieve profile pictures!");
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "IOException when attempting to retrieve profile pictures!");
         }
         return bitmap;
     }
 
-    public static void appInitializer(){
-        if(Data.client==null) {
+    public static void appInitializer() {
+        if (Data.client == null) {
             GraphRequest.GraphJSONObjectCallback userData = new GraphRequest.GraphJSONObjectCallback() {
                 @Override
                 public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
@@ -172,7 +172,7 @@ public class FacebookHelper {
     }
 
     //Invite friends to get the app on facebook
-    public static void inviteFriends(){
+    public static void inviteFriends() {
         String appLinkUrl, previewImageUrl;
 
         appLinkUrl = "https://fb.me/1652069115025838";
