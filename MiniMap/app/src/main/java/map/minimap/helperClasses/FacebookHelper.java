@@ -122,8 +122,7 @@ public class FacebookHelper {
 
         return name;
     }
-
-
+    
     //Get facebook profile picture and return it
     public static Bitmap getFacebookProfilePicture(String userID) {
         Bitmap bitmap = null;
